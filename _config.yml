@@ -5,13 +5,11 @@ url: "https://spazznolo.github.io"
 
 header_pages:
   - index.md
-  - peter.md
   - about.md
-  - contact.md
 
 style: dark
 
-footer: 'follow us on <a href="https://twitter.com/">twitter</a>'
+footer: 'A blog by Jeremie'
 
 # Build settings
 markdown: kramdown
