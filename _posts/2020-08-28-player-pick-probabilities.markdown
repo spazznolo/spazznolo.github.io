@@ -11,7 +11,7 @@ If you’re picking first at the next NHL draft, you want Lafreniere. If you’r
 <br>
 Let’s say we only have our own rankings to go on. Instead of only predicting each player’s draft position, we could create probabilities of each prospect being drafted at each pick. Let’s use Rossi again as an example. Here’s how we might place probabilities on Rossi’s draft result:
 <br>
-<img src="https://spazznolo.github.io/figs/first-plot.png" style="width:500px;length:500px;"/>
+<img src="https://spazznolo.github.io/figs/first-plot.png" style="text-align: center; width: 500px; length: 500px;"/>
 <br>
 This is a probability distribution of Rossi’s predicted draft result. Though this is a step in the right direction, these are only our predictions of where Rossi might go. What if the teams drafting ahead of us think he’s not as good as we think he is? Well, then their probability distribution for Rossi might look like this:
 <br>
