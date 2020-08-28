@@ -82,7 +82,7 @@ User data, when properly treated, is competitive with pro ranking publications a
 <br>
 Here’s the probability Mikko Rantanen had of being selected at specific picks: 1, 0.1%; 2, 1.0%; 3, 2.6%; 4, 4.6%; 5, 7.9%. Another way to look at this is to say the probability Mikko Rantanen would be selected in the first five picks was 16.3% (the addition of each pick probability for picks 1-5). These cumulative probabilities can be calculated for each pick. Here’s what this looks like on a plot.
 <br>
-<img src="https://spazznolo.github.io/figs/eigth-plot.png"  alt="centered image" width="700" height="200"/>
+<img src="https://spazznolo.github.io/figs/eigth-plot.png"  alt="centered image" width=textWidth height="200"/>
 <br>
 This is called a cumulative distribution (each pick takes the cumulative sum of all previous pick-probabilities). A pick-probability curve like the one visualized above can be derived for each player. Given that these cumulative pick-probabilities are the cornerstone of the analysis, it’s important to measure their accuracy. The fit of these curves can be evaluated by going through each pick and asking the questions: what was the probability of this player being drafted by this pick and was he drafted by this pick?
 <br>
