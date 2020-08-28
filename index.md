@@ -1,9 +1,11 @@
 ---
-title: /
+title: home
 layout: home
 permalink: /
 ---
 
-# Welcome
+# Draft Blog
 
-Bla bla bla bla. Bla bla bla bla bla bla bla bla.
+<br>
+<img src="figs/fifty-four.png" style="width:500px;length:500px;"/>
+
