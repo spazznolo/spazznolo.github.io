@@ -15,6 +15,8 @@ Let’s say we only have our own rankings to go on. Instead of only predicting e
 <br>
 This is a probability distribution of Rossi’s predicted draft result. Though this is a step in the right direction, these are only our predictions of where Rossi might go. What if the teams drafting ahead of us think he’s not as good as we think he is? Well, then their probability distribution for Rossi might look like this:
 <br>
+<img src="https://spazznolo.github.io/figs/second-plot.png"  alt="centered image" style="width: 500px; length: 500px;"/>
+<br>
 If the teams ahead of us view Rossi closer to the plot above, then he’ll likely slide lower than we predicted he would, and our chances of drafting him are higher than we previously thought. In fact, if we knew what other teams thought of him, we could pretty accurately predict where he’ll still be available in the draft, which allows us to either a) be comfortable we have a strong chance of picking him without trading up, or b) slide down a couple spots, pick up a mid-round pick and still get him. An important thing to remember is that Rossi’s draft position is much less affected by how we think of him than it is by how everyone else thinks of him. Namita Nandakumar wrote about the value of knowing where players will likely get drafted in this article.
 <br>
 In practice, no team will ever know exactly how every other team has ranked each prospect. Instead, player-pick probability distributions need to be approximated by other means. DTM About Heart outlined one way of doing this for Hockey-Graphs which used bayesian inference and pro rankings publishers. I’m going to outline another possible way, which uses user generated data to derive probability density functions for each player. 
@@ -27,6 +29,8 @@ The goal of this paper is to assign probabilities to questions like the one in t
 <br>
 Over the years, as player data has become more widely available, mock drafts have increased in popularity. In a mock draft, the creator tries to predict where a player will get picked in the upcoming draft. One site in particular, Draft Site, gets hundreds of user mock drafts each year. These mock drafts naturally create probability distributions for each player’s potential pick placement. For example, here was Mikko Rantanen’s in 2015.
 <br>
+<img src="https://spazznolo.github.io/figs/third-plot.png"  alt="centered image" style="width: 500px; length: 500px;"/>
+<br>
 To create the plot above, equal weight was given to each user’s mock draft, regardless of its quality. In practice, some users are more knowledgable than others. A user who can more correctly predict a draft’s order is more valuable than one who cannot. Therefore, larger weights should be given to users who are likely more accurate in their mock draft. Thankfully, there are a couple quality indicators available: a user’s difference to the average user draft, and the number of days before the draft date that a user last updated their mock draft. 
 <br>
 # Quality Indicators
@@ -35,9 +39,13 @@ To create the plot above, equal weight was given to each user’s mock draft, re
 <br>
 Mikko Rantanen’s median pick from the raw user data was 9. If a user selected him 25th, they would be 16 spots off. A user’s absolute error rate can be computed for each pick in their mock draft. Below is the relationship of users’ mean absolute pick difference and their mean absolute pick error to the actual draft from 2015-2019. There’s a strong relationship between the two.
 <br>
+<img src="https://spazznolo.github.io/figs/fourth-plot.png"  alt="centered image" style="width: 500px; length: 500px;"/>
+<br>
 # 2. Days to the Draft
 <br>
 Usually, ranking publications will release a preliminary rankings list about a year before the draft. Then, as the draft approaches and player’s develop – or don’t -  the rankings are updated. The plot below demonstrates that user data becomes more accurate as the draft day approaches.
+<br>
+<img src="https://spazznolo.github.io/figs/fifth-plot.png"  alt="centered image" style="width: 500px; length: 500px;"/>
 <br>
 The variables discussed above were used to (1) filter what are likely low quality drafts and (2) create weights for each user mock draft. Players’ adjusted pick probabilities were then fitted and dampened. More information on these decisions is available in the Analysis Notes section.
 
@@ -60,18 +68,21 @@ user_internal_weights: filtered, weighted, fitted and dampened user mock drafts
 user_external_weights: filters, weighted (to pro consensus), fitted and dampened user mock drafts
 group_average: the average error of pro rankings publishers
 <br>
+<img src="https://spazznolo.github.io/figs/seventh-plot.png"  alt="centered image" style="width: 500px; length: 500px;"/>
+<br>
 Rankings derived from raw user data are below average and tend to be the worst compared to pro rankings. 
 Rankings derived from adjusted user data, weighted to the average user draft, hover around the group average.
 Rankings derived from adjusted user data, weighted to a pro consensus, tend to be above average.
 <br>
 User data, when properly treated, is competitive with pro ranking publications at predicting draft order. The advantage is that user data has built-in player-pick distributions which can be used to answer important questions about the draft.
-
-        ​ 
-        ​ ANALYSIS
-
-            ​ Another Perspective on Probability Distributions
-
+<br>
+## ANALYSIS
+<br>
+# Another Perspective on Probability Distributions
+<br>
 Here’s the probability Mikko Rantanen had of being selected at specific picks: 1, 0.1%; 2, 1.0%; 3, 2.6%; 4, 4.6%; 5, 7.9%. Another way to look at this is to say the probability Mikko Rantanen would be selected in the first five picks was 16.3% (the addition of each pick probability for picks 1-5). These cumulative probabilities can be calculated for each pick. Here’s what this looks like on a plot.
+<br>
+<img src="https://spazznolo.github.io/figs/eigth-plot.png"  alt="centered image" style="width: 500px; length: 500px;"/>
 <br>
 This is called a cumulative distribution (each pick takes the cumulative sum of all previous pick-probabilities). A pick-probability curve like the one visualized above can be derived for each player. Given that these cumulative pick-probabilities are the cornerstone of the analysis, it’s important to measure their accuracy. The fit of these curves can be evaluated by going through each pick and asking the questions: what was the probability of this player being drafted by this pick and was he drafted by this pick?
 <br>
