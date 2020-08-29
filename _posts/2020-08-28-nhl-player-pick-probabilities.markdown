@@ -30,9 +30,7 @@ In practice, no team will ever know exactly how every other team has ranked each
 The goal of this paper is to assign probabilities to questions like the one in the first paragraph: what is the probability a player is still available at a certain pick?
 </p>
 <h5>THE DATA</h5>
-<p>
 <h1> User Mock Drafts </h1>
-</p>
 <p>
 Over the years, as player data has become more widely available, mock drafts have increased in popularity. In a mock draft, the creator tries to predict where a player will get picked in the upcoming draft. One site in particular, Draft Site, gets hundreds of user mock drafts each year. These mock drafts naturally create probability distributions for each player’s potential pick placement. For example, here was Mikko Rantanen’s in 2015.
 </p>
