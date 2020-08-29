@@ -24,8 +24,10 @@ In practice, no team will ever know exactly how every other team has ranked each
 </p>
 <p>
 The goal of this paper is to assign probabilities to questions like the one in the first paragraph: what is the probability a player is still available at a certain pick?
-<br>
+</p>
+<p>
 ## THE DATA
+</p>
 <p>
 # User Mock Drafts
 </p>
@@ -62,9 +64,9 @@ The variables discussed above were used to (1) filter what are likely low qualit
 Here’s a visualization of the effects various treatments have on the user rankings. (add third step)
 <br>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/sixth-plot.png" width="90%" length="200"/></div>
-<br>
+<p>
 The downside to user mock drafts is that prospect ranking is likely a hobby for most users. They may mostly rely on second hand information provided by hockey sites, experts, and prospect ranking models. Before going further, it’s important to measure its capacity for prediction. One way of doing this is to build a draft ranking from the data, and then measure its accuracy against professional ranking publishers.
-<br>
+</p><br>
 # Derived User Rankings vs the Pros
 <p>
 Draft rankings are derived from player-pick probability distributions by iterating through each pick of each draft, and drafting the player with the highest probability of being taken. After each pick, the player distributions are re-approximated (more information is available in the Analysis Notes section).
