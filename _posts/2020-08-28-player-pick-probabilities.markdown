@@ -4,7 +4,7 @@ title:  "Assigning Player-Pick Probabilities with User Generated Data"
 date:   2020-08-28 11:52:05 -0400
 ---
 
-<h6> INTRODUCTION </h6>
+<h5> INTRODUCTION </h5>
 <p>
 If you’re picking first at the next NHL draft, you want Lafreniere. If you’re picking second or third, you want Byfield or Stutzle. If you’re picking fourth, or fifth, or sixth, or seventh, you’re picking Rossi or Perffeti, or Raymond, or Drysdale… Notice how the list lengthens as you make your way through the draft? That’s because the uncertainty of a player being better than all other available players increases the deeper you get into the draft. So maybe you really like Rossi, but you’re picking sixth, and you want to know what the odds of him being available are so you can be prepared to either trade up or take someone else. Well, what are the odds Rossi is still available at six? It’s hard to say.
 </p>
