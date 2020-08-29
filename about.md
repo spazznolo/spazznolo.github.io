@@ -4,6 +4,6 @@ title: /about
 permalink: /about/
 ---
 
-# Jeremie
+<h5>Jeremie</h5>
 
 This is a blog by Jeremie.
