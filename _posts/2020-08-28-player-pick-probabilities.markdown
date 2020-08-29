@@ -4,7 +4,6 @@ title:  "Assigning Player-Pick Probabilities with User Generated Data"
 date:   2020-08-28 11:52:05 -0400
 ---
 
-
 <h5>INTRODUCTION</h5>
 <br>
 If you’re picking first at the next NHL draft, you want Lafreniere. If you’re picking second or third, you want Byfield or Stutzle. If you’re picking fourth, or fifth, or sixth, or seventh, you’re picking Rossi or Perffeti, or Raymond, or Drysdale… Notice how the list lengthens as you make your way through the draft? That’s because the uncertainty of a player being better than all other available players increases the deeper you get into the draft. So maybe you really like Rossi, but you’re picking sixth, and you want to know what the odds of him being available are so you can be prepared to either trade up or take someone else. Well, what are the odds Rossi is still available at six? It’s hard to say.
@@ -48,11 +47,11 @@ Usually, ranking publications will release a preliminary rankings list about a y
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/fifth-plot.png" width="500" length="200"/></div>
 <br>
 The variables discussed above were used to (1) filter what are likely low quality drafts and (2) create weights for each user mock draft. Players’ adjusted pick probabilities were then fitted and dampened. More information on these decisions is available in the Analysis Notes section.
-
-            ​ Comparing Probability Distributions
-
-                ​ The Effect of Treatments on Player-Pick Probability Distributions
-
+<br>
+# Comparing Probability Distributions
+<br>
+# The Effect of Treatments on Player-Pick Probability Distributions
+<br>
 Here’s a visualization of the effects various treatments have on the user rankings. (add third step)
 <br>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/sixth-plot.png" width="500" length="200"/></div>
