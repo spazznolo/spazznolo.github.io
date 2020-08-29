@@ -69,7 +69,7 @@ user_internal_weights: filtered, weighted, fitted and dampened user mock drafts
 user_external_weights: filters, weighted (to pro consensus), fitted and dampened user mock drafts
 group_average: the average error of pro rankings publishers
 <br>
-<img src="https://spazznolo.github.io/figs/sevent-plot.png"  alt="centered image" style="width: 500px; length: 500px;"/>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/sevent-plot.png" width="90%" length="200"/></div>
 <br>
 Rankings derived from raw user data are below average and tend to be the worst compared to pro rankings. 
 Rankings derived from adjusted user data, weighted to the average user draft, hover around the group average.
