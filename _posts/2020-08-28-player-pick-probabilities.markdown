@@ -4,33 +4,40 @@ title:  "Assigning Player-Pick Probabilities with User Generated Data"
 date:   2020-08-28 11:52:05 -0400
 ---
 
-<h5>INTRODUCTION</h5>
-<br>
+# INTRODUCTION
+<p>
 If you’re picking first at the next NHL draft, you want Lafreniere. If you’re picking second or third, you want Byfield or Stutzle. If you’re picking fourth, or fifth, or sixth, or seventh, you’re picking Rossi or Perffeti, or Raymond, or Drysdale… Notice how the list lengthens as you make your way through the draft? That’s because the uncertainty of a player being better than all other available players increases the deeper you get into the draft. So maybe you really like Rossi, but you’re picking sixth, and you want to know what the odds of him being available are so you can be prepared to either trade up or take someone else. Well, what are the odds Rossi is still available at six? It’s hard to say.
-<br>
+</p>
+<p>
 Let’s say we only have our own rankings to go on. Instead of only predicting each player’s draft position, we could create probabilities of each prospect being drafted at each pick. Let’s use Rossi again as an example. Here’s how we might place probabilities on Rossi’s draft result:
-<br>
+</p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/first-plot.png" width="90%" length="200"/></div>
-<br>
+<p>
 This is a probability distribution of Rossi’s predicted draft result. Though this is a step in the right direction, these are only our predictions of where Rossi might go. What if the teams drafting ahead of us think he’s not as good as we think he is? Well, then their probability distribution for Rossi might look like this:
-<br>
+</p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/second-plot.png" width="90%" length="200"/></div>
-<br>
+<p>
 If the teams ahead of us view Rossi closer to the plot above, then he’ll likely slide lower than we predicted he would, and our chances of drafting him are higher than we previously thought. In fact, if we knew what other teams thought of him, we could pretty accurately predict where he’ll still be available in the draft, which allows us to either a) be comfortable we have a strong chance of picking him without trading up, or b) slide down a couple spots, pick up a mid-round pick and still get him. An important thing to remember is that Rossi’s draft position is much less affected by how we think of him than it is by how everyone else thinks of him. Namita Nandakumar wrote about the value of knowing where players will likely get drafted in this article.
-<br>
+</p>
+<p>
 In practice, no team will ever know exactly how every other team has ranked each prospect. Instead, player-pick probability distributions need to be approximated by other means. DTM About Heart outlined one way of doing this for Hockey-Graphs which used bayesian inference and pro rankings publishers. I’m going to outline another possible way, which uses user generated data to derive probability density functions for each player. 
-<br>
+</p>
+<p>
 The goal of this paper is to assign probabilities to questions like the one in the first paragraph: what is the probability a player is still available at a certain pick?
 <br>
 ## THE DATA
-<br>
+<p>
 # User Mock Drafts
-<br>
+</p>
+<p>
 Over the years, as player data has become more widely available, mock drafts have increased in popularity. In a mock draft, the creator tries to predict where a player will get picked in the upcoming draft. One site in particular, Draft Site, gets hundreds of user mock drafts each year. These mock drafts naturally create probability distributions for each player’s potential pick placement. For example, here was Mikko Rantanen’s in 2015.
-<br>
+</p>
+<p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/third-plot.png" width="90%" length="200"/></div>
-<br>
+</p>
+<p>
 To create the plot above, equal weight was given to each user’s mock draft, regardless of its quality. In practice, some users are more knowledgable than others. A user who can more correctly predict a draft’s order is more valuable than one who cannot. Therefore, larger weights should be given to users who are likely more accurate in their mock draft. Thankfully, there are a couple quality indicators available: a user’s difference to the average user draft, and the number of days before the draft date that a user last updated their mock draft. 
+</p>
 <br>
 # Quality Indicators
 <br>
@@ -62,8 +69,10 @@ The downside to user mock drafts is that prospect ranking is likely a hobby for 
 <p>
 Draft rankings are derived from player-pick probability distributions by iterating through each pick of each draft, and drafting the player with the highest probability of being taken. After each pick, the player distributions are re-approximated (more information is available in the Analysis Notes section).
 </p>
+<p>
 Here is the mean absolute error of derived user draft rankings from 2015-2019 compared to various pro ranking publications. All experts but Bobby Mackenzie, the gold standard of draft rankings, have been greyed out. Purple is the group average.
-<br>
+</p>
+<p>
 user_raw: raw user mock drafts
 user_internal_weights: filtered, weighted, fitted and dampened user mock drafts
 user_external_weights: filters, weighted (to pro consensus), fitted and dampened user mock drafts
@@ -74,10 +83,11 @@ group_average: the average error of pro rankings publishers
 Rankings derived from raw user data are below average and tend to be the worst compared to pro rankings. 
 Rankings derived from adjusted user data, weighted to the average user draft, hover around the group average.
 Rankings derived from adjusted user data, weighted to a pro consensus, tend to be above average.
-<br>
+</p>
+<p>
 User data, when properly treated, is competitive with pro ranking publications at predicting draft order. The advantage is that user data has built-in player-pick distributions which can be used to answer important questions about the draft.
-<br>
-## ANALYSIS
+</p>
+# ANALYSIS
 <br>
 # Another Perspective on Probability Distributions
 <br>
@@ -90,15 +100,18 @@ This is called a cumulative distribution (each pick takes the cumulative sum of 
 # Evaluating the Fit
 <br>
 Either a player was drafted by a certain pick, or they weren’t. This is called a binary event, with values 0 (he wasn’t) and 1 (he was). Mikko Rantanen had a 55.5% probability of being drafted by the eighth pick, and the result was that he wasn’t yet picked (0). The error for the probability attributed to this event can be seen as 0.555-0 = 0.555. Rantanen also had an 86.4% probability of being drafted by the twelfth pick, and the result was that he was picked (1). The error for the probability attributed to this event can be seen as 0.864-1 = -0.136. 
-<br>
+</p>
+<p>
 Each player has probabilities attached for the first thirty picks of the draft. This is roughly 7,000 events. Errors can be attributed for these events the same way as they were outlined in the previous paragraph. Glenn Brier suggested a way of evaluating the goodness-of-fit of events like these by summing the squared error of all events. Brier scores for each method are posted in the plot on the next page. 
-<br>
+</p>
+<p>
 The fit can also be assessed by grouping the predicted probabilities into bins and then visualizing them against the observed percentage of time the positive outcomes occur. Here’s an example:
 <br>
 <img src="https://spazznolo.github.io/figs/ninth-plot.png"  alt="centered image" width=textWidth height="800"/>
 <br>
 The table below has 10 events which have probability between 30% and 40%. Ideally, the percent of time a player is picked by this event is also between 30-40%. In this example, the average probability is in the mid 30%s, and 30% of events had positive outcomes (player was picked). 
-<br>
+</p>
+<p>
 Grouping the data into many bins, calculating the predicted vs observed occurrences (like above) and then visualizing the predicted vs observed probabilities is called a calibration plot. It answers the question: when we give events a given probability of occurring, what percentage of the time do they actually occur? The calibration plot is plotted below along with Brier scores.
 <br>
 <img src="https://spazznolo.github.io/figs/tenth-plot.png"  alt="centered image" width=textWidth height="200"/>
@@ -108,7 +121,8 @@ The perfect fit is the grey line, where outcomes occur the predicted percentage 
 # NEXT STEPS
 <br>
 Regardless of one’s methods for developing player-pick probability distributions, on draft day low-likelihood events will nearly always occur. Some examples in recent drafts: Barrett Hayton was selected with the 5th pick in the 2018 draft. He was ranked 13th and had a 4.7% probability of being selected that early. Gabe Vilardi was selected with the 11th pick of the 2017 draft. He was ranked 3rd and had a 5.2% probability of sliding at least that late.
-<br>
+</p>
+<p>
 Question: How do the probability distributions of the remaining players change now that either (1) a player was selected earlier than we thought he would or (2) a highly ranked player is sliding past where we though he would? I’ve yet to think of a way of doing this which I’m satisfied with, but I’ll lay out my thoughts so far.
 <br>
 # Dynamic Player-Pick Probabilities
@@ -118,9 +132,11 @@ In the 2018 draft, two players were considered possibilities for the first overa
 <img src="https://spazznolo.github.io/figs/eleventh-plot.png"  alt="centered image" width=textWidth height="200"/>
 <br>
 Patrick’s pick probabilities go from 40.5%, 50.5% and 8.5% (picks 1,2 and 3 respectively) before the draft, to 0%, 82.5% and 16% after Hischier is drafted first overall. 
-<br>
+</p>
+<p>
 The problem here is that, after shifting each player’s pick probabilities from the first overall pick to other picks across their pick-probability distributions, the total probability of all players being selected second overall does not sum to 100%. To fix this, player-pick probabilities are recalibrated by dividing each player’s probability by the sum of the pick probability. These operations are repeated until calibrations are as desired. This comes at the expense of distortions to player-pick probability distributions. 
-<br>
+</p>
+<p>
 Though this method is admittedly sub-optimal, it does naturally shrink a player’s probability of getting drafted in the first 30 picks as they slide in the draft. An example of how this looks in practice is Arthur Kaliyev, who was ranked 15th in the 2019 draft, but slid into the second round. Here’s how his probability of being drafted in the first thirty picks changes as he slides down the draft.
 <br>
 <img src="https://spazznolo.github.io/figs/twelth-plot.png"  alt="centered image" width=textWidth height="200"/>
@@ -134,7 +150,8 @@ The next step will be to look for better ways to redistribute player pick probab
 # Back to the Marco Rossi Example
 <br>
 Question: What is the probability Marco Rossi is drafted by the sixth pick, given Lafreniere, Byfield and Stutzle are picked 1-3 vs if one of the three slip?
-<br>
+</p>
+<p>
 The current consensus ranking for the top three picks of the 2020 draft is: Lafreniere, Byfield, and Stutzle. If the Senators reach for another player on the third pick, what happens to Rossi’s probability of still being available sixth? To run this simulation, Alex Holtz was used as the reach for the third pick. Rossi’s probability of being taken by the sixth pick drops nearly 10% because of this.
 <br>
 <img src="https://spazznolo.github.io/figs/fourteenth-plot.png"  alt="centered image" width=textWidth height="200"/>
