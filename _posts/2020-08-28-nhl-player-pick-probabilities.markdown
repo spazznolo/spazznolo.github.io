@@ -179,7 +179,6 @@ The current consensus ranking for the top three picks of the 2020 draft is: Lafr
 Filters for adjusted data weighted to user average: RMSE to user average < 15, days to draft < 150
 Filters for adjusted data weighted to pro consensus: RMSE to pro consensus < 10, days to draft < 150
 </p>
-<p>
 <h1>Attributing Weights to Users</h1>
 <p>
 A linear regression is fit using: RMSE to user average, days to draft, (and RMSE to pro consensus for data weighted to pro consensus) as predictors and RMSE to actual draft order as target. 
