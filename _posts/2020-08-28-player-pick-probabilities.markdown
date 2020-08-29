@@ -54,7 +54,7 @@ The variables discussed above were used to (1) filter what are likely low qualit
 <br>
 Here’s a visualization of the effects various treatments have on the user rankings. (add third step)
 <br>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/sixth-plot.png" width="90%" length="200"/></div>
+<div style="text-align: center"><img src="https://spazznolo.github.io/figs/sixth-plot.png" width="90%" length="200"/></div>
 <br>
 The downside to user mock drafts is that prospect ranking is likely a hobby for most users. They may mostly rely on second hand information provided by hockey sites, experts, and prospect ranking models. Before going further, it’s important to measure its capacity for prediction. One way of doing this is to build a draft ranking from the data, and then measure its accuracy against professional ranking publishers.
 <br>
@@ -69,7 +69,7 @@ user_internal_weights: filtered, weighted, fitted and dampened user mock drafts
 user_external_weights: filters, weighted (to pro consensus), fitted and dampened user mock drafts
 group_average: the average error of pro rankings publishers
 <br>
-<img src="https://spazznolo.github.io/figs/sevent-plot.png"  alt="centered image" style="width: 500px; length: 500px;"/>
+<div style="text-align: center"><img src="https://spazznolo.github.io/figs/sevent-plot.png" width="90%" length="200"/></div>
 <br>
 Rankings derived from raw user data are below average and tend to be the worst compared to pro rankings. 
 Rankings derived from adjusted user data, weighted to the average user draft, hover around the group average.
