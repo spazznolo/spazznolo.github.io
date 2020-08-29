@@ -59,9 +59,9 @@ Here’s a visualization of the effects various treatments have on the user rank
 The downside to user mock drafts is that prospect ranking is likely a hobby for most users. They may mostly rely on second hand information provided by hockey sites, experts, and prospect ranking models. Before going further, it’s important to measure its capacity for prediction. One way of doing this is to build a draft ranking from the data, and then measure its accuracy against professional ranking publishers.
 <br>
 # Derived User Rankings vs the Pros
-<br>
+<p>
 Draft rankings are derived from player-pick probability distributions by iterating through each pick of each draft, and drafting the player with the highest probability of being taken. After each pick, the player distributions are re-approximated (more information is available in the Analysis Notes section).
-<br>
+</p>
 Here is the mean absolute error of derived user draft rankings from 2015-2019 compared to various pro ranking publications. All experts but Bobby Mackenzie, the gold standard of draft rankings, have been greyed out. Purple is the group average.
 <br>
 user_raw: raw user mock drafts
