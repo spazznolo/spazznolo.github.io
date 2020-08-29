@@ -25,9 +25,9 @@ In practice, no team will ever know exactly how every other team has ranked each
 <p>
 The goal of this paper is to assign probabilities to questions like the one in the first paragraph: what is the probability a player is still available at a certain pick?
 </p>
-<p>
+
 ## THE DATA
-</p>
+
 <p>
 <h1> User Mock Drafts </h1>
 </p>
