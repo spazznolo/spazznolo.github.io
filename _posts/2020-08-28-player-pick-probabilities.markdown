@@ -13,6 +13,8 @@ Let’s say we only have our own rankings to go on. Instead of only predicting e
 <br>
 <img src="https://spazznolo.github.io/figs/first-plot.png"  alt="centered image" style="width: 500px; length: 500px;"/>
 <br>
+![Picture description](https://spazznolo.github.io/figs/first-plot.png){: .center-image }
+
 This is a probability distribution of Rossi’s predicted draft result. Though this is a step in the right direction, these are only our predictions of where Rossi might go. What if the teams drafting ahead of us think he’s not as good as we think he is? Well, then their probability distribution for Rossi might look like this:
 <br>
 <img src="https://spazznolo.github.io/figs/second-plot.png"  alt="centered image" style="width: 500px; length: 500px;"/>
@@ -94,7 +96,7 @@ Each player has probabilities attached for the first thirty picks of the draft. 
 <br>
 The fit can also be assessed by grouping the predicted probabilities into bins and then visualizing them against the observed percentage of time the positive outcomes occur. Here’s an example:
 <br>
-<img src="https://spazznolo.github.io/figs/ninth-plot.png"  alt="centered image" width=textWidth height="200"/>
+<img src="https://spazznolo.github.io/figs/ninth-plot.png"  alt="centered image" width=textWidth height="800"/>
 <br>
 The table below has 10 events which have probability between 30% and 40%. Ideally, the percent of time a player is picked by this event is also between 30-40%. In this example, the average probability is in the mid 30%s, and 30% of events had positive outcomes (player was picked). 
 <br>
