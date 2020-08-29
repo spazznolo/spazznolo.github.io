@@ -154,7 +154,7 @@ The problem here is that, after shifting each player’s pick probabilities from
 Though this method is admittedly sub-optimal, it does naturally shrink a player’s probability of getting drafted in the first 30 picks as they slide in the draft. An example of how this looks in practice is Arthur Kaliyev, who was ranked 15th in the 2019 draft, but slid into the second round. Here’s how his probability of being drafted in the first thirty picks changes as he slides down the draft.
 </p>
 <p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/twelth-plot.png" width="70%" length="200"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/twelfth-plot.png" width="70%" length="200"/></div>
 </p>
 <p>
 The next step will be to look for better ways to redistribute player pick probabilities after they expire, as this has interesting use cases. For example, it can answer the question: what was the probability Mikko Rantanen had of being select 11th, given everything that happened in the draft before then? Or, more useful, what is the probability Marco Rossi is drafted by the sixth pick, given Lafreniere, Byfield and Stutzle are picked 1-3 vs if one of the three slip?
