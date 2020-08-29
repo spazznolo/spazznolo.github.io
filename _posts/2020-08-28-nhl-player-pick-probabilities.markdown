@@ -65,7 +65,7 @@ The variables discussed above were used to (1) filter what are likely low qualit
 Here’s a visualization of the effects various treatments have on the user rankings. (add third step)
 </p>
 <p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/sixth-plot.png" width="90%" length="200"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/sixth-plot.png" width="70%" length="200"/></div>
 </p>
 <p>
 The downside to user mock drafts is that prospect ranking is likely a hobby for most users. They may mostly rely on second hand information provided by hockey sites, experts, and prospect ranking models. Before going further, it’s important to measure its capacity for prediction. One way of doing this is to build a draft ranking from the data, and then measure its accuracy against professional ranking publishers.
@@ -145,7 +145,7 @@ In the 2018 draft, two players were considered possibilities for the first overa
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/eleventh-plot.png" width="70%" length="200"/></div>
 </p>
 <p>
-Patrick’s pick probabilities go from 40.5%, 50.5% and 8.5% (picks 1,2 and 3 respectively) before the draft, to 0%, 82.5% and 16% after Hischier is drafted first overall. 
+Patrick’s pick probabilities go from 35.7%, 55.3% and 8.7% (picks 1,2 and 3 respectively) before the draft, to 0%, 86.6% and 14.4% after Hischier is drafted first overall. 
 </p>
 <p>
 The problem here is that, after shifting each player’s pick probabilities from the first overall pick to other picks across their pick-probability distributions, the total probability of all players being selected second overall does not sum to 100%. To fix this, player-pick probabilities are recalibrated by dividing each player’s probability by the sum of the pick probability. These operations are repeated until calibrations are as desired. This comes at the expense of distortions to player-pick probability distributions. 
