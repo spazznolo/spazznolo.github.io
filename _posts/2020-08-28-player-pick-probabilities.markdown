@@ -10,11 +10,11 @@ If you’re picking first at the next NHL draft, you want Lafreniere. If you’r
 <br>
 Let’s say we only have our own rankings to go on. Instead of only predicting each player’s draft position, we could create probabilities of each prospect being drafted at each pick. Let’s use Rossi again as an example. Here’s how we might place probabilities on Rossi’s draft result:
 <br>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/first-plot.png" width="500" length="200"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/first-plot.png" width="80%" length="200"/></div>
 <br>
 This is a probability distribution of Rossi’s predicted draft result. Though this is a step in the right direction, these are only our predictions of where Rossi might go. What if the teams drafting ahead of us think he’s not as good as we think he is? Well, then their probability distribution for Rossi might look like this:
 <br>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/second-plot.png" width="500" length="200"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/second-plot.png" width="80%" length="200"/></div>
 <br>
 If the teams ahead of us view Rossi closer to the plot above, then he’ll likely slide lower than we predicted he would, and our chances of drafting him are higher than we previously thought. In fact, if we knew what other teams thought of him, we could pretty accurately predict where he’ll still be available in the draft, which allows us to either a) be comfortable we have a strong chance of picking him without trading up, or b) slide down a couple spots, pick up a mid-round pick and still get him. An important thing to remember is that Rossi’s draft position is much less affected by how we think of him than it is by how everyone else thinks of him. Namita Nandakumar wrote about the value of knowing where players will likely get drafted in this article.
 <br>
@@ -28,7 +28,7 @@ The goal of this paper is to assign probabilities to questions like the one in t
 <br>
 Over the years, as player data has become more widely available, mock drafts have increased in popularity. In a mock draft, the creator tries to predict where a player will get picked in the upcoming draft. One site in particular, Draft Site, gets hundreds of user mock drafts each year. These mock drafts naturally create probability distributions for each player’s potential pick placement. For example, here was Mikko Rantanen’s in 2015.
 <br>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/third-plot.png" width="500" length="200"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/third-plot.png" width="80%" length="200"/></div>
 <br>
 To create the plot above, equal weight was given to each user’s mock draft, regardless of its quality. In practice, some users are more knowledgable than others. A user who can more correctly predict a draft’s order is more valuable than one who cannot. Therefore, larger weights should be given to users who are likely more accurate in their mock draft. Thankfully, there are a couple quality indicators available: a user’s difference to the average user draft, and the number of days before the draft date that a user last updated their mock draft. 
 <br>
@@ -38,13 +38,13 @@ To create the plot above, equal weight was given to each user’s mock draft, re
 <br>
 Mikko Rantanen’s median pick from the raw user data was 9. If a user selected him 25th, they would be 16 spots off. A user’s absolute error rate can be computed for each pick in their mock draft. Below is the relationship of users’ mean absolute pick difference and their mean absolute pick error to the actual draft from 2015-2019. There’s a strong relationship between the two.
 <br>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/fourth-plot.png" width="500" length="200"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/fourth-plot.png" width="80%" length="200"/></div>
 <br>
 # 2. Days to the Draft
 <br>
 Usually, ranking publications will release a preliminary rankings list about a year before the draft. Then, as the draft approaches and player’s develop – or don’t -  the rankings are updated. The plot below demonstrates that user data becomes more accurate as the draft day approaches.
 <br>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/fifth-plot.png" width="500" length="200"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/fifth-plot.png" width="80%" length="200"/></div>
 <br>
 The variables discussed above were used to (1) filter what are likely low quality drafts and (2) create weights for each user mock draft. Players’ adjusted pick probabilities were then fitted and dampened. More information on these decisions is available in the Analysis Notes section.
 <br>
@@ -54,7 +54,7 @@ The variables discussed above were used to (1) filter what are likely low qualit
 <br>
 Here’s a visualization of the effects various treatments have on the user rankings. (add third step)
 <br>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/sixth-plot.png" width="500" length="200"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/sixth-plot.png" width="80%" length="200"/></div>
 <br>
 The downside to user mock drafts is that prospect ranking is likely a hobby for most users. They may mostly rely on second hand information provided by hockey sites, experts, and prospect ranking models. Before going further, it’s important to measure its capacity for prediction. One way of doing this is to build a draft ranking from the data, and then measure its accuracy against professional ranking publishers.
 <br>
