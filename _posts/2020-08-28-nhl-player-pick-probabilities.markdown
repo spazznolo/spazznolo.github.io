@@ -65,7 +65,7 @@ The variables discussed above were used to (1) filter what are likely low qualit
 Here’s a visualization of the effects various treatments have on the user rankings.
 </p>
 <p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/sixth-plot.png" width="70%" length="250"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/sixth-plot.png" width="70%" length="300"/></div>
 </p>
 <p>
 The downside to user mock drafts is that prospect ranking is likely a hobby for most users. They may mostly rely on second hand information provided by hockey sites, experts, and prospect ranking models. Before going further, it’s important to measure its capacity for prediction. One way of doing this is to build a draft ranking from the data, and then measure its accuracy against professional ranking publishers.
