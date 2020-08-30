@@ -62,10 +62,10 @@ The variables discussed above were used to (1) filter what are likely low qualit
 <h5>Comparing Probability Distributions</h5>
 <h1>The Effect of Treatments on Player-Pick Probability Distributions</h1>
 <p>
-Here’s a visualization of the effects various treatments have on the user rankings. (add third step)
+Here’s a visualization of the effects various treatments have on the user rankings.
 </p>
 <p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/sixth-plot.png" width="70%" length="200"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/sixth-plot.png" width="70%" length="250"/></div>
 </p>
 <p>
 The downside to user mock drafts is that prospect ranking is likely a hobby for most users. They may mostly rely on second hand information provided by hockey sites, experts, and prospect ranking models. Before going further, it’s important to measure its capacity for prediction. One way of doing this is to build a draft ranking from the data, and then measure its accuracy against professional ranking publishers.
@@ -132,7 +132,7 @@ The perfect fit is the grey line, where outcomes occur the predicted percentage 
 </p>
 <h5>NEXT STEPS</h5>
 <p>
-Regardless of one’s methods for developing player-pick probability distributions, on draft day low-likelihood events will nearly always occur. Some examples in recent drafts: Barrett Hayton was selected with the 5th pick in the 2018 draft. He was ranked 13th and had a 4.7% probability of being selected that early. Gabe Vilardi was selected with the 11th pick of the 2017 draft. He was ranked 3rd and had a 5.2% probability of sliding at least that late.
+Regardless of one’s methods for developing player-pick probability distributions, low-likelihood events will nearly always occur on draft day. Some examples in recent drafts: Barrett Hayton was selected with the 5th pick in the 2018 draft. He was ranked 13th and had a 4.7% probability of being selected that early. Gabe Vilardi was selected with the 11th pick of the 2017 draft. He was ranked 3rd and had a 5.2% probability of sliding at least that late.
 </p>
 <p>
 Question: How do the probability distributions of the remaining players change now that either (1) a player was selected earlier than we thought he would or (2) a highly ranked player is sliding past where we though he would? I’ve yet to think of a way of doing this which I’m satisfied with, but I’ll lay out my thoughts so far.
@@ -157,7 +157,7 @@ Though this method is admittedly sub-optimal, it does naturally shrink a player�
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/twelfth-plot.png" width="70%" length="200"/></div>
 </p>
 <p>
-The next step will be to look for better ways to redistribute player pick probabilities after they expire, as this has interesting use cases. For example, it can answer the question: what was the probability Mikko Rantanen had of being select 11th, given everything that happened in the draft before then? Or, more useful, what is the probability Marco Rossi is drafted by the sixth pick, given Lafreniere, Byfield and Stutzle are picked 1-3 vs if one of the three slip?
+The next step is to look for better ways to redistribute player pick probabilities after they expire, as this has interesting use cases. For example, it can answer the question: what was the probability Mikko Rantanen had of being select 11th, given everything that happened in the draft before then? Or, more useful, what is the probability Marco Rossi is available at the sixth pick, given what happens in the first three picks?
 </p>
 <h1>Evaluating the Fit of Dynamic Player-Pick Distributions</h1>
 <p>
@@ -165,10 +165,7 @@ The next step will be to look for better ways to redistribute player pick probab
 </p>
 <h1>Back to the Marco Rossi Example</h1>
 <p>
-Question: What is the probability Marco Rossi is drafted by the sixth pick, given Lafreniere, Byfield and Stutzle are picked 1-3 vs if one of the three slip?
-</p>
-<p>
-The current consensus ranking for the top three picks of the 2020 draft is: Lafreniere, Byfield, and Stutzle. If the Senators reach for another player on the third pick, what happens to Rossi’s probability of still being available sixth? To run this simulation, Alex Holtz was used as the reach for the third pick. Rossi’s probability of being taken by the sixth pick drops nearly 10% because of this.
+The current consensus ranking for the top three picks of the 2020 draft is: Lafreniere, Byfield, and Stutzle. What happens to Rossi’s probability of still being available sixth if the Senators reach for another player on the third pick? To run this simulation, Alex Holtz was used as the third pick reach. The results, as shown in the plot below, is that Rossi’s probability of being taken by the sixth pick drops nearly 10% because of this.
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/fourteenth-plot.png" width="70%" length="200"/></div>
