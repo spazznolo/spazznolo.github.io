@@ -173,13 +173,18 @@ The current consensus ranking for the top three picks of the 2020 draft is: Lafr
 <h5>ANALYSIS NOTES</h5>
 <h1>Filtering Users</h1>
 <p>
-Filters for adjusted data weighted to user average: RMSE to user average < 15, days to draft < 150
-Filters for adjusted data weighted to pro consensus: RMSE to pro consensus < 10, days to draft < 150
+Adjusted to User Average:
+1. RMSE to user average < 15
+2. Days to draft < 150
+</p>
+<p>
+Adjusted to Pro Consensus: 
+1. RMSE to pro consensus < 10
+2. Days to draft < 150
 </p>
 <h1>Attributing Weights to Users</h1>
 <p>
-A linear regression is fit using: RMSE to user average, days to draft, (and RMSE to pro consensus for data weighted to pro consensus) as predictors and RMSE to actual draft order as target. 
-User weights are the inverse of the linear model predicted RMSE of user ranking to the actual draft order.
+A linear regression is fit using: RMSE to user average, days to draft, (and RMSE to pro consensus for data weighted to pro consensus) as predictors and the RMSE to actual draft order as target. User weights are the inverse of the linear model predicted RMSE of user ranking to the actual draft order.
 </p>
 <h1>Fitting Player Distributions</h1>
 <p>
@@ -187,7 +192,7 @@ A gamma distribution is fitted to adjusted data.
 </p>
 <h1>Dampening Player Distributions</h1>
 <p>
-Talk about ‘makeshift prior’ and how the deviation created by it is better than that of the raw data because it is observed deviation vs likely bad user predictions.
+Player distributions are dampened by the variance observed in prior years. This is superior to the variance in the raw data because, in this case, it is caused by actual deviations as opposed to what are likely bad user predicitons.
 </p>
 
 
