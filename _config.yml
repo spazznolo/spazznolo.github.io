@@ -2,6 +2,7 @@ title: 'b2a3e8.github.io'
 description: "A jekyll theme inspired by linux consoles for hackers, developers and script kiddies."
 baseurl: ""
 url: "https://spazznolo.github.io"
+google_analytics: UA-177238175-1
 
 header_pages:
   - index.md
