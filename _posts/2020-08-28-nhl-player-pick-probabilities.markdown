@@ -171,7 +171,7 @@ The current consensus ranking for the top three picks of the 2020 draft is: Lafr
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/fourteenth-plot.png" width="70%" length="200"/></div>
 </p>
 <p>
-Cumulative player-pick probabilities for the 2020 draft are available here: https://drive.google.com/file/d/150JF4tPGQ0fRmMsXonIa5CJ_wVVCXBa9/view?usp=drivesdk
+Cumulative player-pick probabilities for the 2020 draft are available <a href="https://drive.google.com/file/d/150JF4tPGQ0fRmMsXonIa5CJ_wVVCXBa9/view?usp=drivesdk">here</a>. 
 </p>
 <h5>ANALYSIS NOTES</h5>
 <h1>Filtering Users</h1>
