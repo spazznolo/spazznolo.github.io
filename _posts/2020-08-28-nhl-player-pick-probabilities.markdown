@@ -32,7 +32,7 @@ The goal of this paper is to assign probabilities to questions like the one in t
 <h5>THE DATA</h5>
 <h1> User Mock Drafts </h1>
 <p>
-Over the years, as player data has become more widely available, mock drafts have increased in popularity. In a mock draft, the creator tries to predict where a player will get picked in the upcoming draft. One site in particular, Draft Site, gets hundreds of user mock drafts each year. These mock drafts naturally create probability distributions for each player’s potential pick placement. For example, here was Mikko Rantanen’s in 2015.
+Over the years, as player data has become more widely available, mock drafts have increased in popularity. In a mock draft, the creator tries to predict where a player will get picked in the upcoming draft. One site in particular, <a href="https://www.draftsite.com/">Draft Site</a>, gets hundreds of user mock drafts each year. These mock drafts naturally create probability distributions for each player’s potential pick placement. For example, here was Mikko Rantanen’s in 2015.
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/third-plot.png" width="70%" length="200"/></div>
