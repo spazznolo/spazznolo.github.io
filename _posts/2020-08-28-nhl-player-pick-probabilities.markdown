@@ -75,7 +75,7 @@ The downside to user mock drafts is that prospect ranking is likely a hobby for 
 Draft rankings are derived from player-pick probability distributions by iterating through each pick of each draft, and drafting the player with the highest probability of being taken. After each pick, the player distributions are re-approximated (more information is available in the Analysis Notes section).
 </p>
 <p>
-Here is the mean absolute error of derived user draft rankings from 2015-2019 compared to various pro ranking publications. All experts but Bobby Mackenzie, the gold standard of draft rankings, have been greyed out. Purple is the group average.
+Here is the mean absolute error of derived user draft rankings from 2015-2019 compared to various pro projections. All experts but Bobby Mackenzie, the gold standard of draft projections, have been greyed out. It's worth noting that the goal of some professional draft analysts is to predict which players will have the best careers, and not necessarily the order they might be picked. Purple is the group average.
 </p>
 <p>
 user_raw: raw user mock drafts
