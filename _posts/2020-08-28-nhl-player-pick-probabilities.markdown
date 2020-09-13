@@ -128,7 +128,7 @@ Grouping the data into many bins, calculating the predicted vs observed occurren
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/tenth-plot.png" width="70%" length="200"/></div>
 </p>
 <p>
-The perfect fit is the grey line, where outcomes occur the predicted percentage of time. Whenever a curve slides away underneath the line of perfect fit, like it does with the raw user data (and to a lesser extent the adjusted user data), it means the method tends to be overconfident in its assignment of probabilities. The plot above, along with the Brier scores, suggest the adjusted user data (score ~ 0.081) is a better fit than raw user data (score ~ 0.196).
+The perfect fit is the grey line, where outcomes occur the predicted percentage of time. Whenever a curve slides away underneath the line of perfect fit, like it does with the raw user data (and to a lesser extent the adjusted user data), it means the method tends to be overconfident in its assignment of probabilities. The plot above, along with the Brier scores, suggest the adjusted user data (score ~ 0.0604) is a better fit than raw user data (score ~ 0.1981).
 </p>
 <h5>NEXT STEPS</h5>
 <p>
