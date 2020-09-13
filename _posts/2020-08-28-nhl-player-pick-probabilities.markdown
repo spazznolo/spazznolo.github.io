@@ -21,10 +21,10 @@ This is a probability distribution of Rossi’s predicted draft result. Though t
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/second-plot.png" width="70%" length="200"/></div>
 </p>
 <p>
-If the teams ahead of us view Rossi closer to the plot above, then he’ll likely slide lower than we predicted he would, and our chances of drafting him are higher than we previously thought. In fact, if we knew what other teams thought of him, we could pretty accurately predict where he’ll still be available in the draft, which allows us to either a) be comfortable we have a strong chance of picking him without trading up, or b) slide down a couple spots, pick up a mid-round pick and still get him. An important thing to remember is that Rossi’s draft position is much less affected by how we think of him than it is by how everyone else thinks of him. Namita Nandakumar wrote about the value of knowing where players will likely get drafted in this article.
+If the teams ahead of us view Rossi closer to the plot above, then he’ll likely slide lower than we predicted he would, and our chances of drafting him are higher than we previously thought. In fact, if we knew what other teams thought of him, we could pretty accurately predict where he’ll still be available in the draft, which allows us to either a) be comfortable we have a strong chance of picking him without trading up, or b) slide down a couple spots, pick up a mid-round pick and still get him. An important thing to remember is that Rossi’s draft position is much less affected by how we think of him than it is by how everyone else thinks of him. Namita Nandakumar wrote about the value of knowing where players will likely get drafted in <a href="http://statsportsconsulting.com/main/wp-content/uploads/Nandakumar_PerfectDraft-1.pdf">this article</a>.
 </p>
 <p>
-In practice, no team will ever know exactly how every other team has ranked each prospect. Instead, player-pick probability distributions need to be approximated by other means. DTM About Heart outlined one way of doing this for Hockey-Graphs which used bayesian inference and pro rankings publishers. I’m going to outline another possible way, which uses user generated data to derive probability density functions for each player. 
+In practice, no team will ever know exactly how every other team has ranked each prospect. Instead, player-pick probability distributions need to be approximated by other means. Dawson Sprigings outlined one way of doing this for <a href="https://hockey-graphs.com/2016/06/08/nhl-draft-probability-tool/">Hockey-Graphs</a> which used bayesian inference and pro rankings publishers. I’m going to outline another possible way, which uses user generated data to derive probability density functions for each player. 
 </p>
 <p>
 The goal of this paper is to assign probabilities to questions like the one in the first paragraph: what is the probability a player is still available at a certain pick?
@@ -32,7 +32,7 @@ The goal of this paper is to assign probabilities to questions like the one in t
 <h5>THE DATA</h5>
 <h1> User Mock Drafts </h1>
 <p>
-Over the years, as player data has become more widely available, mock drafts have increased in popularity. In a mock draft, the creator tries to predict where a player will get picked in the upcoming draft. One site in particular, Draft Site, gets hundreds of user mock drafts each year. These mock drafts naturally create probability distributions for each player’s potential pick placement. For example, here was Mikko Rantanen’s in 2015.
+Over the years, as player data has become more widely available, mock drafts have increased in popularity. In a mock draft, the creator tries to predict where a player will get picked in the upcoming draft. One site in particular, <a href="https://www.draftsite.com/">Draft Site</a>, gets hundreds of user mock drafts each year. These mock drafts naturally create probability distributions for each player’s potential pick placement. For example, here was Mikko Rantanen’s in 2015.
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/third-plot.png" width="70%" length="200"/></div>
@@ -75,7 +75,7 @@ The downside to user mock drafts is that prospect ranking is likely a hobby for 
 Draft rankings are derived from player-pick probability distributions by iterating through each pick of each draft, and drafting the player with the highest probability of being taken. After each pick, the player distributions are re-approximated (more information is available in the Analysis Notes section).
 </p>
 <p>
-Here is the mean absolute error of derived user draft rankings from 2015-2019 compared to various pro ranking publications. All experts but Bobby Mackenzie, the gold standard of draft rankings, have been greyed out. Purple is the group average.
+Here is the mean absolute error of derived user draft rankings from 2015-2019 compared to various pro projections. All experts but Bobby Mackenzie, the gold standard of draft projections, have been greyed out. It's worth noting that the goal of some professional draft analysts is to predict which players will have the best careers, and not necessarily the order they might be picked. Purple is the group average.
 </p>
 <p>
 user_raw: raw user mock drafts
@@ -169,6 +169,9 @@ The current consensus ranking for the top three picks of the 2020 draft is: Lafr
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/fourteenth-plot.png" width="70%" length="200"/></div>
+</p>
+<p>
+Cumulative player-pick probabilities for the 2020 draft are available <a href="https://drive.google.com/file/d/150JF4tPGQ0fRmMsXonIa5CJ_wVVCXBa9/view?usp=drivesdk">here</a>. 
 </p>
 <h5>ANALYSIS NOTES</h5>
 <h1>Filtering Users</h1>
