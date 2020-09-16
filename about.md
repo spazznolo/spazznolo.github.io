@@ -6,4 +6,4 @@ permalink: /about/
 
 <h5>Jeremie</h5>
 
-This is a blog by Jeremie.
+questions, critiques, rants: jeremie.spagnolo@gmail.com
