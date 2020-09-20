@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Assigning NBA Player-Pick Probabilities with User Generated Data"
+title:  "The NBA Draft class no one can agree on"
 date:   2020-09-17 11:52:05 -0400
 ---
 

@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Assigning NHL Player-Pick Probabilities with User Generated Data"
+title:  "Assigning NHL Player-Pick Probabilities with User Mock Drafts (Part 1)"
 date:   2020-08-28 11:52:05 -0400
 ---
 
