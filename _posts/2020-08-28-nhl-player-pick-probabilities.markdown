@@ -130,46 +130,6 @@ Grouping the data into many bins, calculating the predicted vs observed occurren
 <p>
 The perfect fit is the grey line, where outcomes occur the predicted percentage of time. Whenever a curve slides away underneath the line of perfect fit, like it does with the raw user data (and to a lesser extent the adjusted user data), it means the method tends to be overconfident in its assignment of probabilities. The plot above, along with the Brier scores, suggest the adjusted user data (score ~ 0.0604) is a better fit than raw user data (score ~ 0.1981).
 </p>
-<h5>NEXT STEPS</h5>
-<p>
-Regardless of one’s methods for developing player-pick probability distributions, low-likelihood events will nearly always occur on draft day. Some examples in recent drafts: Barrett Hayton was selected with the 5th pick in the 2018 draft. He was ranked 13th and had a 4.7% probability of being selected that early. Gabe Vilardi was selected with the 11th pick of the 2017 draft. He was ranked 3rd and had a 5.2% probability of sliding at least that late.
-</p>
-<p>
-Question: How do the probability distributions of the remaining players change now that either (1) a player was selected earlier than we thought he would or (2) a highly ranked player is sliding past where we though he would? I’ve yet to think of a way of doing this which I’m satisfied with, but I’ll lay out my thoughts so far.
-</p>
-<h1>Dynamic Player-Pick Probabilities</h1>
-<p>
-In the 2018 draft, two players were considered possibilities for the first overall pick: Nico Hischier (~60%) and Nolan Patrick (~40%). The probabilities for the second overall pick were: Patrick (40%), Hischier (36%), with Heiskanen and Vilardi sharing much of the rest. After Hischier is selected first overall, Patrick’s ~40% probability of getting drafted first overall needs to be distributed across other picks. One way of doing this is to distribute this probability proportionally across Patrick’s remaining probability distribution. Here’s what that would look like. 
-</p>
-<p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/eleventh-plot.png" width="70%" length="200"/></div>
-</p>
-<p>
-Patrick’s pick probabilities go from 35.7%, 55.3% and 8.7% (picks 1,2 and 3 respectively) before the draft, to 0%, 86.6% and 14.4% after Hischier is drafted first overall. 
-</p>
-<p>
-The problem here is that, after shifting each player’s pick probabilities from the first overall pick to other picks across their pick-probability distributions, the total probability of all players being selected second overall does not sum to 100%. To fix this, player-pick probabilities are recalibrated by dividing each player’s probability by the sum of the pick probability. These operations are repeated until calibrations are as desired. This comes at the expense of distortions to player-pick probability distributions. 
-</p>
-<p>
-Though this method is admittedly sub-optimal, it does naturally shrink a player’s probability of getting drafted in the first 30 picks as they slide in the draft. An example of how this looks in practice is Arthur Kaliyev, who was ranked 15th in the 2019 draft, but slid into the second round. Here’s how his probability of being drafted in the first thirty picks changes as he slides down the draft.
-</p>
-<p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/twelfth-plot.png" width="70%" length="200"/></div>
-</p>
-<p>
-The next step is to look for better ways to redistribute player pick probabilities after they expire, as this has interesting use cases. For example, it can answer the question: what was the probability Mikko Rantanen had of being select 11th, given everything that happened in the draft before then? Or, more useful, what is the probability Marco Rossi is available at the sixth pick, given what happens in the first three picks?
-</p>
-<h1>Evaluating the Fit of Dynamic Player-Pick Distributions</h1>
-<p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/thirteenth-plot.png" width="70%" length="200"/></div>
-</p>
-<h1>Back to the Marco Rossi Example</h1>
-<p>
-The current consensus ranking for the top three picks of the 2020 draft is: Lafreniere, Byfield, and Stutzle. What happens to Rossi’s probability of still being available sixth if the Senators reach for another player on the third pick? To run this simulation, Alex Holtz was used as the third pick reach. The results, as shown in the plot below, is that Rossi’s probability of being taken by the sixth pick drops nearly 10% because of this.
-</p>
-<p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/fourteenth-plot.png" width="70%" length="200"/></div>
-</p>
 <p>
 Cumulative player-pick probabilities for the 2020 draft are available <a href="https://drive.google.com/file/d/150JF4tPGQ0fRmMsXonIa5CJ_wVVCXBa9/view?usp=drivesdk">here</a>. 
 </p>
