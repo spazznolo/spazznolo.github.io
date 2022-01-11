@@ -7,7 +7,7 @@ google_analytics: UA-177238175-1
 header_pages:
   - index.md
   - about.md
-  - about copy.md
+  - books.md
 
 style: dark
 
