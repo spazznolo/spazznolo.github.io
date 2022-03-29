@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Assigning NHL Player-Pick Probabilities with User Mock Drafts (Part 1)"
-date:   2020-08-28 11:52:05 -0400
+date:   2021-11-28 11:52:05 -0400
 ---
 
 <h5> INTRODUCTION </h5>
