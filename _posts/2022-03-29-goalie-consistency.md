@@ -43,6 +43,16 @@ Running 10,000 simulations of 82 game seasons yields the following distributions
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-plot-two.png" width="70%" length="200"/></div>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-plot-three.png" width="30%" length="50"/></div>
 </p>
+
+<div class="row">
+  <div class="column">
+    <img src="https://spazznolo.github.io/figs/goalie-plot-two.png" style="width:100%">
+  </div>
+  <div class="column">
+    <img src="https://spazznolo.github.io/figs/goalie-plot-three.png" style="width:100%">
+  </div>
+</div>
+
 <p>
 It turns out <em>the average expected standing points increases as a goalie’s inter-game consistency decreases</em>. If that’s surprising to you, you’re not alone - it is a little paradoxical. 
 </p>
@@ -59,7 +69,7 @@ Some other takeaways:
 - The variance in expected standing points increases as a goalie’s consistency increases. This might seem paradoxical, but actually it’s pretty simple if you think about it - a goalie who we expect to allow 70% of goals some games and 30% of goals the other leads to relatively certain in-game results.
 </p>
 <p>
-- The difference in expected standing points might seem small, but it could be the difference between making and missing the playoffs. more examples (show standing points earned by player and salary $ per standing point).
+- The difference in expected standing points might seem small (about 5, or 2.4 wins, over a standard 82 game season), but it could be the difference between making and missing the playoffs.
 </p>
 <p>
 This may all be interesting, but is it helpful? By itself, <b>not really</b>. A goalie can’t and will never be inconsistent from game to game on purpose. It does lead to other questions though, like: are some goalies inconsistent by nature?; are they inconsistent from season-to-season as well? how about from shot-to-shot? and what is the effect of inter-shot consistency on expected standing points?
@@ -77,7 +87,7 @@ Here’s what a ten-shot sequence of outcomes from shots on goal looks like (1 g
 Notice, there is an important structural difference in the consistency between shots and games. Shots lead to binary events (goal or not). Shots can’t be treated in the same way as games were in the previous section - a poisson distribution is no longer fitting. 
 </p>
 <p>
-Thankfully, given that this is a sequence of binary events, we can borrow from information theory for a more robust and generalized measure of consistency. It’s called <b>entropy</b>. Entropy is a way to measure the orderliness of a sequence, or, in our case, the inter-shot consistency of a goalie. It was first introduced <a href="https://repository.upenn.edu/cgi/viewcontent.cgi?article=1081&context=statistics_papers">here</a> for various applications, and then <a href="https://repository.upenn.edu/cgi/viewcontent.cgi?article=1081&context=statistics_papers">repurposed</a> for teams and shooters in hockey (here, we apply it to goalies).
+Thankfully, given that this is a sequence of binary events, we can borrow from information theory for a more robust and generalized measure of consistency. It’s called <b>entropy</b>. Entropy is a way to measure the orderliness of a sequence, or, in our case, the inter-shot consistency of a goalie. It was first introduced <a href="https://repository.upenn.edu/cgi/viewcontent.cgi?article=1081&context=statistics_papers">here</a> for various applications, and then <a href="https://repository.upenn.edu/cgi/viewcontent.cgi?article=1081&context=statistics_papers">repurposed</a> for teams and shooters in hockey (we apply it to goalies in this post).
 </p>
 <p>
 A perfectly ordered sequence has no entropy, and as it loses its orderliness (or consistency), the entropy rises. But how does this decrease in inter-shot consistency effect the expected standing points? 
