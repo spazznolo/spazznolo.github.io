@@ -47,7 +47,7 @@ Running 10,000 simulations of 82 game seasons yields the following distributions
 It turns out <em>the average expected standing points increases as a goalie’s inter-game consistency decreases</em>. If that’s surprising to you, you’re not alone - it is a little paradoxical. 
 </p>
 <p>
-However, if you accept that goals follow a poisson distribution (which <a href="https://www.lakeheadu.ca/sites/default/files/uploads/77/docs/DejardineFinal.pdf">you</a> <a href="https://verbumdata.netlify.app/2019/09/15/picking-nhl-poisson/">should</a>!), the fact that a goalie who expects to allow 1 and 5 goals a game gets more standing points than one who is always expected to save 3 is self-evident. It can even be eye-balled using the probability mass function of the Poisson distribution.
+However, if you accept that goals follow a poisson distribution (which <a href="https://www.lakeheadu.ca/sites/default/files/uploads/77/docs/DejardineFinal.pdf">you</a> <a href="https://verbumdata.netlify.app/2019/09/15/picking-nhl-poisson/">should</a>!), the fact that a goalie who expects to allow 1 and 5 goals a game gets more standing points than one who is always expected to allow 3 is self-evident. It can even be eye-balled using the probability mass function of the Poisson distribution.
 </p>
 <p>
 Still not convinced? Take the scores from past NHL seasons and look at the actual standing points % won when teams allow 0-6 goals. A team can expect higher standing points % allowing 2 and 4 goals (or 1 and 5, or 0 and 6) than it can allowing 3 goals twice.
@@ -100,14 +100,3 @@ The next post will use the normalized entropy measure for consistency (or the la
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-plot-one.png" width="70%" length="200"/></div>
-
-
-<div id="banner">
-    <div class="inline-block">
-        <img src="https://spazznolo.github.io/figs/goalie-plot-two.png" width="30%">
-    </div>
-
-    <div class="inline-block">
-        <img src="https://spazznolo.github.io/figs/goalie-plot-three.png" width="30%">
-    </div>
-</div>
