@@ -45,7 +45,7 @@ Running 10,000 simulations of 82 game seasons yields the following distributions
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-plot-three.png" width="40%" length="100"/></div>
 </p>
 <p>
-It turns out that the average expected standing points increases as a goalie’s inter-game consistency decreases. If that’s surprising to you, you’re not alone - it is a little paradoxical. 
+It turns out <em>the average expected standing points increases as a goalie’s inter-game consistency decreases</em>. If that’s surprising to you, you’re not alone - it is a little paradoxical. 
 </p>
 <p>
 However, if you accept that goals follow a poisson distribution (which <a href="https://www.lakeheadu.ca/sites/default/files/uploads/77/docs/DejardineFinal.pdf">you</a> <a href="https://verbumdata.netlify.app/2019/09/15/picking-nhl-poisson/">should</a>!), the fact that a goalie who expects to save 1 and 5 goals a game gets more standing points than one who is always expected to save 3 is self-evident. It can even be eye-balled using the probability mass function of the Poisson distribution.
@@ -72,10 +72,19 @@ This may all be interesting, but is it helpful? By itself, not really. A goalie 
 Here’s what a sequence of outcomes from shots on goal looks like (1 goal, 0 save).
 </p>
 <p>
+0 0 0 0 1 0 0 0 1 0 0 0 0
+</p>
+<p>
 Notice, there is an important structural difference in the consistency between shots and games. Shots lead to binary events (goal or not). Shots can’t be treated in the same way as games were in the previous section - a poisson distribution is no longer fitting. 
 </p>
 <p>
-Thankfully, we can borrow from information theory for a more robust and generalized measure of consistency in a sequence of binary events. It’s called entropy. Entropy is a way to measure the orderliness of a sequence, or, in our case, the inter-shot consistency of a goalie. First introduced… blah blah.
+Thankfully, given that this is a sequence of binary events, we can borrow from information theory for a more robust and generalized measure of consistency. It’s called entropy. Entropy is a way to measure the orderliness of a sequence, or, in our case, the inter-shot consistency of a goalie. It was first introduced <a href="https://repository.upenn.edu/cgi/viewcontent.cgi?article=1081&context=statistics_papers">here</a> for various applications, and then repurposed <a href="https://repository.upenn.edu/cgi/viewcontent.cgi?article=1081&context=statistics_papers">here</a> for teams and shooters in hockey.  
+</p>
+<p>
+A perfectly ordered sequence has no entropy, and as it loses its orderliness (or consistency), the entropy rises. But how does this decrease in inter-shot consistency effect the expected standing points? 
+</p>
+<p>
+This time, 10,000 random sequences of goalie seasons are created all with the same seasonal save percentage of .900. Then, the entropy of each random sequence is calculated along with the expected standing points earned. The results are below.
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-plot-five.png" width="70%" length="200"/></div>
