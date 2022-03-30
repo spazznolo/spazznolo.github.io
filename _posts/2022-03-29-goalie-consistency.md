@@ -17,7 +17,7 @@ That's where this series of posts comes in. Ideally, they will help - even margi
 Consistency can be measured through various perspectives. For example, it can be measured from shot-to-shot, from game-to-game or from season-to-season. The first two perspectives are addressed in this post. The third will be addressed in another post.
 </p>
 <p>
-<h3> The effect of inter-game consistency on expected standing points </h3>
+<h5> The effect of inter-game consistency on expected standing points </h5>
 </p>
 <p>
 Here’s an illustration: Imagine you’re the General Manager of a hockey team in a league where every single player and goalie is equally skilled. Since all players are equal, all teams are equal too. Now, a special opportunity comes up where you get to decide between four equally skilled goalies who have different levels of consistency.
@@ -65,7 +65,7 @@ Some other takeaways:
 This may all be interesting, but is it helpful? By itself, not really. A goalie can’t and will never be inconsistent from game to game on purpose. It does lead to other questions though, like: are some goalies inconsistent by nature?; are they inconsistent from season-to-season as well? how about from shot-to-shot? and what is the effect of inter-shot consistency on expected standing points?
 </p>
 <p>
-<h3> The effect of inter-shot consistency on expected standing points </h3>
+<h5> The effect of inter-shot consistency on expected standing points </h5>
 </p>
 <p>
 Here’s what a ten-shot sequence of outcomes from shots on goal looks like (1 goal, 0 save).
