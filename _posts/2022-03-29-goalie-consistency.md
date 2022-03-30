@@ -93,7 +93,7 @@ This time, 10,000 random sequences of goalie seasons are created all with the sa
 <em>Inter-shot consistency does not seem have an effect on expected standing points.</em>
 </p>
 <p>
-The next post will use the normalized entropy measure for consistency (or the lack thereof) on real data. Given that entropy has been measured for shooters before here, it will be a very similar exploration, except it will be applied to goalies. In the post after that, I’ll attempt to improve this by exploring goalie entropy using MoneyPuck’s Goals Saved Above Average.
+The next post will use the normalized entropy measure for consistency (or the lack thereof) on real data. Given that entropy has been measured for shooters before, it will be a very similar exploration, except it will be applied to goalies. In the post after that, I’ll attempt to improve this by exploring goalie entropy using MoneyPuck’s Goals Saved Above Average.
 </p>
 <p>
 <em>Note: For clarity’s sake, I introduced game-to-game consistency without randomness (a goalie was expected to be above average and below average in half of his games), but this also works with randomized expectations. The plot below compares the expected standing points when the expected rate of occurrence is randomly sampled from the uniform distribution to those when the expected rate of occurrence is the average expected goals against. The expected difference between a perfectly steady goalie and a perfectly random goalie is about 7 standing points!</em>
