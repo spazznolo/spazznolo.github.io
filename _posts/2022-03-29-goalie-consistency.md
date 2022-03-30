@@ -3,7 +3,7 @@ layout: post
 title:  "Does consistency matter in Goaltending? [Part 1]"
 date:   2022-03-29 11:52:05 -0400
 ---
-<h1> Does consistency matter in Goaltending? </h1>
+<h2> Does consistency matter in Goaltending? </h2>
 <p>
 </p>
 <h5> Part 1 - The effect of goalie consistency on expected standing points </h5>
