@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Assigning NHL Player-Pick Probabilities with User Mock Drafts (Part 1)"
+title:  "Assigning NHL Player-Pick Probabilities with User Mock Drafts"
 date:   2021-11-28 11:52:05 -0400
 ---
 
