@@ -102,4 +102,12 @@ The next post will use the normalized entropy measure for consistency (or the la
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-plot-one.png" width="70%" length="200"/></div>
 
 
+<div id="banner">
+    <div class="inline-block">
+        <img src="https://spazznolo.github.io/figs/goalie-plot-two.png" width="70%" length="200">
+    </div>
 
+    <div class="inline-block">
+        <img src="https://spazznolo.github.io/figs/goalie-plot-three.png" width="30%" length="50"/>
+    </div>
+</div>
