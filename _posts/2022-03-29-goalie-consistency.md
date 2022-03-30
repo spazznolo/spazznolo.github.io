@@ -86,8 +86,8 @@ A perfectly ordered sequence has no entropy, and as it loses its orderliness (or
 This time, 10,000 random sequences of goalie seasons are created all with the same seasonal save percentage of .900. Then, the entropy of each random sequence is calculated along with the expected standing points earned. The results are below.
 </p>
 <p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-plot-six.png" width="70%" length="200"/></div>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-plot-four.png" width="70%" length="200"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-plot-six.png" width="70%" length="200"/></div>
 </p>
 <p>
 <em>Inter-shot consistency does not seem have an effect on expected standing points.</em>
