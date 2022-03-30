@@ -20,18 +20,19 @@ Consistency can be measured through various perspectives. For example, it can be
 <h5> The effect of inter-game consistency on expected standing points </h5>
 </p>
 <p>
-Here’s an illustration: Imagine you’re the General Manager of a hockey team in a league where every single player and goalie is equally skilled. Since all players are equal, all teams are equal too. Now, a special opportunity comes up where you get to decide between four equally skilled goalies who have different levels of consistency.
+Here’s an illustration: Imagine you’re the General Manager of a hockey team in a league where every single player and goalie is equally skilled. Since all players are equal, all teams are equal too. Now, a special opportunity comes up where you get to decide between eight equally skilled goalies who have different levels of consistency.
 </p>
 <p>
 Goalie A always plays average, no matter what.
 Goalie B plays half his games slightly above average, and the other half slightly below average.
 Goalie C plays half his games a little better than B’s good games, and the other half a little worse than B’s bad games.
+And so on...
 </p>
 <p>
 Which do you want to play for you?
 </p>
 <p>
-In order to decide, it helps to understand the underlying structure of goals in hockey. Goals have been <a href="http://www.hockeyanalytics.com/Research_files/Poisson_Toolbox.pdf">shown</a> to follow a Poisson process. Many simulations have shown just how closely goals follow the Poisson over time. Not only is this a clean approximation, it can also easily be simulated.
+In order to decide, it helps to understand the underlying structure of goals in hockey. Goals have been <a href="http://www.hockeyanalytics.com/Research_files/Poisson_Toolbox.pdf">shown</a> to follow a <a href="https://en.wikipedia.org/wiki/Poisson_distribution">Poisson process</a>. Many simulations have shown just how closely goals follow the Poisson over time. Not only is this a clean approximation, it can also easily be simulated.
 </p>
 <p>
 In this simulation, the number of goals a goalie allows will be represented by a set of poisson distributions, and the expected quality of play will be represented by the poisson’s expected rate of occurrences, such that in an average game, a goalie is expected to allow around 3 goals; in a slightly below average game around 3.25 goals; below average around 3.50, and so on… 
@@ -77,7 +78,7 @@ Here’s what a ten-shot sequence of outcomes from shots on goal looks like (1 g
 Notice, there is an important structural difference in the consistency between shots and games. Shots lead to binary events (goal or not). Shots can’t be treated in the same way as games were in the previous section - a poisson distribution is no longer fitting. 
 </p>
 <p>
-Thankfully, given that this is a sequence of binary events, we can borrow from information theory for a more robust and generalized measure of consistency. It’s called <b>entropy</b>. Entropy is a way to measure the orderliness of a sequence, or, in our case, the inter-shot consistency of a goalie. It was first introduced <a href="https://repository.upenn.edu/cgi/viewcontent.cgi?article=1081&context=statistics_papers">here</a> for various applications, and then <a href="https://repository.upenn.edu/cgi/viewcontent.cgi?article=1081&context=statistics_papers">repurposed</a> for teams and shooters in hockey (we apply it to goalies in this post).
+Thankfully, given that this is a sequence of binary events, we can borrow from information theory for a more robust and generalized measure of consistency. It’s called <a href="https://en.wikipedia.org/wiki/Entropy_(information_theory)">entropy</a>. Entropy is a way to measure the orderliness of a sequence, or, in our case, the inter-shot consistency of a goalie. It was first introduced <a href="https://repository.upenn.edu/cgi/viewcontent.cgi?article=1081&context=statistics_papers">here</a> for various applications, and then <a href="https://repository.upenn.edu/cgi/viewcontent.cgi?article=1081&context=statistics_papers">repurposed</a> for teams and shooters in hockey (we apply it to goalies in this post).
 </p>
 <p>
 A perfectly ordered sequence has no entropy, and as it loses its orderliness (or consistency), the entropy rises. But how does this decrease in inter-shot consistency effect the expected standing points? 
