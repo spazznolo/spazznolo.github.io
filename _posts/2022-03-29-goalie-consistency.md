@@ -46,10 +46,10 @@ Running 10,000 simulations of 82 game seasons yields the following distributions
 
 <div class="row">
   <div class="column">
-    <img src="https://spazznolo.github.io/figs/goalie-plot-two.png" style="width:70%">
+    <img src="https://spazznolo.github.io/figs/goalie-plot-two.png" style="width:60%">
   </div>
   <div class="column">
-    <img src="https://spazznolo.github.io/figs/goalie-plot-three.png" style="width:30%">
+    <img src="https://spazznolo.github.io/figs/goalie-plot-three.png" style="width:20%">
   </div>
 </div>
 
