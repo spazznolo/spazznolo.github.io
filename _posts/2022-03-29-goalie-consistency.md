@@ -42,7 +42,7 @@ Running 10,000 simulations of 82 game seasons yields the following distributions
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-plot-two.png" width="70%" length="200"/></div>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-plot-three.png" width="70%" length="200"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-plot-three.png" width="40%" length="100"/></div>
 </p>
 <p>
 It turns out that the average expected standing points increases as a goalie’s inter-game consistency decreases. If that’s surprising to you, you’re not alone - it is a little paradoxical. 
@@ -78,11 +78,11 @@ Notice, there is an important structural difference in the consistency between s
 Thankfully, we can borrow from information theory for a more robust and generalized measure of consistency in a sequence of binary events. It’s called entropy. Entropy is a way to measure the orderliness of a sequence, or, in our case, the inter-shot consistency of a goalie. First introduced… blah blah.
 </p>
 <p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-plot-four.png" width="70%" length="200"/></div>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-plot-five.png" width="70%" length="200"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-plot-four.png" width="70%" length="200"/></div>
 </p>
 <p>
-Inter-shot consistency does not seem have an effect on expected standing points.
+<em>Inter-shot consistency does not seem have an effect on expected standing points.</em>
 </p>
 <p>
 The next post will use the normalized entropy measure for consistency (or the lack thereof) on real data. Given that entropy has been measured for shooters before here, it will be a very similar exploration, except it will be applied to goalies. In the post after that, I’ll attempt to improve this by exploring goalie entropy using MoneyPuck’s Goals Saved Above Average.
