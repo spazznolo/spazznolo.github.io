@@ -11,7 +11,7 @@ header_pages:
 
 style: dark
 
-footer: ''
+footer: 'A blog.'
 
 # Build settings
 markdown: kramdown
