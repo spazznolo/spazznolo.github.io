@@ -1,5 +1,5 @@
 title: 'b2a3e8.github.io'
-description: "A jekyll theme inspired by linux consoles for hackers, developers and script kiddies."
+description: "A draft blog."
 baseurl: ""
 url: "https://spazznolo.github.io"
 google_analytics: UA-177238175-1
@@ -11,7 +11,7 @@ header_pages:
 
 style: dark
 
-footer: ''
+footer: 'A blog.'
 
 # Build settings
 markdown: kramdown
