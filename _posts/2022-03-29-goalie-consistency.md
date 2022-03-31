@@ -72,7 +72,7 @@ This may all be interesting, but is it helpful? By itself, not really. <em>A goa
 Here’s what a ten-shot sequence of outcomes from shots on goal looks like (1 goal, 0 save).
 </p>
 <p>
-0 0 0 0 1 0 0 0 1 0
+<div style="text-align: center">0 0 0 0 1 0 0 0 1 0</div>
 </p>
 <p>
 Notice there is an important structural difference in the consistency between shots and games. Shots lead to binary events (goal or not). Shots can’t be treated in the same way as games were in the previous section - a poisson distribution is no longer fitting. 
