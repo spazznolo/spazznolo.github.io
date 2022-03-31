@@ -12,7 +12,7 @@ Goaltenders make up the least predictable position in hockey. Their behaviour co
 That's where this series of posts comes in. Ideally, they will help - even marginally - rectify this dearth. I’m going to start by exploring the idea of consistency in goalies, along with the potential attendant effects it has on standing points, current performance, and future results. 
 </p>
 <p>
-Consistency can be measured through various perspectives. For example, it can be measured from shot-to-shot, from game-to-game or from season-to-season. The first two perspectives are addressed in this post. The third will be addressed in another post.
+Consistency can be measured through various perspectives. For example, it can be measured from shot-to-shot, from game-to-game or from season-to-season. The first two perspectives are introduced in this post. The third will be introduced in another post.
 </p>
 <h5> The effect of inter-game consistency on expected standing points </h5>
 <p>
