@@ -57,13 +57,13 @@ Still not convinced? Take the scores from past NHL seasons and look at the actua
 Some other takeaways:
 </p>
 <p>
-- The variance in expected standing points increases as a goalie’s consistency increases. This might seem paradoxical, but actually it’s pretty simple if you think about it - a goalie who we expect to allow 70% of goals some games and 30% of goals the other leads to relatively certain in-game results.
+- The variance in expected standing points increases as a goalie’s consistency increases. This too might seem paradoxical, but actually it’s pretty simple if you think about it - a goalie who we expect to allow 70% of goals some games and 30% of goals the other leads to relatively certain in-game results.
 </p>
 <p>
 - The difference in expected standing points might seem small (about 5, or 2.4 wins, over a standard 82 game season), but it could be the difference between making and missing the playoffs.
 </p>
 <p>
-This may all be interesting, but is it helpful? By itself, <b>not really</b>. A goalie can’t and will never be inconsistent from game to game on purpose. It does lead to other questions though, like: are some goalies inconsistent by nature?; are they inconsistent from season-to-season as well? how about from shot-to-shot? and what is the effect of inter-shot consistency on expected standing points?
+This may all be interesting, but is it helpful? By itself, <b>not really</b>. <em>A goalie can’t and will never be inconsistent from game to game on purpose.</em> It does lead to other questions though, like: are some goalies inconsistent by nature?; are they inconsistent from season-to-season as well? how about from shot-to-shot? and what is the effect of inter-shot consistency on expected standing points?
 </p>
 <p>
 <h5> The effect of inter-shot consistency on expected standing points </h5>
@@ -101,3 +101,4 @@ The next post will use the normalized entropy measure for consistency (or the la
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-plot-one.png" width="70%" length="200"/></div>
+</p>
