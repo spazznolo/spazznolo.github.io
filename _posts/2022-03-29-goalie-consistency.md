@@ -63,7 +63,7 @@ Some other takeaways:
 - The difference in expected standing points might seem small (about 5, or 2.4 wins, over a standard 82 game season), but it could be the difference between making and missing the playoffs.
 </p>
 <p>
-This may all be interesting, but is it helpful? By itself, <b>not really</b>. <em>A goalie can’t and will never be inconsistent from game to game on purpose.</em> It does lead to other questions though, like: are some goalies inconsistent by nature?; are they inconsistent from season-to-season as well? how about from shot-to-shot? and what is the effect of inter-shot consistency on expected standing points?
+This may all be interesting, but is it helpful? By itself, not really. <em>A goalie can’t and will never be inconsistent from game to game on purpose.</em> It does lead to other questions though, like: are some goalies inconsistent by nature?; are they inconsistent from season-to-season as well? how about from shot-to-shot? and what is the effect of inter-shot consistency on expected standing points?
 </p>
 <p>
 <h5> The effect of inter-shot consistency on expected standing points </h5>
