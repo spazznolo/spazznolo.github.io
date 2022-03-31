@@ -75,7 +75,7 @@ Here’s what a ten-shot sequence of outcomes from shots on goal looks like (1 g
 0 0 0 0 1 0 0 0 1 0
 </p>
 <p>
-Notice, there is an important structural difference in the consistency between shots and games. Shots lead to binary events (goal or not). Shots can’t be treated in the same way as games were in the previous section - a poisson distribution is no longer fitting. 
+Notice there is an important structural difference in the consistency between shots and games. Shots lead to binary events (goal or not). Shots can’t be treated in the same way as games were in the previous section - a poisson distribution is no longer fitting. 
 </p>
 <p>
 Thankfully, given that this is a sequence of binary events, we can borrow from information theory for a more robust and generalized measure of consistency. It’s called <a href="https://en.wikipedia.org/wiki/Entropy_(information_theory)">entropy</a>. Entropy is a way to measure the orderliness of a sequence, or, in our case, the inter-shot consistency of a goalie. It was first introduced <a href="https://repository.upenn.edu/cgi/viewcontent.cgi?article=1081&context=statistics_papers">here</a> for various applications, and then <a href="https://repository.upenn.edu/cgi/viewcontent.cgi?article=1081&context=statistics_papers">repurposed</a> for teams and shooters in hockey (we apply it to goalies in this post).
