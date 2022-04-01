@@ -38,6 +38,8 @@ Running 10,000 simulations of 82 game seasons yields the following distributions
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-plot-two.png" width="70%" length="200"/></div>
+</p>
+<p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-plot-three.png" width="30%" length="50"/></div>
 </p>
 <p>
@@ -72,7 +74,7 @@ Here’s what a ten-shot sequence of outcomes from shots on goal looks like (1 g
 Notice there is an important structural difference in the consistency between shots and games. Shots lead to binary events (goal or not). Shots can’t be treated in the same way as games were in the previous section - a poisson distribution is no longer fitting. 
 </p>
 <p>
-Thankfully, given that this is a sequence of binary events, we can borrow from information theory for a more robust and generalized measure of consistency. It’s called <a href="https://en.wikipedia.org/wiki/Entropy_(information_theory)">entropy</a>. Entropy is a way to measure the orderliness of a sequence, or, in our case, the inter-shot consistency of a goalie. It was first introduced <a href="https://repository.upenn.edu/cgi/viewcontent.cgi?article=1081&context=statistics_papers">here</a> for various applications, and then <a href="https://repository.upenn.edu/cgi/viewcontent.cgi?article=1081&context=statistics_papers">repurposed</a> for teams and shooters in hockey (we apply it to goalies in this post).
+Thankfully, given that this is a sequence of binary events, we can borrow from information theory for a more robust and generalized measure of consistency. It’s called <a href="https://en.wikipedia.org/wiki/Entropy_(information_theory)">entropy</a>. Entropy is a way to measure the orderliness of a sequence, or, in our case, the inter-shot consistency of a goalie. It was first introduced <a href="https://repository.upenn.edu/cgi/viewcontent.cgi?article=1081&context=statistics_papers">here</a> for various applications, and then <a href="https://github.com/namitanandakumar/Draft-Analysis/blob/master/Streakiness/VanHAC%202018.pdf">repurposed</a> for teams and shooters in hockey (we apply it to goalies in this post).
 </p>
 <p>
 A perfectly ordered sequence has no entropy, and as it loses its orderliness (or consistency), the entropy rises. But how does this decrease in inter-shot consistency effect the expected standing points? 
@@ -82,6 +84,8 @@ This time, 10,000 random sequences of goalie seasons are created all with the sa
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-plot-four.png" width="70%" length="200"/></div>
+</p>
+<p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-plot-six.png" width="70%" length="200"/></div>
 </p>
 <p>
