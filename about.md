@@ -4,4 +4,4 @@ title: / about
 permalink: /about/
 ---
 
-questions, critiques, rants: jeremie.spagnolo@gmail.com
+questions, critiques: jeremie.spagnolo@gmail.com
