@@ -12,7 +12,7 @@ In the <a href="https://spazznolo.github.io/2022/03/29/goalie-consistency-1.html
 <p>
 Remember: to measure entropy, an entire goalie season is first turned into a binary sequence of 0's (saves) and 1's (goals). SHOW ENTROPY IS HIGHER FOR WORSE GOALIES. WE NORMALIZE. Now that entropy has been normalized, consistency can be compared from goalie-to-goalie.
 </p>
-<h5>The effect of goalie consistency on save percentage</h5>
+<h5>The effect of goalie consistency on season save percentage</h5>
 <p>
 In this comparison, a goalie season must include at least 800 shots and every shot is considered equal.
 </p>
@@ -21,8 +21,9 @@ In this comparison, a goalie season must include at least 800 shots and every sh
 </p>
 <p>
 </p>
+<h5>The effect of goalie consistency on career save percentage</h5>
 <p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-two-one.png" width="70%" length="200"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-two-two.png" width="70%" length="200"/></div>
 </p>
 <p>
 </p>
