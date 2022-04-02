@@ -37,7 +37,7 @@ In this simulation, the number of goals a goalie allows will be represented by a
 Running 10,000 simulations of 82 game seasons yields the following distributions of expected standings points.
 </p>
 <p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-plot-two.png" width="70%" length="200"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-one-one.png" width="70%" length="200"/></div>
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-plot-three.png" width="30%" length="50"/></div>
