@@ -80,7 +80,7 @@ Thankfully, given that this is a sequence of binary events, we can borrow from i
 A perfectly ordered sequence has no entropy, and as it loses its orderliness (or consistency), the entropy rises. But how does this decrease in inter-shot consistency effect the expected standing points? 
 </p>
 <p>
-This time, 10,000 random sequences of goalie seasons are created all with the same seasonal save percentage of .900. Then, the entropy of each random sequence is calculated along with the expected standing points earned. The results are below.
+This time, we create 10,000 random sequences of goalie seasons all with seasonal save percentages of .900. Then, we calculate the entropy of each random sequence, along with the expected standing points earned. The results are below.
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-plot-four.png" width="70%" length="200"/></div>
