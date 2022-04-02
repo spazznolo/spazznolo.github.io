@@ -26,6 +26,7 @@ In this comparison, a goalie season must include at least 800 shots and every sh
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-two-two.png" width="70%" length="200"/></div>
 </p>
 <p>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-two-two.png" width="70%" length="200"/></div>
 </p>
 <p>
 </p>
