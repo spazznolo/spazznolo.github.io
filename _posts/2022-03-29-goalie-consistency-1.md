@@ -83,10 +83,10 @@ A perfectly ordered sequence has no entropy, and as it loses its orderliness (or
 This time, we create 10,000 random sequences of goalie seasons all with seasonal save percentages of .900. Then, we calculate the entropy of each random sequence, along with the expected standing points earned. The results are below.
 </p>
 <p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-plot-four.png" width="70%" length="200"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-one-three.png" width="70%" length="200"/></div>
 </p>
 <p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-plot-six.png" width="70%" length="200"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-one-four.png" width="70%" length="200"/></div>
 </p>
 <p>
 <em>Inter-shot consistency does not seem have an effect on expected standing points.</em>
@@ -98,5 +98,5 @@ The next post will use the normalized entropy measure for consistency (or the la
 <em>Note: For clarity’s sake, I introduced game-to-game consistency without randomness (a goalie was expected to be above average and below average in half of his games), but this also works with randomized expectations. The plot below compares the distribution of standing points when the expected rate of occurrence is randomly sampled from the uniform distribution to those when the expected rate of occurrence is the average expected goals against. The expected difference between a perfectly steady goalie and a perfectly random goalie is about 7 standing points!</em>
 </p>
 <p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-plot-one.png" width="70%" length="200"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-one-five.png" width="70%" length="200"/></div>
 </p>

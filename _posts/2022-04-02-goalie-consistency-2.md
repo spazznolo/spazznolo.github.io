@@ -25,7 +25,7 @@ Note: A goalie-season must include at least 800 shots (roughly 20 games) to be i
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-two-one.png" width="70%" length="200"/></div>
 </p>
-<h5>The 10 most consistent goalie careers.</h5>
+<h5>The 10 streakiest goalie careers.</h5>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-two-two.png" width="70%" length="200"/></div>
 </p>
