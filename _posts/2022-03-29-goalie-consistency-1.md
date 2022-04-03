@@ -9,7 +9,7 @@ date:   2022-03-29 11:52:05 -0400
 Goaltenders make up the least predictable position in hockey. Their behaviour confounds analysts and casual fans alike. It isn’t uncommon for a strong goalie to have a below replacement level year, or for an unknown goalie to come in and dominate the league. This may partly explain the relative dearth of analysis on goalies - they're voodoo, some suggest.
 </p>
 <p>
-That's where this series of posts comes in. Ideally, they will help - even marginally - rectify this dearth. I’m going to start by exploring the idea of consistency in goalies, along with the potential attendant effects it has on standing points, current performance, and future results. 
+That's where this series of posts comes in. Ideally, they will help - even marginally - rectify this dearth. I’m going to start by exploring the idea of consistency in goalies, along with the potential attendant effects it has on standing points, current performance, and future results. This post addresses the effect of consistency on standing points.
 </p>
 <p>
 Consistency can be measured through various perspectives. For example, it can be measured from shot-to-shot, from game-to-game or from season-to-season. The first two perspectives are introduced in this post. The third will be introduced in another post.
@@ -40,7 +40,7 @@ Running 10,000 simulations of 82 game seasons yields the following distributions
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-one-one.png" width="60%" length="150"/></div>
 </p>
 <p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-plot-three.png" width="30%" length="50"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-plot-three.png" width="25%" length="45"/></div>
 </p>
 <p>
 It turns out <em>the average expected standing points increases as a goalie’s inter-game consistency decreases</em>. If that’s surprising to you, you’re not alone - it is a little paradoxical. 
@@ -55,7 +55,7 @@ Still not convinced? Take the scores from past NHL seasons and look at the actua
 Some other takeaways:
 </p>
 <p>
-- The variance in expected standing points increases as a goalie’s consistency increases. This too might seem paradoxical, but actually it’s pretty simple if you think about it - a goalie who we expect to allow 60% of goals some games and 30% of goals the other leads to relatively certain in-game results.
+- The variance in expected standing points increases as a goalie’s consistency increases. This too might seem paradoxical, but actually it’s pretty simple if you think about it - a goalie who we expect to allow 1 goal some games and 5 goals the other leads to relatively certain in-game results.
 </p>
 <p>
 - The difference in expected standing points might seem small (about 5, or 2.4 wins, over a standard 82 game season), but it could be the difference between making and missing the playoffs.
@@ -71,10 +71,10 @@ Here’s what a ten-shot sequence of outcomes from shots on goal looks like (1 g
 <div style="text-align: center">0 0 0 0 1 0 0 0 1 0</div>
 </p>
 <p>
-Notice there is an important structural difference in the consistency between shots and games. Shots lead to binary events (goal or not). Shots can’t be treated in the same way as games were in the previous section - a poisson distribution is no longer fitting. 
+There is an important structural difference in the consistency between shots and games. Shots lead to binary events (goal or not). Shots can’t be treated in the same way as games were in the previous section - a poisson distribution is no longer fitting. 
 </p>
 <p>
-Thankfully, given that this is a sequence of binary events, we can borrow from information theory for a more robust and generalized measure of consistency. It’s called <a href="https://en.wikipedia.org/wiki/Entropy_(information_theory)">entropy</a>. Entropy is a way to measure the orderliness of a sequence, or, in our case, the inter-shot consistency of a goalie. It was first introduced <a href="https://repository.upenn.edu/cgi/viewcontent.cgi?article=1081&context=statistics_papers">here</a> for various applications, and then <a href="https://github.com/namitanandakumar/Draft-Analysis/blob/master/Streakiness/VanHAC%202018.pdf">repurposed</a> for teams and shooters in hockey (we apply it to goalies in this post).
+Thankfully, given that this is a sequence of binary events, we can borrow a concept from information theory for a more robust and generalized measure of consistency. It’s called <a href="https://en.wikipedia.org/wiki/Entropy_(information_theory)">entropy</a>. Entropy is a way to measure the orderliness of a sequence, or, in our case, the inter-shot consistency of a goalie. It was first introduced <a href="https://repository.upenn.edu/cgi/viewcontent.cgi?article=1081&context=statistics_papers">here</a> for various applications, and then <a href="https://github.com/namitanandakumar/Draft-Analysis/blob/master/Streakiness/VanHAC%202018.pdf">repurposed</a> for teams and shooters in hockey (we apply it to goalies in this post).
 </p>
 <p>
 A perfectly ordered sequence has no entropy, and as it loses its orderliness (or consistency), the entropy rises. But how does this decrease in inter-shot consistency effect the expected standing points? 
@@ -92,7 +92,7 @@ This time, we create 10,000 random sequences of goalie seasons all with seasonal
 <em>Inter-shot consistency does not seem have an effect on expected standing points.</em>
 </p>
 <p>
-The next post will use the normalized entropy measure for consistency (or the lack thereof) on real data. Given that entropy has been measured for shooters before, it will be a very similar exploration, except it will be applied to goalies. In the post after that, I’ll attempt to improve this by exploring goalie entropy using MoneyPuck’s Goals Saved Above Average.
+The next post will use entropy as a measure for consistency (or the lack thereof) on real data. Given that entropy has been measured for shooters before, it will be a very similar exploration, except it will be applied to goalies. In the post after that, I’ll attempt to improve this by exploring goalie entropy using MoneyPuck’s Expected Goals.
 </p>
 <p>
 <em>Note: For clarity’s sake, I introduced game-to-game consistency without randomness (a goalie was expected to be above average and below average in half of his games), but this also works with randomized expectations. The plot below compares the distribution of standing points when the expected rate of occurrence is randomly sampled from the uniform distribution to those when the expected rate of occurrence is the average expected goals against. The expected difference between a perfectly steady goalie and a perfectly random goalie is about 7 standing points!</em>
