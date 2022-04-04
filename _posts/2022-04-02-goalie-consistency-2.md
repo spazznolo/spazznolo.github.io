@@ -7,7 +7,7 @@ date:   2022-04-01 8:52:05 -0400
 <h2> Does consistency matter in Goaltending? </h2>
 <h2> Part 2 - Exploring the effects of goalie consistency using real data </h2>
 <p>
-In the <a href="https://spazznolo.github.io/2022/03/29/goalie-consistency-1.html">previous post</a>, the concept of entropy as a measure of consistency was <a href="https://github.com/namitanandakumar/Draft-Analysis/blob/master/Streakiness/VanHAC%202018.pdf">repurposed</a> for hockey goalies using simulated data. Here, it's applied to actual NHL data, supplied by <a href="https://moneypuck.com/">MoneyPuck</a> (check it out! he does great work). This will be a short post - mostly descriptive. It tees up the next one.
+In the <a href="https://spazznolo.github.io/2022/03/29/goalie-consistency-1.html">previous post</a>, the concept of entropy as a measure of consistency was <a href="https://github.com/namitanandakumar/Draft-Analysis/blob/master/Streakiness/VanHAC%202018.pdf">repurposed</a> for hockey goalies using simulated data. Here, it's applied to actual NHL data (2007-2020), supplied by <a href="https://moneypuck.com/">MoneyPuck</a> (check it out! he does great work). This will be a short post - mostly descriptive. It tees up the next one.
 </p>
 <p>
 Remember: to measure entropy, an entire goalie season is first turned into a binary sequence of 0's (saves) and 1's (goals). Then, xxx. 
@@ -25,7 +25,7 @@ Note: A goalie-season must include at least 800 shots (roughly 20 games) to be i
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-two-one.png" width="60%" length="150"/></div>
 </p>
-<h5>The 10 streakiest goalie careers.</h5>
+<h5>The 10 streakiest goalie careers (all shots treated equally).</h5>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-two-two.png" width="60%" length="150"/></div>
 </p>
