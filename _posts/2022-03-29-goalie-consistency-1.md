@@ -6,13 +6,7 @@ date:   2022-03-29 11:52:05 -0400
 <h2> Does consistency matter in Goaltending? </h2>
 <h2> Part 1 - The effect of goalie consistency on expected standing points </h2>
 <p>
-Goaltenders make up the least predictable position in hockey. Their behaviour confounds analysts and casual fans alike. It isn’t uncommon for a strong goalie to have a below replacement level year, or for an unknown goalie to come in and dominate the league. This may partly explain the relative dearth of analysis on goalies - they're voodoo, some suggest.
-</p>
-<p>
-That's where this series of posts comes in. Ideally, they will help - even marginally - rectify this dearth. I’m going to start by exploring the idea of consistency in goalies, along with the potential attendant effects it has on standing points, current performance, and future results. This post addresses the effect of consistency on standing points.
-</p>
-<p>
-Consistency can be measured through various perspectives. For example, it can be measured from shot-to-shot, from game-to-game or from season-to-season. The first two perspectives are introduced in this post. The third will be introduced in another post.
+INTRO COMING SOON
 </p>
 <h5> The effect of inter-game consistency on expected standing points </h5>
 <p>
