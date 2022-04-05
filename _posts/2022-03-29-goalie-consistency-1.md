@@ -79,9 +79,6 @@ This time, we create simulate 10,000 goalie seasons, all with seasonal save perc
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-one-three.png" width="60%" length="150"/></div>
 </p>
 <p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-one-four.png" width="60%" length="150"/></div>
-</p>
-<p>
 <em>Inter-shot consistency does not seem have an effect on expected standing points.</em>
 </p>
 <p>

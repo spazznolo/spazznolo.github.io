@@ -34,7 +34,7 @@ Entropy is a way to measure the orderliness of a sequence, or, in our case, the 
 </div>
 </p>
 <p>
-This entropy formula gets us partway there, however it does not account for the length of a goalie season nor does it take into account the percentage of shots saved - both of which have an effect on entropy. To account for this, the xi's in the entropy formula above are divided by the number of shots in the goalie season, and then the entropy itself is divided by the number of goals scored in a season (plus one).
+This entropy formula gets us partway there, however it does not account for the length of a goalie season, nor does it take into account for the percentage of shots saved - both of which have an effect on entropy. In order to compare entropy from goalie-to-goalie and season-to-season, we need to account for these differences. Therefore, the xi's in the entropy formula above are divided by the number of shots in the goalie season, and then the entropy itself is divided by the number of goals scored in a season (plus one).
 </p>
 <h5>Expected Goals</h5>
 <p>
