@@ -32,6 +32,14 @@ Running 10,000 simulations of 82 game seasons yields the following distributions
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-plot-three.png" width="25%" length="45"/></div>
+<div class="row">
+  <div class="column">
+    <img src="https://spazznolo.github.io/figs/goalie-plot-three.png" style="width:100%">
+  </div>
+  <div class="column">
+    <img src="https://spazznolo.github.io/figs/goalie-one-one.png" style="width:100%">
+  </div>
+</div>
 </p>
 <p>
 It turns out <em>the average expected standing points increases as a goalie’s inter-game consistency decreases</em>. If that’s surprising to you, you’re not alone - it is a little paradoxical. 
@@ -90,16 +98,3 @@ The next post will use entropy as a measure for consistency (or the lack thereof
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-one-five.png" width="60%" length="150"/></div>
 </p>
-
-
-<div class="row">
-  <div class="column">
-    <img src="https://spazznolo.github.io/figs/goalie-one-five.png" alt="Snow" style="width:100%">
-  </div>
-  <div class="column">
-    <img src="https://spazznolo.github.io/figs/goalie-one-five.png" alt="Forest" style="width:100%">
-  </div>
-  <div class="column">
-    <img src="https://spazznolo.github.io/figs/goalie-one-five.png" alt="Mountains" style="width:100%">
-  </div>
-</div>
