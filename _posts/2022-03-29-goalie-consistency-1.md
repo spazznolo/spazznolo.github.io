@@ -76,7 +76,7 @@ But how does inter-shot consistency effect the expected standing points?
 This time, we create simulate 10,000 goalie seasons, all with seasonal save percentages of .900. Then, we calculate the entropy of each simulation, along with the expected standing points earned. The results are below.
 </p>
 <p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-one-thre.png" width="60%" length="150"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-one-three.png" width="60%" length="150"/></div>
 </p>
 <p>
 <em>Inter-shot consistency does not seem have an effect on expected standing points.</em>
