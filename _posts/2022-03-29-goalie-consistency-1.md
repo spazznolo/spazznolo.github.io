@@ -22,10 +22,7 @@ And so on...
 Which do you want to play for you?
 </p>
 <p>
-In order to decide, it helps to understand the underlying structure of goals in hockey. Goals have been <a href="http://www.hockeyanalytics.com/Research_files/Poisson_Toolbox.pdf">shown</a> to follow a <a href="https://en.wikipedia.org/wiki/Poisson_distribution">Poisson process</a>. Many simulations have shown just how closely goals follow the Poisson over time. Not only is this a clean approximation, it can also easily be simulated.
-</p>
-<p>
-In this simulation, the number of goals a goalie allows will be represented by a set of poisson distributions, and the expected quality of play will be represented by the poisson’s expected rate of occurrences, such that in an average game, a goalie is expected to allow around 3 goals; in a slightly below average game around 3.25 goals; below average around 3.50, and so on… 
+To help in this decision, let's run simulations. Here, the number of goals a goalie allows will be represented by a set of poisson distributions, and the expected quality of play will be represented by the poisson’s expected rate of occurrences, such that in an average game, a goalie is expected to allow around 3 goals; in a slightly below average game around 3.25 goals; below average around 3.50, and so on… 
 </p>
 <p>
 Running 10,000 simulations of 82 game seasons yields the following distributions of expected standings points.
@@ -65,16 +62,18 @@ Here’s what a ten-shot sequence of outcomes from shots on goal looks like (1 g
 <div style="text-align: center">0 0 0 0 1 0 0 0 1 0</div>
 </p>
 <p>
-There is an important structural difference in the consistency between shots and games. Shots lead to binary events (goal or not). Shots can’t be treated in the same way as games were in the previous section - a poisson distribution is no longer fitting. 
+When measuring goalie performance, there is an important structural difference between shots and games. Games usually include multiple goals, while shots lead to binary events (goal or not). Shots can’t be treated in the same way as games were in the previous section - a poisson distribution is no longer fitting. 
 </p>
 <p>
-Thankfully, given that this is a sequence of binary events, we can borrow a concept from information theory for a more robust and generalized measure of consistency. It’s called <a href="https://en.wikipedia.org/wiki/Entropy_(information_theory)">entropy</a>. Entropy is a way to measure the orderliness of a sequence, or, in our case, the inter-shot consistency of a goalie. It was first introduced <a href="https://repository.upenn.edu/cgi/viewcontent.cgi?article=1081&context=statistics_papers">here</a> for various applications, and then <a href="https://github.com/namitanandakumar/Draft-Analysis/blob/master/Streakiness/VanHAC%202018.pdf">repurposed</a> for teams and shooters in hockey (we apply it to goalies in this post).
+Thankfully, given that shots are a sequence of binary events, we can borrow a concept from information theory for a more robust and generalized measure of consistency. It’s called <a href="https://spazznolo.github.io/2022/03/28/goalie-consistency-intro.html">entropy</a>.
+<p>
+A perfectly ordered sequence has no entropy, and as it loses its orderliness (or consistency), the entropy increase. 
 </p>
 <p>
-A perfectly ordered sequence has no entropy, and as it loses its orderliness (or consistency), the entropy rises. But how does this decrease in inter-shot consistency effect the expected standing points? 
+But how does inter-shot consistency effect the expected standing points? 
 </p>
 <p>
-This time, we create 10,000 random sequences of goalie seasons all with seasonal save percentages of .900. Then, we calculate the entropy of each random sequence, along with the expected standing points earned. The results are below.
+This time, we create simulate 10,000 goalie seasons, all with seasonal save percentages of .900. Then, we calculate the entropy of each simulation, along with the expected standing points earned. The results are below.
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-one-three.png" width="60%" length="150"/></div>

@@ -17,8 +17,17 @@ In this series, we'll measure the effect of goalie consistency (shot-to-shot, ga
 <p>
 But before that, I'll briefly explain a few concepts that will come up across the series.
 </p>
+<h1>Poisson Distribution</h1>
 <p>
-COMING SOON
+Goals have been <a href="http://www.hockeyanalytics.com/Research_files/Poisson_Toolbox.pdf">shown</a> to follow a <a href="https://en.wikipedia.org/wiki/Poisson_distribution">Poisson process</a>. Many simulations have shown just how closely goals follow the Poisson over time.
+</p>
+<p>
+probability mass function of the Poisson distribution.
+</p>
+<h1>Entropy</h1>
+<p>
+Entropy is a way to measure the orderliness of a sequence, or, in our case, the inter-shot consistency of a goalie. It was first introduced <a href="https://repository.upenn.edu/cgi/viewcontent.cgi?article=1081&context=statistics_papers">here</a> for various applications, and then <a href="https://github.com/namitanandakumar/Draft-Analysis/blob/master/Streakiness/VanHAC%202018.pdf">repurposed</a> for teams and shooters in hockey (we apply it to goalies in this post).
+</p>
 </p>
 
 
