@@ -90,7 +90,5 @@ The next post will use entropy as a measure for consistency (or the lack thereof
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-one-five.png" width="60%" length="150"/></div>
 </p>
-<div>
-    <img src="https://spazznolo.github.io/figs/goalie-one-five.png" >
-    <img src="https://spazznolo.github.io/figs/goalie-one-five.png" >
-</div>
+<div style="text-align: left"> <img src="https://spazznolo.github.io/figs/goalie-one-five.png" width="50%" length="150"/></div>
+<div style="text-align: right"> <img src="https://spazznolo.github.io/figs/goalie-one-five.png" width="50%" length="150"/></div>
