@@ -26,7 +26,7 @@ probability mass function of the Poisson distribution.
 </p>
 <h5>Entropy</h5>
 <p>
-Entropy is a way to measure the orderliness of a sequence, or, in our case, the inter-shot consistency of a goalie. It was first introduced <a href="https://repository.upenn.edu/cgi/viewcontent.cgi?article=1081&context=statistics_papers">here</a> for various applications, and then <a href="https://github.com/namitanandakumar/Draft-Analysis/blob/master/Streakiness/VanHAC%202018.pdf">repurposed</a> for teams and shooters in hockey (we apply it to goalies in this post). The formula for entropy is below.
+Entropy, a popular concept in information theory, is a measure of orderliness in a sequence. or, in our case, the inter-shot consistency of a goalie. It was first introduced <a href="https://repository.upenn.edu/cgi/viewcontent.cgi?article=1081&context=statistics_papers">here</a> for various applications, and then <a href="https://github.com/namitanandakumar/Draft-Analysis/blob/master/Streakiness/VanHAC%202018.pdf">repurposed</a> for teams and shooters in hockey (we apply it to goalies in this post). The formula for entropy is below.
 </p>
 <p>
 <div style="text-align: center"> 
@@ -34,7 +34,7 @@ Entropy is a way to measure the orderliness of a sequence, or, in our case, the 
 </div>
 </p>
 <p>
-This entropy formula gets us partway there, however it does not account for the length of a goalie season, nor does it take into account for the percentage of shots saved - both of which have an effect on entropy. In order to compare entropy from goalie-to-goalie and season-to-season, we need to account for these differences. Therefore, the xi's in the entropy formula above are divided by the number of shots in the goalie season, and then the entropy itself is divided by the number of goals scored in a season (plus one).
+This entropy formula gets us partway there, however it does not account for the length of a goalie season, nor does it take into account the percentage of shots saved - both of which have an effect on entropy. In order to compare entropy from goalie-to-goalie and season-to-season, we need to account for these differences. To address this, the xi's in the entropy formula above are divided by the number of shots in the goalie season, and then the entropy itself is divided by the number of goals scored in a season (plus one).
 </p>
 <h5>Expected Goals</h5>
 <p>

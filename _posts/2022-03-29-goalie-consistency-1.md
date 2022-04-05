@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Does consistency matter in Goaltending? [Part 1]"
+title:  "[Part 1] The effect of goalie consistency on expected standing points"
 date:   2022-03-29 11:52:05 -0400
 ---
 <h2> Does consistency matter in Goaltending? </h2>
@@ -29,7 +29,7 @@ Running 10,000 simulations of 82 game seasons yields the following distributions
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-plot-three.png" width="60%" length="150"/></div>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-one-one.png" width="60%" length="150"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-one-one.png" width="30%" length="75"/></div>
 </p>
 <p>
 It turns out <em>the average expected standing points increases as a goalie’s inter-game consistency decreases</em>. If that’s surprising to you, you’re not alone - it is a little paradoxical. 
