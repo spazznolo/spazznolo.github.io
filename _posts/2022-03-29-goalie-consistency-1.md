@@ -27,14 +27,10 @@ To help in this decision, let's run simulations where the number of goals a goal
 <p>
 Running 10,000 simulations of 82 game seasons yields the following distributions of expected standings points.
 </p>
-<div class="row">
-  <div class="column">
-    <img src="https://spazznolo.github.io/figs/goalie-one-one.png" style="width:100%">
-  </div>
-    <div class="column">
-    <img src="https://spazznolo.github.io/figs/goalie-plot-three.png" style="width:100%">
-  </div>
-</div>
+<ul class="people">
+    <li><a><img src="https://spazznolo.github.io/figs/goalie-one-one.png" ></a>
+    <li><a><img src="https://spazznolo.github.io/figs/goalie-plot-three.png"  ></a>
+</ul>
 <p>
 It turns out <em>the average expected standing points increases as a goalie’s inter-game consistency decreases</em>. If that’s surprising to you, you’re not alone - it is a little paradoxical. 
 </p>
