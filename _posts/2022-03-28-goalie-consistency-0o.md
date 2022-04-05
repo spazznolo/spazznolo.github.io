@@ -28,6 +28,7 @@ probability mass function of the Poisson distribution.
 <p>
 Entropy is a way to measure the orderliness of a sequence, or, in our case, the inter-shot consistency of a goalie. It was first introduced <a href="https://repository.upenn.edu/cgi/viewcontent.cgi?article=1081&context=statistics_papers">here</a> for various applications, and then <a href="https://github.com/namitanandakumar/Draft-Analysis/blob/master/Streakiness/VanHAC%202018.pdf">repurposed</a> for teams and shooters in hockey (we apply it to goalies in this post).
 </p>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-one-three.png" width="60%" length="150"/></div>
 <h5>Expected Goals</h5>
 <p>
 Shot data for Expected Goals is provided by <a href="https://moneypuck.com/">MoneyPuck</a>. Tanner, MoneyPuck's creator, explains expected goals as "the probability of each shot being a goal", where information such as "the distance from the net, angle of the shot, type of shot, and what happened before the shot" is considered.
