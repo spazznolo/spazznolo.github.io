@@ -3,8 +3,7 @@ layout: post
 title:  "[Part 1] The effect of inter-game goalie consistency on expected standing points "
 date:   2022-03-29 11:52:05 -0400
 ---
-<h2> Does consistency matter in Goaltending? </h2>
-<h2> Part 1 - The effect of inter-game goalie consistency on expected standing points </h2>
+<h2> The effect of inter-game goalie consistency on expected standing points </h2>
 <p>
 Here’s an illustration: Imagine you’re the General Manager of a hockey team in a league where every single player and goalie is equally skilled. Since all players are equal, all teams are equal too. Now, a special opportunity comes up where you get to decide between eight equally skilled goalies who have different levels of consistency.
 </p>
@@ -47,6 +46,8 @@ Some other takeaways:
 </p>
 <p>
 This may all be interesting, but is it helpful? By itself, not really. <em>A goalie can’t and will never be inconsistent from game to game on purpose.</em> It does lead to other questions though, like: are some goalies inconsistent by nature?; are they inconsistent from season-to-season as well? how about from shot-to-shot? and what is the effect of inter-shot consistency on expected standing points?
+</p>
+<p>
 </p>
 <p>
 <em>Note: For clarity’s sake, I introduced game-to-game consistency without randomness (a goalie was expected to be above average and below average in half of his games), but this also works with randomized expectations. The plot below compares the distribution of standing points when the expected rate of occurrence is randomly sampled from the uniform distribution to those when the expected rate of occurrence is the average expected goals against. The expected difference between a perfectly steady goalie and a perfectly random goalie is about 7 standing points!</em>
