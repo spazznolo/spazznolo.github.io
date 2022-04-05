@@ -92,11 +92,14 @@ The next post will use entropy as a measure for consistency (or the lack thereof
 </p>
 
 
-<div id="banner">
-<div class="images">
-<img src="https://spazznolo.github.io/figs/goalie-one-five.png" width="50%" length="150"/>
-</div>
-<div class="images">
-<img src="https://spazznolo.github.io/figs/goalie-one-five.png" width="50%" length="150"/>
-</div>
+<div class="row">
+  <div class="column">
+    <img src="https://spazznolo.github.io/figs/goalie-one-five.png" alt="Snow" style="width:100%">
+  </div>
+  <div class="column">
+    <img src="https://spazznolo.github.io/figs/goalie-one-five.png" alt="Forest" style="width:100%">
+  </div>
+  <div class="column">
+    <img src="https://spazznolo.github.io/figs/goalie-one-five.png" alt="Mountains" style="width:100%">
+  </div>
 </div>
