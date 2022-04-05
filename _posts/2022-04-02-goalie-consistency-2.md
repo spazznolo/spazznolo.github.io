@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Does consistency matter in Goaltending? [Part 2]"
+title:  "[Part 3] Does consistency matter in Goaltending?"
 date:   2022-04-18 8:52:05 -0400
 ---
 

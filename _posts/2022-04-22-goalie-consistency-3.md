@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "[Part 3] The effects of inter-shot goalie consistency (using NHL data)"
-date:   2022-04-04 8:52:05 -0400
+date:   2022-04-03 8:52:05 -0400
 ---
 <h2> Does consistency matter in Goaltending? </h2>
 <h2> Part 3 - The effects of inter-shot goalie consistency (using NHL data) </h2>
