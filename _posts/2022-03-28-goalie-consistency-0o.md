@@ -47,7 +47,7 @@ This gets us partway there, however it doesn't account for the length of a goali
 </p>
 <h5>Expected Goals</h5>
 <p>
-Shot-level data for Expected Goals is provided by <a href="https://moneypuck.com/">MoneyPuck</a>. Tanner, MoneyPuck's creator, explains expected goals as "the probability of each shot being a goal", where information such as "the distance from the net, angle of the shot, type of shot, and what happened before the shot" is considered.
+Shot-level data for Expected Goals is provided by <a href="https://moneypuck.com/about.htm">MoneyPuck</a>. Tanner, MoneyPuck's creator, explains expected goals as "the probability of each shot being a goal", where information such as "the distance from the net, angle of the shot, type of shot, and what happened before the shot" is considered.
 </p>
 
 
