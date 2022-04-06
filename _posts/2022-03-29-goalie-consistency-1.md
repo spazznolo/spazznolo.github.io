@@ -56,6 +56,11 @@ This may all be interesting, but is it helpful? By itself, not really. <em>A goa
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-one-five.png" width="60%" length="150"/></div>
 </p>
 
+<table><tr>
+<td> <img src="https://spazznolo.github.io/figs/goalie-one-five.png" alt="Drawing" style="width: 250px;"/> </td>
+<td> <img src="https://spazznolo.github.io/figs/goalie-one-five.png" alt="Drawing" style="width: 250px;"/> </td>
+</tr></table>
+
 <p float="left">
   <img src="https://spazznolo.github.io/figs/goalie-one-five.png" width="30%" />
   <img src="https://spazznolo.github.io/figs/goalie-one-five.png" width="30%" />
