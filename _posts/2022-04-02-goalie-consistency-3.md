@@ -21,17 +21,17 @@ Note: A goalie-season must include at least 800 shots (roughly 20 games) to be i
 </p>
 <h5>Goalie-season consistency does not have an effect on save percentage.</h5>
 <p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-two-one.png" width="60%" length="150"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-three-one.png" width="60%" length="150"/></div>
 </p>
 <h5>The 10 streakiest goalie careers (all shots treated equally).</h5>
 <p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-two-two.png" width="60%" length="150"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-three-two.png" width="60%" length="150"/></div>
 </p>
 <h5>Goalies with better careers, as measured by save percentage, have been a little streakier.</h5>
 <p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-two-three.png" width="60%" length="150"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-three-three.png" width="60%" length="150"/></div>
 </p>
 <h5>Goalie consistency does not have an effect on career season-over-season consistency.</h5>
 <p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-two-four.png" width="60%" length="150"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-three-four.png" width="60%" length="150"/></div>
 </p>
