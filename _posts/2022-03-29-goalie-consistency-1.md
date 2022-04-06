@@ -24,8 +24,8 @@ Running 10,000 simulations of 82 game seasons yields the following distributions
 </p>
 <p>
 <table style="margin-left:auto;margin-right:auto;"><tr>
-<td> <img src="https://spazznolo.github.io/figs/goalie-one-two.png" style="margin: 0px 100px 0px 0px" width="200px" length="250px"/> </td>
-<td> <img src="https://spazznolo.github.io/figs/goalie-one-one.png" width="450px" length="250px"/> </td>
+<td> <img src="https://spazznolo.github.io/figs/goalie-one-one.png" style="margin: 0px 100px 0px 0px" width="200px" length="250px"/> </td>
+<td> <img src="https://spazznolo.github.io/figs/goalie-one-two.png" width="450px" length="250px"/> </td>
 </tr></table>
 </p>
 <p>
