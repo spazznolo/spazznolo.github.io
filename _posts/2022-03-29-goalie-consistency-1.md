@@ -58,6 +58,5 @@ This may all be interesting, but is it helpful? By itself, not really. <em>A goa
 
 <p float="left">
   <img src="https://spazznolo.github.io/figs/goalie-one-five.png" width="30%" />
-  <img src="https://spazznolo.github.io/figs/goalie-one-five.png" width="30%" /> 
   <img src="https://spazznolo.github.io/figs/goalie-one-five.png" width="30%" />
 </p>
