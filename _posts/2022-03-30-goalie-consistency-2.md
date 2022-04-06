@@ -31,5 +31,5 @@ This time, we create simulate 10,000 goalie seasons, all with seasonal save perc
 <em>Inter-shot consistency does not seem have an effect on expected standing points.</em>
 </p>
 <p>
-The next post will use entropy as a measure for consistency (or the lack thereof) on real data. Given that entropy has been measured for shooters before, it will be a very similar exploration, except it will be applied to goalies. In the post after that, I’ll attempt to improve this by exploring goalie entropy using MoneyPuck’s Expected Goals.
+The next post will use entropy as a measure for goalie consistency (or the lack thereof) on real data. It will be a similar exploration to this one on shooters, except it will be expanded to include weights on shots in the form of <a href="https://moneypuck.com/">MoneyPuck</a>’s Expected Goals.
 </p>
