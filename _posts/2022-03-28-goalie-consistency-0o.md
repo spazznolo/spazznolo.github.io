@@ -50,11 +50,11 @@ To address this, the xi's in the entropy formula above are divided by the number
 Up to now, this follows exactly the <a href="https://github.com/namitanandakumar/Draft-Analysis/blob/master/Streakiness/VanHAC%202018.pdf">previous work</a> on shooters. 
 </p>
 <p>
-There is still a problem, though - all shots are currently considered equal. But it has been proven many times that <em>we should expect different goal rates for different shots</em>. Thankfully, Peter Tanner makes his work on expected goals available for public consumption. His take on expected goals are summarized below.
+There is still a problem, though - all shots are currently considered equal. But it has been proven many times that <em>we should expect different goal rates for different shots</em>. Thankfully, Peter Tanner makes his work on expected goals available for public consumption. His take on Expected Goals are summarized below.
 </p>
 <h5>Expected Goals</h5>
 <p>
-Shot-level data for Expected Goals is provided by <a href="https://moneypuck.com/about.htm">MoneyPuck</a>. Tanner, MoneyPuck's creator, explains expected goals as "the probability of each shot being a goal", where information such as "the distance from the net, angle of the shot, type of shot, and what happened before the shot" is considered.
+Tanner, through his website <a href="https://moneypuck.com/about.htm">MoneyPuck</a>, provides detailed data for each unblocked shot that occurs in the NHL, whether it hit the net or not, along with a prediction - the probability of the shot being a goal. His model to predict such a thing includes information such as "the distance from the net, angle of the shot, type of shot, and what happened before the shot" among other things.
 </p>
 <p>
 The expansion of normalized entropy to include expected goals is outlined in the <a href="https://spazznolo.github.io/2022/04/04/goalie-consistency-3.html">third post</a> of this series.
