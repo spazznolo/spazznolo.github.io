@@ -55,7 +55,7 @@ This may all be interesting, but is it helpful? By itself, not really. <em>A goa
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-one-five.png" width="60%" length="150"/></div>
 </p>
-![alt-text-1](https://spazznolo.github.io/figs/goalie-one-five.png "title-1") ![alt-text-2](https://spazznolo.github.io/figs/goalie-one-five.png "title-2")
+
 <p float="left">
   <img src="https://spazznolo.github.io/figs/goalie-one-five.png" width="30%" />
   <img src="https://spazznolo.github.io/figs/goalie-one-five.png" width="30%" />
