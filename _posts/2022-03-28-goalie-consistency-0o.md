@@ -35,7 +35,7 @@ Entropy is a popular concept in information theory. It measures the orderliness 
 <div style="text-align: center">0 0 0 0 1 0 0 0 1 0</div>
 </p>
 <p>
-Consequently, entropy can be used to measure the inter-shot consistency of goalies. It was first introduced for similar applications <a href="https://repository.upenn.edu/cgi/viewcontent.cgi?article=1081&context=statistics_papers">here</a>, and then <a href="https://github.com/namitanandakumar/Draft-Analysis/blob/master/Streakiness/VanHAC%202018.pdf">repurposed</a> for teams and shooters in hockey. The formula for entropy is below.
+Consequently, entropy can be used to measure the inter-shot consistency of goalies. It was first introduced for similar applications <a href="https://repository.upenn.edu/cgi/viewcontent.cgi?article=1081&context=statistics_papers">here</a>, and then <a href="https://github.com/namitanandakumar/Draft-Analysis/blob/master/Streakiness/VanHAC%202018.pdf">repurposed</a> for teams and shooters in hockey. The starting formula for goalie entropy is below.
 </p>
 <p>
 <div style="text-align: center"> 
@@ -43,9 +43,8 @@ Consequently, entropy can be used to measure the inter-shot consistency of goali
 </div>
 </p>
 <p>
-This entropy formula gets us partway there, however it does not account for the length of a goalie season, nor does it take into account the percentage of shots saved - both of which have an effect on entropy. In order to compare entropy from goalie-to-goalie and season-to-season, we need to account for these differences. To address this, the xi's in the entropy formula above are divided by the number of shots in the goalie season, and then the entropy itself is divided by the number of goals scored in a season (plus one).
+This gets us partway there, however it doesn't account for the length of a goalie season, nor does it account for the percentage of shots saved - both of which have an effect on entropy. In order to compare entropy between goalies and between seasons, we need to first account for these differences. To address this, the xi's in the entropy formula above are divided by the number of shots a goalie faces in a season, and then the entropy itself is divided by the number of goals a goalie allows in a season (plus one). After this, the entropy measure for each goalie is compared to 10,000 randomly generated seasons with the same performance. The entropy measure then becomes a percentile.
 </p>
-<p>
 
 
 
