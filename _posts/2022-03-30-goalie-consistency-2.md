@@ -8,10 +8,7 @@ date:   2022-03-30 11:52:05 -0400
 Remember, <a href="https://spazznolo.github.io/2022/03/28/goalie-consistency-intro.html">entropy</a> can be used to measure inter-shot goalie consistency. A perfectly ordered sequence has no entropy, and as it loses its orderliness (or consistency), the entropy increase. 
 </p>
 <p>
-Now, how does inter-shot consistency effect the expected standing points? 
-</p>
-<p>
-We create simulate 10,000 goalie seasons, all with seasonal save percentages of .900. Then, we calculate the entropy of each simulation, along with the expected standing points earned. The results are below.
+To measure the effect of inter-shot consistency on expected standing points, we simulate 10,000 goalie seasons, all with seasonal save percentages of .900. Then, we calculate the entropy of each simulation, along with the expected standing points earned. The results are below.
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-one-threee.png" width="60%" length="150"/></div>
@@ -20,5 +17,5 @@ We create simulate 10,000 goalie seasons, all with seasonal save percentages of 
 <em>Inter-shot consistency does not seem have an effect on expected standing points.</em>
 </p>
 <p>
-The next post will use entropy as a measure for goalie consistency (or the lack thereof) on real data. It will be a similar exploration to this one on shooters, except it will be expanded to include weights on shots in the form of <a href="https://moneypuck.com/">MoneyPuck</a>’s Expected Goals.
+The next post will use entropy as a measure for goalie consistency on real data. It will be a similar exploration to this one on shooters, except it will be expanded to include weights on shots in the form of <a href="https://moneypuck.com/">MoneyPuck</a>’s Expected Goals.
 </p>
