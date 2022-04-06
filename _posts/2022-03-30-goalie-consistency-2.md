@@ -3,8 +3,7 @@ layout: post
 title:  "[Part 2] The effect of inter-shot goalie consistency on expected standing points "
 date:   2022-03-30 11:52:05 -0400
 ---
-<h2> Does consistency matter in Goaltending? </h2>
-<h2> Part 1 - The effect of inter-shot goalie consistency on expected standing points </h2>
+<h2> The effect of inter-shot goalie consistency on expected standing points </h2>
 <p>
 Here’s what a ten-shot sequence of outcomes from shots on goal looks like (1 goal, 0 save).
 </p>
