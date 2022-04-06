@@ -24,7 +24,7 @@ Running 10,000 simulations of 82 game seasons yields the following distributions
 </p>
 <p>
 <table style="margin-left:auto;margin-right:auto;"><tr>
-<td> <img src="https://spazznolo.github.io/figs/goalie-plot-three.png" style="margin: 0px 100px 0px 0px" width="200px" length="250px"/> </td>
+<td> <img src="https://spazznolo.github.io/figs/goalie-one-two.png" style="margin: 0px 100px 0px 0px" width="200px" length="250px"/> </td>
 <td> <img src="https://spazznolo.github.io/figs/goalie-one-one.png" width="450px" length="250px"/> </td>
 </tr></table>
 </p>
@@ -55,6 +55,6 @@ This may all be interesting, but is it helpful? By itself, not really. <em>A goa
 <em>Note: For clarity’s sake, I introduced game-to-game consistency without randomness (a goalie was expected to be above average and below average in half of his games), but this also works with randomized expectations. The plot below compares the distribution of standing points when the expected rate of occurrence is randomly sampled from the uniform distribution to those when the expected rate of occurrence is the average expected goals against. The expected difference between a perfectly steady goalie and a perfectly random goalie is about 7 standing points!</em>
 </p>
 <p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-one-five.png" width="60%" length="150"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-one-three.png" width="60%" length="150"/></div>
 </p>
 
