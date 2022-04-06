@@ -5,15 +5,13 @@ date:   2022-03-30 11:52:05 -0400
 ---
 <h2> The effect of inter-shot goalie consistency on expected standing points </h2>
 <p>
-Given that shot leads to a binary event, a sequence of shots ... we can borrow a concept from information theory for a more robust and generalized measure of consistency. It’s called <a href="https://spazznolo.github.io/2022/03/28/goalie-consistency-intro.html">entropy</a>.
-<p>
-A perfectly ordered sequence has no entropy, and as it loses its orderliness (or consistency), the entropy increase. 
+Remember, <a href="https://spazznolo.github.io/2022/03/28/goalie-consistency-intro.html">entropy</a> can be used to measure inter-shot goalie consistency. A perfectly ordered sequence has no entropy, and as it loses its orderliness (or consistency), the entropy increase. 
 </p>
 <p>
-But how does inter-shot consistency effect the expected standing points? 
+Now, how does inter-shot consistency effect the expected standing points? 
 </p>
 <p>
-This time, we create simulate 10,000 goalie seasons, all with seasonal save percentages of .900. Then, we calculate the entropy of each simulation, along with the expected standing points earned. The results are below.
+We create simulate 10,000 goalie seasons, all with seasonal save percentages of .900. Then, we calculate the entropy of each simulation, along with the expected standing points earned. The results are below.
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-one-threee.png" width="60%" length="150"/></div>
