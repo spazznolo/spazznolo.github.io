@@ -57,7 +57,7 @@ This may all be interesting, but is it helpful? By itself, not really. <em>A goa
 </p>
 
 <table><tr>
-<td> <img src="https://spazznolo.github.io/figs/goalie-one-five.png" width = "150px" alt="Drawing"/> </td>
-<td> <img src="https://spazznolo.github.io/figs/goalie-one-five.png" width = "150px" alt="Drawing"/> </td>
+<td> <img src="https://spazznolo.github.io/figs/goalie-one-five.png" width = "450px" alt="Drawing"/> </td>
+<td> <img src="https://spazznolo.github.io/figs/goalie-one-five.png" width = "450px" alt="Drawing"/> </td>
 </tr></table>
 
