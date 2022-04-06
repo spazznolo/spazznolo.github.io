@@ -21,15 +21,9 @@ Goals have been <a href="http://www.hockeyanalytics.com/Research_files/Poisson_T
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-zero-one.png" width="60%" length="150"/></div>
 </p>
-
-
-
-
-
-
 <h5>Entropy</h5>
 <p>
-Entropy is a popular concept in information theory. It measures the orderliness in a sequence, usually of binary events. Shots can be expressed as a sequence of binary events as well. Here’s what a ten-shot sequence of outcomes from shots on goal looks like (1 goal, 0 save).
+<a href="https://en.wikipedia.org/wiki/Entropy_(information_theory)">Entropy</a> is a popular concept in information theory. It measures the orderliness in a sequence, usually of binary events. Shots can be expressed as a sequence of binary events as well. Here’s what a ten-shot sequence of outcomes from shots on goal looks like (1 goal, 0 save).
 </p>
 <p>
 <div style="text-align: center">0 0 0 0 1 0 0 0 1 0</div>
