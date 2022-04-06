@@ -19,7 +19,7 @@ Now that entropy has been normalized, it can be compared from goalie-to-goalie.
 <p>
 Note: A goalie-season must include at least 800 shots (roughly 20 games) to be included in the season comparisons, and goalie-career must include at least 5 seasons, facing at least 800 shots in each, to be included in the career comparisons.
 </p>
-<h5>Goalie-season consistency does not have an effect on overall performance (Goals Saved Above Average per Expected Goal).</h5>
+<h5>Goalie-season consistency does not have an effect on overall performance.</h5>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-three-one.png" width="60%" length="150"/></div>
 </p>
