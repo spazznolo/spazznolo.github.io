@@ -6,23 +6,20 @@ date:   2022-03-28 11:52:05 -0400
 <h1> Does consistency matter in Goaltending? </h1>
 <h2> Introduction </h2>
 <p>
-Goaltenders make up the least predictable position in hockey. Their behavior confounds analysts and casual fans alike. It isn’t uncommon for a strong goalie to have a below replacement level year, or for an unknown goalie to come in and dominate the league. This may partly explain the relative dearth of analysis on goalies - they're voodoo, some suggest.
+Goaltenders make up the least predictable position in hockey. Their behavior confounds analysts and casual fans alike. It isn’t uncommon for a strong goalie to have a below replacement level year, or for an unknown goalie to come in and dominate the league. This may partly explain the relative dearth of analysis on goalies - they're voodoo, it's often said.
 </p>
 <p>
-That's where this series of posts comes in. Ideally, they will help - even marginally - rectify this dearth. I’m going to start by exploring the idea of consistency in goalies, along with the potential attendant effects it has on standing points, current performance, and future results. This post addresses the effect of consistency on standing points.
+That's where this series of posts comes in. Ideally, it will help - even marginally - rectify this dearth. I’m going to explore the idea of consistency in goalies, along with its potential attendant effects on standing points, current performance, and future performance.
 </p>
 <p>
-In this series, we'll measure the effect of goalie consistency (shot-to-shot, game-to-game, and from season-to-season) on various measures, such as: current performance, future performance, and future consistency.
-</p>
-<p>
-But before that, I'll briefly explain a few concepts that will come up across the series.
+But before that, in this post, I'll briefly explain a few concepts that will come up across the series.
 </p>
 <h5>Poisson Distribution</h5>
 <p>
-Goals have been <a href="http://www.hockeyanalytics.com/Research_files/Poisson_Toolbox.pdf">shown</a> to follow a <a href="https://en.wikipedia.org/wiki/Poisson_distribution">Poisson process</a>. Many simulations have shown just how closely goals follow the Poisson over time.
+Goals have been <a href="http://www.hockeyanalytics.com/Research_files/Poisson_Toolbox.pdf">shown</a> to follow a <a href="https://en.wikipedia.org/wiki/Poisson_distribution">Poisson process</a>. Many simulations have shown just how closely goals follow the Poisson over time. This has a few consequences. Like, the Poisson is easy to simulate. Here's what 100,000 simulations of goals allowed in a game look like when a goalie is expected to allow 3 goals.
 </p>
 <p>
-probability mass function of the Poisson distribution.
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-zero-one.png" width="60%" length="150"/></div>
 </p>
 <h5>Entropy</h5>
 <p>
