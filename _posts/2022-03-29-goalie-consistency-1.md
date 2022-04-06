@@ -17,10 +17,10 @@ And so on...
 Which do you want to play for you?
 </p>
 <p>
-To help in this decision, let's run simulations where the number of goals a goalie allows will be represented by a set of poisson distributions, and the expected quality of play will be represented by the poisson’s expected rate of occurrences, such that in an average game, a goalie is expected to allow around 3 goals; in a slightly below average game around 3.25 goals; below average around 3.50, and so on… 
+To help in this decision, let's run simulations. A set of random Poisson are generated, where the expected quality of play is represented by the Poisson’s expected rate of occurrences, such that in an average game, a goalie is expected to allow around 3 goals; in a slightly below average game around 3.25 goals; below average around 3.50, and so on… 
 </p>
 <p>
-Running 10,000 simulations of 82 game seasons yields the following distributions of expected standings points.
+Running 10,000 simulations of 82 game seasons yields the following expected standings point distributions.
 </p>
 <p>
 <table style="margin-left:auto;margin-right:auto;"><tr>
