@@ -50,7 +50,7 @@ To address this, the xi's in the entropy formula above are divided by the number
 Up to now, this follows exactly the <a href="https://github.com/namitanandakumar/Draft-Analysis/blob/master/Streakiness/VanHAC%202018.pdf">previous work</a> on shooters. 
 </p>
 <p>
-There is still a problem, though - all shots are currently considered equal. But it has been proven many times that <em>we should expect different goal rates for different shots</em>. Thankfully, Peter Tanner generously made his work on expected goals available for public consumption. His take on expected goals are summarized below.
+There is still a problem, though - all shots are currently considered equal. But it has been proven many times that <em>we should expect different goal rates for different shots</em>. Thankfully, Peter Tanner makes his work on expected goals available for public consumption. His take on expected goals are summarized below.
 </p>
 <h5>Expected Goals</h5>
 <p>
