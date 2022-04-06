@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[Part 1] The effect of inter-game goalie consistency on expected standing points "
+title:  "[Part 1] The effect of inter-game goalie consistency on expected standing points"
 date:   2022-03-29 11:52:05 -0400
 ---
 <h2> The effect of inter-game goalie consistency on expected standing points </h2>
@@ -54,4 +54,10 @@ This may all be interesting, but is it helpful? By itself, not really. <em>A goa
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-one-five.png" width="60%" length="150"/></div>
+</p>
+
+<p float="left">
+  <img src="https://spazznolo.github.io/figs/goalie-one-five.png" width="30%" />
+  <img src="https://spazznolo.github.io/figs/goalie-one-five.png" width="30%" /> 
+  <img src="https://spazznolo.github.io/figs/goalie-one-five.png" width="30%" />
 </p>
