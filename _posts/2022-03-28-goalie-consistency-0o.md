@@ -45,18 +45,6 @@ Consequently, entropy can be used to measure the inter-shot consistency of goali
 <p>
 This gets us partway there, however it doesn't account for the length of a goalie season, nor does it account for the percentage of shots saved - both of which have an effect on entropy. In order to compare entropy between goalies and between seasons, we need to first account for these differences. To address this, the xi's in the entropy formula above are divided by the number of shots a goalie faces in a season, and then the entropy itself is divided by the number of goals a goalie allows in a season (plus one). After this, the entropy measure for each goalie is compared to 10,000 randomly generated seasons with the same performance. The entropy measure then becomes a percentile.
 </p>
-
-
-
-
-
-
-
-
-
-
-
-
 <h5>Expected Goals</h5>
 <p>
 Shot-level data for Expected Goals is provided by <a href="https://moneypuck.com/">MoneyPuck</a>. Tanner, MoneyPuck's creator, explains expected goals as "the probability of each shot being a goal", where information such as "the distance from the net, angle of the shot, type of shot, and what happened before the shot" is considered.
