@@ -1,11 +1,9 @@
 ---
 layout: post
-title:  "[Part 3] Does consistency matter in Goaltending?"
+title:  "[Part 3] The effects of inter-shot goalie consistency (using NHL data)"
 date:   2022-04-18 8:52:05 -0400
 ---
-
-<h2> Does consistency matter in Goaltending? </h2>
-<h2> Part 2 - Exploring the effects of goalie consistency using real data </h2>
+<h2> The effects of inter-shot goalie consistency (using real data) </h2>
 <p>
 In the <a href="https://spazznolo.github.io/2022/03/29/goalie-consistency-1.html">previous post</a>, the concept of entropy as a measure of consistency was <a href="https://github.com/namitanandakumar/Draft-Analysis/blob/master/Streakiness/VanHAC%202018.pdf">repurposed</a> for hockey goalies using simulated data. Here, it's applied to actual NHL data (2007-2020), supplied by <a href="https://moneypuck.com/">MoneyPuck</a> (check it out! he does great work). This will be a short post - mostly descriptive. It tees up the next one.
 </p>
