@@ -17,6 +17,5 @@ To measure the effect of inter-shot consistency on expected standing points, we 
 <em>Inter-shot consistency does not seem have an effect on expected standing points.</em>
 </p>
 <p>
-
-The next post will use entropy as a measure for goalie consistency on real data. It will be a similar exploration to <a href="https://github.com/namitanandakumar/Draft-Analysis/blob/master/Streakiness/VanHAC%202018.pdf">this one</a> on shooters, except it will be expanded to include weights on shots in the form of <a href="https://moneypuck.com/">MoneyPuck</a>’s Expected Goals.
+The <a href="https://spazznolo.github.io/2022/04/04/goalie-consistency-3.html">next post</a>  will use entropy as a measure for goalie consistency on real data. It will be a similar exploration to <a href="https://github.com/namitanandakumar/Draft-Analysis/blob/master/Streakiness/VanHAC%202018.pdf">this one</a> on shooters, except it will be expanded to include weights on shots in the form of <a href="https://moneypuck.com/">MoneyPuck</a>’s Expected Goals.
 </p>
