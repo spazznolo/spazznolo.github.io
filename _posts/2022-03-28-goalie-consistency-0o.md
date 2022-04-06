@@ -36,6 +36,20 @@ Entropy, a popular concept in information theory, is a measure of orderliness in
 <p>
 This entropy formula gets us partway there, however it does not account for the length of a goalie season, nor does it take into account the percentage of shots saved - both of which have an effect on entropy. In order to compare entropy from goalie-to-goalie and season-to-season, we need to account for these differences. To address this, the xi's in the entropy formula above are divided by the number of shots in the goalie season, and then the entropy itself is divided by the number of goals scored in a season (plus one).
 </p>
+
+
+<p>
+Here’s what a ten-shot sequence of outcomes from shots on goal looks like (1 goal, 0 save).
+</p>
+<p>
+<div style="text-align: center">0 0 0 0 1 0 0 0 1 0</div>
+</p>
+<p>
+When measuring goalie performance, there is an important structural difference between shots and games. Games usually include multiple goals, while shots lead to binary events (goal or not). Shots can’t be treated in the same way as games were in the previous section - a poisson distribution is no longer fitting. 
+</p>
+
+
+
 <h5>Expected Goals</h5>
 <p>
 Shot data for Expected Goals is provided by <a href="https://moneypuck.com/">MoneyPuck</a>. Tanner, MoneyPuck's creator, explains expected goals as "the probability of each shot being a goal", where information such as "the distance from the net, angle of the shot, type of shot, and what happened before the shot" is considered.

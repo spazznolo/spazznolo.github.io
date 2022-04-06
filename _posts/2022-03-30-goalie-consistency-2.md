@@ -5,16 +5,7 @@ date:   2022-03-30 11:52:05 -0400
 ---
 <h2> The effect of inter-shot goalie consistency on expected standing points </h2>
 <p>
-Here’s what a ten-shot sequence of outcomes from shots on goal looks like (1 goal, 0 save).
-</p>
-<p>
-<div style="text-align: center">0 0 0 0 1 0 0 0 1 0</div>
-</p>
-<p>
-When measuring goalie performance, there is an important structural difference between shots and games. Games usually include multiple goals, while shots lead to binary events (goal or not). Shots can’t be treated in the same way as games were in the previous section - a poisson distribution is no longer fitting. 
-</p>
-<p>
-Thankfully, given that shots are a sequence of binary events, we can borrow a concept from information theory for a more robust and generalized measure of consistency. It’s called <a href="https://spazznolo.github.io/2022/03/28/goalie-consistency-intro.html">entropy</a>.
+Given that shot leads to a binary event, a sequence of shots ... we can borrow a concept from information theory for a more robust and generalized measure of consistency. It’s called <a href="https://spazznolo.github.io/2022/03/28/goalie-consistency-intro.html">entropy</a>.
 <p>
 A perfectly ordered sequence has no entropy, and as it loses its orderliness (or consistency), the entropy increase. 
 </p>
