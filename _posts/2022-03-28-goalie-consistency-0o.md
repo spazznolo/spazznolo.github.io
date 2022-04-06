@@ -40,7 +40,14 @@ The application of entropy as a measure of consistency in sport was first (I thi
 </div>
 </p>
 <p>
-This starting formula doesn't account for the length of a goalie season, nor does it account for the percentage of shots saved - both of which have an effect on entropy. It needs to be adjusted in order to compare entropy between goalies and between seasons. To address this, the xi's in the entropy formula above are divided by the number of shots a goalie faces in a season, and then the entropy itself is divided by the number of goals a goalie allows in a season (plus one). After this, the entropy for each goalie is compared to that of 10,000 randomly generated seasons having the same performance - the entropy measure then becomes a percentile. This is exactly what was done previously for shooters. There is still a problem, though. All shots are currently considered equal. But it has been proven many times that <em>we should expect different goal rates for different shots</em>. One person in particular, Peter Tanner, has not only contributed to the idea of expected goals, but has generously made their work available for public consumption. Expected goals are summarized below, but the expansion of normalized entropy to include them is outlined in the <a href="https://spazznolo.github.io/2022/04/04/goalie-consistency-3.html">third post</a> of this series.
+This starting formula doesn't account for the length of a goalie season, nor does it account for the percentage of shots saved - both of which have an effect on entropy. It needs to be adjusted in order to compare entropy between goalies and between seasons. 
+</p>
+<h5>Normalized Entropy</h5>
+<p>
+To address this, the xi's in the entropy formula above are divided by the number of shots a goalie faces in a season, and then the entropy itself is divided by the number of goals a goalie allows in a season (plus one). After this, the entropy for each goalie is compared to that of 10,000 randomly generated seasons having the same performance - the entropy measure then becomes a percentile. This is exactly what was done previously for shooters. 
+</p>
+<p>
+There is still a problem, though. All shots are currently considered equal. But it has been proven many times that <em>we should expect different goal rates for different shots</em>. One person in particular, Peter Tanner, has not only contributed to the idea of expected goals, but has generously made their work available for public consumption. Expected goals are summarized below, but the expansion of normalized entropy to include them is outlined in the <a href="https://spazznolo.github.io/2022/04/04/goalie-consistency-3.html">third post</a> of this series.
 </p>
 <h5>Expected Goals</h5>
 <p>
