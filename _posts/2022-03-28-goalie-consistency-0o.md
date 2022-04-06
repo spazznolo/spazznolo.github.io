@@ -54,7 +54,7 @@ There is still a problem, though - all shots are currently considered equal. But
 </p>
 <h5>Expected Goals</h5>
 <p>
-Tanner, through his website <a href="https://moneypuck.com/about.htm">MoneyPuck</a>, provides detailed data for each unblocked shot that occurs in the NHL, whether it hit the net or not, along with a prediction - the probability of the shot being a goal. His model to predict such a thing includes information such as "the distance from the net, angle of the shot, type of shot, and what happened before the shot" among other things.
+Tanner, through his website <a href="https://moneypuck.com/about.htm">MoneyPuck</a>, provides detailed data for each unblocked shot that occurs in the NHL, whether it hit the net or not, along with a prediction - the probability of the shot being a goal. His model includes information such as "the distance from the net, angle of the shot, type of shot, and what happened before the shot" among other things.
 </p>
 <p>
 The expansion of normalized entropy to include expected goals is outlined in the <a href="https://spazznolo.github.io/2022/04/04/goalie-consistency-3.html">third post</a> of this series.
