@@ -44,7 +44,10 @@ This starting formula doesn't account for the length of a goalie season, nor doe
 </p>
 <h5>Normalized Entropy</h5>
 <p>
-To address this, the xi's in the entropy formula above are divided by the number of shots a goalie faces in a season, and then the entropy itself is divided by the number of goals a goalie allows in a season (plus one). After this, the entropy for each goalie is compared to that of 10,000 randomly generated seasons having the same performance - the entropy measure then becomes a percentile. This is exactly what was done previously for shooters. 
+To address this, the xi's in the entropy formula above are divided by the number of shots a goalie faces in a season, and then the entropy itself is divided by the number of goals a goalie allows in a season (plus one). After this, the entropy for each goalie is compared to that of 10,000 randomly generated seasons having the same performance - it becomes a percentile. 
+</p>
+<p>
+Up to now, this follows exactly the <a href="https://github.com/namitanandakumar/Draft-Analysis/blob/master/Streakiness/VanHAC%202018.pdf">previous work</a> on shooters. 
 </p>
 <p>
 There is still a problem, though. All shots are currently considered equal. But it has been proven many times that <em>we should expect different goal rates for different shots</em>. One person in particular, Peter Tanner, has not only contributed to the idea of expected goals, but has generously made their work available for public consumption. Expected goals are summarized below, but the expansion of normalized entropy to include them is outlined in the <a href="https://spazznolo.github.io/2022/04/04/goalie-consistency-3.html">third post</a> of this series.
