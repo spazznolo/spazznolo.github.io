@@ -16,14 +16,26 @@ But before that, in this post, I'll briefly explain a few concepts that will com
 </p>
 <h5>Poisson Distribution</h5>
 <p>
-Goals have been <a href="http://www.hockeyanalytics.com/Research_files/Poisson_Toolbox.pdf">shown</a> to follow a <a href="https://en.wikipedia.org/wiki/Poisson_distribution">Poisson process</a>. Many simulations have shown just how closely goals follow the Poisson over time. This has a few consequences. Like, the Poisson is easy to simulate. Here's what 100,000 simulations of goals allowed in a game look like when a goalie is expected to allow 3 goals.
+Goals have been <a href="http://www.hockeyanalytics.com/Research_files/Poisson_Toolbox.pdf">shown</a> to follow a <a href="https://en.wikipedia.org/wiki/Poisson_distribution">Poisson process</a>. Many simulations have shown just how closely goals follow the Poisson over time. Fortunately, the Poisson is easy to simulate. Here's what 100,000 simulations of goals allowed in a game look like when a goalie is expected to allow 3 goals.
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-zero-one.png" width="60%" length="150"/></div>
 </p>
+
+
+
+
+
+
 <h5>Entropy</h5>
 <p>
-Entropy, a popular concept in information theory, is a measure of orderliness in a sequence. or, in our case, the inter-shot consistency of a goalie. It was first introduced <a href="https://repository.upenn.edu/cgi/viewcontent.cgi?article=1081&context=statistics_papers">here</a> for various applications, and then <a href="https://github.com/namitanandakumar/Draft-Analysis/blob/master/Streakiness/VanHAC%202018.pdf">repurposed</a> for teams and shooters in hockey (we apply it to goalies in this post). The formula for entropy is below.
+Entropy is a popular concept in information theory. It measures the orderliness in a sequence, usually of binary events. Shots can be expressed as a sequence of binary events as well. Here’s what a ten-shot sequence of outcomes from shots on goal looks like (1 goal, 0 save).
+</p>
+<p>
+<div style="text-align: center">0 0 0 0 1 0 0 0 1 0</div>
+</p>
+<p>
+Consequently, entropy can be used to measure the inter-shot consistency of goalies. It was first introduced for similar applications <a href="https://repository.upenn.edu/cgi/viewcontent.cgi?article=1081&context=statistics_papers">here</a>, and then <a href="https://github.com/namitanandakumar/Draft-Analysis/blob/master/Streakiness/VanHAC%202018.pdf">repurposed</a> for teams and shooters in hockey. The formula for entropy is below.
 </p>
 <p>
 <div style="text-align: center"> 
@@ -33,23 +45,22 @@ Entropy, a popular concept in information theory, is a measure of orderliness in
 <p>
 This entropy formula gets us partway there, however it does not account for the length of a goalie season, nor does it take into account the percentage of shots saved - both of which have an effect on entropy. In order to compare entropy from goalie-to-goalie and season-to-season, we need to account for these differences. To address this, the xi's in the entropy formula above are divided by the number of shots in the goalie season, and then the entropy itself is divided by the number of goals scored in a season (plus one).
 </p>
+<p>
 
 
-<p>
-Here’s what a ten-shot sequence of outcomes from shots on goal looks like (1 goal, 0 save).
-</p>
-<p>
-<div style="text-align: center">0 0 0 0 1 0 0 0 1 0</div>
-</p>
-<p>
-When measuring goalie performance, there is an important structural difference between shots and games. Games usually include multiple goals, while shots lead to binary events (goal or not). Shots can’t be treated in the same way as games were in the previous section - a poisson distribution is no longer fitting. 
-</p>
+
+
+
+
+
+
+
 
 
 
 <h5>Expected Goals</h5>
 <p>
-Shot data for Expected Goals is provided by <a href="https://moneypuck.com/">MoneyPuck</a>. Tanner, MoneyPuck's creator, explains expected goals as "the probability of each shot being a goal", where information such as "the distance from the net, angle of the shot, type of shot, and what happened before the shot" is considered.
+Shot-level data for Expected Goals is provided by <a href="https://moneypuck.com/">MoneyPuck</a>. Tanner, MoneyPuck's creator, explains expected goals as "the probability of each shot being a goal", where information such as "the distance from the net, angle of the shot, type of shot, and what happened before the shot" is considered.
 </p>
 
 
