@@ -16,7 +16,7 @@ In the <a href="https://spazznolo.github.io/2022/03/28/goalie-consistency-0.html
 In order to advance this idea to include Expected Goals,we need to modify two parts: the simulation of seasons - we can no longer randomize seasons through sampling shot outcomes without replacement; and the entropy equation listed above - which needs to include the probability of shots becoming goals.
 </p>
 <h5>Modifying Season Simulations</h5>
-To convert a sequence of Expected Goals into a sequence of outcomes (goal or save), we flip a weighted coin by way of a <a href="https://en.wikipedia.org/wiki/Binomial_distribution">binomial</a> simulation, with the weight being the probability that the shot becomes a goal <em>minus the goalie's goals saved above expected per expected goal multiplied by the original shot probability</em>. This way, the simulations will mirror a goalie's deviance from the expected performance (if a goalie leaves more goals in than he should have, so will the simulations).
+To convert a sequence of Expected Goals into a sequence of outcomes (goal or save), we flip a weighted coin by way of a <a href="https://en.wikipedia.org/wiki/Binomial_distribution">binomial</a> simulation, with the weight being the probability that the shot becomes a goal <em>minus the goalie's goals saved above expected per expected goal multiplied by the original shot probability</em>. This way, the simulations will mirror a goalie's deviance from the expected performance (if a goalie allows more goals than expected, so will the simulations).
 <p> 
 For example, xx in 2020 saved x more goals than expected per expected goal. The simulation of a shot with a probability of 14% of becoming a goal then can be represented by:
 </p>
