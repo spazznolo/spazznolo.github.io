@@ -13,7 +13,7 @@ In the <a href="https://spazznolo.github.io/2022/03/28/goalie-consistency-0.html
 </div>
 </p>
 <p> 
-Here, we advance this idea to include Expected Goals. To do so, we need to modify two parts: the simulation of seasons - we can no longer randomize seasons through sampling without replacement; and the entropy equation listed above - which needs to include the probability of shots becoming goals.
+We advance this idea to include Expected Goals, but first, we need to modify two parts: the simulation of seasons - we can no longer randomize seasons through sampling without replacement; and the entropy equation listed above - which needs to include the probability of shots becoming goals.
 </p>
 <h5>Season Simulations</h5>
 <p> 
