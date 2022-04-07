@@ -16,16 +16,15 @@ Here, we advance this idea to include Expected Goals.
 <p> 
 In order to do so, we need to modify two parts: the simulation of seasons - which can no longer randomize seasons through sampling with replacement; and the entropy equation listed above - which needs to include the weights of shots.
 </p>
+<h5>Season Simulations</h5>
 <p> 
-Season Simulations
 Shots are now represented by the likelihood that they become a goal. To create a sequence of outcomes (goal or save), we flip a weighted coin by way of a binomial simulation, with the weight being the probability that the shot becomes a goal <em>minus the goalie's goals saved above expected per expected goal</em>. This way, the simulations will mirror a goalie's deviance from the average (if a goalie leaves more goals in than he should have, so will the simulations).
 </p>
 <p> 
 For example, xx in 2020 saved x more goals than expected per expected goal. The simulation of a shot with a probability of 14% of beoming a goal then can be represented by:
 </p>
+<h5>Entropy Equation</h5>
 <p> 
-Entropy Equation
-
 </p>
 <p> 
 It turns out - as the plots below will show - that there isn't much there. A goalie's inter-shot consistency in a given season doesn't say much their inter-shot consistency in the next season, better goalie careers don't appear to have more or less consistency than a worse career, etc. 
