@@ -21,11 +21,9 @@ To convert a sequence of Expected Goals into a sequence of outcomes (goal or sav
 For example, xx in 2020 saved x more goals than expected per expected goal. The simulation of a shot with a probability of 14% of beoming a goal then can be represented by:
 </p>
 <h5>Modifying the Entropy Equation</h5>
-<p> 
 <div style="text-align: center"> 
 <img src="https://spazznolo.github.io/figs/goalie-formula-entropy-two.png" width="80%" length="125"/>
 </div>
-</p>
 <p> 
 With this, we can  measure the effect of inter-shot goalie consistency on various things. And it turns out - as the plots below show - that there isn't much there. A goalie's inter-shot consistency in a given season doesn't say much about their inter-shot consistency in the next season, better goalie careers don't appear to have more or less consistency than a worse career, etc. 
 </p>
