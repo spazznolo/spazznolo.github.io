@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "[Part 3] The effects of inter-shot goalie consistency (using NHL data)"
-date:   2022-04-04 8:52:05 -0400
+date:   2022-04-07 8:52:05 -0400
 ---
 <h2> The effects of inter-shot goalie consistency (using real data) </h2>
 <p>
@@ -13,7 +13,7 @@ In the <a href="https://spazznolo.github.io/2022/03/28/goalie-consistency-0.html
 </div>
 </p>
 <p>
-We advance this idea to include Expected Goals, but first, we need to modify two parts: the simulation of seasons - we can no longer randomize seasons through sampling without replacement; and the entropy equation listed above - which needs to include the probability of shots becoming goals.
+We advance this idea to include Expected Goals, but first, we need to modify two parts: the simulation of seasons - we can no longer randomize seasons through sampling shot outcomes without replacement; and the entropy equation listed above - which needs to include the probability of shots becoming goals.
 </p>
 <h5>Modifying Season Simulations</h5>
 To convert a sequence of Expected Goals into a sequence of outcomes (goal or save), we flip a weighted coin by way of a binomial simulation, with the weight being the probability that the shot becomes a goal <em>minus the goalie's goals saved above expected per expected goal multiplied by the original shot probability</em>. This way, the simulations will mirror a goalie's deviance from the expected performance (if a goalie leaves more goals in than he should have, so will the simulations).
@@ -21,12 +21,14 @@ To convert a sequence of Expected Goals into a sequence of outcomes (goal or sav
 For example, xx in 2020 saved x more goals than expected per expected goal. The simulation of a shot with a probability of 14% of beoming a goal then can be represented by:
 </p>
 <h5>Modifying the Entropy Equation</h5>
+<p>
+The entropy equation is modified in the following way: instead of the number of shots saved in a row (or, the save streak) between goals, we observe the number of Expected Goals saved in between goals (the Expected Goals saved streak).
+</p>
 <div style="text-align: center"> 
 <img src="https://spazznolo.github.io/figs/goalie-formula-entropy-two.png" width="80%" length="125"/>
 </div>
-<p> 
+<h5>The Results</h5>
 With this, we can  measure the effect of inter-shot goalie consistency on various things. And it turns out - as the plots below show - that there isn't much there. A goalie's inter-shot consistency in a given season doesn't say much about their inter-shot consistency in the next season, better goalie careers don't appear to have more or less consistency than a worse career, etc. 
-</p>
 <p>
 </p>
 <p>
