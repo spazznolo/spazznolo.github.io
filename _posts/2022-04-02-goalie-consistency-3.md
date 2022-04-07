@@ -25,6 +25,7 @@ For example, xx in 2020 saved x more goals than expected per expected goal. The 
 </p>
 <h5>Entropy Equation</h5>
 <p> 
+equation here
 </p>
 <p> 
 It turns out - as the plots below will show - that there isn't much there. A goalie's inter-shot consistency in a given season doesn't say much their inter-shot consistency in the next season, better goalie careers don't appear to have more or less consistency than a worse career, etc. 
