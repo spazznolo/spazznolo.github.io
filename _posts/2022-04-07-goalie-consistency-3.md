@@ -18,7 +18,7 @@ In order to advance this idea to include Expected Goals,we need to modify two pa
 <h5>Modifying Season Simulations</h5>
 To convert a sequence of Expected Goals into a sequence of outcomes (goal or save), we flip a weighted coin by way of a <a href="https://en.wikipedia.org/wiki/Binomial_distribution">binomial</a> simulation, with the weight being the probability that the shot becomes a goal <em>minus the goalie's goals saved above expected per expected goal multiplied by the original shot probability</em>. This way, the simulations will mirror a goalie's deviance from the expected performance (if a goalie allows more goals than expected, so will the simulations).
 <p> 
-For example, xx in 2020 saved x more goals than expected per expected goal. The simulation of a shot with a probability of 14% of becoming a goal then can be represented by:
+For example, xx in 2020 saved x more goals than expected per expected goal. The simulation of a shot with probability 14% of becoming a goal then can be represented by a weighted coin flip with probabilities of (x-x) = x% for a goal and (1-P(goal)) = y% for a save/miss.
 </p>
 <h5>Modifying the Entropy Equation</h5>
 The entropy equation is modified in the following way: instead of the number of shots saved in a row (or, the save streak) between goals, we sum the number of Expected Goals saved in between goals (the Expected Goals saved streak).
