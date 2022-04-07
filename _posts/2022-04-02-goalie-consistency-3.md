@@ -25,7 +25,7 @@ For example, xx in 2020 saved x more goals than expected per expected goal. The 
 <h5>Entropy Equation</h5>
 <p> 
 <div style="text-align: center"> 
-<img src="https://spazznolo.github.io/figs/goalie-formula-entropy-two.png" width="50%" length="75"/>
+<img src="https://spazznolo.github.io/figs/goalie-formula-entropy-two.png" width="75%" length="100"/>
 </div>
 </p>
 <p> 
