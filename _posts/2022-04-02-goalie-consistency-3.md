@@ -9,7 +9,7 @@ In the <a href="https://spazznolo.github.io/2022/03/28/goalie-consistency-0.html
 </p>
 <p> 
 <div style="text-align: center"> 
-<img src="https://spazznolo.github.io/figs/goalie-formula-entropy.png" width="50%" length="75"/>
+<img src="https://spazznolo.github.io/figs/goalie-formula-entropy.png" width="40%" length="60"/>
 </div>
 </p>
 <p> 
@@ -25,7 +25,7 @@ For example, xx in 2020 saved x more goals than expected per expected goal. The 
 <h5>Entropy Equation</h5>
 <p> 
 <div style="text-align: center"> 
-<img src="https://spazznolo.github.io/figs/goalie-formula-entropy-two.png" width="75%" length="100"/>
+<img src="https://spazznolo.github.io/figs/goalie-formula-entropy-two.png" width="80%" length="125"/>
 </div>
 </p>
 <p> 
