@@ -4,7 +4,9 @@ title:  " [Introduction] Does consistency matter in Goaltending?"
 date:   2022-03-28 11:52:05 -0400
 ---
 <h1> [Introduction] Does consistency matter in Goaltending? </h1>
+<p>
 Goaltenders make up the least predictable position in hockey. Their behavior confounds analysts and casual fans alike. It isn’t uncommon for a strong goalie to have a below replacement level year, or for an unknown goalie to come in and dominate the league. This may partly explain the relative dearth of analysis on goalies - they're voodoo, it's often said.
+</p>
 <p>
 That's where this series of posts comes in. Ideally, it will help - even marginally - rectify this dearth. I’m going to explore the idea of consistency in goalies, along with its potential attendant effects on standing points, current performance, and future performance.
 </p>
