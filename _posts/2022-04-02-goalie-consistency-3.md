@@ -17,7 +17,7 @@ Here, we advance this idea to include Expected Goals. To do so, we need to modif
 </p>
 <h5>Season Simulations</h5>
 <p> 
-Shots are now represented by the likelihood that they become a goal. To create a sequence of outcomes (goal or save), we flip a weighted coin by way of a binomial simulation, with the weight being the probability that the shot becomes a goal <em>minus the goalie's goals saved above expected per expected goal</em>. This way, the simulations will mirror a goalie's deviance from the average performance (if a goalie leaves more goals in than he should have, so will the simulations).
+To convert a sequence of Expected Goals into a sequence of outcomes (goal or save), we flip a weighted coin by way of a binomial simulation, with the weight being the probability that the shot becomes a goal <em>minus the goalie's goals saved above expected per expected goal multiplied by the original shot probability</em>. This way, the simulations will mirror a goalie's deviance from the expected performance (if a goalie leaves more goals in than he should have, so will the simulations).
 </p>
 <p> 
 For example, xx in 2020 saved x more goals than expected per expected goal. The simulation of a shot with a probability of 14% of beoming a goal then can be represented by:
@@ -29,7 +29,7 @@ For example, xx in 2020 saved x more goals than expected per expected goal. The 
 </div>
 </p>
 <p> 
-With this, we can easily measure various outcomes goalie consistency might have an effect on. And it turns out - as the plots below show - that there isn't much there. A goalie's inter-shot consistency in a given season doesn't say much their inter-shot consistency in the next season, better goalie careers don't appear to have more or less consistency than a worse career, etc. 
+With this, we can  measure the effect of inter-shot goalie consistency on various things. And it turns out - as the plots below show - that there isn't much there. A goalie's inter-shot consistency in a given season doesn't say much about their inter-shot consistency in the next season, better goalie careers don't appear to have more or less consistency than a worse career, etc. 
 </p>
 <p>
 </p>
