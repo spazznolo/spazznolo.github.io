@@ -24,7 +24,7 @@ Running 10,000 simulations of 82 game seasons yields the following expected stan
 </p>
 <p>
 <table style="margin-left:auto;margin-right:auto;"><tr>
-<td> <img src="https://spazznolo.github.io/figs/goalie-one-one.png" style="margin: 0px 10% 0px 0px" width="75%" length="250"/> </td>
+<td> <img src="https://spazznolo.github.io/figs/goalie-one-one.png" style="margin: 0px 10% 0px 10%" width="75%" length="250"/> </td>
 <td> <img src="https://spazznolo.github.io/figs/goalie-one-two.png" width="75%" length="250"/> </td>
 </tr></table>
 </p>
