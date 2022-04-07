@@ -8,7 +8,9 @@ date:   2022-04-04 8:52:05 -0400
 In the <a href="https://spazznolo.github.io/2022/03/28/goalie-consistency-0.html">Introduction</a>, we defined normalized entropy as a measure for inter-shot goalie consistency using the following equation:
 </p>
 <p> 
-EQUATION HERE
+<div style="text-align: center"> 
+<img src="https://spazznolo.github.io/figs/goalie-formula-entropy.png" width="50%" length="75"/>
+</div>
 </p>
 <p> 
 Here, we advance this idea to include Expected Goals. To do so, we need to modify two parts: the simulation of seasons - we can no longer randomize seasons through sampling without replacement; and the entropy equation listed above - which needs to include the probability of shots beoming goals.
@@ -22,7 +24,9 @@ For example, xx in 2020 saved x more goals than expected per expected goal. The 
 </p>
 <h5>Entropy Equation</h5>
 <p> 
-equation here
+<div style="text-align: center"> 
+<img src="https://spazznolo.github.io/figs/goalie-formula-entropy-two.png" width="50%" length="75"/>
+</div>
 </p>
 <p> 
 With this, we can easily measure various outcomes goalie consistency might have an effect on. And it turns out - as the plots below show - that there isn't much there. A goalie's inter-shot consistency in a given season doesn't say much their inter-shot consistency in the next season, better goalie careers don't appear to have more or less consistency than a worse career, etc. 
