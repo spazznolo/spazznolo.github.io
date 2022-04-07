@@ -32,7 +32,9 @@ For example, xx in 2020 saved x more goals than expected per expected goal. The 
 With this, we can easily measure various outcomes goalie consistency might have an effect on. And it turns out - as the plots below show - that there isn't much there. A goalie's inter-shot consistency in a given season doesn't say much their inter-shot consistency in the next season, better goalie careers don't appear to have more or less consistency than a worse career, etc. 
 </p>
 <p>
-Note: A goalie season must include at least 800 shots (roughly 20 games) to be included in the season comparisons, and goalie-career must include at least 5 seasons, facing at least 800 shots in each, to be included in the career comparisons.
+</p>
+<p>
+<em>Note: A goalie season must include at least 800 shots (roughly 20 games) to be included in the season comparisons, and goalie-career must include at least 5 seasons, facing at least 800 shots in each, to be included in the career comparisons.</em>
 </p>
 <h5>Inter-shot goalie consistency does not have an effect on overall performance.</h5>
 <p>
