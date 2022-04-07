@@ -40,6 +40,9 @@ The application of entropy as a measure of consistency in sport was first (I thi
 </div>
 </p>
 <p>
+Since entropy sums streaks of saves, it follows that higher entropy equates to a lack of consistency - or conversely that low entropy equates to consistency. 
+</p>
+<p>
 This starting formula doesn't account for the length of a goalie season, nor does it account for the percentage of shots saved - both of which have an effect on entropy. It needs to be adjusted in order to compare entropy between goalies and between seasons. 
 </p>
 <h5>Normalized Entropy</h5>
