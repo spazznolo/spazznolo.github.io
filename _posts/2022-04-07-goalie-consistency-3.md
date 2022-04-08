@@ -30,7 +30,7 @@ With this, we can  measure the effect of inter-shot goalie consistency on variou
 <p>
 </p>
 <p>
-<em>Note: A goalie season must include at least 800 shots (roughly 20 games) to be included in the season comparisons, and goalie-career must include at least 5 seasons, facing at least 800 shots in each, to be included in the career comparisons.</em>
+<em>Note: A goalie season must include at least 800 shots (roughly 20 games) to be included in the season comparisons, and a goalie career must include at least 5 seasons, facing at least 800 shots in each, to be included in the career comparisons.</em>
 </p>
 <p>
 </p>
