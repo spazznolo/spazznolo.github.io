@@ -18,6 +18,9 @@ Goals have been <a href="http://www.hockeyanalytics.com/Research_files/Poisson_T
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-zero-one.png" width="60%" length="150"/></div>
 </p>
+<p>
+<em>The simulation of the Poisson to obtain outcomes for an exploration on inter-game goalie consistency occurs in the <a href="https://spazznolo.github.io/2022/04/04/goalie-consistency-1.html">first post</a> of this series.</em>
+</p>
 <h5>Entropy</h5>
 <a href="https://en.wikipedia.org/wiki/Entropy_(information_theory)">Entropy</a> is a popular concept in information theory. It measures the orderliness in a sequence, usually of binary events. Good news - shots can be expressed as a sequence of binary events. Here’s what a sequence of outcomes from shots on goal can look like (1 goal, 0 save).
 <p>
@@ -36,6 +39,9 @@ The application of entropy as a measure of consistency in sport was first (I thi
 </p>
 <p>
 Since entropy sums streaks of saves, it follows that higher entropy equates to a lack of consistency - or conversely that low entropy equates to consistency. 
+</p>
+<p>
+<em>Entropy is used to explore inter-shot goalie consistency in the <a href="https://spazznolo.github.io/2022/04/04/goalie-consistency-2.html">second post</a> of this series.</em>
 </p>
 <p>
 There's a problem though. This starting formula doesn't account for the length of a goalie season, nor does it account for the percentage of shots saved - both of which have an effect on entropy. It needs to be adjusted if we're going to compare it between goalies and between seasons. 
