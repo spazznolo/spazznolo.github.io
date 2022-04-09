@@ -16,7 +16,7 @@ But to start things off, we'll finish this post by looking at how many overtime 
 <h5>
 Pre-Overtime Standing Points Per Game vs % of Games going to Overtime
 </h5>
-There isn't much of a relationship between a team's regular season performance and the number of times they make it to overtime. Let's assume going forward in this series that the number of OT appearances of a given team is random and centered around 27%.
+There isn't much of a relationship between a team's regular season performance and the number of times they make it to overtime. You might have thought - like me - that average teams tend to have more overtime appearances because they're more closely skilled with the rest of the league than exceedingly strong/weak teams, but no, there isn't much there*. Let's assume going forward in this series that the number of OT appearances of a given team is random and centered around 27%.
 <p>
 <div style="text-align: center"> 
 <img src="https://spazznolo.github.io/figs/post-regulation-zero-one.png" width="60%" length="150"/>
@@ -24,7 +24,7 @@ There isn't much of a relationship between a team's regular season performance a
 </p>
 <p>
 <em>
-Technically, you could make the case to drop the few historically <a href="https://www.hockey-reference.com/teams/COL/2017.html">bad</a> <a href="https://www.hockey-reference.com/teams/DET/2020.html">teams</a> as outliers, in which case there would be a slight but statistically significant decrease in overtime games as a team's standing performance increased, which would amount to roughly a 4% (or, 3.28 game) difference in overtime games per season between the worst and best teams, but this is moving away from the spirit of the analysis and will be ignored.
+*Technically, you could make the case to drop the few historically <a href="https://www.hockey-reference.com/teams/COL/2017.html">bad</a> <a href="https://www.hockey-reference.com/teams/DET/2020.html">teams</a> as outliers, in which case there would be a slight but statistically significant decrease in overtime games as a team's standing performance increased, which would amount to roughly a 4% (or, 3.28 game) difference in overtime games per season between the worst and best teams, but this is moving away from the spirit of the analysis and will be ignored.
 </em>
 </p>
 
