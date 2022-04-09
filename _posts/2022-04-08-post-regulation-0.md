@@ -16,9 +16,7 @@ But to start things off, we'll finish this post by looking at how many overtime 
 <h5>
 Pre-Overtime Standing Points Per Game vs % of Games going to Overtime
 </h5>
-<p>
 There isn't much of a relationship between a team's regular season performance and the number of times they make it to overtime. Let's assume going forward in this series that the number of OT appearances of a given team is random and centered around 27%.
-</p>
 <p>
 <div style="text-align: center"> 
 <img src="https://spazznolo.github.io/figs/post-regulation-zero-one.png" width="60%" length="150"/>
