@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "[Introduction] How important is post-regulation time?"
-date:   2022-04-10 8:52:05 -0400
+date:   2022-04-08 8:52:05 -0400
 ---
 <h2>How important is post-regulation time?</h2>
 <p>
