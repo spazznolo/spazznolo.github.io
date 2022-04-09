@@ -8,7 +8,7 @@ date:   2022-04-08 8:52:05 -0400
 Since 2015, when a game is tied after 60 minutes of play, both teams are awarded one standing point along with the opportunity for a second point in the form of the overtime. Most of the rules from regulation carry over, except for a few important ones - the play goes from 5 players aside to 3, and the period lasts only 5 minutes (compared to 20 in regulation). The format change is geared towards increasing entertainment in the form of chaos - the ice surface is too large and the players are too fast and too skilled to prevent chances.
 </p>
 <p>
-This series of posts will attempt to address the effects of this change in playing format, by answering questions like: Is a given game's regulation play an indicator for its overtime play? Does a team's play in overtime <em>before a goal is scored</em> indicate who is more likely win? Is the chaos created by the playing format change an equalizer of sorts? 
+This series of posts will attempt to address the effects of this change in playing format, by answering questions like: Is a given game's regulation play an indicator for its overtime play? Does a team's play in overtime <em>before a goal is scored</em> indicate who is more likely win? Can we predict who will get the next shot? Is the chaos created by the playing format change an equalizer of sorts? 
 </p>
 <p>
 But to start things off, we'll finish this post by looking at how many overtime games a team can expect to play in a given year.
