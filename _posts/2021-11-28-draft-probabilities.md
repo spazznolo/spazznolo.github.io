@@ -27,7 +27,6 @@ In practice, no team will ever know exactly how every other team has ranked each
 <p>
 The goal of this paper is to assign probabilities to questions like the one in the first paragraph: what is the probability a player is still available at a certain pick?
 </p>
-<h5>THE DATA</h5>
 <h1> User Mock Drafts </h1>
 Over the years, as player data has become more widely available, mock drafts have increased in popularity. In a mock draft, the creator tries to predict where a player will get picked in the upcoming draft. One site in particular, <a href="https://www.draftsite.com/">Draft Site</a>, gets hundreds of user mock drafts each year. These mock drafts naturally create probability distributions for each player’s potential pick placement. For example, here was Mikko Rantanen’s in 2015.
 <p>
@@ -37,18 +36,14 @@ Over the years, as player data has become more widely available, mock drafts hav
 To create the plot above, equal weight was given to each user’s mock draft, regardless of its quality. In practice, some users are more knowledgable than others. A user who can more correctly predict a draft’s order is more valuable than one who cannot. Therefore, larger weights should be given to users who are likely more accurate in their mock draft. Thankfully, there are a couple quality indicators available: a user’s difference to the average user draft, and the number of days before the draft date that a user last updated their mock draft. 
 </p>
 <br>
-<h1>Quality Indicators</h1>
-<h1>1. Difference to the Average Draft</h1>
-<p>
+<h5>Mock Draft Quality Indicators</h5>
+<h5>Difference to the Average Draft</h5>
 Mikko Rantanen’s median pick from the raw user data was 9. If a user selected him 25th, they would be 16 spots off. A user’s absolute error rate can be computed for each pick in their mock draft. Below is the relationship of users’ mean absolute pick difference and their mean absolute pick error to the actual draft from 2015-2019. There’s a strong relationship between the two.
-</p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/fourth-plot.png" width="70%" length="200"/></div>
 </p>
-<h1>2. Days to the Draft</h1>
-<p>
+<h1>Days to the Draft</h1>
 Usually, ranking publications will release a preliminary rankings list about a year before the draft. Then, as the draft approaches and player’s develop – or don’t -  the rankings are updated. The plot below demonstrates that user data becomes more accurate as the draft day approaches.
-</p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/fifth-plot.png" width="70%" length="200"/></div>
 </p>
@@ -57,9 +52,7 @@ The variables discussed above were used to (1) filter what are likely low qualit
 
 <h5>Comparing Probability Distributions</h5>
 <h1>The Effect of Treatments on Player-Pick Probability Distributions</h1>
-<p>
 Here’s a visualization of the effects various treatments have on the user rankings.
-</p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/sixth-plot.png" width="70%" length="300"/></div>
 </p>
@@ -67,9 +60,7 @@ Here’s a visualization of the effects various treatments have on the user rank
 The downside to user mock drafts is that prospect ranking is likely a hobby for most users. They may mostly rely on second hand information provided by hockey sites, experts, and prospect ranking models. Before going further, it’s important to measure its capacity for prediction. One way of doing this is to build a draft ranking from the data, and then measure its accuracy against professional ranking publishers.
 </p>
 <h1>Derived User Rankings vs the Pros</h1>
-<p>
 Draft rankings are derived from player-pick probability distributions by iterating through each pick of each draft, and drafting the player with the highest probability of being taken. After each pick, the player distributions are re-approximated (more information is available in the Analysis Notes section).
-</p>
 <p>
 Here is the mean absolute error of derived user draft rankings from 2015-2019 compared to various pro projections. All experts but Bobby Mackenzie, the gold standard of draft projections, have been greyed out. It's worth noting that the goal of some professional draft analysts is to predict which players will have the best careers, and not necessarily the order they might be picked. Purple is the group average.
 </p>
@@ -90,21 +81,16 @@ Rankings derived from adjusted user data, weighted to a pro consensus, tend to b
 <p>
 User data, when properly treated, is competitive with pro ranking publications at predicting draft order. The advantage is that user data has built-in player-pick distributions which can be used to answer important questions about the draft.
 
-<h5>ANALYSIS</h5>
-<h1>Another Perspective on Probability Distributions</h1>
-<p>
+<h5>Another Perspective on Probability Distributions</h5>
 Here’s the probability Mikko Rantanen had of being selected at specific picks: 1, 0.1%; 2, 1.0%; 3, 2.6%; 4, 4.6%; 5, 7.9%. Another way to look at this is to say the probability Mikko Rantanen would be selected in the first five picks was 16.3% (the addition of each pick probability for picks 1-5). These cumulative probabilities can be calculated for each pick. Here’s what this looks like on a plot.
-</p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/eigth-plot.png" width="70%" length="200"/></div>
 </p>
 <p>
 This is called a cumulative distribution (each pick takes the cumulative sum of all previous pick-probabilities). A pick-probability curve like the one visualized above can be derived for each player. Given that these cumulative pick-probabilities are the cornerstone of the analysis, it’s important to measure their accuracy. The fit of these curves can be evaluated by going through each pick and asking the questions: what was the probability of this player being drafted by this pick and was he drafted by this pick?
 </p>
-<h1>Evaluating the Fit</h1>
-<p>
-Either a player was drafted by a certain pick, or they weren’t. This is called a binary event, with values 0 (he wasn’t) and 1 (he was). Mikko Rantanen had a 55.5% probability of being drafted by the eighth pick, and the result was that he wasn’t yet picked (0). The error for the probability attributed to this event can be seen as 0.555-0 = 0.555. Rantanen also had an 86.4% probability of being drafted by the twelfth pick, and the result was that he was picked (1). The error for the probability attributed to this event can be seen as 0.864-1 = -0.136. 
-</p>
+<h5>Evaluating the Fit</h5>
+Either a player was drafted by a certain pick, or they weren’t. This is called a binary event, with values 0 (he wasn’t) and 1 (he was). Mikko Rantanen had a 55.5% probability of being drafted by the eighth pick, and the result was that he wasn’t yet picked (0). The error for the probability attributed to this event can be seen as 0.555-0 = 0.555. Rantanen also had an 86.4% probability of being drafted by the twelfth pick, and the result was that he was picked (1). The error for the probability attributed to this event can be seen as 0.864-1 = -0.136.
 <p>
 Each player has probabilities attached for the first thirty picks of the draft. This is roughly 7,000 events. Errors can be attributed for these events the same way as they were outlined in the previous paragraph. Glenn Brier suggested a way of evaluating the goodness-of-fit of events like these by summing the squared error of all events. Brier scores for each method are posted in the plot on the next page. 
 </p>
@@ -129,30 +115,24 @@ The perfect fit is the grey line, where outcomes occur the predicted percentage 
 <p>
 Cumulative player-pick probabilities for the 2020 draft are available <a href="https://drive.google.com/file/d/150JF4tPGQ0fRmMsXonIa5CJ_wVVCXBa9/view?usp=drivesdk">here</a>. 
 </p>
-<h5>ANALYSIS NOTES</h5>
-<h1>Filtering Users</h1>
-<p>
+<h5>Notes</h5>
+<h5>Filtering Users</h5>
 Adjusted to User Average:
 1. RMSE to user average < 15
 2. Days to draft < 150
-</p>
 <p>
 Adjusted to Pro Consensus: 
 1. RMSE to pro consensus < 10
 2. Days to draft < 150
 </p>
-<h1>Attributing Weights to Users</h1>
+<h5>Attributing Weights to Users</h5>
 <p>
 A linear regression is fit using: RMSE to user average, days to draft, (and RMSE to pro consensus for data weighted to pro consensus) as predictors and the RMSE to actual draft order as target. User weights are the inverse of the linear model predicted RMSE of user ranking to the actual draft order.
 </p>
-<h1>Fitting Player Distributions</h1>
-<p>
-A gamma distribution is fitted to adjusted data.
-</p>
-<h1>Dampening Player Distributions</h1>
-<p>
+<h5>Fitting Player Distributions</h5>
+A gamma distribution is fit to adjusted data.
+<h5>Dampening Player Distributions</h5>
 Player distributions are dampened by the variance observed in prior years. This is superior to the variance in the raw data because, in this case, it is caused by actual deviations as opposed to what are likely bad user predicitons.
-</p>
 <p>
 I wrote a similar article for Nylon Calculus which can be found <a href="https://fansided.com/2020/09/17/nba-draft-class-controversial-obi-toppin/">here</a>.
 </p>
