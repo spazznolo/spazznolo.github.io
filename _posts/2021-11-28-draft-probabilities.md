@@ -5,7 +5,7 @@ date:   2021-11-28 11:52:05 -0400
 ---
 
 <h5> INTRODUCTION </h5>
-If you’re picking first at the next NHL draft, you want Lafreniere. If you’re picking second or third, you want Byfield or Stutzle. If you’re picking fourth, or fifth, or sixth, or seventh, you’re picking Rossi or Perffeti, or Raymond, or Drysdale… Notice how the list lengthens as you make your way through the draft? That’s because the uncertainty of a player being better than all other available players increases the deeper you get into the draft. So maybe you really like Rossi, but you’re picking sixth, and you want to know what the odds of him being available are so you can be prepared to either trade up or take someone else. Well, what are the odds Rossi is still available at six? It’s hard to say.
+If you’re picking first at the next NHL draft, you want Lafreniere. If you’re picking second or third, you want Byfield or Stutzle. If you’re picking fourth, or fifth, or sixth, or seventh, you’re picking Rossi or Perffeti, or Raymond, or Drysdale… Notice how the list lengthens as you make your way through the draft? That’s because the uncertainty of a player being better than all other available players increases the deeper you get into the draft. So maybe you really like Rossi, but you’re picking sixth, and you want to be reasonably certain he will still be available. Well, what are the odds Rossi is still available at six? It’s hard to say.
 <p>
 Let’s say we only have our own rankings to go on. Instead of only predicting each player’s draft position, we could create probabilities of each prospect being drafted at each pick. Let’s use Rossi again as an example. Here’s how we might place probabilities on Rossi’s draft result:
 </p>
@@ -13,21 +13,18 @@ Let’s say we only have our own rankings to go on. Instead of only predicting e
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/first-plot.png" width="70%" length="200"/></div>
 </p>
 <p>
-This is a probability distribution of Rossi’s predicted draft result. Though this is a step in the right direction, these are only our predictions of where Rossi might go. What if the teams drafting ahead of us think he’s not as good as we think he is? Well, then their probability distribution for Rossi might look like this:
+This is a probability distribution of Rossi’s predicted draft result. Though this is a step in the right direction, these are only our predictions of where Rossi might go. What if the teams drafting ahead of us don't rank him as highly? Their probability distribution for Rossi might look like this:
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/second-plot.png" width="70%" length="200"/></div>
 </p>
 <p>
-If the teams ahead of us view Rossi closer to the plot above, then he’ll likely slide lower than we predicted he would, and our chances of drafting him are higher than we previously thought. In fact, if we knew what other teams thought of him, we could pretty accurately predict where he’ll still be available in the draft, which allows us to either a) be comfortable we have a strong chance of picking him without trading up, or b) slide down a couple spots, pick up a mid-round pick and still get him. An important thing to remember is that Rossi’s draft position is much less affected by how we think of him than it is by how everyone else thinks of him. Namita Nandakumar wrote about the value of knowing where players will likely get drafted in <a href="http://statsportsconsulting.com/main/wp-content/uploads/Nandakumar_PerfectDraft-1.pdf">this article</a>.
+If the teams ahead of us view Rossi closer to the plot above, then he’ll likely slide lower than we predicted he would, and our chances of drafting him are higher than we previously thought. In fact, if we knew what other teams thought of him, we could pretty accurately predict where he’ll still be available in the draft, which allows us to either a) be comfortable we have a strong chance of picking him without trading up, or b) slide down a couple spots, pick up a mid-round pick and still get him. An important thing to remember is that Rossi’s draft position is much less affected by how we think of him than it is by how <a href="http://statsportsconsulting.com/main/wp-content/uploads/Nandakumar_PerfectDraft-1.pdf">everyone else thinks of him</a>.
 </p>
 <p>
 In practice, no team will ever know exactly how every other team has ranked each prospect. Instead, player-pick probability distributions need to be approximated by other means. Dawson Sprigings outlined one way of doing this for <a href="https://hockey-graphs.com/2016/06/08/nhl-draft-probability-tool/">Hockey-Graphs</a> which used bayesian inference and pro rankings publishers. I’m going to outline another possible way, which uses user generated data to derive probability density functions for each player. 
 </p>
-<p>
-The goal of this paper is to assign probabilities to questions like the one in the first paragraph: what is the probability a player is still available at a certain pick?
-</p>
-<h1> User Mock Drafts </h1>
+<h5> User Mock Drafts </h5>
 Over the years, as player data has become more widely available, mock drafts have increased in popularity. In a mock draft, the creator tries to predict where a player will get picked in the upcoming draft. One site in particular, <a href="https://www.draftsite.com/">Draft Site</a>, gets hundreds of user mock drafts each year. These mock drafts naturally create probability distributions for each player’s potential pick placement. For example, here was Mikko Rantanen’s in 2015.
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/third-plot.png" width="70%" length="200"/></div>
@@ -126,9 +123,7 @@ Adjusted to Pro Consensus:
 2. Days to draft < 150
 </p>
 <h5>Attributing Weights to Users</h5>
-<p>
 A linear regression is fit using: RMSE to user average, days to draft, (and RMSE to pro consensus for data weighted to pro consensus) as predictors and the RMSE to actual draft order as target. User weights are the inverse of the linear model predicted RMSE of user ranking to the actual draft order.
-</p>
 <h5>Fitting Player Distributions</h5>
 A gamma distribution is fit to adjusted data.
 <h5>Dampening Player Distributions</h5>
