@@ -103,7 +103,7 @@ Each player has probabilities attached for the first thirty picks of the draft. 
 </div>
 </p>
 <p>
-The perfect fit is the grey line, where outcomes occur the predicted percentage of time. Whenever a curve slides away underneath the line of perfect fit, like it does with the raw user data (and to a lesser extent the adjusted user data), it means the method tends to be overconfident in its assignment of probabilities. The plot above, along with the Brier scores, suggest the adjusted user data (score ~ 0.0604) is a better fit than raw user data (score ~ 0.1981).
+The perfect fit is the grey line, where outcomes occur the predicted percentage of time. Whenever a curve slides away underneath the line of perfect fit, like it does with the raw user data (and to a lesser extent the adjusted user data), it means the method tends to be overconfident in its assignment of probabilities. The plot above, along with the Brier scores, suggest the adjusted user data (score ~ 0.0604) is a better fit than raw user data (score ~ 0.198).
 </p>
 <p>
 Cumulative player-pick probabilities for the 2020 draft are available <a href="https://drive.google.com/file/d/150JF4tPGQ0fRmMsXonIa5CJ_wVVCXBa9/view?usp=drivesdk">here</a>. 
