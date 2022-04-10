@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Assigning NHL Player-Pick Probabilities with User Mock Drafts"
+title:  "Assigning pick probabilities with user mock drafts"
 date:   2021-11-28 11:52:05 -0400
 ---
 
@@ -157,7 +157,8 @@ A gamma distribution is fitted to adjusted data.
 <p>
 Player distributions are dampened by the variance observed in prior years. This is superior to the variance in the raw data because, in this case, it is caused by actual deviations as opposed to what are likely bad user predicitons.
 </p>
-
-
+<p>
+I wrote a similar article for Nylon Calculus which can be found <a href="https://fansided.com/2020/09/17/nba-draft-class-controversial-obi-toppin/">here</a>.
+</p>
 
 
