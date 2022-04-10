@@ -5,9 +5,7 @@ date:   2021-11-28 11:52:05 -0400
 ---
 
 <h5> INTRODUCTION </h5>
-<p>
 If you’re picking first at the next NHL draft, you want Lafreniere. If you’re picking second or third, you want Byfield or Stutzle. If you’re picking fourth, or fifth, or sixth, or seventh, you’re picking Rossi or Perffeti, or Raymond, or Drysdale… Notice how the list lengthens as you make your way through the draft? That’s because the uncertainty of a player being better than all other available players increases the deeper you get into the draft. So maybe you really like Rossi, but you’re picking sixth, and you want to know what the odds of him being available are so you can be prepared to either trade up or take someone else. Well, what are the odds Rossi is still available at six? It’s hard to say.
-</p>
 <p>
 Let’s say we only have our own rankings to go on. Instead of only predicting each player’s draft position, we could create probabilities of each prospect being drafted at each pick. Let’s use Rossi again as an example. Here’s how we might place probabilities on Rossi’s draft result:
 </p>
@@ -31,9 +29,7 @@ The goal of this paper is to assign probabilities to questions like the one in t
 </p>
 <h5>THE DATA</h5>
 <h1> User Mock Drafts </h1>
-<p>
 Over the years, as player data has become more widely available, mock drafts have increased in popularity. In a mock draft, the creator tries to predict where a player will get picked in the upcoming draft. One site in particular, <a href="https://www.draftsite.com/">Draft Site</a>, gets hundreds of user mock drafts each year. These mock drafts naturally create probability distributions for each player’s potential pick placement. For example, here was Mikko Rantanen’s in 2015.
-</p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/third-plot.png" width="70%" length="200"/></div>
 </p>
