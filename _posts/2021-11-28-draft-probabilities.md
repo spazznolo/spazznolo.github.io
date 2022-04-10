@@ -86,11 +86,6 @@ group_average: the average error of pro rankings publishers
 </div>
 </p>
 <p>
-Rankings derived from raw user data are below average and tend to be the worst compared to pro rankings. 
-Rankings derived from adjusted user data, weighted to the average user draft, hover around the group average.
-Rankings derived from adjusted user data, weighted to a pro consensus, tend to be above average.
-</p>
-<p>
 User data, when properly treated, is competitive with pro ranking publications at predicting draft order. The advantage is that user data has built-in player-pick distributions which can be used to answer important questions about the draft.
 
 <h5>Another Perspective on Probability Distributions</h5>
