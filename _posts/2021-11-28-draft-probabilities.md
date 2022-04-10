@@ -95,21 +95,7 @@ This is called a cumulative distribution (each pick takes the cumulative sum of 
 <h5>Evaluating the Fit</h5>
 Either a player was drafted by a certain pick, or they weren’t. This is called a binary event, with values 0 (he wasn’t) and 1 (he was). Mikko Rantanen had a 55.5% probability of being drafted by the eighth pick, and the result was that he wasn’t yet picked (0). The error for the probability attributed to this event can be seen as 0.555-0 = 0.555. Rantanen also had an 86.4% probability of being drafted by the twelfth pick, and the result was that he was picked (1). The error for the probability attributed to this event can be seen as 0.864-1 = -0.136.
 <p>
-Each player has probabilities attached for the first thirty picks of the draft. This is roughly 7,000 events. Errors can be attributed for these events the same way as they were outlined in the previous paragraph. Glenn Brier suggested a way of evaluating the goodness-of-fit of events like these by summing the squared error of all events. Brier scores for each method are posted in the plot on the next page. 
-</p>
-<p>
-The fit can also be assessed by grouping the predicted probabilities into bins and then visualizing them against the observed percentage of time the positive outcomes occur. Here’s an example:
-</p>
-<p>
-<div style="text-align: center"> 
-<img src="https://spazznolo.github.io/figs/ninth-plot.png" width="70%" length="600"/>
-</div>
-</p>
-<p>
-The table below has 10 events which have probability between 30% and 40%. Ideally, the percent of time a player is picked by this event is also between 30-40%. In this example, the average probability is in the mid 30%s, and 30% of events had positive outcomes (player was picked). 
-</p>
-<p>
-Grouping the data into many bins, calculating the predicted vs observed occurrences (like above) and then visualizing the predicted vs observed probabilities is called a calibration plot. It answers the question: when we give events a given probability of occurring, what percentage of the time do they actually occur? The calibration plot is plotted below along with Brier scores.
+Each player has probabilities attached for the first thirty picks of the draft. This is roughly 7,000 events. Errors can be attributed for these events the same way as they were outlined in the previous paragraph. Since the aim is to build well calibrated probability distributions, the brier score will be used to evaluate the fit. The calibration plot is plotted below along with Brier scores.
 </p>
 <p>
 <div style="text-align: center"> 
@@ -129,7 +115,7 @@ Adjusted to User Average:
 2. Days to draft < 150
 <p>
 Adjusted to Pro Consensus: 
-1. RMSE to pro consensus < 10
+1. RMSE to pro consensus < 15
 2. Days to draft < 150
 </p>
 <h5>Attributing Weights to Users</h5>
