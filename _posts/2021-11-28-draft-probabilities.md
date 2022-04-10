@@ -75,12 +75,6 @@ Draft rankings are derived from player-pick probability distributions by iterati
 Here is the mean absolute error of derived user draft rankings from 2015-2019 compared to various pro projections. All experts but Bobby Mackenzie, the gold standard of draft projections, have been greyed out. It's worth noting that the goal of some professional draft analysts is to predict which players will have the best careers, and not necessarily the order they might be picked. Purple is the group average.
 </p>
 <p>
-user_raw: raw user mock drafts
-user_internal_weights: filtered, weighted, fitted and dampened user mock drafts
-user_external_weights: filters, weighted (to pro consensus), fitted and dampened user mock drafts
-group_average: the average error of pro rankings publishers
-</p>
-<p>
 <div style="text-align: center"> 
 <img src="https://spazznolo.github.io/figs/seventh-plot.png" width="70%" length="200"/>
 </div>
