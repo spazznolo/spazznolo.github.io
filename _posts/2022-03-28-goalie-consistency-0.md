@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  " [Introduction] Does consistency matter in Goaltending?"
+title:  "Does consistency matter in Goaltending?"
 date:   2022-03-28 11:52:05 -0400
 ---
 <h1> [Introduction] Does consistency matter in Goaltending? </h1>
@@ -59,6 +59,18 @@ Tanner, through his website <a href="https://moneypuck.com/about.htm">MoneyPuck<
 <p>
 <em>The expansion of normalized entropy to include expected goals is outlined in the <a href="https://spazznolo.github.io/2022/04/04/goalie-consistency-3.html">third post</a> of this series.</em>
 </p>
+<p>
+Posts in this series:
+<a href="https://spazznolo.github.io/2022/03/29/goalie-consistency-1.html">
+[Post 1] The effect of inter-game goalie consistency on expected standing points
+</a>
+<a href="https://spazznolo.github.io/2022/04/02/goalie-consistency-2.html">
+[Post 2] The effect of inter-shot goalie consistency on expected standing points
+</a>
+<a href="https://spazznolo.github.io/2022/04/04/goalie-consistency-3.html">
+[Post 3] The effects of inter-shot goalie consistency (using real data)
+</a>
+
 
 
 
