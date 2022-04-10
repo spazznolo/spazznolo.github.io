@@ -4,9 +4,9 @@ title:  "Assigning pick probabilities with user mock drafts"
 date:   2021-11-28 11:52:05 -0400
 ---
 
-<h5>
+<h1>
 [FULL POST] Assigning pick probabilities with user mock drafts
-</h5>
+</h1>
 If you’re picking first at the next NHL draft, you want Lafreniere. If you’re picking second or third, you want Byfield or Stutzle. If you’re picking fourth, or fifth, or sixth, or seventh, you’re picking Rossi or Perffeti, or Raymond, or Drysdale… Notice how the list lengthens as you make your way through the draft? That’s because the uncertainty of a player being better than all other available players increases the deeper you get into the draft. So maybe you really like Rossi, but you’re picking sixth, and you want to be reasonably certain he will still be available. Well, what are the odds Rossi is still available at six? It’s hard to say.
 <p>
 Let’s say we only have our own rankings to go on. Instead of only predicting each player’s draft position, we could create probabilities of each prospect being drafted at each pick. Let’s use Rossi again as an example. Here’s how we might place probabilities on Rossi’s draft result:
