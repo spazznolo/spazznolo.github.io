@@ -40,7 +40,6 @@ In practice, no team will ever know exactly how every other team has ranked each
 <p>
 This distribution should be smoothed, but first, I'd like to address the fact that some mock drafts are more informative than others. A user who can more correctly predict a draft’s order is more valuable than one who cannot. Therefore, larger weights should be given to users who are likely more accurate in their mock draft. Thankfully, there are a couple quality indicators available: a user’s difference to the average user draft, and the number of days before the draft date that a user last updated their mock draft. 
 </p>
-<br>
 <h5>Mock Draft Quality Indicators</h5>
 <h5>Difference to the Average Draft</h5>
 Mikko Rantanen’s median pick from the raw user data was 9. If a user selected him 25th, they would be 16 spots off. A user’s absolute error rate can be computed for each pick in their mock draft. Below is the relationship of users’ mean absolute pick difference and their mean absolute pick error to the actual draft from 2015-2019. There’s a strong relationship between the two.
