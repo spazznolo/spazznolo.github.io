@@ -10,7 +10,9 @@ In progress
 <img src="https://spazznolo.github.io/figs/post-regulation-one-one.png" width="60%" length="150"/>
 </div>
 </p>
+<p>
 A team's performance in regulation has very little relation to its performance in overtime. In fact, whether a team is at home or not has magnitudes greater effect (about 20x!) as the xGF% in regulation time.
+</p>
 <p>
 <div style="text-align: center"> 
 <img src="https://spazznolo.github.io/figs/post-regulation-one-two.png" width="60%" length="150"/>
