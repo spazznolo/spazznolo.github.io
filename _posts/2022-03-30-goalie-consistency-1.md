@@ -5,7 +5,7 @@ date:   2022-03-29 11:52:05 -0400
 ---
 <h2>[Post 1] The effect of inter-game goalie consistency on expected standing points</h2>
 <p>
-Here’s an illustration: Imagine you’re the General Manager of a hockey team in a league where every single player and goalie is equally skilled. Since all players are equal, all teams are equal too. Now, a special opportunity comes up where you get to decide between eight equally skilled goalies who have different levels of consistency.
+Here’s an illustration: Imagine you’re the General Manager of a hockey team in a league where every single player and goalie is equally skilled. Since all players are equal, all teams are equal too. Now, a special opportunity comes up where you get to decide between five equally skilled goalies who have different levels of consistency.
 </p>
 <p>
 Goalie A always plays average, no matter what.
