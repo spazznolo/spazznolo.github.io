@@ -5,7 +5,7 @@ date:   2022-04-07 8:52:05 -0400
 ---
 <h2>[Post 3] The effects of inter-shot goalie consistency (using real data)</h2>
 <p>
-In the <a href="https://spazznolo.github.io/2022/03/28/goalie-consistency-0.html">Introduction</a>, we defined normalized entropy as a measure for inter-shot goalie consistency using the following equation:
+In the <a href="https://spazznolo.github.io/2022/03/28/goalie-consistency-0.html">Introduction</a>, we defined entropy as a measure for inter-shot goalie consistency using the following equation:
 </p>
 <p> 
 <div style="text-align: center"> 
