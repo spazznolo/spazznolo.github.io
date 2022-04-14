@@ -11,7 +11,7 @@ In progress
 </div>
 </p>
 <p>
-A team's performance in regulation has very little relation to its performance in overtime. In fact, whether a team is at home or not has magnitudes greater effect (about 20x!) as the xGF% in regulation time.
+A team's performance in regulation has very little relation to its performance in overtime. In fact, whether a team is at home or not has magnitudes greater effect (about 20x!) as the xG% in regulation time.
 </p>
 <p>
 <div style="text-align: center"> 
