@@ -7,7 +7,7 @@ date:   2022-04-10 8:52:05 -0400
 In progress
 <p>
 <div style="text-align: center"> 
-<img src="https://spazznolo.github.io/figs/post-regulation-one-one.png" width="60%" length="150"/>
+<img src="https://spazznolo.github.io/figs/post-regulation-one-onee.png" width="60%" length="150"/>
 </div>
 </p>
 <p>
@@ -15,6 +15,6 @@ A team's performance in regulation has very little relation to its performance i
 </p>
 <p>
 <div style="text-align: center"> 
-<img src="https://spazznolo.github.io/figs/post-regulation-one-two.png" width="60%" length="150"/>
+<img src="https://spazznolo.github.io/figs/post-regulation-one-twoo.png" width="60%" length="150"/>
 </div>
 </p>
