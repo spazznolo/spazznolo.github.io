@@ -19,7 +19,7 @@ Pre-Overtime Standing Points Per Game vs % of Games going to Overtime
 There isn't much of a relationship between a team's regular season performance and the number of times they make it to overtime. You might have thought - like me - that average teams tend to have more overtime appearances because they're more closely skilled with the rest of the league than exceedingly strong/weak teams, but no, there isn't much there*. Let's assume going forward in this series that the number of OT appearances of a given team is random and centered around 23%.
 <p>
 <div style="text-align: center"> 
-<img src="https://spazznolo.github.io/figs/post-regulation-zero-one.png" width="60%" length="150"/>
+<img src="https://spazznolo.github.io/figs/post-regulation-zero-one.png" width="70%" length="175"/>
 </div>
 </p>
 <p>
