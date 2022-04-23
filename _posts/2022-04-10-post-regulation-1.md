@@ -4,7 +4,12 @@ title:  "The effect of regulation performance on overtime"
 date:   2022-04-10 8:52:05 -0400
 ---
 <h2>[Post 1] The effect of regulation performance on overtime</h2>
-In progress
+<p>
+By most accounts, the 5 minute 3-on-3 overtime used by the NHL is considered random. MoneyPuck doesn't even bother deviating from a 50% win probability for both teams. Just how random is overtime, though? Let's start this exploration with a basic descriptive model.
+</p>
+<p>
+We'll regress various team and game characteristics on the outcome of individual overtimes, specifically a team's xGF% throughout their season, game and overtime, whether they're at home and whether they had the last shot before the winning goal. Here's a few examples:
+</p>
 <p>
 <div style="text-align: center"> 
 <img src="https://spazznolo.github.io/figs/post-regulation-one-one.png" width="60%" length="150"/>
