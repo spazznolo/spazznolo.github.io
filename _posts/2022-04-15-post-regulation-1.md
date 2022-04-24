@@ -18,7 +18,7 @@ Let's explore with a basic descriptive model. We'll regress various team and gam
 </p>
 <p>
 <div style="text-align: center"> 
-<img src="https://spazznolo.github.io/figs/post-regulation-one-one.png" width="60%" length="150"/>
+<img src="https://spazznolo.github.io/figs/post-regulation-one-oneee.png" width="60%" length="150"/>
 </div>
 </p>
 <p>
