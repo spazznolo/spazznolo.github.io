@@ -26,7 +26,7 @@ Using every game that ended in overtime since its inception in 2015, the regress
 </p>
 <p>
 <div style="text-align: center"> 
-<img src="https://spazznolo.github.io/figs/post-regulation-one-two.png" width="60%" length="150"/>
+<img src="https://spazznolo.github.io/figs/post-regulation-one-two.png" width="30%" length="75"/>
 </div>
 </p>
 <p>
