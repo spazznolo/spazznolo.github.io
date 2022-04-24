@@ -32,15 +32,7 @@ A team's performance in regulation has little relation to its performance in ove
 <p>
 This isn't so surprising, though. Broken up into 5 minute chunks, hockey is actually pretty random! Breaking regulation time into 5 minute chunks, a 10% positive deviance in a team's xGF% in a given chunk leads to about a 0.2% increase in its xGF% performance in the next chunk. For context, the home team sits at a 1.5xGF% increase just for being at home.
 </p>
-<p>
-<div style="text-align: center"> 
-<img src="https://spazznolo.github.io/figs/post-regulation-one-twoo.png" width="60%" length="150"/>
-</div>
-</p><p>
-<div style="text-align: center"> 
-<img src="https://spazznolo.github.io/figs/post-regulation-one-twoo.png" width="60%" length="150"/>
-</div>
-</p>
+
 
 
 
