@@ -11,10 +11,10 @@ By most accounts, the outcome of the NHL's 5 minute 3-on-3 overtime is random. M
 This year, the Panthers, who've by far scored the most goals of any team this season, went 13-2 in overtime. The Avalanche, Hurricanes, and Leafs, the league's next best teams, went about .500.
 </p>
 <p>
-Just how random is overtime?
+Is overtime completely random?
 </p>
 <p>
-Let's explore with a basic descriptive model. We'll regress various team and game characteristics on the outcome of <em>individual games which ended in overtime</em>. Specifically, the predictors will be: a team's xGF% throughout their season, game and overtime (before the winning goal was scored), whether they're playing at home, and whether they had the last shot before the winning goal was scored. A few examples:
+Let's explore this thought with a basic descriptive model. We'll regress various team and game characteristics on the outcome of <em>individual games which ended in overtime</em>. Specifically, the predictors will be: a team's xGF% throughout their season, game and overtime (before the winning goal was scored), and whether they had the last shot before the winning goal was scored. A few examples:
 </p>
 <p>
 <div style="text-align: center"> 
@@ -30,9 +30,18 @@ Using every game that ended in overtime since its inception in 2015, the regress
 </div>
 </p>
 <p>
-<b>Translation: </b>Whether a team had the last shot before the winning goal was scored is the strongest predictor of a win out of the five predictors. It adds about 15% to a team's win probability. A 10% increase in xGF% of a given overtime adds about 3.8% to the team's win probability. This might seem like alot, but 75% of Expected Goals is total domination, which translates to 75-50=25*0.0038... Neither a team's regular season xGF% or their regulation xGF% have an effect on the outcome of the game. 
+By far, the strongest predictor of outcome for games ending in overtime is whether or not a team had the last shot before the winning goal was scored. Having the last shot adds about 13.8% to a team's win probability (63.8%).
 </p>
-
+<p>
+The only other relevant predictor is not a team's xGF% in the regular season, nor in a given game's regulation, but its xGF% in the overtime before the goal was scored. It's a distant second though: a 10% increase in xGF% adds about 1.9% to the team's win probability. This means that if a team dominates overtime with 75% of Expected Goals, its probability of winning only increases 4.7% (54.7%). 
+</p>
+<h5>
+Are all shots equal, though?
+</h5>
+In this model, all shots were considered equal. Given that the last shot before the goal is the most important factor in the outcome of an overtime, we shouldn't just treat them equally, however. Some questions: Do all shots lead to a higher chance in winning? Can we include games that did not end in the overtime to make the analysis more robust? Doesn't every shot matter, and not just the last ones?
+<p>
+In the next post, we'll build a win probability model for the sequence after each shot based on the given shot's characteristics.
+</p>
 
 
 
