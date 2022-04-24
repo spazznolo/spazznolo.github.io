@@ -11,9 +11,6 @@ By most accounts, the 5 minute 3-on-3 overtime used by the NHL is considered ran
 We'll regress various team and game characteristics on the outcome of individual overtimes, specifically a team's xGF% throughout their season, game and overtime, whether they're at home and whether they had the last shot before the winning goal. Here's a few examples:
 </p>
 <p>
-<div style="text-align: center"> 
-<img src="https://spazznolo.github.io/figs/post-regulation-one-one.png" width="60%" length="150"/>
-</div>
 </p>
 <p>
 A team's performance in regulation has little relation to its performance in overtime. On average, teams with a 10% increase in xGF% in regulation experience about a 1.9% increase in xGF% in overtime. This is about the same xGF% increase as a team gets in overtimes played at home (1.7%).
