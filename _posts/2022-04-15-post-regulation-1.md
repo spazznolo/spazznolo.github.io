@@ -29,9 +29,10 @@ Using every game that ended in overtime since its inception in 2015, the regress
 <img src="https://spazznolo.github.io/figs/post-regulation-one-two.png" width="30%" length="75"/>
 </div>
 </p>
-<p>
+<h5>
+Model Translation:
+</h5>
 By far, the strongest predictor of outcome for games ending in overtime is whether or not a team had the last shot before the winning goal was scored. Having the last shot adds about 13.8% to a team's win probability (63.8%).
-</p>
 <p>
 The only other relevant predictor is not a team's xGF% in the regular season, nor in a given game's regulation, but its xGF% in the overtime before the goal was scored. It's a distant second though: a 10% increase in xGF% adds about 1.9% to the team's win probability. This means that if a team dominates overtime with 75% of Expected Goals, its probability of winning only increases 4.7% (54.7%). 
 </p>
