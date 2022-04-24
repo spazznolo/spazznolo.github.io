@@ -5,16 +5,16 @@ date:   2022-04-15 8:52:05 -0400
 ---
 <h2>[Post 1] The effect of regulation performance on overtime</h2>
 <p>
-By most accounts, the outcome of the NHL's 5 minute 3-on-3 overtime is random. MoneyPuck, a popular website which predicts game outcomes in real time, doesn't even bother deviating from a coin flip probability for any team to win in overtime, regardless of their opponent. This is in line with sports betting sites, which, in a given overtime, usually offer -115 odds for both teams (even odds before the <a href="https://en.wikipedia.org/wiki/Vigorish">vig</a>). 
+By most accounts, the outcome of the NHL's 5 minute 3-on-3 overtime is random. <a href="https://moneypuck.com/">MoneyPuck</a>, a popular website which predicts game outcomes in real time, doesn't even bother deviating from a coin flip probability for any team to win in overtime, regardless of their opponent. This is in line with sports betting sites, which, in a given overtime, usually offer -115 odds for both teams (even odds before the <a href="https://en.wikipedia.org/wiki/Vigorish">vig</a>). 
 </p>
 <p>
 This year, the Panthers, who've by far scored the most goals of any team this season, went 13-2 in overtime. The Avalanche, Hurricanes, and Leafs, the league's next best teams, went about .500.
 </p>
 <p>
-Is overtime completely random?
+Is overtime <em>completely</em> random, though?
 </p>
 <p>
-Let's explore this thought with a basic descriptive model. We'll regress various team and game characteristics on the outcome of <em>individual games which ended in overtime</em>. Specifically, the predictors will be: a team's xGF% throughout their season, game and overtime (before the winning goal was scored), and whether they had the last shot before the winning goal was scored. A few examples:
+Let's explore this thought with a basic descriptive model. <em>We'll regress various team and game characteristics on the outcome of individual games which ended in overtime</em>. Specifically, the predictors will be: a team's xGF% throughout their season, game and overtime (before the winning goal was scored), and whether they had the last shot before the winning goal was scored. A few examples:
 </p>
 <p>
 <div style="text-align: center"> 
@@ -44,7 +44,7 @@ Are all shots equal, though?
 </h5>
 In this model, all shots were considered equal. Given that the last shot before the goal is the most important factor in the outcome of an overtime, we shouldn't just treat them equally, however. Some questions: Do all shots lead to a higher chance in winning? Can we include games that did not end in the overtime to make the analysis more robust? Doesn't every shot matter, and not just the last ones?
 <p>
-In the next post, we'll build a win probability model for the sequence after each shot based on the given shot's characteristics.
+In the next post, we'll build a win probability model based on each given shot's characteristics.
 </p>
 
 
