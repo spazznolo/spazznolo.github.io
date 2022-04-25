@@ -22,7 +22,7 @@ Let's explore this thought with a basic descriptive model. <em>We'll regress var
 </div>
 </p>
 <p>
-Using every game that ended in overtime since its inception in 2015, the regression looks like this:
+Using every game that ended in overtime since its inception in 2015, the regression can be summarized like this:
 </p>
 <p>
 <div style="text-align: center"> 
