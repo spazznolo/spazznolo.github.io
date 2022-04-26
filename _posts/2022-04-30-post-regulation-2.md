@@ -1,9 +1,9 @@
 ---
 layout: post
 title:  "Is the overtime completely random?"
-date:   2022-04-15 8:52:05 -0400
+date:   2022-04-30 8:52:05 -0400
 ---
-<h2>[Post 1] Is the overtime completely random?</h2>
+<h2>[Post 2] Is the overtime completely random?</h2>
 <p>
 By most accounts, the outcome of the NHL's 5 minute 3-on-3 overtime is random. <a href="https://moneypuck.com/">MoneyPuck</a>, a popular website which predicts game outcomes in real time, assigns a coin flip probability for any team to win in overtime, regardless of their opponent. This is in line with sports betting sites, which, in a given overtime, usually offer -115 odds for both teams (even odds before the <a href="https://en.wikipedia.org/wiki/Vigorish">vig</a>). 
 </p>
@@ -14,7 +14,7 @@ This year, the Panthers, who've by far scored the most goals of any team this se
 Is overtime <em>completely</em> random, though?
 </p>
 <p>
-Let's explore this thought with a basic descriptive model. <em>We'll regress various team and game characteristics on the outcome of individual games which ended in overtime</em>. Specifically, the predictors will be: a team's xGF% throughout their season, game and overtime (before the winning goal was scored), and whether they had the last shot before the winning goal was scored. A few examples:
+Let's explore this thought with a basic descriptive model. <em>We'll regress various team and game characteristics on the outcome of individual games which ended in overtime</em>. Specifically, the predictors will be: a team's xGF% throughout their season and game. A few examples:
 </p>
 <p>
 <div style="text-align: center"> 
