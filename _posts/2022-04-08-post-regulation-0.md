@@ -11,7 +11,7 @@ Since 2015, when a game is tied after 60 minutes of play, both teams are awarded
 This series of posts will attempt to address the effects of this change in playing format, by answering questions like: Does a team's regular season success translate to overtime success? Is a given game's regulation play an indicator for its overtime play? Does a team's play in overtime <em>before a goal is scored</em> indicate who is more likely win? Can we predict who will get the next shot? Is the chaos created by the playing format change an equalizer of sorts? 
 </p>
 <p>
-We'll finish this post by looking at how many overtime games a team can expect to play in a given year.
+We'll finish this post by looking at how many overtime games a team can expect to play in a given year using data from 2015-2019 (this overtime format was introduced in 2015 and 2020 was an incomplete year).
 </p>
 <h5>
 Pre-Overtime Standing Points Per Game vs % of Games going to Overtime
