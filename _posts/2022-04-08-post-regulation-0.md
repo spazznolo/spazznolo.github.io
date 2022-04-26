@@ -24,7 +24,7 @@ There isn't much of a relationship between a team's regular season performance a
 </p>
 <p>
 <em>
-*Technically, you could make the case to drop the few historically <a href="https://www.hockey-reference.com/teams/COL/2017.html">bad</a> <a href="https://www.hockey-reference.com/teams/DET/2020.html">teams</a> as outliers, in which case there would be a slight but statistically significant decrease in overtime games as a team's standing performance increased, which would amount to roughly a 1.2% (about 1 game) difference in overtime games per season between the worst and best teams, but this is moving away from the spirit of the analysis and will be ignored.
+*Technically, you could make the case to drop the few historically <a href="https://www.hockey-reference.com/teams/COL/2017.html">bad</a> <a href="https://www.hockey-reference.com/teams/DET/2020.html">teams</a> as outliers, in which case there would be a slight but statistically significant decrease in overtime games as a team's standing performance increased, which would amount to roughly a 2.5% (about 2 games) difference in overtime games per season between the worst and best teams, but this is moving away from the spirit of the analysis and will be ignored.
 </em>
 </p>
 <a href="https://spazznolo.github.io/2022/04/24/post-regulation-1.html">
