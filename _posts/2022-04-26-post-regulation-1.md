@@ -27,6 +27,7 @@ Now we assign the average number of overtime games (23%, or about 19, regardless
 <p>
 A team can expect to stray from their expected standing points by about 1.76 points. On average, the largest swings (both positive and negative) are about 4.4 standing points. 
 </p>
+<p>
 For context, we can simulate seasons using: 1) the conference of synthetic teams, after converting their regulation point percentage to point totals and 2) coin flips to determine overtime winners. With this, we can see in what percentage of seasons a team who would have made the playoffs with their regulation points misses with the extra overtime point (about 44%), as well as the average number of ranking changes which occur in a given year due to the overtime point (about 5.5).
 </p>
 
