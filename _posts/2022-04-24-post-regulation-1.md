@@ -18,7 +18,7 @@ To measure this, we'll create a synthetic conference of teams. Each synthetic te
 </p>
 <p>
 <div style="text-align: center"> 
-<img src="https://spazznolo.github.io/figs/post-regulation-one-one.png" width="60%" length="150"/>
+<img src="https://spazznolo.github.io/figs/post-regulation-one-onee.png" width="60%" length="150"/>
 </div>
 </p>
 <p>
