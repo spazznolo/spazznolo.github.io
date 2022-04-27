@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Measuring the uncertainty caused by the current overtime format"
-date:   2022-04-24 8:52:05 -0400
+date:   2022-04-26 8:52:05 -0400
 ---
 <h2>[Post 1] Measuring the uncertainty caused by the current overtime format</h2>
 <p>
@@ -14,7 +14,7 @@ For now, let's take this at face value (we'll save the skepticism for another po
 But how much uncertainty does the current playoff format add?
 </p>
 <p>
-To measure this, we'll create a synthetic conference of teams. Each synthetic team is assigned a regulation points total based on the average regulation standing points of their rank (the average regulation standing points of the first ranked teams in the conference from 2015-2019 [0.637, 0.67, xx] is the first ranked synthetic team. And so on... It looks something like this:
+To measure this, we'll create a conference of synthetic teams. Teams are created by taking the average regulation points percentage of their conference rank from 2015-2020, like this:
 </p>
 <p>
 <div style="text-align: center"> 
@@ -25,7 +25,9 @@ To measure this, we'll create a synthetic conference of teams. Each synthetic te
 Now we assign the average number of overtime games (23%, or about 19, regardless of team ranking) to each team, and flip coins by way of the binomial to determine the number of overtime points won for each team. 
 </p>
 <p>
-A team can expect to stray from their expected standing points by about 1.76 points. On average, the largest swings (both positive and negative) are about 4.4 standing points. For context, we can simulate seasons with: 1) the synthetic conference of teams with regulation point totals and 2) coin flips to determine overtime winners. With this, we can see in what percentage of seasons a team who would have made the playoffs with their regulation points misses with the extra overtime point (about 44%), as well as the average number of ranking changes which occur in a given year due to the overtime point (about 5.5).
+A team can expect to stray from their expected standing points by about 1.76 points. On average, the largest swings (both positive and negative) are about 4.4 standing points. 
+</p>
+For context, we can simulate seasons using: 1) the conference of synthetic teams, after converting their regulation point percentage to point totals and 2) coin flips to determine overtime winners. With this, we can see in what percentage of seasons a team who would have made the playoffs with their regulation points misses with the extra overtime point (about 44%), as well as the average number of ranking changes which occur in a given year due to the overtime point (about 5.5).
 </p>
 
 
