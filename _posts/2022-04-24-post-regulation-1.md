@@ -16,11 +16,7 @@ But how much uncertainty does the current playoff format add?
 <p>
 To measure this, we'll create a synthetic conference of teams. Each synthetic team is assigned a regulation points total based on the average regulation standing points of their rank (the average regulation standing points of the first ranked teams in the conference from 2015-2019 [0.637, 0.67, xx] is the first ranked synthetic team. And so on... It looks something like this:
 </p>
-<p>
-<div style="text-align: center"> 
-<img src="https://spazznolo.github.io/figs/post-regulation-one-one.png" width="60%" length="150"/>
-</div>
-</p>
+
 <p>
 Now we assign the average number of overtime games (23%, or about 19, regardless of team ranking) to each team, and flip coins by way of the binomial to determine the number of overtime points won for each team. 
 </p>
