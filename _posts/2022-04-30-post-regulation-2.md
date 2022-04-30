@@ -32,3 +32,7 @@ Another way to look at this is to regress regulation point percentage and regula
 <img src="https://spazznolo.github.io/figs/post-regulation-two-twoo.png" width="30%" length="75"/>
 </div>
 </p>
+<p>
+This series so far has been full of insignificance, but that is still useful in understanding overtime. Also, the <a href="https://spazznolo.github.io/2022/05/02/post-regulation-3.html">next post</a> finds some statistical significance. It's about the randomness in overtime <em>during the overtime</em>.
+
+
