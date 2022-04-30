@@ -23,7 +23,7 @@ Using every game that ended in overtime since its inception in 2015, the regress
 <h5>
 Model Translation:
 </h5>
-Having the last shot before the winning goal was scored matters - it adds about 13.8% to a team's win probability (63.8%).
+Having the last shot matters - it adds about 13.8% to a team's win probability (63.8%).
 <p>
 The only other relevant predictor is a team's xGF% in the overtime before the goal was scored. It's a distant second though: a 10% increase in xGF% adds about 1.9% to the team's win probability. This means that if a team dominates overtime with 75% of Expected Goals, its probability of winning only increases 4.7% (54.7%). 
 </p>
