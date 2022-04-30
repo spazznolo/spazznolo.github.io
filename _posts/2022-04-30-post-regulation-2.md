@@ -14,7 +14,7 @@ Is overtime <em>completely</em> random, though?
 Let's explore this thought with a set of basic descriptive models. First, we'll regress a team's regulation point percentage on their overtime point percentage, then we'll regress two characteristics (one team and one game) on the outcome of individual games which ended in overtime. Specifically, the predictors will be: a team's xGF% throughout their season and game.
 </p>
 <p>
-Comparing regulation points percentage to overtime points percentage (there's nothing there):
+Comparing regulation points percentage to overtime points percentage:
 </p>
 <p>
 <div style="text-align: center"> 
@@ -22,10 +22,13 @@ Comparing regulation points percentage to overtime points percentage (there's no
 </div>
 </p>
 <p>
-Using every game that ended in overtime since its inception in 2015, the regression can be summarized like this:
+There's nothing there. I added the regression results, but you don't need a regression to see that.
+</p>
+<p>
+Another way to look at this is to regress regulation point percentage and regulation time xGF% on the outcome of individual games. But it's the same result - there's nothing there.
 </p>
 <p>
 <div style="text-align: center"> 
-<img src="https://spazznolo.github.io/figs/post-regulation-one-two.png" width="30%" length="75"/>
+<img src="https://spazznolo.github.io/figs/post-regulation-two-two.png" width="30%" length="75"/>
 </div>
 </p>
