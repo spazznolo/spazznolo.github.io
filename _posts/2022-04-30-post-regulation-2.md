@@ -29,6 +29,6 @@ Another way to look at this is to regress regulation point percentage and regula
 </p>
 <p>
 <div style="text-align: center"> 
-<img src="https://spazznolo.github.io/figs/post-regulation-two-two.png" width="30%" length="75"/>
+<img src="https://spazznolo.github.io/figs/post-regulation-two-two.png" width="45%" length="100"/>
 </div>
 </p>
