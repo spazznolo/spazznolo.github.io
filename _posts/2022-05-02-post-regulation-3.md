@@ -5,11 +5,11 @@ date:   2022-04-30 8:52:05 -0400
 ---
 <h2>[Post 3] Is the overtime random after each shot?</h2>
 <p>
-To measure this, <em>we'll regress various team and game characteristics on the outcome of individual games which ended in overtime</em>. Specifically, the predictors will be: a team's xGF% throughout their season, game and overtime (before the winning goal was scored), and whether they had the last shot before the winning goal was scored. A few examples:
+To measure this, <em>we'll regress various team and game characteristics, including who had the last shot, on the outcome of individual games which ended in overtime</em>. Specifically, the predictors will be: a team's xGF% throughout their season, game and overtime (before the winning goal was scored), and whether they had the last shot before the winning goal was scored. Think of the non-shot predictors as controls. A few examples of what an observation looks like:
 </p>
 <p>
 <div style="text-align: center"> 
-<img src="https://spazznolo.github.io/figs/post-regulation-one-one.png" width="60%" length="150"/>
+<img src="https://spazznolo.github.io/figs/post-regulation-three-one.png" width="60%" length="150"/>
 </div>
 </p>
 <p>
@@ -17,13 +17,13 @@ Using every game that ended in overtime since its inception in 2015, the regress
 </p>
 <p>
 <div style="text-align: center"> 
-<img src="https://spazznolo.github.io/figs/post-regulation-one-two.png" width="30%" length="75"/>
+<img src="https://spazznolo.github.io/figs/post-regulation-three-two.png" width="30%" length="75"/>
 </div>
 </p>
 <h5>
 Model Translation:
 </h5>
-By far, the strongest predictor of outcome for games ending in overtime is whether or not a team had the last shot before the winning goal was scored - it adds about 13.8% to a team's win probability (63.8%).
+Having the last shot before the winning goal was scored matters - it adds about 13.8% to a team's win probability (63.8%).
 <p>
 The only other relevant predictor is a team's xGF% in the overtime before the goal was scored. It's a distant second though: a 10% increase in xGF% adds about 1.9% to the team's win probability. This means that if a team dominates overtime with 75% of Expected Goals, its probability of winning only increases 4.7% (54.7%). 
 </p>
