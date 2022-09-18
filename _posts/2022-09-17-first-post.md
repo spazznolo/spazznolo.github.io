@@ -13,13 +13,13 @@ The other day I was at a bar and the US Open was on. I don't particularly watch 
 </div>
 </p>
 <p>
-I've made a career out of statistical analysis and the implementation of traditional machine learning alogrithms, but recently I've been thinking of messing around with computer vision. I tend to learn best by trying (and failing, and failing) to apply a new subject to a real-world problem I'm interested in.
+I've made a career out of statistical analysis and the implementation of traditional machine learning alogrithms, but recently I've been thinking of messing around with computer vision. I tend to learn best by trying (and failing and failing) to apply a new subject to a real-world problem I'm interested in.
 </p>
 <p>
 Hello, tennis.
 </p>
 <p>
-I'm going to use this blog as a place to sporadically dump my thoughts and progress for the project. The goal, by the way, is to build a program which takes in the full video broadcast of a tennis match and pushes out an account of the game in tabular format. Each row of the output would be a unique frame of the video, with the location of both players and the ball during the frame, along with categorical variables for: ball bounce (yes or no), swing type (serve, backhand, forehand, overhead).
+I'm going to use this blog as a place to sporadically dump my thoughts and progress on the project. The goal, by the way, is to build a program which takes in the full video broadcast of a tennis match and pushes out an account of the game in tabular format. Each row of the output would be a unique frame of the video, with the location of both players and the ball during the frame, along with categorical variables for: ball bounce (yes or no), swing type (serve, backhand, forehand, overhead).
 </p>
 <p>
 I should say, there's a community of tennis fans and analysts who are manually tracking games, based on a methodology <a href="https://www.tennisabstract.com/blog/2015/09/23/the-match-charting-project-quick-start-guide/">introduced by Jeff Sackman</a>. If the computer vision project is successful, it can hopefully help scale the tracking and we can get a more comprehensive account of tennis.
