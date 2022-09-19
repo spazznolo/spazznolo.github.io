@@ -13,7 +13,7 @@ A tennis broadcast has commercials, replays, timeouts, etc. A surprisingly small
 </p>
 <p>
 <h5>2. Locate the court.</h5>
-Professional tennis matches are played on regulation courts. This is important - by locating the court, we have a standardized system by which to measure distances. Pretty easily, the ball and players can be projected onto this system.
+Professional tennis matches are played on regulation courts. This is important - by locating the court, we have a standardized system by which to measure distances. From there, pretty easily, the ball and players can be projected onto this system.
 </p>
 <p>
 <h5>3. Identify the players.</h5>
@@ -24,5 +24,6 @@ The big question here is whether we can use a pre-trained model for this task or
 Hmmmmm...
 </p>
 <p>
+<h5>5. Challenges.</h5>
 My instinct: the true challenges will be 1) to sufficiently diversify the model so that it doesn't get confused by the different surfaces games are played on and 2) to streamline the model in terms of memory and computation time so that the whole process isn't too slow moving.
 </p>
