@@ -19,8 +19,22 @@ It takes no time to see a pattern here. Really, the only false positives that sh
 <h5>Classification Options</h5>
 <p>
 <b>Option 1: VGG16 (transfer learning)</b>
-I'm going to start with the more complex option here because it's my first computer vision project and I'm interested to install the programs and packages to get this thing off the ground. As a way to ease into transfer learning, I'm going to label a chunk of frames from the 2004 US Open final between the Williams sisters, and predict another chunk of frames from the same final. The lack of diversity in court color and texture and stadium setup and lighting and... should make this trivial, which is a good first step.
+I'm going to start with the more complex option here because it's my first computer vision project and I'm interested to install the programs and packages to get this thing off the ground. As a way to ease into transfer learning, I'm going to label a chunk of frames from the 2004 US Open final between the Williams sisters, and predict another chunk of frames from the same final. The lack of diversity in court color and texture and stadium setup and lighting etc. should make this trivial.
 </p>
 <p>
 <b>Option 2: Set of Heuristics</b>
-A frame is a numeric matrix. We can reduce the complexity of the frame by averaging out chunks of the matrix, which decreases memory usage and runtime while allowing for easier detection of patterns. To go further, my instinct is that a statistical summary of the numeric matrix could be enough to pproperly differentiate game states. Also, if the summary itself isn't enough, it could be fed into a simple, traditional learning algorithm (like a logistic regression). This <i>should</i> be much faster than the first option, and definitely requires less memory, so if the results are similar, this is the obvious choice.
+A frame is a numeric matrix. We can reduce the complexity of the frame by averaging out chunks of the matrix, which decreases memory usage and runtime while allowing for easier detection of patterns. To go further, my instinct is that a statistical summary of the numeric matrix could be enough to properly differentiate game states. Also, if the summary itself isn't enough, it could be fed into a simple, traditional learning algorithm (like a logistic regression), which <i>should</i> still be much faster than the first option, and definitely would require less memory, so if the results are similar, this is the obvious choice.
+</p>
+<h5>Results</h5>
+<p>
+<b>VGG16 (transfer learning)</b>
+Runtime (per 100 frames): 1.875s
+False Positive Rate:
+False Negative Rate: 0 
+</p>
+<p>
+<b>Set of Heuristics</b>
+Runtime (per 100 frames):
+False Positive Rate:
+False Negative Rate:
+</p>
