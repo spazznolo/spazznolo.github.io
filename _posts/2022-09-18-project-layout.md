@@ -7,7 +7,7 @@ date:   2022-09-18 10:52:05 -0400
 <p>
 Because this project is a holistic approach at obtaining tennis data, I've decided to break it into parts. As it stands, this is how I'm thinking of approaching it.
 </p>
-<h5>1. Classify game states.</h5>
+<h5>1. <a href="https://spazznolo.github.io/2022/09/19/classifying-game-states.html">Classify game states.</a></h5>
 A tennis broadcast has commercials, replays, timeouts, etc. A surprisingly small sliver of the broadcast consists of actual gameplay. Building a binary classification model which differentiates gameplay from the rest of the broadcast is an important first step. Thankfully, the long, static, symmetric shots should make this relatively easy.
 <p>
 <h5>2. Identify and map the court.</h5>
@@ -26,6 +26,6 @@ There's already a few ball tracking alorgithms available. Some are out-of-the-bo
 The initial location of the players and ball will be in pixels. The final step is to map these pixel coordinates into standardized coordinates via the court in step 2.
 </p>
 <p>
-<h5>6. Challenges.</h5>
+<h5>Challenges.</h5>
 My instinct: the true challenges will be 1) to sufficiently diversify the model so that it doesn't get confused by the different surfaces/lighting/stadium designs that games are played on and 2) to streamline the model in terms of memory and computation time so that the whole process isn't too slow moving.
 </p>
