@@ -13,7 +13,7 @@ A tennis broadcast has commercials, replays, timeouts, etc. A surprisingly small
 </p>
 <p>
 <h5>2. Identify and map the court.</h5>
-The ultimate goal is to locate the players and ball using a <i>common coordinate system</i>. The good news is that professional tennis matches are played on regulation courts. If a few key aspects of the court can be identified, then we can map it leveraging the known court dimensions.
+The ultimate goal is to locate the players and ball using a <i>common coordinate system</i>. The good news is that professional tennis matches are played on regulation courts. If a few key aspects of the court can be identified, then we leverage the known court dimensions to create a common coordinate system.
 </p>
 <p>
 <h5>3. Identify the players.</h5>
