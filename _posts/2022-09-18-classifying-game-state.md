@@ -30,7 +30,7 @@ A frame is a numeric matrix. We can reduce the complexity of the frame by averag
 <b>VGG16 (transfer learning)</b>
 Runtime (per 100 frames): 1.875s
 False Positive Rate:
-False Negative Rate: 0 
+False Negative Rate: 0%
 </p>
 <p>
 <b>Set of Heuristics</b>
