@@ -11,7 +11,7 @@ There are a few strategies to consider when classifying game states. The strateg
 The act of classification necissitates a model. This doesn't need to be a complex neural network, though. In fact, a set of heuristics maybe be roughly as good while significantly reducing runtime. As it happens, it's incredibly easy to differentiate gameplay from commercials, time-outs, replays, etc (call it off-time).
 </p>
 <p>
-Here's a set of frames exhibiting gameplay and off-time that I hand-labeled while considering which models to try and how to rate them.
+Here's a set of hand-labeled frames exhibiting gameplay and off-time.
 </p>
 <p>
 It takes no time to see a pattern here. Really, the only false positives that should occur are pre-serve routines, which often seem to last longer than the corresponding gameplay itself. It shouldn't be a problem including these pre-serve routines, so long as the actual serve can be identified. I guess it'll just increase the number of frames in the following steps, which could be burdensome for the memory/runtime. We'll come back to this if necessary.
