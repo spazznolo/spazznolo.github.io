@@ -7,10 +7,8 @@ date:   2022-09-18 10:52:05 -0400
 <p>
 Because this project is a holistic approach at obtaining tennis data, I've decided to break it into parts. As it stands, this is how I'm thinking of approaching it.
 </p>
-<p>
 <h5>1. Classify game states.</h5>
 A tennis broadcast has commercials, replays, timeouts, etc. A surprisingly small sliver of the broadcast consists of actual gameplay. Building a binary classification model which differentiates gameplay from the rest of the broadcast is an important first step. Thankfully, the long, static, symmetric shots should make this relatively easy.
-</p>
 <p>
 <h5>2. Identify and map the court.</h5>
 The ultimate goal is to locate the players and ball using a <i>common coordinate system</i>. The good news is that professional tennis matches are played on regulation courts. If a few key aspects of the court can be identified, then we leverage the known court dimensions to create a common coordinate system.
