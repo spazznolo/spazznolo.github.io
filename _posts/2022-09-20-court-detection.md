@@ -36,6 +36,6 @@ From drawing hough lines on a variety of gameplay frames, the thing that strikes
 </p>
 <p>
 <div style="text-align: center"> 
-<img src="https://spazznolo.github.io/figs/hough-line-ex-2.png" width="60%" length="150"/>
+<img src="https://spazznolo.github.io/figs/hough-line-ex-2.jpg" width="60%" length="150"/>
 </div>
 </p>
