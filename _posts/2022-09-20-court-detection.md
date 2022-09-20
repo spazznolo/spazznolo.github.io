@@ -27,7 +27,7 @@ Ben, a user on Stack Overflow, suggested a possible solution for a <a href="http
 </p>
 <p>
 <b>Jeremie's Ricketty Approach</b>
-From drawing hough lines on a variety of gameplay frames, the thing that strikes me most are the four lines which make up the length of the court. The two on the outside are for doubles and the two on the inside are for singles. We have two sets of lines which have roughly the same length and slope when captured on the broadcast. Let's picture them, along with the other captued hough lines, in red.
+From drawing hough lines on a variety of gameplay frames, the thing that strikes me most are the four lines which make up the length of the court. The two on the outside are for doubles and the two on the inside are for singles. We have two sets of lines which have roughly the same length and slope when captured on the broadcast. Let's picture them in red along with the other captued hough lines.
 </p>
 <p>
 <div style="text-align: center"> 
