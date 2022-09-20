@@ -27,7 +27,7 @@ Ben, a user on Stack Overflow, suggested a possible solution for a <a href="http
 </p>
 <p>
 <b>Jeremie's Ricketty Approach</b>
-From drawing hough lines on a variety of gameplay frames, the thing that strikes me most are the four lines which make up the length of the court. The two on the outside are for doubles and the two on the inside are for singles. We have two sets of lines which have roughly the same length and slope when captured on the broadcast. Let's picture them in red along with the other captued hough lines.
+From drawing hough lines on a variety of gameplay frames, the thing that strikes me most are the four lines which make up the length of the court. The two on the outside are for doubles and the two on the inside are for singles. Here we have two sets of lines which have roughly the same length and slope when captured on the broadcast. I'm going to randomly select 20 frames which feature gameplay and plot all the discovered hough lines in red except for those with absolute slope between 1.5 and 3 which I'll plot in green.
 </p>
 <p>
 <div style="text-align: center"> 
