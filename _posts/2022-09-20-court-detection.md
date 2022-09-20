@@ -25,12 +25,17 @@ This is the paper that Chlebus adapted in the first method on the list. The pape
 <b>Ben's Iterative Approach using RANSAC</b>
 Ben, a user on Stack Overflow, suggested a possible solution for a <a href="https://stackoverflow.com/questions/24135289/python-opencv-detect-lines-in-a-tennis-court-using-two-differents-methods-of-h">similar problem</a>. This solution actually seems pretty close to the previous robust approach, except it's more lightweight. I'm probably going to try to implement Ben's suggestion simply because I want to try my hand at the RANSAC, which I've never used before. However, I <i>still</i> feel like the remarkable simplicity of the camerawork in tennis is not being fully leveraged here.
 </p>
-<b>Jeremie's Iterative Approach to... remove iteration</b>
 <p>
-From drawing hough lines on a variety of gameplay frames, the thing that strikes me most are the four lines which make up the length of the court. The two on the outside are for doubles and the two on the inside are for singles. We have two sets of lines which have the roughly the same length and slope when captured on the broadcast.
+<b>Jeremie's Ricketty Approach</b>
+From drawing hough lines on a variety of gameplay frames, the thing that strikes me most are the four lines which make up the length of the court. The two on the outside are for doubles and the two on the inside are for singles. We have two sets of lines which have roughly the same length and slope when captured on the broadcast. Let's picture them, along with the other captued hough lines, in red.
 </p>
 <p>
 <div style="text-align: center"> 
 <img src="https://spazznolo.github.io/figs/hough-line-ex.png" width="60%" length="150"/>
+</div>
+</p>
+<p>
+<div style="text-align: center"> 
+<img src="https://spazznolo.github.io/figs/hough-line-ex-2.png" width="60%" length="150"/>
 </div>
 </p>
