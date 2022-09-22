@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "LIVEBLOG [Post 2] Project Layout"
+title:  "LIVEBLOG 002: Project Layout"
 date:   2022-09-17 10:52:05 -0400
 ---
-<h2>LIVEBLOG [Post 2] Project Layout</h2>
+<h2>LIVEBLOG 002: Project Layout</h2>
 <p>
 Because this project is a holistic approach at obtaining tennis data, I've decided to break it into parts. As it stands, this is how I'm thinking of approaching it.
 </p>
