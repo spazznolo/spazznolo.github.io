@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "LIVEBLOG [Post 7] Court Detection [Part 2]"
+title:  "LIVEBLOG 007: Court Detection [Part 2]"
 date:   2022-09-20 12:52:05 -0400
 ---
-<h2>LIVEBLOG [Post 7] Court Detection [Part 2]</h2>
+<h2>LIVEBLOG 007: Court Detection [Part 2]</h2>
 <p>
 In the last Court Detection post, I wrote vaguely about detecting the tennis court using a set of heuristics based on Hough lines. I'm going to expand on it here, introduce the first iteration of this approach, and visualize the outcome on 25 randommly selected frames featuring gameplay.
 </p>
