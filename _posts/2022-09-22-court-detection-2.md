@@ -9,7 +9,7 @@ In the last Court Detection post, I wrote vaguely about detecting the tennis cou
 </p>
 <p>
 <b>Jeremie's set of heuristics for court detection</b>
-1. Find the Hough lines 
+1. Detect Hough lines 
 2. Identify the lengthwise court lines (doubles and singles borders) by filtering Hough lines having:
     a. absolute slope between 1.5 and 3.
     b. length over 200 pixels.
