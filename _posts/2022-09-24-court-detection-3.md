@@ -5,7 +5,7 @@ date:   2022-09-24 12:00:00 -0400
 ---
 <h2>LIVEBLOG 009: Court Detection [Part 3]</h2>
 <p>
-Tracked the last of the 12 games this morning. Realized I hadn't thought of a proper pipeline from tracking to training, and paid for it in time and monotony, but it's finished. Next is to take random samples of the frames labelled as gameplay and plotting the first iteration of the Hough line method which I'll outline again below.
+Tracked the last of the 12 games this morning. Realized I hadn't thought of a proper pipeline from tracking to training, and paid for it in time and monotony, but it's finished. Next is to take random samples of the frames labelled as gameplay and plot the first iteration of the Hough line method which I'll outline again below.
 </p>
 <p>
 The most challenging part of the court detection strategy so far has been data wrangling. Python isn't my first language and the OpenCV objects-to-pandas pipeline is a little... weird. Anyways, that's to say that the strategy is exceedingly simple and the first version should be finished by the end of this weekend. It'll definitely need refinement, but I have ideas on how to improve it, so it isn't a worry. 
