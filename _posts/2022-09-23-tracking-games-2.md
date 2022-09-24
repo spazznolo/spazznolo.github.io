@@ -14,9 +14,5 @@ The set of heuristics for the court detection strategy is coming together. It's 
 It dawned on me today that hard court games are much easier to predict on because the synthetic court has less imperfections. It's possible the court types are different enough that they could use their own models. As the project moves on, I'm having to make concessions, which is natural, and one major concession might be to limit the project to hard courts for the first step. The US and Austalian Opens are both on hard court and both have great video quality.
 </p>
 <p>
-A few other things. 
-    - the sound of a racquet hitting a tennis ball is distinct (could it be used to detect hits?)
-    - the ball tracking is going to be difficult (hopefully the sound will ease things)
-    - there is a formula of gameplay to change-of-camera-perspective-for-player-reaction to              replay-from-different-perspective to gameplay-perspective-serve-routine.
-    - some players celebrate in ways which seem not so sportmanslike lol
+A few other things. I've tracked 100 minutes of tennis broadcasts so far and all but one (!) point was shot from the same lengthwise, static setup. This isn't to say there aren't small differences each point/game, just that the basic court detection method has a decent chance of succeeding. Curious to see how fast it will be on a fps basis. Also, the sound of racquets hitting a ball, the replay analyst breaking down a play, and the crowd cheers are all easily distingushable, which makes me wonder if sound should be included. On top of this, there seems to be a general formula for a broadcast in terms of the feed changes, something like: lengthwise static gameplay shot to change of camera perspective for player reaction to replay from different perspective to lengthwise static gameplay shot for the serve routine. Oh, and it's sort of funny how some players celebrate in ways which seem not so sportmanslike lol.
 </p>
