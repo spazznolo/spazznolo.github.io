@@ -27,6 +27,6 @@ As a reminder:
 <b>Results (Iteration 1)</b>
 <p>
 <div style="text-align: center"> 
-<img src="https://spazznolo.github.io/figs/hough-collage-1.jpg" width="60%" length="150"/>
+<img src="https://spazznolo.github.io/figs/hough-collage-1.jpg" width="90%" length="300"/>
 </div>
 </p>
