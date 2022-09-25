@@ -30,3 +30,7 @@ As a reminder:
 <img src="https://spazznolo.github.io/figs/hough-collage-1.jpg" width="90%" length="300"/>
 </div>
 </p>
+<p>
+Obviously, there are large problems here. Mostly they stem from the false positives on the lengthwise lines. The widthwise lines rely on a correct x-range, and a false positive usually changes the range for the worse. In retrospect, it was naive to try a deterministic approach, but I'm happy to have tried, because it folds in nicely to the next step.
+</p>
+<p>
