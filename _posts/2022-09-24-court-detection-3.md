@@ -17,8 +17,8 @@ As a reminder:
 <b>Jeremie's set of heuristics for court detection</b>
 1. Detect Hough lines 
 2. Identify the lengthwise court lines (doubles and singles borders) by filtering Hough lines having:
-    a. absolute slope between 1.5 and 3.
-    b. length over 200 pixels.
+    a. absolute slope between 1 and 3.
+    b. length over 100 pixels.
 3. Identify widthwise court lines by filtering the Hough lines having:
     a. y-coordinates either between the minimum or maximum y-coordinates of the lengthwise lines (+/- 10 pixels)
     b. x-coordinates between the minimum and maximum x-coordinates lengthwise lines (+/- 10 pixels)
@@ -31,6 +31,12 @@ As a reminder:
 </div>
 </p>
 <p>
-Obviously, there are large problems here. Mostly they stem from the false positives on the lengthwise lines. The widthwise lines rely on a correct x-range, and a false positive usually changes the range for the worse. In retrospect, it was naive to try a deterministic approach, but I'm happy to have tried, because it folds in nicely to the next step.
+Obviously, there are large problems here. Mostly they stem from either the false positives or false continuations of the lengthwise lines. The widthwise lines rely on a correct y-range, and a false positive/continuation changes the range for the worse. In retrospect, it was naive to try a deterministic approach, but I'm happy to have tried, because it folds in nicely to the next step.
 </p>
 <p>
+Next, I'm looking for an iterative approach at finding the lines which make up the boundary of the court. Somewhat begrudgingly, I've turned to clustering the Hough lines which pass the block filter by the absolute slope value (univariate), then taking the two largest groups, then taking the minimum average absolute slope from these two largest groups.
+</p>
+<p>
+Also! To remind myself: the camera is mostly static. This means there should be a quick, efficient check to see if it has moved from the previous frame. Off the top of my head, I can run the Hough line algo each frame and if the lengthwise lines are nearly identical then keep the same coordinate system and move to the next frame.
+</p>
+
