@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "LIVEBLOG 005: Court Detection [Part 1]"
+title:  "LIVEBLOG 005: Court Detection 01"
 date:   2022-09-20 12:52:05 -0400
 ---
-<h2>LIVEBLOG 005: Court Detection [Part 1]</h2>
+<h2>LIVEBLOG 005: Court Detection 01</h2>
 <p>
 Though I intended to develop a few simple models to compete with the VGG16 on the game-state predictions, the initial results were satisfactory and I started getting caught up with Hough lines and corner detection algos anyways so I figured I'd start a post on court detection. Each step is so new and different, I'm basically doing a literature review every time. I found a few existing court detection algorithms, which I'll summarize below. The end of the story is that none of them are fit for this exact problem and I'd prefer try my hand at a method which doesn't require much memory or runtime (familiar, I know).
 </p>

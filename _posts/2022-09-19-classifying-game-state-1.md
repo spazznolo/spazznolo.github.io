@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "LIVEBLOG 004: Classifying Game States [Part 1]"
+title:  "LIVEBLOG 004: Classifying Game States 02"
 date:   2022-09-19 12:52:05 -0400
 ---
-<h2>LIVEBLOG 004: Classifying Game States [Part 1]</h2>
+<h2>LIVEBLOG 004: Classifying Game States 02</h2>
 <p>
 There are a few strategies to consider when classifying game states. The strategies are going to be evaluated on accuracy, memory requirements, and runtime. This is the most simple step of the project, so we can't dedicate much of our precious memory and runtime here. 
 </p>
