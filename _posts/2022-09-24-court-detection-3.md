@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "LIVEBLOG 009: Court Detection [Part 3]"
+title:  "LIVEBLOG 009: Court Detection 03"
 date:   2022-09-24 12:00:00 -0400
 ---
-<h2>LIVEBLOG 009: Court Detection [Part 3]</h2>
+<h2>LIVEBLOG 009: Court Detection 03</h2>
 <p>
 Tracked the last of the 12 games this morning. Realized I hadn't thought of a proper pipeline from tracking to training, and paid for it in time and monotony, but it's finished. Next is to take random samples of the frames labelled as gameplay and plot the first iteration of the Hough line method which I'll outline again below.
 </p>
@@ -33,10 +33,5 @@ As a reminder:
 <p>
 Obviously, there are large problems here. Mostly they stem from either the false positives or false continuations of the lengthwise lines. The widthwise lines rely on a correct y-range, and a false positive/continuation changes the range for the worse. In retrospect, it was naive to try a deterministic approach, but I'm happy to have tried, because it folds in nicely to the next step.
 </p>
-<p>
-Next, I'm looking for an iterative approach at finding the lines which make up the boundary of the court. Somewhat begrudgingly, I've turned to clustering the Hough lines which pass the block filter by the absolute slope value (univariate), then taking the two largest groups, then taking the minimum average absolute slope from these two largest groups.
-</p>
-<p>
-Also! To remind myself: the camera is mostly static. This means there should be a quick, efficient check to see if it has moved from the previous frame. Off the top of my head, I can run the Hough line algo each frame and if the lengthwise lines are nearly identical then keep the same coordinate system and move to the next frame.
-</p>
+
 
