@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "LIVEBLOG 008: Tracking Games [Part 2]"
+title:  "LIVEBLOG 008: Tracking Games 02"
 date:   2022-09-23 12:00:00 -0400
 ---
-<h2>LIVEBLOG 008: Tracking Games [Part 2]</h2>
+<h2>LIVEBLOG 008: Tracking Games 02</h2>
 <p>
 I tracked all the clay and grass games yesterday. That's 80 minutes of broadcast time. It took two hours in total. Tracking at 1.5x realtime is twice as fast as I did in my test runs with the Williams final, which is encouraging. I'll probably finish the rest today.
 </p>
