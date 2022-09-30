@@ -1,18 +1,21 @@
 ---
 layout: post
-title:  "LIVEBLOG 012: Court Detection 06"
+title:  "LIVEBLOG 012: Change-up 06"
 date:   2022-09-28 12:00:00 -0400
 ---
-<h2>LIVEBLOG 012: Court Detection 06</h2>
+<h2>LIVEBLOG 012: Change-up 06</h2>
 <p>
-The clustering has made the strategy much more robust, especially in combination with taking the median slope and intercept of the lines. Next is to plot these lines through the whole image, creating a plane where the court should be. This should be ready later today.
+The final iteration of the first version of the lengthwise court line capture is complete. Next is to get the widthwise lines. I can either rely on more clustering around the ends of the lengthwise lines or try for a new approach. Currently, the strategy runs at about 1.5x realtime, which I think is unacceptable for actual production but is fine for now.
 </p>
 <p>
-
+I'm going to change things up for the next bit and temporarily abandon the court detection bit to work on player detection. This was originally supposed to train my computer vision muscle, but lately I've mostly been working with filtering Hough lines and I'm looking for a change of pace.
 </p>
-<b>Results (Iteration 3)</b>
+<p>
+Update: While reading various strategies to detect players, I came across a <a href="https://www.researchgate.net/publication/221411677_Player_Detection_and_Tracking_in_Broadcast_Tennis_Video">paper</a> outlining a strategy which uses non-dominant color extraction. I found an example of this on Stack and interpreted the code to get this:
+</p>
 <p>
 <div style="text-align: center"> 
-<img src="https://spazznolo.github.io/figs/hough-collage-2.jpg" width="90%" length="300"/>
+<img src="https://spazznolo.github.io/figs/hough-line-ex-3.jpg" width="90%" length="300"/>
 </div>
 </p>
+
