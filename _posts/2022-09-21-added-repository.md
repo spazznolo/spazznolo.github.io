@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "LIVEBLOG 006: GitHub Repository"
-date:   2022-09-21 12:52:05 -0400
+date:   2022-09-21 12:00:00 -0400
 ---
 <h2>LIVEBLOG 006: GitHub Repository</h2>
 <p>

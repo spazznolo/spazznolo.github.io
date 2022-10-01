@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "LIVEBLOG 005: Court Detection 01"
-date:   2022-09-20 12:52:05 -0400
+date:   2022-09-20 12:00:00 -0400
 ---
 <h2>LIVEBLOG 005: Court Detection 01</h2>
 <p>
