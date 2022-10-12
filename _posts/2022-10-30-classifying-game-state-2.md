@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "LIVEBLOG 010: Classifying Game States [Part 2]"
-date:   2022-10-10 12:00:00 -0400
+date:   2022-10-30 12:00:00 -0400
 ---
 <h2>LIVEBLOG 010: Classifying Game States [Part 2]</h2>
 <p>
