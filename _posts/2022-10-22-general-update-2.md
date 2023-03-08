@@ -20,7 +20,7 @@ Using Roboflow, I labelled the front player, back player, and tennis ball for ea
 </p>
 <p>
 GOOGLE COLAB
-I'm currently using Google Colab to train the computer vision model. I've looked around, and for my current needs (research), it fits. Easy to use, compatible with Roboflow, offers a free-to-use GPU (though it disconnects with inactivity). 
+I'm currently using Google Colab to train the computer vision model. I've looked around, and for my current needs (research), it fits. Easy to use, compatible with Roboflow, offers a free-to-use GPU (though it disconnects with inactivity). I'm currently using Google Colab to train a YOLOv5 model.
 </p>
 <p>
 YOLOv5
