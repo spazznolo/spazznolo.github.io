@@ -36,6 +36,10 @@ back-player:
 tennis-ball:
 </p>
 <p>
+VIDEO EXAMPLE
+Here's an example of the inference: https://www.youtube.com/watch?v=DwdfFsjQgFg
+</p>
+<p>
 GAME-STATE CLASSIFICATION
 Because of the labelling framework, where players are only labelled when the camera is in 'gameplay' mode (long static shot of the court with a player in front of the net and another behind it), the player detection model fails to detect players in other shots like replay or time-outs or even commercials. This allows for an indirect game-state classification strategy - whenever players aren't detected, it is assumed to be non-gameplay. A post will be dedicated on refining this. 
 </p>
