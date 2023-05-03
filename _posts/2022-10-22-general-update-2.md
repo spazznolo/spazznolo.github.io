@@ -30,7 +30,8 @@ YOLOv5
 The object detection model I chose to start is YOLOv5. It's incredibly fast. Inference is around 100fps, which makes it scalable when it comes time to track an entire tournament of gameplay. It works fine for players, but it doesn't leverage the spatio-temporal nature of tennis. This is particularly problematic when detecting a tennis ball, which, depending on the context, can appear as a blurred line, blend in with the court lines, be hidden behind a player, etc.
 
 Some results:
-front-player: 
+overall: 91.0% mAP; 95.9% precision; 90.6% recall
+front-player: 99.2% mAP; 99.6% precision; 99.1% recall
 back-player:
 tennis-ball:
 </p>
