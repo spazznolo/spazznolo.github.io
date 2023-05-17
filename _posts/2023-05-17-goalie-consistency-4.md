@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Bayesian Save Percentage"
-date:   2022-05-17 8:52:05 -0400
+date:   2023-05-17 8:52:05 -0400
 ---
 <h2>[Post 4] Bayesian Save Percentage</h2>
 <p>
