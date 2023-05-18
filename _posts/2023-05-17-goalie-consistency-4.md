@@ -15,8 +15,13 @@ Let's again look at uncertainty, but this time, instead of the uncertainty in go
 A Bayesian framework requires a prior distribution,...
 </p>
 <p>
+To start simply, here's a histogram of career goalie save percentages, unadjusted.
+</p>
+<p>
 </p>
 <h5>Distribution of Career Save Percentage for Goalies Facing 750+ shots</h5>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-four-one.png" width="60%" length="150"/></div>
 </p>
+<p>
+It is reasonable to say that, given a new goalie we know nothing about, the ditribution of possible outcomes for him could fit the plot above. This is called the <em>prior</em>.
