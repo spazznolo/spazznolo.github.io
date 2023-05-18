@@ -18,5 +18,5 @@ A Bayesian framework requires a prior distribution,...
 </p>
 <h5>Inter-shot goalie consistency does not have an effect on overall performance.</h5>
 <p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-three-one.png" width="60%" length="150"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-four-one.png" width="60%" length="150"/></div>
 </p>
