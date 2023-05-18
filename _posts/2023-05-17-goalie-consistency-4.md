@@ -24,4 +24,12 @@ To start simply, here's a histogram of career goalie save percentages, unadjuste
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-four-one.png" width="60%" length="150"/></div>
 </p>
 <p>
-It is reasonable to say that, given a new goalie we know nothing about, the ditribution of possible outcomes for him could fit the plot above. This is called the <em>prior</em>.
+It is reasonable to say that, given a new goalie we know nothing about, the ditribution of possible outcomes for him could fit the plot above. This will be the <em>prior</em>.
+</p>
+<p>
+Here's what what fitting a beta distribution, a common prior when the variable of interest is a percentage (as is ours with the save percentage).
+</p>
+<h5>Beta Distribution Fitted to Career Save Percentage Distribution</h5>
+<p>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-four-two.png" width="60%" length="150"/></div>
+</p>
