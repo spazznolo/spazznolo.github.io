@@ -31,5 +31,5 @@ Here's what what fitting a beta distribution, a common prior when the variable o
 </p>
 <h5>Beta Distribution Fitted to Career Save Percentage Distribution</h5>
 <p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-four-two.png" width="60%" length="150"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-four-twoo.png" width="60%" length="150"/></div>
 </p>
