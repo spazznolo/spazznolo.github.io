@@ -16,7 +16,7 @@ A Bayesian framework requires a prior distribution,...
 </p>
 <p>
 </p>
-<h5>Inter-shot goalie consistency does not have an effect on overall performance.</h5>
+<h5>Distribution of Career Save Percentage for Goalies Facing 750+ shots</h5>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-four-one.png" width="60%" length="150"/></div>
 </p>
