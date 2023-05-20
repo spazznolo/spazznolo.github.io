@@ -21,7 +21,7 @@ The second step is to update the fit prior with each goalie's career results. He
 Let's start with an example. Using only Fenwick Save Percentage, who's the better goalie, Andrei Vasilevski or Jeremy Swayman? Well, looking at their career Fenwick Save Percentage, Swayman is ahead - he's at .942 while Vasilevski's at .941. However, Swayman has faced only 2,159 shots, while Vasilevsky faced 19,155. How can we take into account the fact that Vasilevsky has been elite with a greater body of work?
 </p>
 <p>
-To start simply, here's a histogram of career goalie save percentages, unadjusted.
+To start simply, here's a histogram of career Fenwick save percentages for goalies having faced 750+ shots.
 </p>
 <p>
 </p>
