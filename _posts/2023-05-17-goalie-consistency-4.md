@@ -12,6 +12,12 @@ Recall from from the introductory paragraph of this series:
 Let's again look at uncertainty, but this time, instead of the uncertainty in goalie performance we'll look at the uncertainty in goalie skill. There's a difference. In the previous three posts I looked at the variance in game-to-game outcomes, but this time I want to look at the variance in a goalie's actual expected save percentage. To do this, we'll use empirical Bayes. This has been explored in previous papers [link]. This will be a launchpad for more detailed, rigorous research.
 </p>
 <p>
+The first step of empirircal Bayes is to estimate a prior distribution. Think of it like this - a new goalie you've never heard of appears. What probability would you give that they have a career .910 save percentage? .920? .930? 
+</p>
+<p>
+The second step is to update the fit prior with each goalie's career results. Here, if a goalie has only faced a few shots, there will be higher uncertainty (represented by variance in their distribution) of their save percentage. As a goalie saves more shots, the uncertainty will decrease.
+</p>
+<p>
 Let's start with an example. Using only Fenwick Save Percentage, who's the better goalie, Andrei Vasilevski or Jeremy Swayman? Well, looking at their career Fenwick Save Percentage, Swayman is ahead - he's at .942 while Vasilevski's at .941. However, Swayman has faced only 2,159 shots, while Vasilevsky faced 19,155. How can we take into account the fact that Vasilevsky has been elite with a greater body of work?
 </p>
 <p>
@@ -34,4 +40,12 @@ The beta distribution is a common prior when the variable of interest is a perce
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-four-two.png" width="60%" length="150"/></div>
 </p>
 <p>
-The beta distribution has some interesting, clean properties. First of all, it 
+This fit isn't perfect, and we'll explore alternatives in a future post, but it isn't terrible. The beta distribution has two hyper parameters (alpha and beta), which you can interpret as the successes (saves) and failures (goals) we attribute to a goalie before we know anything about them.  The fitted beta distribution has as hyperparameters 1770 and 126, which represents 1770 saves and 126 goals, or a save percentage of .9335 to begin.
+</p>
+<p>
+From this, it is quite easy to update the prior with observed goalie results. All you need to do is add the observed success and failures to the beta's hyperparameters. Here are Vasilevsky and Swayman's distributions.
+</p>
+<h5>Posterior Distributions of Vasilevsky and Swayman</h5>
+<p>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-four-three.png" width="60%" length="150"/></div>
+</p>
