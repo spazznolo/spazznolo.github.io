@@ -55,3 +55,10 @@ Some takeaways from this plot:
     - There's a 99.99% chance that Vasilevsky is better than average
     - There's a 86.73% chance that Swayman is better than average
 </p>
+<p>
+Here are all the assumptions with this method, though:
+    - The prior distribution is assumed to be beta with hyperparameters 1770 and 126.
+    - Age is assumed to be irrelevant. It is well documented that goalies experience aging effects.
+    - Scoring rates are assumed to be constant. Due to rule changes, variance in scoring skill, we know they are not.
+    - All shots are assumed to be equal. Fenwick is the number of unblocked shots a goalie faces. Whether this is a cross-ice one-timer or a dump-in from the red line.
+    - Team systems are the same. This is obviously untrue and can't be rectified with the available data.
