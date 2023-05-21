@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Bayesian Save Percentage"
+title:  "Empirical Bayes Save Percentage"
 date:   2023-05-17 8:52:05 -0400
 ---
 <h2>[Post 4] Empirical Bayes Save Percentage</h2>
