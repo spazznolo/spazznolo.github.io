@@ -59,11 +59,10 @@ Some takeaways from this plot:
 Here are all the assumptions with this method, though:
     - The prior distribution is assumed to be beta with hyperparameters 1770 and 126.
     - Age is assumed to be irrelevant. 
-    - Scoring rates are assumed to be constant. Due to rule changes, variance in scoring skill, we know they are not.
-    - All shots are assumed to be equal. Fenwick is the number of unblocked shots a goalie faces. Whether this is a cross-ice one-timer or a dump-in from the red line.
-    - Team systems are the same. This is obviously untrue and can't be rectified with the available data.
-
-<h5>Age is not irrelevant</h5>
+    - Scoring rates are assumed to be constant.
+    - All shots are assumed to be equal. 
+    - Team systems are the same.
+</p>
 <p>
-It is well documented that goalies experience aging effects.
+These will be challenged and addressed in the following posts.
 </p>
