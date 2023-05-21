@@ -11,8 +11,8 @@ Recall from from the introductory paragraph of this series:
 <p>
 Let's again look at uncertainty, but this time, instead of the uncertainty in goalie performance we'll look at the uncertainty in goalie skill. There's a difference. In the previous three posts I looked at the variance in game-to-game outcomes, but this time I want to look at the variance in a goalie's actual expected save percentage. To do this, we'll use empirical Bayes. This has been explored in previous papers [link]. This post is a launchpad for more detailed, rigorous research.
 </p>
-<h5>Step One</h5>
 <p>
+<h5>Step One</h5>
 The first step of empirircal Bayes is to use the observed data to fit a prior distribution. Think of it like this - a new goalie you've never heard of appears. What probability would you give that they have a career .920 Fenwick save percentage*? .930? .940?
 </p>
 <p>
