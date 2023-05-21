@@ -66,8 +66,8 @@ Here are all the assumptions with this method, though:
 <p>
 These will be challenged and addressed in the following posts.
 </p>
-<highlight>
+```
 goalie_prior = fitdist(career_save_pcts$mean_sv_pct, "beta", method = 'mle')
 prior_points = dbeta(sv_pct_fits, shape1 = goalie_prior$estimate[1], shape2 = goalie_prior$estimate[2])
 prior_points = prior_points/sum(prior_points)
-</highlight>
+```
