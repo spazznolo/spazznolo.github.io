@@ -3,7 +3,7 @@ layout: post
 title:  "Bayesian Save Percentage"
 date:   2023-05-17 8:52:05 -0400
 ---
-<h2>[Post 4] Bayesian Save Percentage</h2>
+<h2>[Post 4] Empirical Bayes Save Percentage</h2>
 <p>
 Recall from from the introductory paragraph of this series:
 "Goaltenders make up the least predictable position in hockey. Their behavior confounds analysts and casual fans alike. It isn’t uncommon for a good goalie to have a below replacement level year, or for an unknown goalie to come in and dominate the league for a stretch of time. This may partly explain the relative dearth of analysis on goalies - they're voodoo, it's often said."
@@ -66,8 +66,6 @@ Here are all the assumptions with this method, though:
 <p>
 These will be challenged and addressed in the following posts.
 </p>
-```
-goalie_prior = fitdist(career_save_pcts$mean_sv_pct, "beta", method = 'mle')
-prior_points = dbeta(sv_pct_fits, shape1 = goalie_prior$estimate[1], shape2 = goalie_prior$estimate[2])
-prior_points = prior_points/sum(prior_points)
-```
+<p>
+Code available here: https://github.com/spazznolo/goalie-consistency/blob/main/post_4.R
+</p>
