@@ -13,8 +13,10 @@ Let's again look at uncertainty, but this time, instead of the uncertainty in go
 </p>
 <h5>Step One</h5>
 <p>
-The first step of empirircal Bayes is to use the observed data to fit a prior distribution. Think of it like this - a new goalie you've never heard of appears. What probability would you give that they have a career .910 save percentage? .920? .930?
+The first step of empirircal Bayes is to use the observed data to fit a prior distribution. Think of it like this - a new goalie you've never heard of appears. What probability would you give that they have a career .920 Fenwick save percentage*? .930? .940?
 </p>
+<p>
+*Fenwick save percentage is the total percentage of unblocked shots saved. This means that shots which miss the net are still counted. It has been proven that goalie skill is correlated with making players miss the net.
 <p>
 Here's a histogram of career Fenwick save percentages for goalies having faced 750+ shots.
 </p>
@@ -22,16 +24,16 @@ Here's a histogram of career Fenwick save percentages for goalies having faced 7
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-four-one.png" width="60%" length="150"/></div>
 </p>
 <p>
-Given a new goalie we know nothing about, it is reasonable to represent their possible career save percentage as the plot above. Now, the histogram above is a rough distribution - there are bumps throughout which seem random. In order to smooth this, we need to fit a distribution on it. 
+Given a new goalie we know nothing about, it is reasonable to represent their possible career Fenwick save percentage as the plot above. Now, the histogram above is a rough distribution - there are bumps throughout which seem random. In order to smooth this, we need to fit a distribution on it. 
 </p>
 <p>
-The beta distribution is a common prior when the variable of interest is a percentage (as is ours with the save percentage). Here's what fitting a beta distribution to the career save percentage distribution looks like. This will be our <em>prior</em>.
+The beta distribution is a common prior when the variable of interest is a percentage (as is ours with the save percentage). Here's what fitting a beta distribution to the career Fenwick save percentage distribution looks like. This will be our <em>prior</em>.
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-four-two.png" width="60%" length="150"/></div>
 </p>
 <p>
-This fit isn't perfect, and we'll explore alternatives in a future post, but it isn't terrible. The beta distribution has two hyper parameters (alpha and beta), which you can interpret as successes (saves) and failures (goals). The fitted beta distribution has as hyperparameters 1770 and 126, which means we attribute 1770 saves and 126 goals to a goalie prior to knowing anything about them. This represents a .934 save percentage, which is the same as the median career save percentage for goalies having faces 750+ shots.
+This fit isn't perfect, and we'll explore alternatives in a future post, but it isn't terrible. The beta distribution has two hyper parameters (alpha and beta), which you can interpret as successes (saves) and failures (goals). The fitted beta distribution has as hyperparameters 1770 and 126, which means we attribute 1770 saves and 126 goals to a goalie prior to knowing anything about them. This represents a .934 Fenwick save percentage, which is the same as the median career save percentage for goalies having faces 750+ shots.
 </p>
 <h5>Step Two</h5>
 <p>
