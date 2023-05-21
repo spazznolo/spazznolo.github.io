@@ -43,16 +43,17 @@ The second step is to update the prior with each goalie's career results. Here, 
 It is quite easy to update the prior with observed goalie results. All you need to do is add the observed success and failures to the beta's hyperparameters.
 </p>
 <p>
-As an example, let's plot the posterior distributions for Andrei Vasilevski and Jeremy Swayman.
+As an example, let's plot the posterior distributions for two 24 year old goalies - Jake Oettinger and Jeremy Swayman.
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-four-three.png" width="60%" length="150"/></div>
 </p>
 <p>
 These posterior distributions allow for some interesting insights, like: 
-    - There's a 79.49% chance that Vasilevsky is better than Swayman
-    - There's a 99.99% chance that Vasilevsky is better than average
-    - There's a 86.73% chance that Swayman is better than average
+    - There's a 62.99% chance that Oettinger is better than Swayman
+    - There's a 95.99% chance that Oettinger is better than average
+    - There's a 86.68% chance that Swayman is better than average
+    - Oettinger's distribution is tighter than Swayman's because he's faced more shots.
 </p>
 <p>
 Here are all the assumptions with this method, though:
