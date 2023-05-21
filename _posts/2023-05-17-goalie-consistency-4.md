@@ -49,3 +49,9 @@ From this, it is quite easy to update the prior with observed goalie results. Al
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-four-three.png" width="60%" length="150"/></div>
 </p>
+<p>
+Some takeaways from this plot: 
+    - There's a 79.49% chance that Vasilevsky is better than Swayman
+    - There's a 99.99% chance that Vasilevsky is better than average
+    - There's a 86.73% chance that Swayman is better than average
+</p>
