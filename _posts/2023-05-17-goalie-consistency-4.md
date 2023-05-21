@@ -35,8 +35,8 @@ The beta distribution is a common prior when the variable of interest is a perce
 <p>
 The fit isn't perfect (we'll explore alternatives in a future post), but it isn't terrible. The beta distribution has two hyper parameters (alpha and beta), which you can interpret as successes (saves) and failures (goals). The fitted beta distribution has as hyperparameters 1770 and 126, which means we attribute 1770 saves and 126 goals to a goalie prior to knowing anything about them. This represents a .934 Fenwick save percentage, which is the same as the median career save percentage for goalies having faces 750+ shots.
 </p>
-<h5>Step Two</h5>
 <p>
+<h5>Step Two</h5>
 The second step is to update the prior with each goalie's career results. Here, if a goalie has only faced a few shots, their expected save percentage will shrink towards the mean of the prior distribution and the uncertainty (represented by variance in their distribution) will remain high. Essentially the distribution will still resemble the prior's. As a goalie faces more and more shots, the uncertainty of their expected save percentage decreases.
 </p>
 <p>
