@@ -21,9 +21,9 @@ I'm going to address the fourth point in this post. We already know that not all
 <p>
 <h5>Adjusted Save Percentage</h5>
 We can adjust a goalie's save percentage by taking into account the expectation of each shot becoming a goal. There are many ways to do this, but I've decided to derive one which would retain the measure as a rate. Here's what I came up with:
-Fenwick Save Percentage (FSV) = 1 - (Goals Against / Fenwick Shots Against)
-Expected Fenwick Save Percentage (xFSV%) = 1 - (Expected Goals Against / Fenwick Shots Against)
-Mean Save Percentage (MSV) = 1 - (Total Goals Scored / Total Shots Faced)
+<br>Fenwick Save Percentage (FSV) = 1 - (Goals Against / Fenwick Shots Against)</br>
+<br>Expected Fenwick Save Percentage (xFSV%) = 1 - (Expected Goals Against / Fenwick Shots Against)</br>
+<br>Mean Save Percentage (MSV) = 1 - (Total Goals Scored / Total Shots Faced)</br>
 <b>Adjusted Save Percentage = MSV + (FSV% - xFSV%)</b>
 </p>
 <p>
