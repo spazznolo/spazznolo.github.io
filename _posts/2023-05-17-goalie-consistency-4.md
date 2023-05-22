@@ -13,12 +13,12 @@ Let's again look at uncertainty, but this time, instead of the uncertainty in go
 </p>
 <p>
 <h5>Step One</h5>
-The first step of empirircal Bayes is to use the observed data to fit a prior distribution. Think of it like this - a new goalie you've never heard of appears. What probability would you give that they have a career .920 Fenwick save percentage*? .930? .940?
+The first step of empirircal Bayes is to use the observed data to fit a prior distribution. Think of it like this - a new goalie you've never heard of appears. What probability would you give that they have a career .930 Fenwick save percentage*? .940? .950?
 </p>
 <p>
 *Fenwick save percentage is the total percentage of unblocked shots saved. This means that shots which miss the net are still counted. It has been proven that goalie skill is correlated with making players miss the net.
 <p>
-Here's a histogram of career Fenwick save percentages for goalies having faced 750+ shots.
+Here's a histogram of career 5v5 Fenwick save percentages for goalies having faced 750+ shots.
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-four-one.png" width="60%" length="150"/></div>
@@ -50,9 +50,9 @@ As an example, let's plot the posterior distributions for two 24 year old goalie
 </p>
 <p>
 These posterior distributions allow for some interesting insights, like: 
-    - There's a 63.29% chance that Oettinger is better than Swayman
-    - There's a 96.21% chance that Oettinger is better than average
-    - There's a 86.88% chance that Swayman is better than average
+    - There's a 53.72% chance that Oettinger is better than Swayman
+    - There's a 79.77% chance that Oettinger is better than average
+    - There's a 73.79% chance that Swayman is better than average
     - Oettinger's distribution is tighter than Swayman's because he's faced more shots.
 </p>
 <p>
