@@ -58,9 +58,9 @@ These posterior distributions allow for some interesting insights, like:
 <p>
 Here are all the assumptions with this method, though:
     - The prior distribution is assumed to be beta with hyperparameters 1770 and 126.
-    - Age is assumed to be irrelevant. 
+    - Age is assumed to be irrelevant.
     - Scoring rates are assumed to be constant.
-    - All shots are assumed to be equal. 
+    - All shots are assumed to be equal.
     - Team systems are assumed to be identical.
 </p>
 <p>

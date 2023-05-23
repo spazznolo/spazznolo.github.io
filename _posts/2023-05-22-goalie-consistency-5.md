@@ -16,11 +16,14 @@ Assumptions:
     - Team systems are assumed to be identical.
 </p>
 <p>
-I'm going to address the fourth point in this post. We already know that not all shots are equal. Countless Exepected Goals models have been produced to address this. Thankfully, Peter Tanner, through his website <a href="https://moneypuck.com/about.htm">MoneyPuck</a>, provides detailed data for each unblocked shot that occurs in the NHL (whether it hit the net or not) along with a prediction - the probability of the shot being a goal.
+I'm going to address the fourth point in this post.
 </p>
 <p>
 <h5>Adjusted Save Percentage</h5>
-We can adjust a goalie's save percentage by taking into account the expectation of each shot becoming a goal. There are many ways to do this, but I've decided to derive one which would retain the measure as a rate. Here's what I came up with:
+We already know that not all shots are equal. Countless Exepected Goals models have been produced to address this. Thankfully, Peter Tanner, through his website <a href="https://moneypuck.com/about.htm">MoneyPuck</a>, provides detailed data for each unblocked shot that occurs in the NHL (whether it hit the net or not) along with a prediction - the probability of the shot being a goal.
+</p>
+<p>
+We can adjust a goalie's save percentage by taking into account these predictions from MoneyPuck. There are many ways to do this, but I've decided to derive one which would retain the measure as a rate. Here's what I came up with:
 </p>
 <p>
 <br>Fenwick Save Percentage (FSV) = 1 - (Goals Against / Fenwick Shots Against)
@@ -43,10 +46,13 @@ Let's revisit the Jake Oettinger and Jeremy Swayman comparison.
 </p>
 <p>
 The posteriors change as follows:
-    - There's a 77.03% (previously 57.18%) chance that Swayman is better than Oettinger
-    - There's a 86.88% (previously 92.57%) chance that Oettinger is better than average
-    - There's a 96.50% (previously 91.81%) chance that Swayman is better than average
+    - There's a 77.03% (previously 57.18%) chance that Swayman is better than Oettinger.
+    - There's a 86.88% (previously 92.57%) chance that Oettinger is better than average.
+    - There's a 96.50% (previously 91.81%) chance that Swayman is better than average.
     - Oettinger's distribution is tighter than Swayman's because he's faced more shots.
+</p>
+<p>
+These changes are due to the fact that Swayman faces more difficult shots on a whole - his expected Fenwick save percentage is 94.07 while Oettinger's is 94.39.
 <p>
 Code available here: <a href="https://github.com/spazznolo/goalie-consistency/blob/main/post_5.R">https://github.com/spazznolo/goalie-consistency/blob/main/post_5.R</a>
 </p>
