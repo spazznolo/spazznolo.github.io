@@ -50,9 +50,9 @@ As an example, let's plot the posterior distributions for two 24 year old goalie
 </p>
 <p>
 These posterior distributions allow for some interesting insights, like: 
-    - There's a 57.18% chance that Swayman is better than Oettinger
-    - There's a 92.57% chance that Oettinger is better than average
-    - There's a 91.81% chance that Swayman is better than average
+    - There's a 57.18% chance that Swayman's save percentage is higher than Oettinger's.
+    - There's a 92.57% chance that Oettinger's save percentage is higher than average.
+    - There's a 91.81% chance that Swayman's save percentage is higher than average.
     - Oettinger's distribution is tighter than Swayman's because he's faced more shots.
 </p>
 <p>
