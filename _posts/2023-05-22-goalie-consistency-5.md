@@ -26,8 +26,10 @@ We can adjust a goalie's save percentage by taking into account the expectation 
 <br>Fenwick Save Percentage (FSV) = 1 - (Goals Against / Fenwick Shots Against)
 <br>Expected Fenwick Save Percentage (xFSV%) = 1 - (Expected Goals Against / Fenwick Shots Against)
 <br>Mean Save Percentage (MSV) = 1 - (Total Goals Scored / Total Shots Faced)
-<br><b>Adjusted Save Percentage = MSV + (FSV% - xFSV%)</b>
+<br><b>Adjusted Save Percentage (AdjSP) = MSV + (FSV% - xFSV%)</b>
 </p>
+<p>
+For the sake of simplicity, let's flip the adjusted save percentage to the adjusted failure rate (1 - AdjSP) and plot out the distribution of career rates for goalies having faced more than 10 expected goals.
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-five-one.png" width="60%" length="150"/></div>
 </p>

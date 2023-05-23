@@ -13,7 +13,7 @@ Let's again look at uncertainty, but this time, instead of the uncertainty in go
 </p>
 <p>
 <h5>Step One</h5>
-The first step of empirircal Bayes is to use the observed data to fit a prior distribution. Think of it like this - a new goalie you've never heard of appears. What probability would you give that they have a career .930 Fenwick save percentage*? .940? .950?
+The first step of empirical Bayes is to use the observed data to fit a prior distribution. Think of it like this - a new goalie you've never heard of appears. What probability would you give that they have a career .930 Fenwick save percentage*? .940? .950?
 </p>
 <p>
 *Fenwick save percentage is the total percentage of unblocked shots saved. This means that shots which miss the net are still counted. It has been proven that goalie skill is correlated with making players miss the net.
