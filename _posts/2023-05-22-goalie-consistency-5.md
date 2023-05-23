@@ -26,7 +26,7 @@ We already know that not all shots are equal. Countless Exepected Goals models h
 We can adjust a goalie's save percentage by taking into account these predictions from MoneyPuck. There are many ways to do this, but I've decided to derive one which would retain the measure as a rate. Here's what I came up with:
 </p>
 <p>
-<br>Fenwick Save Percentage (FSV%) = 1 - (Goals Against / Fenwick Shots Against)
+Fenwick Save Percentage (FSV%) = 1 - (Goals Against / Fenwick Shots Against)
 <br>Expected Fenwick Save Percentage (xFSV%) = 1 - (Expected Goals Against / Fenwick Shots Against)
 <br>Median Save Percentage (MSV%) = Median of Goalie (20+ xG faced) Career Save Percentage
 <br><b>Adjusted Save Percentage (AdjSV%) = MSV% + (FSV% - xFSV%)</b>
