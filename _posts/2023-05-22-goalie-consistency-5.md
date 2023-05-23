@@ -29,9 +29,17 @@ We can adjust a goalie's save percentage by taking into account the expectation 
 <br><b>Adjusted Save Percentage (AdjSP) = MSV + (FSV% - xFSV%)</b>
 </p>
 <p>
-For the sake of simplicity, let's flip the adjusted save percentage to the adjusted failure rate (1 - AdjSP) and plot out the distribution of career rates for goalies having faced more than 10 expected goals.
+For the sake of simplicity, let's flip the adjusted save percentage to the adjusted failure rate (1 - AdjSP) and plot the distribution of career rates for goalies having faced more than 10 expected goals. We'll include a fitted beta distribution in white. The goodness of fit, which frankly was questionable in the last post, looks better this time. It'll improve as we try different distributions in future posts.
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-five-one.png" width="60%" length="150"/></div>
+</p>
+<p>
+Given that we are once again fitting a beta distribution, the rest of the work is the same as the previous post.
+</p>
+<p>
+Revisiting Jake Oettinger vs Jeremy Swayman:
+<p>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-five-two.png" width="60%" length="150"/></div>
 </p>
 <p>
 Code available here: <a href="https://github.com/spazznolo/goalie-consistency/blob/main/post_5.R">https://github.com/spazznolo/goalie-consistency/blob/main/post_5.R</a>
