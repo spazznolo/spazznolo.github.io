@@ -37,10 +37,16 @@ For the sake of simplicity, let's flip the adjusted save percentage to the adjus
 Given that we are once again fitting a beta distribution, the rest of the work is the same as the previous post.
 </p>
 <p>
-Revisiting Jake Oettinger vs Jeremy Swayman:
+Let's revisit the Jake Oettinger and Jeremy Swayman comparison.
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-five-two.png" width="60%" length="150"/></div>
 </p>
+<p>
+The posteriors change as follows:
+    - There's a 77.03% (previously 57.18%) chance that Swayman is better than Oettinger
+    - There's a 86.88% (previously 92.57%) chance that Oettinger is better than average
+    - There's a 96.50% (previously 91.81%) chance that Swayman is better than average
+    - Oettinger's distribution is tighter than Swayman's because he's faced more shots.
 <p>
 Code available here: <a href="https://github.com/spazznolo/goalie-consistency/blob/main/post_5.R">https://github.com/spazznolo/goalie-consistency/blob/main/post_5.R</a>
 </p>
