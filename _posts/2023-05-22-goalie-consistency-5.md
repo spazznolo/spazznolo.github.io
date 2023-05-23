@@ -46,9 +46,9 @@ Let's revisit the Jake Oettinger and Jeremy Swayman comparison.
 </p>
 <p>
 The posteriors change as follows:
-    - There's a 77.03% (previously 57.18%) chance that Swayman's adjusted save percentage better than Oettinger.
-    - There's a 86.88% (previously 92.57%) chance that Oettinger's adjusted save percentage is better than average.
-    - There's a 96.50% (previously 91.81%) chance that Swayman's adjusted save percentage is better than average.
+    - There's a 77.03% (previously 57.18%) chance that Swayman's AdjSP better than Oettinger.
+    - There's a 86.88% (previously 92.57%) chance that Oettinger's AdjSP is better than average.
+    - There's a 96.50% (previously 91.81%) chance that Swayman's AdjSP is better than average.
 </p>
 <p>
 These changes are due to the fact that Swayman faces more difficult shots on a whole - his expected Fenwick save percentage is 94.07 while Oettinger's is 94.39.
