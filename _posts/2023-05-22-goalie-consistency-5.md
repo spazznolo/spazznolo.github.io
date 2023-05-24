@@ -63,7 +63,7 @@ Couple of points:
     - The relationship between a goalie's SV% and his AdjSV% seems to strengthen as he faces more shots.
     - A goalie's AdjSV% converges with his posterior AdjSV% as he faces more shots (that's the yellow diagonal line).
     - The consequence of the previous three points - there is heteroskedasticity in the relationship between a goalie's SV% and his posterior AdjSV%.
-    - There is likely some survivorship bias happening.
+    - There is almost certainly survivorship bias. 
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-five-three.png" width="100%" length="250"/></div>
