@@ -55,6 +55,15 @@ These changes are due to the fact that Swayman faces more difficult shots on a w
 </p>
 <p>
 <h5>Appendix</h5>
+Below is a collection of plots which compare various save percentage metrics discussed in this + the last post.
+</p>
+<p>
+Couple of points:
+    - Goalies who have a bad start to their career tend to not play many games (surprise, surprise).
+    - The relationship between a goalie's SV% and his AdjSV% seems to strengthen as he faces more shots.
+    - A goalie's AdjSV% converges with his posterior AdjSV% as he faces more shots (that's the yellow diagonal line).
+    - The consequence of the previous three points - there is hetereskerasdicity in the relationship between a goalie's SV% and his posterior AdjSV%.
+</p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-five-three.png" width="100%" length="250"/></div>
 </p>
 <p>
