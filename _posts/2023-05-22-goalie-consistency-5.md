@@ -55,7 +55,7 @@ These changes are due to the fact that Swayman faces more difficult shots on a w
 </p>
 <p>
 <h5>Appendix</h5>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-five-three.png" width="60%" length="150"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-five-three.png" width="80%" length="200"/></div>
 </p>
 <p>
 Code available here: <a href="https://github.com/spazznolo/goalie-consistency/blob/main/post_5.R">https://github.com/spazznolo/goalie-consistency/blob/main/post_5.R</a>
