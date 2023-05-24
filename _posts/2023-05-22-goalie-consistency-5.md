@@ -5,7 +5,7 @@ date:   2023-05-22 8:52:05 -0400
 ---
 <h2>[Post 5] Empirical Bayes Adjusted Save Percentage</h2>
 <p>
-In post 4, I outlined a framework for measuring goalie talent using their career Fenwick 5v5 save percentage. It concluded with the assumptions of the initial strategy, which I'll include below.
+In post 4, I outlined a framework for measuring goalie talent using their career Fenwick 5v5 save percentage. It concluded with the assumptions of the initial strategy, which I'll include again below.
 </p>
 <p>
 Assumptions:
@@ -51,7 +51,7 @@ The posteriors change as follows:
     - There's a 96.50% (previously 91.81%) chance that Swayman's AdjSV% is better than the MSV%.
 </p>
 <p>
-These changes are due to the fact that Swayman faces more difficult shots on a whole - his xFSV% is 94.07 while Oettinger's is 94.39.
+These changes are due to the fact that Swayman faces more difficult shots than Oettinger on a whole - his xFSV% is 94.07 while Oettinger's is 94.39.
 </p>
 <p>
 <h5>Appendix</h5>
@@ -59,12 +59,11 @@ Below is a collection of plots which compare various save percentage metrics dis
 </p>
 <p>
 Couple of points:
-
     - Goalies who have a bad start to their career tend to not play many games (surprise, surprise).
     - The relationship between a goalie's SV% and his AdjSV% seems to strengthen as he faces more shots.
     - A goalie's AdjSV% converges with his posterior AdjSV% as he faces more shots (that's the yellow diagonal line).
     - The consequence of the previous three points - there is heteroskedasticity in the relationship between a goalie's SV% and his posterior AdjSV%.
-
+    - There is likely some survivorship bias happening.
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-five-three.png" width="100%" length="250"/></div>
