@@ -16,10 +16,16 @@ Assumptions:
     - Team systems are assumed to be identical.
 </p>
 <p>
-I'm going to address the second point in this post.
+I'm going to address the second point in this post, but before I do, I wanted to share an interesting (though probably intuitive) finding. Below is the cumulative distribution function for seasons played by goalies. It shows that less than 50% of goalies who have played an NHL game end up playing over 3 seasons.
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-one.png" width="60%" length="150"/></div>
+</p>
+<p>
+Summary of findings:
+    - Over 25% of goalies play only one season.
+    - Over 50% of goalies play three seasons or less.
+    - Over 75% of goalies play seven seasons or less.
 </p>
 <p>
 Code available here: <a href="https://github.com/spazznolo/goalie-consistency/blob/main/post_6.R">https://github.com/spazznolo/goalie-consistency/blob/main/post_6.R</a>
