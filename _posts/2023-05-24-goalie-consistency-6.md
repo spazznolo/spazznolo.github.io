@@ -22,11 +22,11 @@ I'm going to address the second point in this post, but before I do, I wanted to
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-one.png" width="60%" length="150"/></div>
 </p>
 <p>
-Summary of findings:
+Summary of findings for goalies whose career started after 2007-2008 and ended before 2022-2023:
     - 47% of goalies played only one season.
     - 70% of goalies played three seasons or less.
     - 91% of goalies played eight seasons or less.
 </p>
 <p>
-Code available here: <a href="https://github.com/spazznolo/goalie-consistency/blob/main/post_6.R">https://github.com/spazznolo/goalie-consistency/blob/main/post_6.R</a>
+Code available here: <a href="https://github.com/spazznolo/goalie-consistency/blob/main/posts/post-6.R">https://github.com/spazznolo/goalie-consistency/blob/main/posts/post-6.R</a>
 </p>
