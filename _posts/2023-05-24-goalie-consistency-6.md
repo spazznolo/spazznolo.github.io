@@ -49,7 +49,7 @@ Let's fix the bias above with a few changes. Instead of simply grouping shots by
 Some thoughts:
     - With this method, goalies peak around the age of 27.
     - This agrees with <a href="https://hockeyviz.com/txt/age22">some</a> past research.
-    - This disagrees with other past research.
+    - This disagrees with <a href="https://hockey-graphs.com/2014/03/21/how-well-do-goalies-age-a-look-at-a-goalie-aging-curve/">other</a> past research.
 </p>
 <p>
 Code available here: <a href="https://github.com/spazznolo/goalie-consistency/blob/main/posts/post-6.R">https://github.com/spazznolo/goalie-consistency/blob/main/posts/post-6.R</a>
