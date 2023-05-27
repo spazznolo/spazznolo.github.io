@@ -46,5 +46,11 @@ Let's fix the bias above with a few changes. Instead of simply grouping shots by
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-three.png" width="60%" length="150"/></div>
 </p>
 <p>
+Some thoughts:
+    - With this method, goalies peak around the age of 27.
+    - This agrees with <a href="https://hockeyviz.com/txt/age22">some</a> past research.
+    - This disagrees with other past research.
+</p>
+<p>
 Code available here: <a href="https://github.com/spazznolo/goalie-consistency/blob/main/posts/post-6.R">https://github.com/spazznolo/goalie-consistency/blob/main/posts/post-6.R</a>
 </p>
