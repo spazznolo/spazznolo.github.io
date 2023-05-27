@@ -28,9 +28,20 @@ Summary of findings (for careers starting after 2007-2008 and ending before 2022
     - 91% of goalies played eight seasons or less.
 </p>
 <p>
+<h5>Exploring Age</h5>
+I scraped hockey-reference for each goalie's date of birth (code available here) in order to see how their performance changes as they age. Using goalie birthdays and dates of games, we can get the exact age of goalies for each of their games. I started the exploration grouping shots into bins by goalie age, rounded to the first decimal (ex: 26.0, 26.1, etc.), and then calculating the group-wide save percentage. I added alpha to the number of shots faced, so groups with few shots pale in comparison to groups with many shots. Here's what that looks like:
+<p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-two.png" width="60%" length="150"/></div>
 </p>
-tesst
+<p>
+Some thoughts:
+    - Most shots are taken on goalies aged 23-35.
+    - If you squint, you can see a little bit of an age curve here.
+    - This plot is riddled with bias (particularly when it comes to goalies with short or long careers).
+</p>
+<p>
+Let's fix the bias above with a few changes. Instead of simply grouping shots by age, we instead follow strategies developed by xxx and take the change in save percentage (dSV%) from each goalie's age change. Take the average dSV% for each age to get a synthetic change in performance. Finally, you take the cumulative sum of these synthetic changes to get a synthetic career arc, like below:
+</p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-three.png" width="60%" length="150"/></div>
 </p>
