@@ -8,7 +8,7 @@ date:   2022-04-02 11:52:05 -0400
 To measure the effect of inter-shot consistency on expected standing points, we simulate 10,000 goalie seasons, all with seasonal save percentages of .900, by sampling seasonal shot outcomes without replacement into a sequence (or, a season). Then, we calculate the <a href="https://spazznolo.github.io/2022/03/28/goalie-consistency-intro.html">entropy</a> of each simulation, along with the expected standing points earned. The results are below.
 </p>
 <p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-one-threee.png" width="60%" length="150"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-two-one.png" width="60%" length="150"/></div>
 </p>
 <p>
 <em>Inter-shot consistency does not seem have an effect on expected standing points.</em>
