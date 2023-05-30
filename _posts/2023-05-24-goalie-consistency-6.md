@@ -40,7 +40,14 @@ Some thoughts:
     - This plot is riddled with bias (particularly when it comes to goalies with short or long careers).
 </p>
 <p>
-Let's fix the bias above with a few changes. Instead of simply grouping shots by age, we instead follow strategies developed by xxx and take the change in save percentage (dSV%) from each goalie's age to the next. Take the average dSV% for each age to get a synthetic change in performance. Finally, you take the cumulative sum of these synthetic changes to get a synthetic career arc, like below:
+Let's fix the bias above with a few changes. Instead of simply grouping shots by age, we'll follow a strategy seemingly developed by Tango Tiger here called the delta method. Here are the steps:
+    - Take change in save percentage (dSV%) from each goalie's age to the next. 
+    - Take the harmonic mean of dSV% for each age as the the observed change in SV%.
+    - Clip off underrepresented ages (-21, 39+).
+    - Take the cumulative sum of dSV% throughout the retained age range.
+</p>
+<p>
+Altogether, this gives us the curve below:
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-three.png" width="60%" length="150"/></div>
