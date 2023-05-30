@@ -37,7 +37,7 @@ I scraped hockey-reference for each goalie's date of birth (code available here)
 Some thoughts:
     - Most shots are taken on goalies aged 23-35.
     - If you squint, you can see a little bit of an age curve here.
-    - This plot is riddled with bias (particularly when it comes to goalies with short or long careers).
+    - This plot is riddled with bias (particularly for goalies with short or long careers).
 </p>
 <p>
 Let's fix the bias above with a few changes. Instead of simply grouping shots by age, we'll follow a strategy <a href = "https://hockey-graphs.com/2017/03/23/a-new-look-at-aging-curves-for-nhl-skaters-part-1">seemingly</a> developed by Tango Tiger <a href = "http://www.tangotiger.net/aging.html">here</a> called the delta method. Here are the steps:
@@ -57,6 +57,9 @@ Some thoughts:
     - With this method, goalies peak around the age of 27.
     - This agrees with <a href="https://hockeyviz.com/txt/age22">some</a> past research.
     - This disagrees with <a href="https://hockey-graphs.com/2014/03/21/how-well-do-goalies-age-a-look-at-a-goalie-aging-curve/">other</a> past research.
+</p>
+<p>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-four.png" width="60%" length="150"/></div>
 </p>
 <p>
 Code available here: <a href="https://github.com/spazznolo/goalie-consistency/blob/main/posts/post-6.R">https://github.com/spazznolo/goalie-consistency/blob/main/posts/post-6.R</a>
