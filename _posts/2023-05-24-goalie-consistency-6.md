@@ -16,11 +16,11 @@ Assumptions:
     - Team systems are assumed to be identical.
 </p>
 <p>
-I'm going to address the second point in this post, but in a sidewinding sort of way. First of all, we can only include goalies whose career span is inside the available range of data, which means goalies who haven't played the first (2007-2008) or last season (2022-2023). 
+I'm going to address the second point in this post, but in a sidewinding sort of way. First of all, we can only include goalies whose career spans inside the available range of data (this way we remove goalies who are in the middle of their careers), which means goalies who haven't played the first (2007-2008) or last season (2022-2023).
 </p>
 <p>
 <h5>Exploring Age</h5>
-I wanted to start by sharing an interesting (though probably intuitive) finding. Below is the cumulative distribution function for seasons played during their career for goalies who haven't played the first (2007-2008) or last season (2022-2023) from the available data (this way we remove goalies who are in the middle of their careers). It shows that almost 50% of goalies who have played an NHL game ended up only playing one season.
+I wanted to start by sharing an interesting (though probably intuitive) finding. Below is the cumulative distribution function for goalie career seasons played.
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-one.png" width="60%" length="150"/></div>
@@ -32,8 +32,7 @@ Summary of findings (for careers starting after 2007-2008 and ending before 2022
     - 91% of goalies played eight seasons or less.
 </p>
 <p>
-<h5>Exploring Age</h5>
-I scraped hockey-reference for each goalie's date of birth (code available here) in order to see how their performance changes as they age. Using goalie birthdays and dates of games, we can get the exact age of goalies for each of their games. I started the exploration grouping shots into bins by goalie age, rounded to the first decimal (ex: 26.0, 26.1, etc.), and then calculating the group-wide save percentage. I added alpha to the number of shots faced, so groups with few shots pale in comparison to groups with many shots. Here's what that looks like:
+I scraped hockey-reference for each goalie's date of birth (code available <a href="https://github.com/spazznolo/goalie-consistency/blob/main/import/scrape_goalie_data.R">here</a>) in order to see how their performance changes as they age. Using goalie birthdays and dates of games, we can get the exact age of goalies for each of their games. I started the exploration grouping shots into bins by goalie age, rounded to the first decimal (ex: 26.0, 26.1, etc.), and then calculating the group-wide save percentage. I added alpha to the number of shots faced, so groups with few shots pale in comparison to groups with many shots. Here's what that looks like:
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-two.png" width="60%" length="150"/></div>
 </p>
