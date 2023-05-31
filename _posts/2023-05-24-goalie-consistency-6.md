@@ -63,7 +63,7 @@ Some thoughts:
 </p>
 <p>
 Some more thoughts:
-    - Pretty well every goalie who faces less than 1500 shots ends his career with a pAdjSV% below average.
+    - Nearly every goalie who faces < 1500 shots ends his career with a pAdjSV% below average.
     - Goalies 
     - This disagrees with <a href="https://hockey-graphs.com/2014/03/21/how-well-do-goalies-age-a-look-at-a-goalie-aging-curve/">other</a> past research.
 </p>
