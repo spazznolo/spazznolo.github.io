@@ -32,7 +32,7 @@ Summary of findings (for careers starting after 2007-2008 and ending before 2022
     - 91% of goalies played eight seasons or less.
 </p>
 <p>
-I scraped hockey-reference for each goalie's date of birth (code available <a href="https://github.com/spazznolo/goalie-consistency/blob/main/import/scrape_goalie_data.R">here</a>) in order to see how their performance changes as they age. Using goalie birthdays and dates of games, we can get the exact age of goalies for each of their games. I started the exploration grouping shots into bins by goalie age, rounded to the first decimal (ex: 26.0, 26.1, etc.), and then calculating the group-wide save percentage. I added alpha to the number of shots faced, so groups with few shots pale in comparison to groups with many shots. Here's what that looks like:
+I scraped hockey-reference for each goalie's date of birth (code available <a href="https://github.com/spazznolo/goalie-consistency/blob/main/import/scrape_goalie_data.R">here</a>) in order to see how their performance changes as they age. Using goalies' dates of birth with dates of games, we can get the exact age of a goaltender for each of their games. Let's start by simply grouping shots into bins by goalie age, rounded to the first decimal (ex: 26.0, 26.1, etc.), and then calculating the group-wide save percentage. Points belonging to groups with fewer shots pale in comparison to groups with many shots. Here's what that looks like:
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-two.png" width="60%" length="150"/></div>
 </p>
@@ -43,7 +43,7 @@ Some thoughts:
     - This plot is riddled with bias (particularly for goalies with short or long careers).
 </p>
 <p>
-Let's fix the bias above with a few changes. Instead of simply grouping shots by age, we'll follow a strategy <a href = "https://hockey-graphs.com/2017/03/23/a-new-look-at-aging-curves-for-nhl-skaters-part-1">seemingly</a> developed by Tango Tiger <a href = "http://www.tangotiger.net/aging.html">here</a> called the delta method. Here are the steps:
+Let's fix some of the bias above with a few changes. Instead of simply grouping shots by age, we'll follow a well-worn strategy <a href = "https://hockey-graphs.com/2017/03/23/a-new-look-at-aging-curves-for-nhl-skaters-part-1">seemingly</a> developed by Tango Tiger <a href = "http://www.tangotiger.net/aging.html">here</a> called the delta method. Here are the steps:
     - Take change in save percentage (dSV%) from each goalie's age to the next. 
     - Take the harmonic mean of dSV% for each age as the the observed change in SV%.
     - Clip off underrepresented ages (-21, 39+).
@@ -65,7 +65,7 @@ Some thoughts:
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-four.png" width="65%" length="165"/></div>
 </p>
 <p>
-Some more thoughts:
+Some thoughts:
     - Nearly every goalie who faces < 1500 shots ends his career with a pAdjSV% below average.
     - Goalies 
     - This disagrees with <a href="https://hockey-graphs.com/2014/03/21/how-well-do-goalies-age-a-look-at-a-goalie-aging-curve/">other</a> past research.
