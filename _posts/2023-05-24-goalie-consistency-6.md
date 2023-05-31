@@ -16,7 +16,11 @@ Assumptions:
     - Team systems are assumed to be identical.
 </p>
 <p>
-I'm going to address the second point in this post, but before I do, I wanted to share an interesting (though probably intuitive) finding. Below is the cumulative distribution function for seasons played during their career for goalies who haven't played the first (2007-2008) or last season (2022-2023) from the available data (this way we remove goalies who are in the middle of their careers). It shows that almost 50% of goalies who have played an NHL game ended up only playing one season.
+I'm going to address the second point in this post, but in a sidewinding sort of way. First of all, we can only include goalies whose career span is inside the available range of data, which means goalies who haven't played the first (2007-2008) or last season (2022-2023). 
+</p>
+<p>
+<h5>Exploring Age</h5>
+I wanted to start by sharing an interesting (though probably intuitive) finding. Below is the cumulative distribution function for seasons played during their career for goalies who haven't played the first (2007-2008) or last season (2022-2023) from the available data (this way we remove goalies who are in the middle of their careers). It shows that almost 50% of goalies who have played an NHL game ended up only playing one season.
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-one.png" width="60%" length="150"/></div>
