@@ -20,6 +20,13 @@ I'm going to address the second point in this post, but in a sidewinding sort of
 </p>
 <p>
 <h5>Exploring Age</h5>
+Here's a short summary of the filtered dataset:
+    - Our population of goalies drops from 318 to 130.
+    -
+
+
+
+<p>
 I wanted to start by sharing an interesting (though probably intuitive) finding. Below is the cumulative distribution function for goalie career seasons played.
 </p>
 <p>
@@ -73,12 +80,15 @@ Some thoughts:
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-five.png" width="65%" length="165"/></div>
 </p>
-<p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-six.png" width="65%" length="165"/></div>
-</p>
+An important dimension is missing in the above data which could partially explain the unintuitive result where goalies who face < 5000 shots take a significant early lead in pAdjSV% over goalies who face 5000+ shots - age. Let's plot the average age of goalies in each group as they face shots over their career.
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-seven.png" width="65%" length="165"/></div>
 </p>
+Some thoughts:
+    - Goalies who face -5000 shots are about 1.5 years ahead throughout the first 2000 shots of their careers.
+    - This difference spans from age 23 to roughly 27.
+    - This is precisely the age range in which goalies seem to be improving in AdjSV%.
+    - We need to adjust for this.
 <p>
 Code available here: <a href="https://github.com/spazznolo/goalie-consistency/blob/main/posts/post-6.R">https://github.com/spazznolo/goalie-consistency/blob/main/posts/post-6.R</a>
 </p>
