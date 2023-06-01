@@ -86,7 +86,7 @@ An important dimension is missing in the above data which could partially explai
 </p>
 <p>
 Some thoughts:
-    - Goalies who face -5000 shots are about 1 year older throughout their career.
+    - Goalies who face -5000 shots are about 1.5 years older throughout their career.
     - This difference obviously also spans from age 23 to roughly 27.
     - This is precisely the age range in which goalies seem to be improving in AdjSV%.
     - We need to adjust for this.
