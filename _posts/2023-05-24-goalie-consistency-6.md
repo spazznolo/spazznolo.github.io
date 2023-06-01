@@ -97,7 +97,9 @@ Some thoughts:
     - This agrees with <a href="https://hockeyviz.com/txt/age22">some</a> past research.
     - This disagrees with <a href="https://hockey-graphs.com/2014/03/21/how-well-do-goalies-age-a-look-at-a-goalie-aging-curve/">other</a> past research.
 </p>
+<p>
 Let's revisit the unintuive plot comparing pAdjSV% over goalie careers, grouped by career length. This time, we'll plot the average age of goalies in each group as they face shots over their career.
+</p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-six.png" width="65%" length="165"/></div>
 </p>
