@@ -11,21 +11,23 @@ In post 4, I outlined a framework for measuring goalie talent using their career
 Assumptions:
     - The prior distribution is assumed to be from the beta family.
     - Age is assumed to be irrelevant. 
+    - The number of shots faced is assumed to be independent from performance.
     - Scoring rates are assumed to be constant.
     - All shots are assumed to be equal. 
     - Team systems are assumed to be identical.
 </p>
 <p>
-I'm going to address the second point in this post, but in a sidewinding sort of way. First of all, we can only include goalies whose career spans inside the available range of data (this way we remove goalies who are in the middle of their careers), which means goalies who haven't played the first (2007-2008) or last season (2022-2023).
+I'm going to address the second and third points in this post, but in a sidewinding sort of way. 
 </p>
 <p>
-<h5>Exploring Age</h5>
-Here's a short summary of the filtered dataset:
-    - Our population of goalies drops from 318 to 130.
-    -
+<h5>Exploring Experience</h5>
+Let's start the exploration by defining our population. There aren't many NHL goalie careers, so we need to be greedy and take as many as we can for the analysis at hand. When we talk about experience, we're referencing the number of shots faced. We don't know how many shots a goalie faced before 2007, so any goalie playing before then has to be removed. The converse is true for the 2022-2023 season. 
 
-
-
+Here's a short summary of the experience dataset:
+    - Goalie population drops from 318 to 130.
+    - Average career shots faced drops from 4,198 to 3,225.
+    - AdjSV% drops from .937 to .927
+</p>
 <p>
 I wanted to start by sharing an interesting (though probably intuitive) finding. Below is the cumulative distribution function for goalie career seasons played.
 </p>
@@ -39,7 +41,40 @@ Summary of findings (for careers starting after 2007-2008 and ending before 2022
     - 91% of goalies played eight seasons or less.
 </p>
 <p>
-I scraped hockey-reference for each goalie's date of birth (code available <a href="https://github.com/spazznolo/goalie-consistency/blob/main/import/scrape_goalie_data.R">here</a>) in order to see how their performance changes as they age. Using goalies' dates of birth with dates of games, we can get the exact age of a goaltender for each of their games. Let's start by simply grouping shots into bins by goalie age, rounded to the first decimal (ex: 26.0, 26.1, etc.), and then calculating the group-wide save percentage. Points belonging to groups with fewer shots pale in comparison to groups with many shots. Here's what that looks like:
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-four.png" width="65%" length="165"/></div>
+</p>
+<p>
+Some thoughts:
+    - Nearly every goalie [give %] who faces -6000 shots ends his career with a pAdjSV% below average.
+    - Goalies facing 1500+ but -6000 seem to regress towards league average pAdjSV%.
+    - These goalies tend to be backups, facing ~600-1000 shots a season.
+    - This regression to league average could partly be due to aging effects.
+</p>
+<p>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-five.png" width="65%" length="165"/></div>
+</p>
+An important dimension is missing in the above data which could partially explain the unintuitive result where goalies who face < 5000 shots take a significant early lead in pAdjSV% over goalies who face 5000+ shots - age. Let's plot the average age of goalies in each group as they face shots over their career.
+<p>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-six.png" width="65%" length="165"/></div>
+</p>
+<p>
+Some thoughts:
+    - Goalies who face -5000 shots are about 1.5 years older throughout their career.
+    - This difference obviously includes the span from age 23 to roughly 27.
+    - This is precisely the age range in which goalies seem to be improving in AdjSV%.
+    - We need to adjust for this.
+</p>
+<p>
+<h5>Exploring Age</h5>
+<p>
+I scraped hockey-reference for each goalie's date of birth (code available <a href="https://github.com/spazznolo/goalie-consistency/blob/main/import/scrape_goalie_data.R">here</a>) in order to see how their performance changes as they age. Using goalies' dates of birth with dates of games, we can get the exact age of a goaltender for each of their games. A few goalies were not linked. Our analysis population changes as follows:
+    - Goalie population drops from 318 to 311.
+    - Average career shots faced drops from 4,198 to 3,225.
+    - AdjSV% drops from .937 to .927
+</p>
+<p>
+Let's start by simply grouping shots into bins by goalie age, rounded to the first decimal (ex: 26.0, 26.1, etc.), and then calculating the group-wide save percentage. Points belonging to groups with fewer shots pale in comparison to groups with many shots. Here's what that looks like:
+</p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-two.png" width="60%" length="150"/></div>
 </p>
@@ -67,30 +102,6 @@ Some thoughts:
     - With this method, goalies peak around the age of 27.
     - This agrees with <a href="https://hockeyviz.com/txt/age22">some</a> past research.
     - This disagrees with <a href="https://hockey-graphs.com/2014/03/21/how-well-do-goalies-age-a-look-at-a-goalie-aging-curve/">other</a> past research.
-</p>
-<p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-four.png" width="65%" length="165"/></div>
-</p>
-<p>
-Some thoughts:
-    - Nearly every goalie who faces -6000 shots ends his career with a pAdjSV% below average.
-    - Goalies facing 1500+ but -6000 seem to regress towards league average pAdjSV%.
-    - These goalies tend to be backups, facing ~600-1000 shots a season.
-    - This regression to league average could partly be due to aging effects.
-</p>
-<p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-five.png" width="65%" length="165"/></div>
-</p>
-An important dimension is missing in the above data which could partially explain the unintuitive result where goalies who face < 5000 shots take a significant early lead in pAdjSV% over goalies who face 5000+ shots - age. Let's plot the average age of goalies in each group as they face shots over their career.
-<p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-six.png" width="65%" length="165"/></div>
-</p>
-<p>
-Some thoughts:
-    - Goalies who face -5000 shots are about 1.5 years older throughout their career.
-    - This difference obviously includes the span from age 23 to roughly 27.
-    - This is precisely the age range in which goalies seem to be improving in AdjSV%.
-    - We need to adjust for this.
 </p>
 <p>
 <h5>Adjusting for Age</h5>
