@@ -92,8 +92,10 @@ Some thoughts:
     - This is precisely the age range in which goalies seem to be improving in AdjSV%.
     - We need to adjust for this.
 </p>
+<p>
 <h5>Adjusting for Age</h5>
 adfadfasdf
+</p>
 <p>
 adfadf
 </p>
