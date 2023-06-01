@@ -96,6 +96,7 @@ Some thoughts:
     - With this method, goalies peak around the age of 27.
     - This agrees with <a href="https://hockeyviz.com/txt/age22">some</a> past research.
     - This disagrees with <a href="https://hockey-graphs.com/2014/03/21/how-well-do-goalies-age-a-look-at-a-goalie-aging-curve/">other</a> past research.
+    - There is well documented survivorship bias with this method.
 </p>
 <p>
 Let's revisit the unintuive plot comparing pAdjSV% over goalie careers, grouped by career length. This time, we'll plot the average age of goalies in each group as they face shots over their career.
@@ -112,7 +113,7 @@ Some thoughts:
 </p>
 <p>
 <h5>Adjusting for Age</h5>
-adfadfasdf
+What do we mean by "adjusting" for age? Well, as a goalie progresses through his life, our expectations of him change. We do not expect a 15 year old goalie to play well in the NHL; we do not expect a 45 year old play well either. In between this, our expectations of the goalie increases up to a certain point (shown to potentially be around age 27 above), and then decreases again for, well, forever. It follows that if a goalie starts his NHL career at 18 and faces 1000 shots, we have a different expecation of how many saves he should make than if he started at 25. This is a definite shortcoming of the empirical Bayes strategy outlined in the 4th post.
 </p>
 <p>
 adfadf
