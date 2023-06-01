@@ -35,10 +35,13 @@ I wanted to start by sharing an interesting (though probably intuitive) finding.
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-one.png" width="60%" length="150"/></div>
 </p>
 <p>
-Summary of findings (for careers starting after 2007-2008 and ending before 2022-2023):
+Some thoughts:
     - 47% of goalies played only one season.
-    - 70% of goalies played three seasons or less.
-    - 91% of goalies played eight seasons or less.
+    - 74% of goalies played five seasons or less.
+    - 90% of goalies played twelve seasons or less.
+</p>
+<p>
+adfadfa
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-four.png" width="65%" length="165"/></div>
@@ -46,9 +49,9 @@ Summary of findings (for careers starting after 2007-2008 and ending before 2022
 <p>
 Some thoughts:
     - Nearly every goalie [give %] who faces -6000 shots ends his career with a pAdjSV% below average.
-    - Goalies facing 1500+ but -6000 seem to regress towards league average pAdjSV%.
+    - Goalies facing 1500+ but -6000 seem to fade as their career progresses.
     - These goalies tend to be backups, facing ~600-1000 shots a season.
-    - This regression to league average could partly be due to aging effects.
+    - This fade could partly be due to aging effects.
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-five.png" width="65%" length="165"/></div>
@@ -102,7 +105,7 @@ Some thoughts:
 Let's revisit the unintuive plot comparing pAdjSV% over goalie careers, grouped by career length. This time, we'll plot the average age of goalies in each group as they face shots over their career.
 </p>
 <p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-six.png" width="65%" length="165"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-six.png" width="60%" length="150"/></div>
 </p>
 <p>
 Some thoughts:
@@ -113,7 +116,7 @@ Some thoughts:
 </p>
 <p>
 <h5>Adjusting for Age</h5>
-What do we mean by "adjusting" for age? Well, as a goalie progresses through his life, our expectations of him change. We do not expect a 15 year old goalie to play well in the NHL; we do not expect a 45 year old play well either. In between this, our expectations of the goalie increases up to a certain point (shown to potentially be around age 27 above), and then decreases again for, well, forever. It follows that if a goalie starts his NHL career at 18 and faces 1000 shots, we have a different expecation of how many saves he should make than if he started at 25. This is a definite shortcoming of the empirical Bayes strategy outlined in the 4th post.
+What do we mean by "adjusting" for age? Well, as a goalie progresses through his life, our expectations of him change. We do not expect a 15 year old goalie to play well in the NHL; we do not expect a 45 year old play well either. In between this, our expectations of the goalie increases up to a certain point (shown above to potentially be around age 27), and then decreases again for, well, forever. It follows that if a goalie starts his NHL career at 18 and faces 1000 shots, we have a different expecation of how many saves he should make than if he faced those shots starting his career at 25. This is a definite shortcoming of the empirical Bayes strategy outlined in the 4th post.
 </p>
 <p>
 adfadf
