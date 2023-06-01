@@ -24,9 +24,9 @@ I'm going to address the second and third points in this post, but in a sidewind
 Let's start the exploration by defining our population. There aren't many NHL goalie careers, so we need to be greedy and take as many as we can for the analysis at hand. When we talk about experience, we're referencing the number of shots faced. We don't know how many shots a goalie faced before 2007, so any goalie playing before then has to be removed. The converse is true for the 2022-2023 season. 
 
 Here's a short summary of the experience dataset:
-    - Goalie population drops from 318 to 130.
-    - Average career shots faced drops from 4,198 to 3,225.
-    - AdjSV% drops from .937 to .927
+    - Goalie population drops from 315 to 140.
+    - Harmonic mean of career shots faced rises from 12,690 to 14,568.
+    - Harmonic mean of AdjSV% stays at .939
 </p>
 <p>
 I wanted to start by sharing an interesting (though probably intuitive) finding. Below is the cumulative distribution function for goalie career seasons played.
@@ -62,9 +62,9 @@ I scraped hockey-reference for each goalie's date of birth (code available <a hr
 </p>
 <p>
 Our analysis population changes as follows:
-    - Goalie population drops from 318 to 311.
-    - Average career shots faced drops from 4,198 to 3,225.
-    - AdjSV% drops from .937 to .927
+    - Goalie population drops from 315 to 308.
+    - Harmonic mean of career shots faced rises from 12,690 to 12,721.
+    - Harmonic mean of AdjSV% stays at .939
 </p>
 <p>
 Let's start by simply grouping shots into bins by goalie age, rounded to the first decimal (ex: 26.0, 26.1, etc.), and then calculating the group-wide save percentage. Points belonging to groups with fewer shots pale in comparison to groups with many shots. Here's what that looks like:
