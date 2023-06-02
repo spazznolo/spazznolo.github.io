@@ -26,8 +26,8 @@ Let's start the exploration by defining our population. There aren't many NHL go
 <p>
 Here's a short summary of the experience dataset:
     - Goalie population drops from 315 to 140.
-    - Harmonic mean of career shots faced rises from 12,690 to 14,568 (mean drops from 4,198 to 3,225).
-    - Harmonic mean of AdjSV% stays at .939 (mean drops from .932 to .927).
+    - Harmonic mean of shots against rises from 12,690 to 14,568 (mean drops, 4,198 to 3,225).
+    - Harmonic mean of AdjSV% stays at .939 (mean drops, .932 to .927).
     - Mean of career shots faced drops from 4,198 to 3,225.
     - Mean of AdjSV% drops from .932 to .927.
 </p>
@@ -73,7 +73,7 @@ To get a clearer sense of the dynamics described above, let's group goalies by t
 Some thoughts:
     - The effects are much clearer here.
     - There isn't much to glean from goalies facing -300 shots.
-    - These goalies do not play again in the NHL for reasons outside thier play in the NHL (lower league play).
+    - These short NHL careers are almost certainly for reasons outside their play in the NHL.
     - Goalies facing -1500 shots fade quickly. They are given a shot and fail acutely.
     - Goalies facing -6000 shots start as the best group through the first 1,000 shots, then fade.
     - This seemingly unintuitive results is likely due to randomness, and, more interestingly, age.
@@ -131,7 +131,7 @@ Let's revisit the unintuive plot comparing pAdjSV% over goalie careers, grouped 
 </p>
 <p>
 Some thoughts:
-    - Goalies who face -6000 shots are about 1.5 years older than 6000+ goalies throughout their career.
+    - Goalies facing -6000 shots are ~1.5 years older than 6000+ goalies throughout their career.
     - This difference obviously includes the span from age 23 to roughly 27.
     - This is precisely the age range in which goalies seem to be improving in AdjSV%.
     - We need to adjust for this.
