@@ -64,7 +64,7 @@ Some thoughts:
     - This fade could partly be due to aging effects.
 </p>
 <p>
-To get a clearer sense of the dynamics described above, let's group goalies by the number of shots they faced and calculate the average pAdjSV% through each shot faced.
+To get a clearer sense of the dynamics described above, let's take the group average pAdjSV% through each shot faced.
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-five.png" width="65%" length="165"/></div>
@@ -73,10 +73,10 @@ To get a clearer sense of the dynamics described above, let's group goalies by t
 Some thoughts:
     - The effects are much clearer here.
     - There isn't much to glean from goalies facing -300 shots.
-    - These short NHL careers are almost certainly for reasons outside their play in the NHL.
-    - Goalies facing -1500 shots fade quickly. They are given a shot and fail acutely.
+    - These short NHL careers are almost certainly due to reasons outside their play in the NHL.
+    - Goalies facing -1500 shots fade quickly. They are given a decent look and fail acutely.
     - Goalies facing -6000 shots start as the best group through the first 1,000 shots, then fade.
-    - This seemingly unintuitive results is likely due to randomness, and, more interestingly, age.
+    - This seemingly unintuitive result is likely due to randomness, and, more interestingly, age.
 </p>
 <p>
 It's time to account for age.
@@ -88,8 +88,8 @@ I scraped hockey-reference for each goalie's date of birth (code available <a hr
 <p>
 Our analysis population changes as follows:
     - Goalie population drops from 315 to 308.
-    - Harmonic mean of career shots faced rises from 12,690 to 12,721 (mean rises from 4,198 to 4,286).
-    - Harmonic mean of AdjSV% stays at .939 (mean rises from .932 to .933).
+    - Harmonic mean of shots against rises from 12,690 to 12,721 (mean rises, 4,198 to 4,286).
+    - Harmonic mean of AdjSV% stays at .939 (mean rises, .932 to .933).
 </p>
 <p>
 Let's start by simply grouping shots into bins by goalie age, rounded to the first decimal (ex: 26.0, 26.1, etc.), and then calculating the group-wide save percentage. Points belonging to groups with fewer shots pale in comparison to groups with many shots. Here's what that looks like:
