@@ -144,8 +144,8 @@ What do we mean by "adjusting" for age? Well, as a goalie progresses through his
 The cleanest way to adjust for age would be to bake it into the already created adjustment for the probability of a shot being a goal. Taking the smoothed age curve presented above, we set the peak (age 27) as the standard and adjust for all other ages, so that, for example, an xFSV% of 0.940 at age 27 is 0.94000 - 0.00118 = 0.93882 at age 23 and 0.94000 - 0.00513 = 0.93487 at age 38.
 </p>
 <p>
-Fenwick Save Percentage (FSV%) = 1 - (Goals Against / Fenwick Shots Against)<br>
-<b>Age-Adjusted</b> Expected Fenwick Save Percentage (AdjxFSV%) = 1 - (Expected Goals Against / Fenwick Shots Against) - Adjustment<br>
+Fenwick Save Percentage (FSV%) = 1 - (GA/FSA)<br>
+<b>Age-Adjusted</b> Expected Fenwick Save Percentage (AdjxFSV%) = 1 - (xG/FSA) - Age Adjustment<br>
 Median Save Percentage (MSV%) = Median of Goalie (20+ xG faced) Career Save Percentage<br>
 <b>Adjusted Save Percentage (AdjSV%) = MSV% + (FSV% - AdjxFSV%)</b>
 </p>
