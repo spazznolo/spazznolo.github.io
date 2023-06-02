@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "Goalie Performance Assessment: The Problem with Time"
+title:  "Goalie Performance: The Problem with Time"
 date:   2023-05-24 8:52:05 -0400
 ---
-<h2>[Post 6] Goalie Performance Assessment: The Problem with Time</h2>
+<h2>[Post 3] Goalie Performance: The Problem with Time</h2>
 <p>
 In post 4, I outlined a framework for measuring goalie talent using their career Fenwick 5v5 save percentage. It concluded with the assumptions of the initial strategy, which I'll include again below.
 </p>
@@ -116,7 +116,7 @@ Some thoughts:
 </p>
 <p>
 <h5>Adjusting for Age</h5>
-What do we mean by "adjusting" for age? Well, as a goalie progresses through his life, our expectations of him change. We do not expect a 15 year old goalie to play well in the NHL; we do not expect a 45 year old play well either. In between this, our expectations of the goalie increases up to a certain point (shown above to potentially be around age 27), and then decreases again for, well, forever. It follows that if a goalie starts his NHL career at 18 and faces 1000 shots, we have a different expecation of how many saves he should make than if he faced those shots starting his career at 25. This is a definite shortcoming of the empirical Bayes strategy outlined in the 4th post.
+What do we mean by "adjusting" for age? Well, as a goalie progresses through his life, our expectations of him change. We do not expect a 15 year old goalie to play well in the NHL; we do not expect a 45 year old play well either. In between this, our expectations of the goalie increases up to a certain point (shown above to potentially be around age 27), and then decreases again for, well, forever. It follows that if a goalie starts his NHL career at 18 and faces 1000 shots, we have a different expecation of how many saves he should make than if he faced those shots starting his career at age 25. This is a definite shortcoming of the empirical Bayes strategy outlined in the 4th post.
 </p>
 <p>
 adfadf

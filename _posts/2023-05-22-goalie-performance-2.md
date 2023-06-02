@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "Empirical Bayes Adjusted Save Percentage"
+title:  "Goalie Performance: Empirical Bayes Adjusted Save Percentage"
 date:   2023-05-22 8:52:05 -0400
 ---
-<h2>[Post 5] Empirical Bayes Adjusted Save Percentage</h2>
+<h2>[Post 2] Goalie Performance: Empirical Bayes Adjusted Save Percentage</h2>
 <p>
 In post 4, I outlined a framework for measuring goalie talent using their career Fenwick 5v5 save percentage. It concluded with the assumptions of the initial strategy, which I'll include again below.
 </p>
