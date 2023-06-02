@@ -22,42 +22,64 @@ I'm going to address the second and third points in this post, but in a sidewind
 <p>
 <h5>Exploring Experience</h5>
 Let's start the exploration by defining our population. There aren't many NHL goalie careers, so we need to be greedy and take as many as we can for the analysis at hand. When we talk about experience, we're referencing the number of shots faced. We don't know how many shots a goalie faced before 2007, so any goalie playing before then has to be removed. The converse is true for the 2022-2023 season. 
-
-Here's a short summary of the experience dataset:
-    - Goalie population drops from 315 to 140.
-    - Harmonic mean of career shots faced rises from 12,690 to 14,568.
-    - Harmonic mean of AdjSV% stays at .939
 </p>
 <p>
-I wanted to start by sharing an interesting (though probably intuitive) finding. Below is the cumulative distribution function for goalie career seasons played.
+Here's a short summary of the experience dataset:
+    - Goalie population drops from 315 to 140.
+    - Harmonic mean of career shots faced rises from 12,690 to 14,568 (mean drops from 4,198 to 3,225).
+    - Harmonic mean of AdjSV% stays at .939 (mean drops from .932 to .927).
+    - Mean of career shots faced drops from 4,198 to 3,225.
+    - Mean of AdjSV% drops from .932 to .927.
+</p>
+<p>
+Another perspective on time is the number of seasons played. This measure differs from shots for goalies who play more games per season (starters). Let's start by contextualizing just how short most goalie careers are with a plot of the cumulative distribution function for goalie career seasons played.
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-one.png" width="60%" length="150"/></div>
 </p>
 <p>
 Some thoughts:
-    - 47% of goalies played only one season.
+    - 42% of goalies played only one season.
     - 74% of goalies played five seasons or less.
     - 90% of goalies played twelve seasons or less.
 </p>
 <p>
-adfadfa
+It is difficult to understands a goalie's path by looking at their save percentage or shots faced in isolation. What's nice about the empirical Bayesian method introduced in the previous posts - it considers these measures at the same time. Moreover, we can repeatedly re-evaluate a goalie's pAdjSV% after each shot they face. We can then plot this posterior over shots to get a sense of a goalie's career path. In order to extract more insight from this, let's group goalies by their career shots faced, like this:
+</p>
+<p>
+Goalies facing:
+    - less than 300 shots -> -0300.
+    - more than 300 shots, but less than 1,500 -> -1500.
+    - more than 1,500 shots, but less than 6,000 -> -6000.
+    - more than 6000 -> 6000+.
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-four.png" width="65%" length="165"/></div>
 </p>
 <p>
 Some thoughts:
-    - Nearly every goalie [give %] who faces -6000 shots ends his career with a pAdjSV% below average.
+    - Nearly every goalie (77.1%) who faces -6000 shots ends his career with a pAdjSV% below expected.
     - Goalies facing 1500+ but -6000 seem to fade as their career progresses.
     - These goalies tend to be backups, facing ~600-1000 shots a season.
     - This fade could partly be due to aging effects.
 </p>
 <p>
+To get a clearer sense of the dynamics described above, let's group goalies by the number of shots they faced and calculate the average pAdjSV% through each shot faced.
+</p>
+<p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-five.png" width="65%" length="165"/></div>
 </p>
 <p>
-An important dimension is missing in the above data which could partially explain the unintuitive result where goalies who face < 5000 shots take a significant early lead in pAdjSV% over goalies who face 5000+ shots - age. 
+Some thoughts:
+    - The effects are much clearer here.
+    - There isn't much to glean from goalies facing -300 shots.
+    - These goalies do not play again in the NHL for reasons outside thier play in the NHL (lower league play).
+    - Goalies facing -1500 shots fade quickly. They are given a shot and fail acutely.
+    - Goalies facing -6000 shots start as the best group through the first 1,000 shots, then fade.
+    - This seemingly unintuitive results is likely due to randomness, and, more interestingly, age.
+</p>
+<p>
+It's time to account for age.
 </p>
 <p>
 <h5>Exploring Age</h5>
@@ -66,8 +88,8 @@ I scraped hockey-reference for each goalie's date of birth (code available <a hr
 <p>
 Our analysis population changes as follows:
     - Goalie population drops from 315 to 308.
-    - Harmonic mean of career shots faced rises from 12,690 to 12,721.
-    - Harmonic mean of AdjSV% stays at .939
+    - Harmonic mean of career shots faced rises from 12,690 to 12,721 (mean rises from 4,198 to 4,286).
+    - Harmonic mean of AdjSV% stays at .939 (mean rises from .932 to .933).
 </p>
 <p>
 Let's start by simply grouping shots into bins by goalie age, rounded to the first decimal (ex: 26.0, 26.1, etc.), and then calculating the group-wide save percentage. Points belonging to groups with fewer shots pale in comparison to groups with many shots. Here's what that looks like:
@@ -109,17 +131,23 @@ Let's revisit the unintuive plot comparing pAdjSV% over goalie careers, grouped 
 </p>
 <p>
 Some thoughts:
-    - Goalies who face -5000 shots are about 1.5 years older throughout their career.
+    - Goalies who face -6000 shots are about 1.5 years older than 6000+ goalies throughout their career.
     - This difference obviously includes the span from age 23 to roughly 27.
     - This is precisely the age range in which goalies seem to be improving in AdjSV%.
     - We need to adjust for this.
 </p>
 <p>
 <h5>Adjusting for Age</h5>
-What do we mean by "adjusting" for age? Well, as a goalie progresses through his life, our expectations of him change. We do not expect a 15 year old goalie to play well in the NHL; we do not expect a 45 year old play well either. In between this, our expectations of the goalie increases up to a certain point (shown above to potentially be around age 27), and then decreases again for, well, forever. It follows that if a goalie starts his NHL career at 18 and faces 1000 shots, we have a different expecation of how many saves he should make than if he faced those shots starting his career at age 25. This is a definite shortcoming of the empirical Bayes strategy outlined in the 4th post.
+What do we mean by "adjusting" for age? Well, as a goalie progresses through his life, our expectations of him change. We do not expect a 15 year old goalie to play well in the NHL; we do not expect a 45 year old play well either. In between this, our expectations of the goalie increases up to a certain point (shown above to potentially be around age 27), and then decreases again for, well, forever. It follows that if a goalie starts his NHL career at 18 and faces 1000 shots, we have a different expectation of how many saves he should make than if he faced those shots starting his career at age 25. This is a definite shortcoming of the empirical Bayes strategy outlined in the 4th post.
 </p>
 <p>
-adfadf
+The cleanest way to adjust for age would be to bake it into the already created adjustment for the probability of a shot being a goal. Taking the smoothed age curve presented above, we set the peak (age 27) as the standard and adjust for all other ages, so that, for example, an xFSV% of 0.940 at age 27 is 0.94000 - 0.00118 = 0.93882 at age 23 and 0.94000 - 0.00513 = 0.93487 at age 38.
+</p>
+<p>
+Fenwick Save Percentage (FSV%) = 1 - (Goals Against / Fenwick Shots Against)<br>
+<b>Age-Adjusted</b> Expected Fenwick Save Percentage (AdjxFSV%) = 1 - (Expected Goals Against / Fenwick Shots Against) - Adjustment<br>
+Median Save Percentage (MSV%) = Median of Goalie (20+ xG faced) Career Save Percentage<br>
+<b>Adjusted Save Percentage (AdjSV%) = MSV% + (FSV% - AdjxFSV%)</b>
 </p>
 <p>
 Code available here: <a href="https://github.com/spazznolo/goalie-consistency/blob/main/posts/post-6.R">https://github.com/spazznolo/goalie-consistency/blob/main/posts/post-6.R</a>
