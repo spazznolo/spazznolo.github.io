@@ -21,7 +21,7 @@ I'm going to address the second and third points in this post, but in a sidewind
 </p>
 <p>
 <h5>Exploring Experience</h5>
-Let's start the exploration by defining our population. There aren't many NHL goalie careers, so we need to be greedy and take as many as we can for the analysis at hand. When we talk about experience, we're referencing the number of shots faced. We don't know how many shots a goalie faced before 2007, so any goalie playing before then has to be removed. The converse is true for the 2022-2023 season. 
+Let's start by defining our population. There aren't many NHL goalie careers, so we need to be greedy and take as many as we can for the analysis at hand. When we talk about experience, we're referencing the number of shots faced. We don't know how many shots a goalie faced before the 2007-2008 season, so any goalie playing before then has to be removed. The same is true for the goalies playing the 2022-2023 season. As an example, we don't know how Jeremy Sayman's career will turn out - we only know what he's done in his first few seasons, so we can't properly categorize his career yet.
 </p>
 <p>
 Here's a short summary of the experience dataset:
@@ -32,10 +32,19 @@ Here's a short summary of the experience dataset:
     - Mean of AdjSV% drops from .932 to .927.
 </p>
 <p>
+To get a better sense of the longevity of a goalie career, we plot the percentage of goalies having faced at least a certain number of shots throughout their careers. This is also known as the cumulative distribution function (cdf) of career shots faced for goalies. 
+</p>
+<p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-one.png" width="60%" length="150"/></div>
 </p>
 <p>
-Another perspective on time is the number of seasons played. This measure differs from shots for goalies who play more games per season (starters). Let's start by contextualizing just how short most goalie careers are with a plot of the cumulative distribution function for goalie career seasons played.
+Some thoughts:
+    - 25% of goalies faced 33 shots or less (!).
+    - 50% of goalies faced 202 shots or less (that's about 7 games).
+    - 75% of goalies faced 2,606 shots or less.
+</p>
+<p>
+Another perspective on goalie longevity is the number of seasons played. This measure differs from shots for goalies who play more games per season (starters). Again, we plot the cdf, but this time for goalie career seasons played.
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-two.png" width="60%" length="150"/></div>
