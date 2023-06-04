@@ -26,7 +26,7 @@ Terms established in previous posts:
 </p>
 <p>
 <h5>Exploring Experience</h5>
-Let's start by defining our population. There aren't many NHL goalie careers, so we need to be greedy and take as many as we can for the analysis at hand. When we talk about experience, we're referencing the number of shots faced. We don't know how many shots a goalie faced before the 2007-2008 season, so any goalie playing before then has to be removed. The same is true for the goalies playing the 2022-2023 season. As an example, we don't know how Jeremy Sayman's career will turn out - we only know what he's done in his first few seasons, so we can't properly categorize his career yet.
+Let's start by defining our population. There aren't many NHL goalies, so we need to be greedy and take as many as we can for the analysis at hand. We don't know how much experience a goalie had before the 2007-2008 season, so any goalie playing that season has to be removed. The same is true for the goalies playing the 2022-2023 season. As an example, we don't know how Jeremy Sayman's career will turn out - we only know what he's done in his first few seasons, so we can't properly categorize his career yet.
 </p>
 <p>
 Here's a short summary of the experience dataset:
@@ -61,7 +61,7 @@ Some thoughts:
     - 90% of goalies played twelve seasons or less.
 </p>
 <p>
-It is difficult to understands a goalie's path by looking at their save percentage or shots faced in isolation. What's nice about the empirical Bayesian method introduced in the previous posts - it considers these measures at the same time. Moreover, we can repeatedly re-evaluate a goalie's pAdjSV% after each shot they face. We can then plot this posterior over each shot of a goalie's career to get a sense of their path. In order to extract more insight from this, let's section goalies by their career shots faced, like this:
+It is difficult to understands a goalie's path by looking at their save percentage or shots faced in isolation. What's nice about the empirical Bayesian method introduced in the previous posts is that it considers these measures at the same time. Moreover, we can repeatedly re-evaluate a goalie's pAdjSV% after each shot they face. We can then plot this posterior over each shot of a goalie's career to get a sense of their path. In order to extract more insight from this, let's section goalies by their career shots faced, like this:
 </p>
 <p>
 Goalies facing:
@@ -69,6 +69,15 @@ Goalies facing:
     - more than 300 shots, but less than 1,500 -> -1500.
     - more than 1,500 shots, but less than 6,000 -> -6000.
     - more than 6000 -> 6000+.
+</p>
+<p>
+As an example, Braden Holtby's pAdjSV% after facing various shot totals:
+    - 0 shots: 0.9417 (as is every goalie's)
+    - 1,000 shots: 0.9421
+    - 5,000 shots: 0.9425
+    - 10,000 shots: 0.9452
+    - 15,000 shots: 0.9450
+    - 19,555 shots: 0.9433
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-four.png" width="65%" length="165"/></div>
