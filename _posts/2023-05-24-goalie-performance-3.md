@@ -80,7 +80,7 @@ As an example, Braden Holtby's pAdjSV% after facing various shot totals:
     - 19,555 shots: 0.9433
 </p>
 <p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-four.png" width="65%" length="165"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-three.png" width="65%" length="165"/></div>
 </p>
 <p>
 Some thoughts:
@@ -93,7 +93,7 @@ Some thoughts:
 To get a clearer sense of the dynamics described above, let's take the group average pAdjSV% through each shot faced.
 </p>
 <p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-five.png" width="65%" length="165"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-four.png" width="65%" length="165"/></div>
 </p>
 <p>
 Some thoughts:
@@ -121,7 +121,7 @@ The analysis population changes as follows:
 Let's start by simply grouping shots into bins by goalie age, rounded to the first decimal (ex: 26.0, 26.1, etc.), and then calculating the group-wide save percentage. Points belonging to groups with fewer shots pale in comparison to groups with many shots. Here's what that looks like:
 </p>
 <p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-two.png" width="60%" length="150"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-five.png" width="60%" length="150"/></div>
 </p>
 <p>
 Some thoughts:
