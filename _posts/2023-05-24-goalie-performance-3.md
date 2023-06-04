@@ -20,6 +20,11 @@ Assumptions:
 I'm going to address the second and third points in this post, but in a sidewinding sort of way. 
 </p>
 <p>
+Terms established in previous posts:
+    - AdjSV%: A goalie's save percentage, adjusted for shot quality.
+    - pAdjSV%: A goalie's posterior adjusted save percentage.
+</p>
+<p>
 <h5>Exploring Experience</h5>
 Let's start by defining our population. There aren't many NHL goalie careers, so we need to be greedy and take as many as we can for the analysis at hand. When we talk about experience, we're referencing the number of shots faced. We don't know how many shots a goalie faced before the 2007-2008 season, so any goalie playing before then has to be removed. The same is true for the goalies playing the 2022-2023 season. As an example, we don't know how Jeremy Sayman's career will turn out - we only know what he's done in his first few seasons, so we can't properly categorize his career yet.
 </p>
@@ -56,7 +61,7 @@ Some thoughts:
     - 90% of goalies played twelve seasons or less.
 </p>
 <p>
-It is difficult to understands a goalie's path by looking at their save percentage or shots faced in isolation. What's nice about the empirical Bayesian method introduced in the previous posts - it considers these measures at the same time. Moreover, we can repeatedly re-evaluate a goalie's pAdjSV% after each shot they face. We can then plot this posterior over shots to get a sense of a goalie's career path. In order to extract more insight from this, let's group goalies by their career shots faced, like this:
+It is difficult to understands a goalie's path by looking at their save percentage or shots faced in isolation. What's nice about the empirical Bayesian method introduced in the previous posts - it considers these measures at the same time. Moreover, we can repeatedly re-evaluate a goalie's pAdjSV% after each shot they face. We can then plot this posterior over each shot of a goalie's career to get a sense of their path. In order to extract more insight from this, let's section goalies by their career shots faced, like this:
 </p>
 <p>
 Goalies facing:
@@ -91,7 +96,7 @@ Some thoughts:
     - This seemingly unintuitive result is likely due to randomness, and, more interestingly, age.
 </p>
 <p>
-It's time to account for age.
+It's time to explore age.
 </p>
 <p>
 <h5>Exploring Age</h5>
