@@ -5,7 +5,7 @@ date:   2023-05-24 8:52:05 -0400
 ---
 <h2>[Post 3] Goalie Performance: The Problem with Time</h2>
 <p>
-In post 4, I outlined a framework for measuring goalie talent using their career Fenwick 5v5 save percentage. It concluded with the assumptions of the initial strategy, which I'll include again below.
+In the first post, I outlined a framework for measuring goalie talent using their career Fenwick 5v5 save percentage. It concluded with the assumptions of the initial strategy, which I'll include again below.
 </p>
 <p>
 Assumptions:
@@ -32,10 +32,13 @@ Here's a short summary of the experience dataset:
     - Mean of AdjSV% drops from .932 to .927.
 </p>
 <p>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-one.png" width="60%" length="150"/></div>
+</p>
+<p>
 Another perspective on time is the number of seasons played. This measure differs from shots for goalies who play more games per season (starters). Let's start by contextualizing just how short most goalie careers are with a plot of the cumulative distribution function for goalie career seasons played.
 </p>
 <p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-one.png" width="60%" length="150"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-two.png" width="60%" length="150"/></div>
 </p>
 <p>
 Some thoughts:
@@ -124,6 +127,9 @@ Some thoughts:
     - There is well documented survivorship bias with this method.
 </p>
 <p>
+INCLUDE PHANTOM YEARS HERE
+</p>
+<p>
 Let's revisit the unintuive plot comparing pAdjSV% over goalie careers, grouped by career length. This time, we'll plot the average age of goalies in each group as they face shots over their career.
 </p>
 <p>
@@ -134,7 +140,7 @@ Some thoughts:
     - Goalies facing -6000 shots are ~1.5 years older than 6000+ goalies throughout their career.
     - This difference obviously includes the span from age 23 to roughly 27.
     - This is precisely the age range in which goalies seem to be improving in AdjSV%.
-    - We need to adjust for this.
+    - We can adjust for this.
 </p>
 <p>
 <h5>Adjusting for Age</h5>
@@ -147,7 +153,7 @@ The cleanest way to adjust for age would be to bake it into the already created 
 Fenwick Save Percentage (FSV%) = 1 - (GA/FSA)<br>
 <b>Age-Adjusted</b> Expected Fenwick Save Percentage (AdjxFSV%) = 1 - (xG/FSA) - Age Adjustment<br>
 Median Save Percentage (MSV%) = Median of Goalie (20+ xG faced) Career Save Percentage<br>
-<b>Adjusted Save Percentage (AdjSV%) = MSV% + (FSV% - AdjxFSV%)</b>
+<b>Adjusted (Age + xG) Save Percentage (AdjSV%) = MSV% + (FSV% - AdjxFSV%)</b>
 </p>
 <p>
 Code available here: <a href="https://github.com/spazznolo/goalie-consistency/blob/main/posts/post-6.R">https://github.com/spazznolo/goalie-consistency/blob/main/posts/post-6.R</a>
