@@ -109,10 +109,10 @@ It's time to explore age.
 </p>
 <p>
 <h5>Exploring Age</h5>
-I scraped hockey-reference for each goalie's date of birth (code available <a href="https://github.com/spazznolo/goalie-consistency/blob/main/import/scrape_goalie_data.R">here</a>) in order to see how their performance changes as they age. Using goalies' dates of birth with dates of games, we can get the exact age of a goaltender for each of their games. Unfortunately, a few goalies were not linked. 
+I scraped hockey-reference for each goalie's date of birth (code available <a href="https://github.com/spazznolo/goalie-consistency/blob/main/import/scrape_goalie_data.R">here</a>) in order to see how their performance changes as they age. By combining the goalies' dates of birth with the dates of their games, we can determine the exact age of a goaltender for each game they played. Unfortunately, a few goalies were not linked. 
 </p>
 <p>
-Our analysis population changes as follows:
+The analysis population changes as follows:
     - Goalie population drops from 315 to 308.
     - Harmonic mean of shots against rises from 12,690 to 12,721 (mean rises, 4,198 to 4,286).
     - Harmonic mean of AdjSV% stays at .939 (mean rises, .932 to .933).
