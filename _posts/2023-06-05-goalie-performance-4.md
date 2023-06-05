@@ -38,7 +38,11 @@ The analysis population changes as follows:
 Let's start by simply grouping shots into bins by goalie age, rounded to the first decimal (ex: 26.0, 26.1, etc.), and then calculating the group-wide save percentage. Points belonging to groups with fewer shots pale in comparison to groups with many shots. Here's what that looks like:
 </p>
 <p>
+<<<<<<< Updated upstream
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-two.png" width="60%" length="150"/></div>
+=======
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-seven-one.png" width="60%" length="150"/></div>
+>>>>>>> Stashed changes
 </p>
 <p>
 Some thoughts:
@@ -57,7 +61,11 @@ Let's fix some of the bias above with a few changes. Instead of simply grouping 
 Altogether, this gives us the curve below:
 </p>
 <p>
+<<<<<<< Updated upstream
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-three.png" width="60%" length="150"/></div>
+=======
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-seven-two.png" width="60%" length="150"/></div>
+>>>>>>> Stashed changes
 </p>
 <p>
 Some thoughts:
@@ -70,6 +78,7 @@ Some thoughts:
 INCLUDE PHANTOM YEARS HERE
 </p>
 <p>
+<<<<<<< Updated upstream
 Let's revisit the unintuive plot comparing pAdjSV% over goalie careers, grouped by career length. This time, we'll plot the average age of goalies in each group as they face shots over their career.
 </p>
 <p>
@@ -83,6 +92,8 @@ Some thoughts:
     - We can adjust for this.
 </p>
 <p>
+=======
+>>>>>>> Stashed changes
 <h5>Adjusting for Age</h5>
 What do we mean by "adjusting" for age? Well, as a goalie progresses through his life, our expectations of him change. We do not expect a 15 year old goalie to play well in the NHL; we do not expect a 45 year old play well either. In between this, our expectations of the goalie increases up to a certain point (shown above to potentially be around age 27), and then decreases again for, well, forever. It follows that if a goalie starts his NHL career at 18 and faces 1000 shots, we have a different expectation of how many saves he should make than if he faced those shots starting his career at age 25. This is a definite shortcoming of the empirical Bayes strategy outlined in the 4th post.
 </p>
