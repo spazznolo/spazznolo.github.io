@@ -61,7 +61,10 @@ Some thoughts:
     - 90% of goalies played twelve seasons or less.
 </p>
 <p>
-It is difficult to understands a goalie's path by looking at their save percentage or shots faced in isolation. What's nice about the empirical Bayesian method introduced in the previous posts is that it considers these measures at the same time. Moreover, we can repeatedly re-evaluate a goalie's pAdjSV% after each shot they face. We can then plot this posterior over each shot of a goalie's career to get a sense of their path. In order to extract more insight from this, let's section goalies by their career shots faced, like this:
+Intuitively, we feel that goalie career length is dependent on performance. If a goalie performs well, they'll keep getting more chances to play. If they play poorly, they'll get less chances until, finally, they are no longer given the chance to play. 
+</p>
+<p>
+If they It is difficult to understands a goalie's path by looking at their save percentage or shots faced in isolation. What's nice about the empirical Bayesian method introduced in the previous posts is that it considers these measures at the same time. Moreover, we can repeatedly re-evaluate a goalie's pAdjSV% after each shot they face. We can then plot this posterior over each shot of a goalie's career to get a sense of their path. In order to extract more insight from this, let's section goalies by their career shots faced, like this:
 </p>
 <p>
 Goalies facing:
