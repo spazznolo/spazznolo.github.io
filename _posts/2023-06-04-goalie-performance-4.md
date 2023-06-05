@@ -3,7 +3,7 @@ layout: post
 title:  "Goalie Performance: Age is Confounding"
 date:   2023-06-04 8:52:05 -0400
 ---
-<h2>[Post 3] Goalie Performance: Age is Confounding</h2>
+<h2>[Post 4] Goalie Performance: Age is Confounding</h2>
 <p>
 In the first post, I outlined a framework for measuring goalie talent using their career Fenwick 5v5 save percentage. It concluded with the assumptions of the initial strategy, which I'll include again below.
 </p>
@@ -68,19 +68,6 @@ Some thoughts:
 </p>
 <p>
 INCLUDE PHANTOM YEARS HERE
-</p>
-<p>
-Let's revisit the unintuive plot comparing pAdjSV% over goalie careers, grouped by career length. This time, we'll plot the average age of goalies in each group as they face shots over their career.
-</p>
-<p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-six.png" width="60%" length="150"/></div>
-</p>
-<p>
-Some thoughts:
-    - Goalies facing -6000 shots are ~1.5 years older than 6000+ goalies throughout their career.
-    - This difference obviously includes the span from age 23 to roughly 27.
-    - This is precisely the age range in which goalies seem to be improving in AdjSV%.
-    - We can adjust for this.
 </p>
 <p>
 <h5>Adjusting for Age</h5>

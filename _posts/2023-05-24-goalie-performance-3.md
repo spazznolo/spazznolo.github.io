@@ -108,13 +108,10 @@ Some thoughts:
     - This seemingly unintuitive result is likely due to randomness, and, more interestingly, age.
 </p>
 <p>
-In the next post, we explore age.
-</p>
-<p>
 Let's revisit the unintuive plot comparing pAdjSV% over goalie careers, grouped by career length. This time, we'll plot the average age of goalies in each group as they face shots over their career.
 </p>
 <p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-five.png" width="60%" length="150"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-six.png" width="60%" length="150"/></div>
 </p>
 <p>
 Some thoughts:
@@ -122,6 +119,9 @@ Some thoughts:
     - This difference obviously includes the span from age 23 to roughly 27.
     - This is precisely the age range in which goalies seem to be improving in AdjSV%.
     - We can adjust for this.
+</p>
+<p>
+In the next post, we explore how age is a confounder in assessing goalie performance.
 </p>
 <p>
 Code available here: <a href="https://github.com/spazznolo/goalie-consistency/blob/main/posts/post-6.R">https://github.com/spazznolo/goalie-consistency/blob/main/posts/post-6.R</a>
