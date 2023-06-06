@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "How important is post-regulation time?"
+title:  "Post-regulation: How important is it?"
 date:   2022-04-08 8:52:05 -0400
 ---
 <h2>[Introduction] How important is post-regulation time?</h2>

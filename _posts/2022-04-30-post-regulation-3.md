@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Is the overtime random after each shot?"
+title:  "Post-regulation: Is the overtime random after each shot?"
 date:   2022-04-30 8:52:05 -0400
 ---
 <h2>[Post 3] Is the overtime random after each shot?</h2>

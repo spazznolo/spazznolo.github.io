@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Measuring the uncertainty caused by the current overtime format"
+title:  "Post-regulation: Measuring the uncertainty caused by the current format"
 date:   2022-04-26 8:52:05 -0400
 ---
 <h2>[Post 1] Measuring the uncertainty caused by the current overtime format</h2>
