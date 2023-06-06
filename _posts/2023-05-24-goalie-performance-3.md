@@ -5,17 +5,23 @@ date:   2023-05-24 8:52:05 -0400
 ---
 <h2>[Post 3] Goalie Performance: Exploring the Distribution</h2>
 <p>
-In the first post, I outlined a framework for measuring goalie talent using their career Fenwick 5v5 save percentage. We fit a prior from the beta family to our goalie career AdjSV% histogram which yielded the hyper-parameters we built the posterior with (alpha of 56.45766, beta of 881.8847). There's a problem, though. To fit this prior, we had to throw out goalies who faced less than 10 xG. Unfortunately, 90 of the 314 goalies in our set were cut! Moreover, we treated goalies equally, meaning Zachary Fucale was considered to be as informative as Henrik Lundqvist. 
+In the first post, I outlined a framework for measuring goalie talent using their career Fenwick 5v5 save percentage. A prior from the beta family was fit to the goalie career AdjSV% histogram, which yielded the hyper-parameters we built the posterior with (alpha of 56.45766, beta of 881.8847). There's a problem, though. To fit this prior, we had to throw out goalies who faced less than 10 xG. Unfortunately, 90 of the 314 goalies in our set were cut! Moreover, we treated goalies equally, meaning Zachary Fucale was considered to be as informative as Henrik Lundqvist. 
 </p>
 <p>
-It turns out we can fix both issues outlined above with one change - instead of fitting a beta distribution with goalie AdjSV%, we can fit a negative binomial distribution with goalies' 1) shots faced and 2) adjusted saves. With this, we can include all goalies, as long as they have made a save and allowed a goal. These are totals, so the prior will be weighted towards experience. Problem solved? Not really. Think of which kind of goalies get to gain experience. If a goalie performs well, they'll keep getting more chances to play. If they play poorly, they'll get less chances until, finally, they are no longer given the chance to play. Therefore, the extent of a goalie's experience is biased by his performance. For now, we sidestep the problem with fitting a "correct" distribution and explore experience.
+It turns out we can fix both issues outlined above with one change - instead of fitting a beta distribution with goalie AdjSV%, we can fit a negative binomial distribution with goalies' 1) shots faced and 2) adjusted saves. EXPLAIN MORE With this, we can include all goalies, as long as they have made a save and allowed a goal. These are totals, so the prior will be weighted towards experience.
+</p>
+<p>
+Problem solved? 
+</p>
+<p>
+Not really. Think of which kind of goalies get to gain experience - if a goalie performs well, they'll keep getting more chances to play; if they play poorly, they'll get less chances until, finally, they are no longer given the chance to play. Therefore, the extent of a goalie's experience is biased by his performance. For now, we sidestep the problem with fitting a "correct" distribution and further explore experience.
 </p>
 <p>
 <h5>Exploring Experience</h5>
-Let's start by defining our population. There aren't many NHL goalies, so we need to be greedy and take as many as we can for the analysis at hand. We don't know how much experience a goalie had before the 2007-2008 season, so any goalie playing that season has to be removed. The same is true for the goalies playing the 2022-2023 season. As an example, we don't know how Jeremy Sayman's career will turn out - we only know what he's done in his first few seasons, so we can't properly categorize his career yet.
+To start, we can't keep every goalie in our population for this analysis. We just don't know how much experience a goalie had before the 2007-2008 season, so any goalie playing that season has to be removed. The same is true for the goalies playing the 2022-2023 season. As an example, we don't know how Jeremy Sayman's career will turn out - we only know what he's done in his first few seasons, so we can't properly categorize his career yet.
 </p>
 <p>
-Here's a short summary of the experience dataset:
+Here's a short summary of the reduced population:
     - Goalie population drops from 315 to 140.
     - Harmonic mean of shots against rises from 12,690 to 14,568 (mean drops, 4,198 to 3,225).
     - Harmonic mean of AdjSV% stays at .939 (mean drops, .932 to .927).
@@ -23,7 +29,7 @@ Here's a short summary of the experience dataset:
     - Mean of AdjSV% drops from .932 to .927.
 </p>
 <p>
-To get a better sense of the longevity of a goalie career, we plot the percentage of goalies having faced at least a certain number of shots throughout their careers. This is also known as the cumulative distribution function (cdf) of career shots faced for goalies. 
+To conextualize goalie career lengths, we plot the percentage of goalies having faced at least a certain number of shots throughout their careers. This is also known as the cumulative distribution function (cdf) of career shots faced for goalies. 
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-one.png" width="60%" length="150"/></div>
@@ -46,6 +52,13 @@ Some thoughts:
     - 74% of goalies played five seasons or less.
     - 90% of goalies played twelve seasons or less.
 </p>
+<p>
+It should now be obvious that most goalies don't really have a typical NHL career as we imagine them. Let's confirm the assumption that goalies with more experience perform better than those with less. Simple plot, we group goalies by career seasons played and then take the average AdjSV% for each group; seasons played on the x-axis against mean AdjSV% on the y-axis. 
+</p>
+<p>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-three.png" width="60%" length="150"/></div>
+</p>
+
 
 <p>
 It is difficult to understands a goalie's path by looking at their save percentage or shots faced in isolation. What's nice about the empirical Bayesian method introduced in the previous posts is that it considers these measures at the same time. Moreover, we can repeatedly re-evaluate a goalie's pAdjSV% after each shot they face. We can then plot this posterior over each shot of a goalie's career to get a sense of their path. In order to extract more insight from this, let's section goalies by their career shots faced, like this:
