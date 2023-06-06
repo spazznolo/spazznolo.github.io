@@ -1,28 +1,14 @@
 ---
 layout: post
-title:  "Goalie Performance: Experience is Confounding"
+title:  "Goalie Performance: Exploring the Distribution"
 date:   2023-05-24 8:52:05 -0400
 ---
-<h2>[Post 3] Goalie Performance: Experience is Confounding</h2>
+<h2>[Post 3] Goalie Performance: Exploring the Distribution</h2>
 <p>
-In the first post, I outlined a framework for measuring goalie talent using their career Fenwick 5v5 save percentage. It concluded with the assumptions of the initial strategy, which I'll include again below.
+In the first post, I outlined a framework for measuring goalie talent using their career Fenwick 5v5 save percentage. We fit a prior from the beta family to our goalie career AdjSV% histogram which yielded the hyper-parameters we built the posterior with (alpha of 56.45766, beta of 881.8847). There's a problem, though. To fit this prior, we had to throw out goalies who faced less than 10 xG. Unfortunately, 90 of the 314 goalies in our set were cut! Moreover, we treated goalies equally, meaning Zachary Fucale was considered to be as informative as Henrik Lundqvist. 
 </p>
 <p>
-Assumptions:
-    - The prior distribution is assumed to be from the beta family.
-    - Age is assumed to be irrelevant. 
-    - The number of shots faced is assumed to be independent from performance.
-    - Scoring rates are assumed to be constant.
-    - All shots are assumed to be equal. 
-    - Team systems are assumed to be identical.
-</p>
-<p>
-I'm going to address the third point in this post. 
-</p>
-<p>
-Terms established in previous posts:
-    - AdjSV%: A goalie's save percentage, adjusted for shot quality.
-    - pAdjSV%: A goalie's posterior adjusted save percentage.
+It turns out we can fix both issues outlined above with one change - instead of fitting a beta distribution with goalie AdjSV%, we can fit a negative binomial distribution with goalies' 1) shots faced and 2) adjusted saves. With this, we can include all goalies, as long as they have made a save and allowed a goal. These are totals, so the prior will be weighted towards experience. Problem solved? Not really. Think of which kind of goalies get to gain experience. If a goalie performs well, they'll keep getting more chances to play. If they play poorly, they'll get less chances until, finally, they are no longer given the chance to play. Therefore, the extent of a goalie's experience is biased by his performance. For now, we sidestep the problem with fitting a "correct" distribution and explore experience.
 </p>
 <p>
 <h5>Exploring Experience</h5>
@@ -60,9 +46,7 @@ Some thoughts:
     - 74% of goalies played five seasons or less.
     - 90% of goalies played twelve seasons or less.
 </p>
-<p>
-Intuitively, we feel that goalie career length is dependent on performance. If a goalie performs well, they'll keep getting more chances to play. If they play poorly, they'll get less chances until, finally, they are no longer given the chance to play. Therefore, the extent of a goalie's experience is biased by his performance.
-</p>
+
 <p>
 It is difficult to understands a goalie's path by looking at their save percentage or shots faced in isolation. What's nice about the empirical Bayesian method introduced in the previous posts is that it considers these measures at the same time. Moreover, we can repeatedly re-evaluate a goalie's pAdjSV% after each shot they face. We can then plot this posterior over each shot of a goalie's career to get a sense of their path. In order to extract more insight from this, let's section goalies by their career shots faced, like this:
 </p>
