@@ -58,10 +58,12 @@ It should now be obvious that most goalies don't really have a typical NHL caree
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-three.png" width="60%" length="150"/></div>
 </p>
-
+<p>
+What does this mean for the prior distribution? Do we weigh the observations by shots faced, which is biased towards goalies with experience, or treat all goalies equally, losing nearly 30% of our population (albeit less than 1% of shots faced) at the same time?
+</p>
 
 <p>
-It is difficult to understands a goalie's path by looking at their save percentage or shots faced in isolation. What's nice about the empirical Bayesian method introduced in the previous posts is that it considers these measures at the same time. Moreover, we can repeatedly re-evaluate a goalie's pAdjSV% after each shot they face. We can then plot this posterior over each shot of a goalie's career to get a sense of their path. In order to extract more insight from this, let's section goalies by their career shots faced, like this:
+It is difficult to understand a goalie's path by looking at their save percentage or shots faced in isolation. What's nice about the empirical Bayesian method introduced in the previous posts is that it considers these measures at the same time. Moreover, we can repeatedly re-evaluate a goalie's pAdjSV% after each shot they face. We can then plot this posterior over each shot of a goalie's career to get a sense of their path. In order to extract more insight from this, let's section goalies by their career shots faced, like this:
 </p>
 <p>
 Goalies facing:
