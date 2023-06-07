@@ -69,3 +69,15 @@ These will be challenged and addressed in the following posts.
 <p>
 Code available here: <a href="https://github.com/spazznolo/goalie-consistency/blob/main/post_4.R">https://github.com/spazznolo/goalie-consistency/blob/main/post_4.R</a>
 </p>
+
+
+To start, we can't keep every goalie in our population for this analysis. We just don't know how much experience a goalie had before the 2007-2008 season, so any goalie playing that season has to be removed. The same is true for the goalies playing the 2022-2023 season. As an example, we don't know how Jeremy Sayman's career will turn out - we only know what he's done in his first few seasons, so we can't properly categorize his career yet.
+</p>
+<p>
+Here's a short summary of the reduced population:
+    - Goalie population drops from 315 to 140.
+    - Harmonic mean of shots against rises from 12,690 to 14,568 (mean drops, 4,198 to 3,225).
+    - Harmonic mean of AdjSV% stays at .939 (mean drops, .932 to .927).
+    - Mean of career shots faced drops from 4,198 to 3,225.
+    - Mean of AdjSV% drops from .932 to .927.
+</p>
