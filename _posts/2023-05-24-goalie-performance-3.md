@@ -5,16 +5,14 @@ date:   2023-05-24 8:52:05 -0400
 ---
 <h2>[Post 3] Goalie Performance: Exploring the Distribution</h2>
 <p>
-In the first post, I outlined a framework for measuring goalie talent using their career Fenwick 5v5 save percentage. A prior from the beta family was fit to the goalie career AdjSV% histogram, which yielded the hyper-parameters we built the posterior with (alpha of 56.45766, beta of 881.8847). There's a problem, though. To fit this prior, we had to throw out goalies who faced less than 10 xG. Unfortunately, 90 of the 314 goalies in our set were cut! Moreover, we treated goalies equally, meaning Zachary Fucale was considered to be as informative as Henrik Lundqvist. 
+In the first post, I outlined a framework for measuring goalie talent using their career Fenwick 5v5 save percentage. A prior from the beta family was fit to the goalie career AdjSV% histogram, which yielded the hyper-parameters we built the posterior from (alpha of 56.45766, beta of 881.8847). There's are two obvious problems with this methodology, though. 
 </p>
 <p>
-It turns out we can fix both issues outlined above with one change - instead of fitting a beta distribution with goalie AdjSV%, we can fit a negative binomial distribution with goalies' 1) shots faced and 2) adjusted saves. EXPLAIN MORE With this, we can include all goalies, as long as they have made a save and allowed a goal. These are totals, so the prior will be weighted towards experience.
+    1. Goalies facing less than 10 xG had to be thrown out (unfortunately, 90 of the 314 goalies were cut!) 
+    2. Goalies were treated equally, meaning Zachary Fucale was considered to be as informative as Henrik Lundqvist. 
 </p>
 <p>
-Problem solved? 
-</p>
-<p>
-Not really. Think of which kind of goalies get to gain experience - if a goalie performs well, they'll keep getting more chances to play; if they play poorly, they'll get less chances until, finally, they are no longer given the chance to play. Therefore, the extent of a goalie's experience is biased by his performance. For now, we sidestep the problem with fitting a "correct" distribution and further explore experience.
+One possible solution to this was proposed by David Robinson here. Instead of fitting a beta distribution to batting averages, he fit a negative binomial distribution using 1) at bats and 2) hits. This can easily be applied to goalies uing 1) shots faced and 2) adjusted saves. It has <em>its</em> problems too, though. Think back to Zachary Fucal and Henrik Lundqvist again. Why was Lundvist given more opportunities to play? Was it random? Intuitively, my thinking is that if a goalie performs well, they'll keep getting more chances to play; if they play poorly, they'll get less chances until, finally, they are no longer given the chance to play at all. Therefore, the extent of a goalie's experience is biased by his performance. I want to confirm this before moving further.
 </p>
 <p>
 <h5>Exploring Experience</h5>
