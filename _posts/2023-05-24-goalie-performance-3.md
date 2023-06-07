@@ -72,7 +72,22 @@ We revisit the goalie career AdjSV% density plots, except this time we split goa
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-four.png" width="60%" length="150"/></div>
 </p>
 <p>
+Some thoughts:
+    - From these group distributions, we can build two separate priors.
+    - These can be merged by including a likelihood of a goalie belonging to each group.
+    - The likelihood is the probability that a goalie belongs to each group.
+    - The likelihood will sum to 1, and begins at 50% for each group.
+    - This is because 50% of the goalies in our population have faced over 200 shots.
+    - As a goalie faces more shots, depending on his performance, this likelihood will shift.
+</p>
+<p>
+Here's a simple idea for a likelihood: run a logistic regression using shots faced and AdjSV% onto the outcome wheter a goalie ended up facing over 200 shots. It turns out such a model is not only simple but is well-calibrated.
+</p>
+<p>
 In the next post, we explore how age is a confounder in assessing goalie performance.
+</p>
+<p>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-four.png" width="60%" length="150"/></div>
 </p>
 <p>
 Code available here: <a href="https://github.com/spazznolo/goalie-consistency/blob/main/posts/post-6.R">https://github.com/spazznolo/goalie-consistency/blob/main/posts/post-6.R</a>
