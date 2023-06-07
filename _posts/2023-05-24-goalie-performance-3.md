@@ -63,7 +63,13 @@ What does this mean for the prior distribution? We're left with a compromise. Do
 </p>
 <p>
 <h5>Combining Priors</h5>
-Recall that nearly 50% of goalies face less than 200 shots. This is a huge spoke in our wheels, methodologically speaking. It is responsible for the tension described above. We may be able to address this by expanding our Bayesian framework to include two priors, with a likelihood to glue them together.
+Recall that nearly 50% of goalies face less than 200 shots. This is a huge spoke in our wheels, methodologically speaking. It is responsible for the tension described above. Fortunately, we may be able to address this by expanding our Bayesian framework to include two priors, glued together by a likelihood.
+</p>
+<p>
+We revisit the goalie career AdjSV% density plots, except this time we split goalies into two equally sized groups - those facing over 200 shots, and those facing less. Here's what they look like:
+</p>
+<p>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-four.png" width="60%" length="150"/></div>
 </p>
 <p>
 In the next post, we explore how age is a confounder in assessing goalie performance.
