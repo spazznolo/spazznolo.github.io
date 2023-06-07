@@ -8,8 +8,14 @@ date:   2023-05-24 8:52:05 -0400
 In the first post, I outlined a framework for measuring goalie talent using their career Fenwick 5v5 save percentage. In the second post, a prior from the beta family was fit to the goalie career AdjSV% histogram, which yielded the hyper-parameters we built the posterior from (alpha of 56.45766, beta of 881.8847). There are two obvious problems with this methodology, though. 
 </p>
 <p>
-    1. Goalies facing less than 10 xG had to be thrown out (unfortunately, 90 of the 314 goalies were cut!) 
-    2. Goalies were treated equally, meaning Zachary Fucale was considered to be as informative as Henrik Lundqvist. 
+    1. Goalies facing less than 10 xG had to be thrown out.
+    2. Goalies were treated equally, meaning Zachary Fucale's career SV% was considered to be as informative as Henrik Lundqvist's.
+</p>
+<p>
+Even though we're only talking about a 10xG cut-off, this eliminates more goalies than I would have thought. To illustrate this, here's the cdf xxxx.
+</p>
+<p>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-one.png" width="60%" length="150"/></div>
 </p>
 <p>
 One possible solution to this was proposed by David Robinson <a href="http://varianceexplained.org/r/empirical_bayes_baseball/">here</a>. Instead of fitting a beta distribution to batting averages, he fit a negative binomial distribution using 1) at bats and 2) hits. This can easily be applied to goalies uing 1) shots faced and 2) adjusted saves. It has <em>its</em> problems too, though (which, of course, David addresses in a string of fantastic blog posts which became a <a href = "https://drob.gumroad.com/l/empirical-bayes">book</a>). Think back to Zachary Fucal and Henrik Lundqvist. Why was Lundvist given more opportunities to play? Was it random? Intuitively, my thinking is that if a goalie performs well, they'll keep getting more chances to play; if they play poorly, they'll get less chances until, finally, they are no longer given the chance to play at all. This can be confirmed with a simple plot. We group goalies by career seasons played and then take the average AdjSV% for each group; seasons played on the x-axis against mean AdjSV% on the y-axis. 
@@ -47,9 +53,6 @@ Here's a simple idea for a likelihood: run a logistic regression using cumulativ
 <p>
 <h5>Contextualizing Experience</h5>
 Let's start simple: How long is the average goalie career? How many goalies face over 30 shots? How many make it past 200?... All of these questions can be answered by plotting the cumulative distribution function (cdf) of career shots faced for goalies.
-</p>
-<p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-one.png" width="60%" length="150"/></div>
 </p>
 <p>
 Some thoughts:
