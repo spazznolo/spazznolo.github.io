@@ -48,6 +48,10 @@ Here's a simple idea for a likelihood: run a logistic regression using cumulativ
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-five.png" width="60%" length="150"/></div>
 </p>
 <p>
+The new equation to derive the posterior save percentage then becomes:
+    Probability of facing over 1500 shots * (alpha_over + adjusted saves)/(alpha_over + beta_over + shots faced) +
+    Probability of facing under 1500 shots * (alpha_under + adjusted saves)/(alpha_under + beta_under + shots faced)
+<p>
 In the next post, we explore how age is a confounder in assessing goalie performance.
 </p>
 <p>
