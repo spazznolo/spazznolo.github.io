@@ -5,6 +5,31 @@ date:   2023-06-20 8:52:05 -0400
 ---
 <h2>temp</h2>
 <p>
+<h5>Contextualizing Experience</h5>
+Let's start simple: How long is the average goalie career? How many goalies face over 30 shots? How many make it past 200?... All of these questions can be answered by plotting the cumulative distribution function (cdf) of career shots faced for goalies.
+</p>
+<p>
+Some thoughts:
+    - 25% of goalies faced 33 shots or less (!).
+    - 50% of goalies faced 202 shots or less (that's about 7 games).
+    - 75% of goalies faced 2,606 shots or less.
+</p>
+<p>
+We can gain another perspective on goalie experience by repeating the plot above for goalie career seasons played.
+</p>
+<p>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-two.png" width="60%" length="150"/></div>
+</p>
+<p>
+Some thoughts:
+    - 42% of goalies played only one season.
+    - 74% of goalies played five seasons or less.
+    - 90% of goalies played twelve seasons or less.
+</p>
+<p>
+It should now be obvious that most goalies don't really have a typical NHL career as we imagine them. Let's confirm the assumption that goalies with more experience perform better than those with less.
+</p>
+<p>
 It is difficult to understand a goalie's path by looking at their save percentage or shots faced in isolation. What's nice about the empirical Bayesian method introduced in the previous posts is that it considers these measures at the same time. Moreover, we can repeatedly re-evaluate a goalie's pAdjSV% after each shot they face. We can then plot this posterior over each shot of a goalie's career to get a sense of their path. In order to extract more insight from this, let's section goalies by their career shots faced, like this:
 </p>
 <p>
