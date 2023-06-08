@@ -48,31 +48,6 @@ Here's a simple idea for a likelihood: run a logistic regression using cumulativ
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-five.png" width="60%" length="150"/></div>
 </p>
 <p>
-<h5>Contextualizing Experience</h5>
-Let's start simple: How long is the average goalie career? How many goalies face over 30 shots? How many make it past 200?... All of these questions can be answered by plotting the cumulative distribution function (cdf) of career shots faced for goalies.
-</p>
-<p>
-Some thoughts:
-    - 25% of goalies faced 33 shots or less (!).
-    - 50% of goalies faced 202 shots or less (that's about 7 games).
-    - 75% of goalies faced 2,606 shots or less.
-</p>
-<p>
-We can gain another perspective on goalie experience by repeating the plot above for goalie career seasons played.
-</p>
-<p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-two.png" width="60%" length="150"/></div>
-</p>
-<p>
-Some thoughts:
-    - 42% of goalies played only one season.
-    - 74% of goalies played five seasons or less.
-    - 90% of goalies played twelve seasons or less.
-</p>
-<p>
-It should now be obvious that most goalies don't really have a typical NHL career as we imagine them. Let's confirm the assumption that goalies with more experience perform better than those with less.
-</p>
-<p>
 In the next post, we explore how age is a confounder in assessing goalie performance.
 </p>
 <p>
