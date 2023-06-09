@@ -21,7 +21,7 @@ Even though we're only talking about a 10xG cut-off, this eliminates more goalie
 One possible solution to this was proposed by David Robinson <a href="http://varianceexplained.org/r/empirical_bayes_baseball/">here</a> in his Baysian series on baseball. Instead of fitting a beta distribution to batting averages, he fit a negative binomial distribution using 1) at bats and 2) hits. This can easily be applied to goalies using 1) shots faced and 2) adjusted saves. It has <em>its</em> problems too, though (which, of course, David addresses in a string of fantastic blog posts, eventually putting out a <a href = "https://drob.gumroad.com/l/empirical-bayes">book</a>). The main problem is this: goalies are weighted by the number of career shots they faced. Why was, say, Henrik Lundvist given more opportunities to play than Zachary Fucal? Was it random? Intuitively, goalies who perform well will keep getting more chances to play; if they play poorly, they'll get less chances until, finally, they are no longer given the chance to play at all. Let's see if the data matches intuition. We group goalies by career seasons played and then take the average AdjSV% for each group; seasons played on the x-axis against mean AdjSV% on the y-axis. 
 </p>
 <p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-three.png" width="60%" length="150"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-two.png" width="60%" length="150"/></div>
 </p>
 <p>
 There is definitely bias here. This potential solution has caused a compromise. Do we weigh the observations by shots faced, which is biased towards better performing goalies, or do we treat all goalie careers equally, losing nearly 30% of our population (albeit less than 1% of shots faced) at the same time? Or... is there an alternative?
@@ -30,7 +30,7 @@ There is definitely bias here. This potential solution has caused a compromise. 
 Fortunately, we may be able to address this by expanding our Bayesian framework to include two priors, glued together by a likelihood. Let's revisit the goalie career AdjSV% density plots, except this time split goalies into two equally sized groups - those facing over 200 shots, and those facing less.
 </p>
 <p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-four.png" width="60%" length="150"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-three.png" width="60%" length="150"/></div>
 </p>
 <p>
 Some thoughts:
@@ -45,7 +45,7 @@ Some thoughts:
 Here's a simple idea for a likelihood: run a logistic regression using cumulative shots faced and AdjSV% onto the outcome wheter a goalie ended up facing over 200 shots. It turns out such a model is not only simple but is well-calibrated.
 </p>
 <p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-five.png" width="60%" length="150"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-four.png" width="60%" length="150"/></div>
 </p>
 <p>
 The new equation to derive the posterior save percentage then becomes:
