@@ -52,7 +52,7 @@ Here's a simple idea for a likelihood: run a logistic regression using cumulativ
 </p>
 <p>
 The new equation to derive the posterior save percentage then becomes:
-    P(1500+)*(alphaO + AdjSV)/(alphaO + betaO + shots) + P(-1500)*(alphaU + AdjSV)/(alphaU + betaU + shots)
+    P(1500+)*(alphaO + AdjSV)/(alphaO + betaO + S) + P(-1500)*(alphaU + AdjSV)/(alphaU + betaU + S)
 <p>
 In the next post, we explore how age is a confounder in assessing goalie performance.
 </p>
