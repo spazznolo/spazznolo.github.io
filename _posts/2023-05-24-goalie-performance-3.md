@@ -26,6 +26,9 @@ One possible solution to this was proposed by David Robinson <a href="http://var
 <p>
 There is definitely bias here. This potential solution has caused a compromise. Do we weigh the observations by shots faced, which is biased towards better performing goalies, or do we treat all goalie careers equally, losing nearly 30% of our population (albeit less than 1% of shots faced) at the same time? Or... is there an alternative?
 </p>
+<p>
+David suggests using a beta-binomial regression to fit batting averages to at-bats. Essentially, each at-bat total has its own prior. Though this is a good idea for his use case, it isn't great for mine. The problem is that I am heavily biased towards building something which can help in making decisions - I want to build towards a model which is useful for goalies who are playing right now, and we don't know how many shots they will face in the future! I need something different.
+</p>
 <h5>Combining Priors</h5>
 Fortunately, we may be able to address this by expanding our Bayesian framework to include two priors, glued together by a likelihood. Let's revisit the goalie career AdjSV% density plots, except this time split goalies into two equally sized groups - those facing over 200 shots, and those facing less.
 </p>
@@ -42,15 +45,14 @@ Some thoughts:
     - This likelihood will shift depending on his performance as he faces more shots.
 </p>
 <p>
-Here's a simple idea for a likelihood: run a logistic regression using cumulative shots faced and AdjSV% onto the outcome wheter a goalie ended up facing over 200 shots. It turns out such a model is not only simple but is well-calibrated.
+Here's a simple idea for a likelihood: run a logistic regression using cumulative shots faced and AdjSV% onto the outcome wheter a goalie ended up facing over 1500 shots. It turns out such a model is not only simple but is well-calibrated.
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-four.png" width="60%" length="150"/></div>
 </p>
 <p>
 The new equation to derive the posterior save percentage then becomes:
-    Probability of facing over 1500 shots * (alpha_over + adjusted saves)/(alpha_over + beta_over + shots faced) +
-    Probability of facing under 1500 shots * (alpha_under + adjusted saves)/(alpha_under + beta_under + shots faced)
+    P(1500+)*(alphaO + AdjSV)/(alphaO + betaO + shots) + P(-1500)*(alphaU + AdjSV)/(alphaU + betaU + shots)
 <p>
 In the next post, we explore how age is a confounder in assessing goalie performance.
 </p>
