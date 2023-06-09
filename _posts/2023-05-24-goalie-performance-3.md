@@ -53,8 +53,17 @@ Here's a simple idea for a likelihood: run a logistic regression using cumulativ
 <p>
 The new equation to derive the posterior save percentage then becomes:
     P(1500+)*(alphaO + AdjSV)/(alphaO + betaO + S) + P(-1500)*(alphaU + AdjSV)/(alphaU + betaU + S)
+
+    where:
+    - P(1500+) = Predicted probability that goalie faces 1500+ shots in career.
+    - alphaO = alpha from fitted beta distribution on goalies facing 1500+ shots.
+    - betaO = beta from fitted beta distribution on goalies facing 1500+ shots.
+    - P(-1500) = Predicted probability that goalie faces -1500 shots in career.
+    - alphaU = alpha from fitted beta distribution on goalies facing -1500 shots.
+    - betaU = beta from fitted beta distribution on goalies facing -1500 shots.
+</p>
 <p>
-In the next post, we explore how age is a confounder in assessing goalie performance.
+In the next post, I'll explore age as a confounder in the assessment of goalie performance.
 </p>
 <p>
 Code available here: <a href="https://github.com/spazznolo/goalie-consistency/blob/main/posts/post-6.R">https://github.com/spazznolo/goalie-consistency/blob/main/posts/post-6.R</a>
