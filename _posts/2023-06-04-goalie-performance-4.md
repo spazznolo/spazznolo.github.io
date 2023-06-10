@@ -69,7 +69,7 @@ INCLUDE PHANTOM YEARS HERE
 The above plot confirms the intuition that expectations for goalies depends on age. It follows that if a goalie starts his NHL career at 18 and faces 1000 shots, we have a different expectation of how many saves he should make than if he faced those same shots starting his career at age 25. This is a definite shortcoming of the empirical Bayes strategy outlined in the first post.
 </p>
 <p>
-The cleanest way to adjust for age would be to bake it into the already created adjustment for the probability of a shot being a goal. Taking the smoothed age curve presented above, we set the peak (age 27) as the standard and adjust for all other ages, so that, for example, an xFSV% of 0.940 at age 27 is 0.94000 - 0.00118 = 0.93882 at age 23 and 0.94000 - 0.00513 = 0.93487 at age 38.
+The cleanest way to adjust for age that I can think of is to bake it into the already created adjustment for the probability of a shot being a goal. Taking the smoothed age curve presented above, we set the peak (age 27) as the standard and adjust for all other ages, so that, for example, an xFSV% of 0.940 at age 27 is 0.94000 - 0.00118 = 0.93882 at age 23 and 0.94000 - 0.00513 = 0.93487 at age 38.
 </p>
 <p>
 Fenwick Save Percentage (FSV%) = 1 - (GA/FSA)<br>
