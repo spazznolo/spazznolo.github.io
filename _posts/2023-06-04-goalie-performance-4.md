@@ -20,11 +20,6 @@ Assumptions:
 I'm going to address the second point in this post.
 </p>
 <p>
-Terms established in previous posts:
-    - AdjSV%: A goalie's save percentage, adjusted for shot quality.
-    - pAdjSV%: A goalie's posterior adjusted save percentage.
-</p>
-<p>
 <h5>Exploring Age</h5>
 I scraped hockey-reference for each goalie's date of birth (code available <a href="https://github.com/spazznolo/goalie-consistency/blob/main/import/scrape_goalie_data.R">here</a>) in order to see how their performance changes as they age. By combining the goalies' dates of birth with the dates of their games, we can determine the exact age of a goaltender for each game they played. Unfortunately, a few goalies were not linked. 
 </p>
@@ -71,7 +66,7 @@ INCLUDE PHANTOM YEARS HERE
 </p>
 <p>
 <h5>Adjusting for Age</h5>
-What do we mean by "adjusting" for age? Well, as a goalie progresses through his life, our expectations of him change. We do not expect a 15 year old goalie to play well in the NHL; we do not expect a 45 year old play well either. In between this, our expectations of the goalie increases up to a certain point (shown above to potentially be around age 27), and then decreases again for, well, forever. It follows that if a goalie starts his NHL career at 18 and faces 1000 shots, we have a different expectation of how many saves he should make than if he faced those shots starting his career at age 25. This is a definite shortcoming of the empirical Bayes strategy outlined in the 4th post.
+The above plot confirms the intuition that expectations for goalies depends on age. It follows that if a goalie starts his NHL career at 18 and faces 1000 shots, we have a different expectation of how many saves he should make than if he faced those same shots starting his career at age 25. This is a definite shortcoming of the empirical Bayes strategy outlined in the first post.
 </p>
 <p>
 The cleanest way to adjust for age would be to bake it into the already created adjustment for the probability of a shot being a goal. Taking the smoothed age curve presented above, we set the peak (age 27) as the standard and adjust for all other ages, so that, for example, an xFSV% of 0.940 at age 27 is 0.94000 - 0.00118 = 0.93882 at age 23 and 0.94000 - 0.00513 = 0.93487 at age 38.
