@@ -5,7 +5,7 @@ date:   2023-05-17 8:52:05 -0400
 ---
 <h2>[Post 1] Goalie Performance: Empirical Bayes Save Percentage</h2>
 <p>
-Recall from the introductory paragraph of this series:
+Recall from the introductory paragraph of the series on goalie consistency:
 "Goaltenders make up the least predictable position in hockey. Their behavior confounds analysts and casual fans alike. It isn’t uncommon for a good goalie to have a below replacement level year, or for an unknown goalie to come in and dominate the league for a stretch of time. This may partly explain the relative dearth of analysis on goalies - they're voodoo, it's often said."
 </p>
 <p>
@@ -68,16 +68,4 @@ These will be challenged and addressed in the following posts.
 </p>
 <p>
 Code available here: <a href="https://github.com/spazznolo/goalie-consistency/blob/main/post_4.R">https://github.com/spazznolo/goalie-consistency/blob/main/post_4.R</a>
-</p>
-
-
-To start, we can't keep every goalie in our population for this analysis. We just don't know how much experience a goalie had before the 2007-2008 season, so any goalie playing that season has to be removed. The same is true for the goalies playing the 2022-2023 season. As an example, we don't know how Jeremy Sayman's career will turn out - we only know what he's done in his first few seasons, so we can't properly categorize his career yet.
-</p>
-<p>
-Here's a short summary of the reduced population:
-    - Goalie population drops from 315 to 140.
-    - Harmonic mean of shots against rises from 12,690 to 14,568 (mean drops, 4,198 to 3,225).
-    - Harmonic mean of AdjSV% stays at .939 (mean drops, .932 to .927).
-    - Mean of career shots faced drops from 4,198 to 3,225.
-    - Mean of AdjSV% drops from .932 to .927.
 </p>
