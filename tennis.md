@@ -3,8 +3,8 @@ layout: page
 title: / tennis
 permalink: /tennis/
 ---
-<h5>[2022-09-16] Hello, tennis: A Liveblog</h5>
 <p>
+<h2>[2022-09-16] Hello, tennis: A Liveblog</h2>
 The other day I was at a bar and the US Open was on. I don't particularly watch much pro tennis, so I was surprised by the clean camerawork. It's very elegant. During gameplay, the camera is static on a lengthwise shot which captures the entire court. It only moves slightly when the ball is hit wide and then goes right back to that symmetric static shot. I figured tennis analytics must be booming ahead of other sports because of this, so I searched for what people have come up with and found... <a href="https://hdsr.mitpress.mit.edu/pub/uy0zl4i1/release/4">this</a>, where the author, a <a href="http://on-the-t.com/">tennis researcher</a>, lists all the reasons why tennis is decidedly NOT booming, and actually lagging all other major sports. 
 </p>
 <p>
@@ -25,9 +25,8 @@ I'm going to use this blog as a place to sporadically dump my thoughts and progr
 Also, there's a community of tennis fans and analysts who are manually tracking games, based on a methodology <a href="https://www.tennisabstract.com/blog/2015/09/23/the-match-charting-project-quick-start-guide/">introduced by Jeff Sackman</a>. If the computer vision project is successful, it can hopefully help scale the tracking and we can get a more comprehensive account of tennis.
 </p>
 
-
-<h5>[2022-09-17] Project Layout</h5>
 <p>
+<h2>[2022-09-17] Project Layout</h2>
 Because this project is a holistic approach at obtaining tennis data, I've decided to break it into parts. As it stands, this is how I'm thinking of approaching it.
 </p>
 <h5>1. <a href="https://spazznolo.github.io/2022/09/18/classifying-game-state.html">Classify game states.</a></h5>
@@ -43,8 +42,8 @@ The initial location of the players and ball will be in pixels. The final step i
 <h5>Challenges.</h5>
 My instinct: the true challenges will be 1) to sufficiently diversify the model so that it doesn't get confused by the different surfaces/lighting/stadium designs that games are played on and 2) to streamline the model in terms of memory and computation time so that the whole process isn't too slow moving.
 
-<h5>Tracking Games 01</h5>
 <p>
+<h2>[2022-09-18] Tracking Games 01</h2>
 Quick post on how the modelling set will be built. I'm looking for diversity of game time, court, years and gender, with a testing set that features games not in the training or validation sets. I've decided on randomly sampling 10 random 60 seconds chunks from 12 matches. That's a total of 120 minutes, or, at 1,600 frames a minute, 192,000 frames. The good news is that gameplay, like off-time, is sequential, so it won't be as daunting as it might sound. After doing 10 minutes of the Williams sisters Australian Open final in 2003, it looks like I'm averaging 3 minutes of labelling per 1 minute of broadcast time. Extrapolating, it will probably take around 6 hours to get the modelling set I'd like to start with.
 </p>
 <h5>Games I've chosen to track.</h5>
@@ -70,9 +69,8 @@ Quick post on how the modelling set will be built. I'm looking for diversity of 
 2022 US Open W
 </p>
 
-
-<h5>[2022-09-19] Classifying Game States 02</h5>
 <p>
+<h2>[2022-09-19] Classifying Game States 02</h2>
 There are a few strategies to consider when classifying game states. The strategies are going to be evaluated on accuracy, memory requirements, and runtime. This is the most simple step of the project, so we can't dedicate much of our precious memory and runtime here. 
 </p>
 <p>
@@ -94,9 +92,8 @@ A frame is a numeric matrix. We can reduce the complexity of the frame by averag
 These strategies will be implemented and evaluated in a future post.
 </p>
 
-
-<h5>[2022-09-20] Court Detection 01</h5>
 <p>
+<h2>[2022-09-20] Court Detection 01</h2>
 Though I intended to develop a few simple models to compete with the VGG16 on the game-state predictions, the initial results were satisfactory and I started getting caught up with Hough lines and corner detection algos anyways so I figured I'd start a post on court detection. Each step is so new and different, I'm basically doing a literature review every time. I found a few existing court detection algorithms, which I'll summarize below. The end of the story is that none of them are fit for this exact problem and I'd prefer try my hand at a method which doesn't require much memory or runtime (familiar, I know).
 </p>
 <h5>Existing Court Detection Methods</h5>
@@ -121,14 +118,12 @@ Ben, a user on Stack Overflow, suggested a possible solution for a <a href="http
 <b>Jeremie's Ricketty Approach</b>
 From drawing hough lines on a variety of gameplay frames, the thing that strikes me most are the four lines which make up the length of the court. The two on the outside are for doubles and the two on the inside are for singles. Here we have two sets of lines which have roughly the same length and slope when captured on the broadcast. Gut feel: a set of heuristics can satisfactorily detect the court well enough for my purposes.
 
-
-<h5>[2022-09-21] GitHub Repository</h5>
 <p>
+<h2>[2022-09-21] GitHub Repository</h2>
 I created a <a href="https://github.com/spazznolo/tennis-tracker">repository</a> for this project in the off-chance it snowballs into something bigger. Tracked a game today, or ten 60 second chunk of a game between Federer and Djokovic on clay. The camerawork was a little more dynamic than the first two games I tracked, but the court detection approach using a set of heuristics with hough lines did not faulter, which is encouraging. Also, downloaded all the necessary games for the initial model and started using Todoist, an app to track my project tasks.
 
-
-<h5>[2022-09-22] Court Detection 02</h5>
 <p>
+<h2>[2022-09-22] Court Detection 02</h2>
 In the last Court Detection post, I wrote vaguely about detecting the tennis court using a set of heuristics based on Hough lines. I'm going to expand on it here, introduce the first iteration of this approach, and visualize the outcome on 25 randomly selected frames featuring gameplay (this part will only be updated once I've tracked the 12 games).
 </p>
 <p>
@@ -147,9 +142,8 @@ In the last Court Detection post, I wrote vaguely about detecting the tennis cou
 </div>
 </p>
 
-
-<h5>[2022-09-23] Tracking Games 02</h5>
 <p>
+<h2>[2022-09-23] Tracking Games 02</h2>
 I tracked all the clay and grass games yesterday. That's 80 minutes of broadcast time. It took two hours in total. Tracking at 1.5x realtime is twice as fast as I did in my test runs with the Williams final, which is encouraging. I'll probably finish the rest today.
 </p>
 <p>
@@ -162,9 +156,8 @@ It dawned on me today that hard court games are much easier to predict on becaus
 A few other things. I've tracked 100 minutes of tennis broadcasts so far and all but one (!) point was shot from the same lengthwise, static setup. This isn't to say there aren't small differences each point/game, just that the basic court detection method has a decent chance of succeeding. Curious to see how fast it will be on a fps basis. Also, the sound of racquets hitting a ball, the replay analyst breaking down a play, and the crowd cheers are all easily distingushable, which makes me wonder if sound should be included. On top of this, there seems to be a general formula for a broadcast in terms of the feed changes, something like: lengthwise static gameplay shot to change of camera perspective for player reaction to replay from different perspective to lengthwise static gameplay shot for the serve routine. Oh, and it's sort of funny how some players celebrate in ways which seem not so sportmanslike lol.
 </p>
 
-
-<h5>[2022-09-24] Court Detection 03</h5>
 <p>
+<h2>[2022-09-24] Court Detection 03</h2>
 Tracked the last of the 12 games this morning. Realized I hadn't thought of a proper pipeline from tracking to training, and paid for it in time and monotony, but it's finished. Next is to take random samples of the frames labelled as gameplay and plot the first iteration of the Hough line method which I'll outline again below.
 </p>
 <p>
@@ -194,9 +187,8 @@ As a reminder:
 Obviously, there are large problems here. Mostly they stem from either the false positives or false continuations of the lengthwise lines. The widthwise lines rely on a correct y-range, and a false positive/continuation changes the range for the worse. In retrospect, it was naive to try a deterministic approach, but I'm happy to have tried, because it folds in nicely to the next step.
 </p>
 
-
-<h5>[2022-09-26] Court Detection 04</h5>
 <p>
+<h2>[2022-09-26] Court Detection 04</h2>
 Spent today thinking up an iterative approach at finding the lines which make up the boundary of the court. Somewhat begrudgingly, I've turned to clustering the Hough lines which pass the initial block filter (absolute slope between 1 and 3). It's a univariate hierarchical clustering strategy using lines' absolute slope, followed by a filtering of all lines which are part of the two largest clusters, then taking the minimum median absolute slope from these two largest groups (usually the largest median absolute slope is the inner lengthwise lines and the smallest is the outter lines).
 </p>
 <p>
@@ -209,9 +201,8 @@ Also, to remind myself: the camera is mostly static. This means there should be 
 </div>
 </p>
 
-
-<h5>[2022-09-27] Court Detection 05</h5>
 <p>
+<h2>[2022-09-27] Court Detection 05</h2>
 The clustering has made the strategy much more robust, especially in combination with taking the median slope and intercept of the lines. Next is to plot these lines through the whole image, creating a plane where the court should be. This should be ready later today.
 </p>
 <p>
@@ -224,9 +215,8 @@ The clustering has made the strategy much more robust, especially in combination
 </div>
 </p>
 
-
-<h5>[2022-09-28] Change-up 06</h5>
 <p>
+<h2>[2022-09-28] Change-up 06</h2>
 The final iteration of the first version of the lengthwise court line capture is complete. Next is to get the widthwise lines. I can either rely on more clustering around the ends of the lengthwise lines or try for a new approach. Currently, the strategy runs at about 1.5x realtime, which I think is unacceptable for actual production but is fine for now. Here it is below.
 </p>
 <p>
@@ -246,18 +236,16 @@ Update: While reading various strategies to detect players, I came across a <a h
 </div>
 </p>
 
-
-<h5>[2022-09-29] Player Detection 01</h5>
 <p>
+<h2>[2022-09-29] Player Detection 01</h2>
 Literature review today. Read a <i>fantastic</i> paper on table tennis tracking <a href="Player Detection 01">here</a>. Not only is the methodology explained clearly, the author provides details on the modules and parameters used in their research. Much appreciated. I'll try their method for ball detection. I can say some of their ideas will definitely make an impact on the court detection algorithm I've been writing.
 </p>
 <p>
 Also made a bit of headway on the player detection and as soon as I hit a wall I jumped over to the court perspective change, which I knew would be easy. Basically, if you know the dimensions of a regulation court and you locate the four court corners of an image, you can transform the whole thing, getting the located player's actual court location almost for free (I think).
 </p>
 
-
-<h5>[2022-10-01] Player Detection 02</h5>
 <p>
+<h2>[2022-10-01] Player Detection 02</h2>
 More literature review. This <a href="https://www.researchgate.net/publication/285203332_An_Efficient_Ball_and_Player_Detection_in_Broadcast_Tennis_Video">paper</a> breaks down a similar methodology as the previous research I posted on Table Tennis. Actually, they are nearly identical in their processing - they combine a background filter with frame differencing using something called a logical AND operation. It sounds formal so I looked into it but it seems they're just combining the images. Maybe something was lost in the translation. Anyways, they follow this with thresholding and dilation.
 </p>
 <p>
@@ -269,31 +257,26 @@ In many of these papers, accuracy is measured as the percentage of time a player
 </div>
 </p>
 
-
-<h5>[2022-10-02] Player Detection 03</h5>
 <p>
+<h2>[2022-10-02] Player Detection 03</h2>
 I'm going to call today a soft implementation of the strategies used in the papers I read yesterday. Many of these concepts are covered in opencv, so the implementation is pretty easy. I'm calibrating the thresholds and blurs and running random chunks of gameplay through it. Mostly I do this to capture patterns, but I'm realizing the more I use these clips to calibrate, the more I'm biasing my methods on the collection of games I've tracked. Probably, I should download a bunch of different game highlights to better diversify the chunks I'm "training" on.
 </p>
 <p>
 As for the actual detection, the player closest to the camera is easy to locate in full, but the player on the other side of the court is more difficult. While running through these random game chunks, I'm thinking that I could implement for the player detection what the Table Tennis paper did for the ball - use the previous known location of the player, and then search only in the neighborhood of that location. There's still the problem that sometimes the feet disappear from the contour due to lower differencing from the court.
 </p>
 
-
-<h5>[2022-10-03] Pipeline Build 01</h5>
 <p>
+<h2>[2022-10-03] Pipeline Build 01</h2>
 Started thinking about tying together the modules to get the desired output for a single point. This will force me to zoom out and notice the fault lines of the project so far. One thing I'm curious to see is how robust the imputation will be. For example, if a player is misidentified (and this should be obvious), we can impute their location by taking their last known location. One frame is not enough time to really change one's court location very much. 
 </p>
 
-
-<h5>[2022-10-09] Player Detect Demo</h5>
 <p>
+<h2>[2022-10-09] Player Detect Demo</h2>
 It's been a while. I've been working on a court/player detection demo. I'm going to run a demo on an entire match and troubleshoot from there. So far one point has been processed and the results were encouraging. I'm trying to find a way to embed videos here, but the file size is just too big for github pages so far. Maybe I'll upload some demos to Youtube later.
 </p>
 
-
-<h5>[2022-10-12] General Update</h5>
 <p>
-An update of things:
+<h2>[2022-10-12] General Update</h2>
 
 - Game-state detection hasn't been touched since my first run of it using on the Williams' sisters Australian Open game. I haven't thought about it too much because it'll be easy to do and I'm in a problem solving mood lately.
 
@@ -304,9 +287,8 @@ An update of things:
 - The first iteration of the coordinate projection is complete. Nothing much to say; as long as the other steps are okay, this is trivial.
 </p>
 
-
-<h5>[2023-03-08] Object Detection Framework</h5>
 <p>
+<h2>[2023-03-08] Object Detection Framework</h2>
 I stepped away from the project last year when I realized I was going to have to annotate thousands of images to create a robust player/ball detection model. In the past few months, I decided to map and build such a modelling framework. This post outlines the methods and services used for the framework.
 </p>
 <p>
