@@ -8,3 +8,6 @@ permalink: /
 
 <br>
 <div style="text-align: center"> <img src="figs/fifty-four.png" width="90%" length="320"/></div>
+<p>
+Can you add text here
+</p>
