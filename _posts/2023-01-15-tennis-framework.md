@@ -1,10 +1,11 @@
 ---
 layout: post
-permalink: /tennis/tennis-framework.md
+title:  "Building a framework to track tennis games at scale"
+date:   2023-01-15 12:00:00 -0400
 ---
 
-<h2>[2023-03-08] Object Detection Framework</h2>
-I stepped away from the project last year when I realized I was going to have to annotate thousands of images to create a robust player/ball detection model. In the past few months, I decided to map and build such a modelling framework. This post outlines the methods and services used for the framework.
+<h2>Building a framework to track tennis games at scale</h2>
+I stepped away from the first iteration of this project last year when I realized I was going to have to annotate thousands of images to create a robust player/ball detection model. In the next few months, I'll design and build such a modelling framework. This post outlines the methods and services which will be used for the framework.
 </p>
 <p>
 TENNIS TV
