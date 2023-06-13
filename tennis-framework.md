@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: post
 permalink: /tennis/tennis-framework.md
 ---
 
