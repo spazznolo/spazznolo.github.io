@@ -5,7 +5,7 @@ url: "https://spazznolo.github.io"
 google_analytics: UA-177238175-1
 
 header_pages:
-  - index.md
+  - home.md
   - about.md
   - goalies.md
   - tennis.md
