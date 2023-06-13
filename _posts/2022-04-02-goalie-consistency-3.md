@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "The effect of inter-shot goalie consistency on expected standing points"
+title:  "Goalie Consistency: The inter-shot effect on expected standing points"
 date:   2022-04-02 11:52:05 -0400
 ---
 <h2>[Post 3] The effect of inter-shot consistency on expected standing points</h2>

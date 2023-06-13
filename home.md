@@ -8,7 +8,7 @@ permalink: /
 <p>
 </p>
 <p>
-Around 2016, a few years removed from a Mathematics degree, my interest in proofs, statistics, and even logic puzzles was waning. I was leaning away from all of this towards creative pursuits. I was working odd jobs, reading fiction and making music. This was my state of mind when my brother lent me the book <a href = "http://www.hockeyabstract.com/statshot">Stat Shot</a>. 
+Around 2016, a few years removed from a Mathematics degree, my interest in proofs, statistics, and even logic puzzles was waning. I was leaning away from this towards creative pursuits. I was working odd jobs, reading fiction and making music. This was my state of mind when my brother lent me the book <a href = "http://www.hockeyabstract.com/statshot">Stat Shot</a>. 
 </p>
 <p>
 <em>Stat Shot</em> was marketed as an entry point for the casual fan to understand advanced hockey statistics - as a fun, entertaining way to explore a different perspective of the sport. It was meant to be a light read. This was not how I read it. To me, it was a blueprint. This was around the time that I came to understand the research process as a creative one. 

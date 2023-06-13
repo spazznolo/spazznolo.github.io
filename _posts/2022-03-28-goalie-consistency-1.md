@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Does consistency matter in goaltending?"
+title:  "Goalie Consistency: Does it matter?"
 date:   2022-03-28 11:52:05 -0400
 ---
 <h1> [Post 1] Does consistency matter in goaltending? </h1>
