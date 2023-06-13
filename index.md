@@ -14,7 +14,7 @@ Around 2016, my brother lent me the book <em>Stat Shot</em>. It was marketed as 
 I'm currently helping Prashanth Iyer build an <a href="https://piyer97.shinyapps.io/NHLDraft2023/">interactive NHL draft tool</a> by implementing a methodology
 </p>
 <p>
-I'm also building a <a href="https://spazznolo.github.io/2023/01/15/tennis-framework.html">tennis tracking program</a>.
+I'm also building a <a href="https://spazznolo.github.io/2023/01/15/tennis-framework.html">tennis tracking program</a>, which hopefully will scale to the level where players and ball can be tracked for entire tournaments. Such a database could <a href = "https://hdsr.mitpress.mit.edu/pub/uy0zl4i1/release/4">prove useful</a> for researchers and players alike, pushing the sport forward.
 </p>
 <p>
 ---
