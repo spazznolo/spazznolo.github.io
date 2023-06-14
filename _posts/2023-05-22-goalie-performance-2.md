@@ -12,7 +12,7 @@ Assumptions:
     - The prior distribution is assumed to be from the beta family.
     - Age is assumed to be irrelevant. 
     - Scoring rates are assumed to be constant.
-    - All shots are assumed to be equal. 
+    - <b>All shots are assumed to be equal.</b>
     - Team systems are assumed to be identical.
 </p>
 <p>
