@@ -11,10 +11,10 @@ This blog serves as an outlet to casually explore ideas which naturally interest
 </p>
 <p>
 <h5>Background</h5>
-Around 2016, a few years removed from a Mathematics degree, my interest in proofs, statistics, and even logic puzzles was waning. I was leaning away from this towards creative pursuits. I was working odd jobs, reading fiction and making music. This was my state of mind when my brother lent me the book <a href = "http://www.hockeyabstract.com/statshot">Stat Shot</a>. 
+Around 2016, a few years removed from a Mathematics degree, my interest in proofs, statistics, and even logic puzzles was waning. I was leaning away from this towards creative pursuits. I was working odd jobs, reading fiction and making music. It was during this time, in this state of mind, that I was lent the book <a href = "http://www.hockeyabstract.com/statshot">Stat Shot</a> by my brother. 
 </p>
 <p>
-<em>Stat Shot</em> was marketed as an entry point for the casual fan to understand advanced hockey statistics - as a fun, entertaining way to explore a different perspective of the sport. It was meant to be a light read, but this was not how I read it. To me, it was a blueprint. I came to understand the research process as a creative one. 
+<em>Stat Shot</em> was written as an entry point for the casual fan to understand advanced hockey statistics - as a fun, entertaining way to explore a different perspective of the sport. It was meant to be a light read, but this was not how I read it. To me, it was a blueprint. I came to understand the research process as a creative one. 
 </p>
 <p>
 In my experience, research usually unfolds as follows: a curiosity arises from watching sports, listening to narratives, reading research papers, or just in conversations with friends; this then gives way to qualitative arguments which xxx; then various quantitative frameworks are drafted, usually mentally. Based on the idea's complexity cost and worth, it is either pursued or forgotten. This process led me from independent research in hockey, to an internship at the St Lawrence River Institute, to my career as a Data Scientist in applied research at Statistics Canada, and to this blog. 
