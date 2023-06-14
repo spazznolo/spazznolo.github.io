@@ -5,5 +5,8 @@ permalink: /draft/
 ---
 <p>
 <h5>NHL Draft</h5>
-In the first post, <a href="https://spazznolo.github.io/2023/05/17/goalie-performance-1.html">Empirical Bayes Save Percentage</a>, I introduce a framework to evaluate goalie performance using empirical Bayes. In the second post, <a href="https://spazznolo.github.io/2023/05/22/goalie-performance-2.html">Empirical Bayes Adjusted Save Percentage</a>, I refine the methdology by accounting for shot quality. In the third post, <a href="https://spazznolo.github.io/2023/05/24/goalie-performance-3.html">Exploring the Distribution</a>, I refine the prior distribution by accounting for performance bias (goalies who perform well tend to face more shots). In the fourth post, <a href="https://spazznolo.github.io/2023/06/04/goalie-performance-4.html">Age is Confounding</a>, I explore the effects of age on performance, and then attempt to account for it.
+In 2020, bored during lockdown, I decided to scrape a now defunct website which hosted user mock drafts called Draft Site . I obtained hundreds of entries over multiple drafts, and built a <a href="https://spazznolo.github.io/2021/11/28/draft-probabilities.html">draft pick probability model for the upcoming NHL draft</a>. I reached out to Ian Levy at Nylon Calculus to see if he was interested in having the same methodology applied to the NBA draft. He <a href="https://fansided.com/2020/09/17/nba-draft-class-controversial-obi-toppin/">was</a>. 
+</p>
+<p>
+Last week (2023/06/10), <a href="https://twitter.com/iyer_prashanth">Pranshanth Iyer</a> reached out to see if I was interested in helping apply a rank-ordered logit model to professional draft rankings. I <a href="https://piyer97.shinyapps.io/NHLDraft2023/">was</a>.  I'll link to the methodology section on the app and probably include an extended version on the blog.
 </p>
