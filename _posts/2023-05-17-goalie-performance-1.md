@@ -37,10 +37,10 @@ The fit isn't perfect (we'll explore alternatives (gamma, weibull, etc.) in a fu
 </p>
 <p>
 <h5>Step Two</h5>
-The second step is to update the prior with each goalie's career results. Here, if a goalie has only faced a few shots, their expected save percentage will shrink towards the mean of the prior distribution and the uncertainty (represented by variance in their distribution) will remain high. Essentially the distribution will still resemble the prior's. As a goalie faces more and more shots, the uncertainty of their expected save percentage decreases.
+The second step is to update the prior with each goalie's career results. Here, if a goalie has only faced a few shots, their expected save percentage will shrink towards the mean of the prior distribution and the uncertainty (represented by variance in their distribution) will remain high. Essentially the distribution will still resemble the prior. As a goalie faces more shots, the uncertainty of their expected save percentage decreases.
 </p>
 <p>
-It is quite easy to update the prior with observed goalie results. All you need to do is add the observed success and failures to the beta's hyperparameters.
+It is quite easy to update the prior with observed goalie results. All you need to do is add the observed success and failures (again, these are just saves and shots) to the beta's hyperparameters.
 </p>
 <p>
 As an example, let's plot the posterior distributions for two 24 year old goalies - Jake Oettinger and Jeremy Swayman.
