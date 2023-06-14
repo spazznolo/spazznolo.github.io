@@ -36,7 +36,7 @@ tennis-ball:
 </p>
 <p>
 <h5>Video Example</h5>
-Here's an example of the inference: https://www.youtube.com/watch?v=DwdfFsjQgFg
+Here's an example of the inference: <a href = "https://www.youtube.com/watch?v=DwdfFsjQgFg">https://www.youtube.com/watch?v=DwdfFsjQgFg</a>
 </p>
 <p>
 <h5>Game-State Classification</h5>

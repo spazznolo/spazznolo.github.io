@@ -16,14 +16,14 @@ Assumptions:
     - Team systems are assumed to be identical.
 </p>
 <p>
-I'm going to address the fourth point in this post.
+I'm going to address the fourth assumption, that all shots are assumed to be equal, in this post.
 </p>
 <p>
 <h5>Adjusted Save Percentage</h5>
 We already know that not all shots are equal. Countless Exepected Goals models have been produced to address this. Thankfully, Peter Tanner, through his website <a href="https://moneypuck.com/about.htm">MoneyPuck</a>, provides detailed data for each unblocked shot that occurs in the NHL (whether it hit the net or not) along with a prediction - the probability of the shot being a goal.
 </p>
 <p>
-We can adjust a goalie's save percentage by taking into account these predictions from MoneyPuck. There are many ways to do this, but I've decided to derive one which would retain the measure as a rate. Here's what I came up with:
+We can adjust a goalie's save percentage by taking into account these predictions from MoneyPuck. There are many ways to do this, but I've decided to derive one which would retain the performance measure as a rate. Here's what I came up with:
 </p>
 <p>
 Fenwick Save Percentage (FSV%) = 1 - (Goals Against / Fenwick Shots Against)<br>

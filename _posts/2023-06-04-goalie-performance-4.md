@@ -10,14 +10,14 @@ In the first post, I outlined a framework for measuring goalie talent using thei
 <p>
 Assumptions:
     - The prior distribution is assumed to be from the beta family.
-    - Age is assumed to be irrelevant. 
+    - <b>Age is assumed to be irrelevant.</b>
     - The number of shots faced is assumed to be independent from performance.
     - Scoring rates are assumed to be constant.
     - All shots are assumed to be equal. 
     - Team systems are assumed to be identical.
 </p>
 <p>
-I'm going to address the second point in this post.
+I'm going to address the second assumption, that age is assumed to be irrelevant, in this post.
 </p>
 <p>
 <h5>Exploring Age</h5>
