@@ -29,8 +29,8 @@ The object detection model I chose to start is YOLOv5. It's incredibly fast. Inf
 </p>
 <p>
 Some results:
-overall: 91.0% mAP; 95.9% precision; 90.6% recall
-front-player: 99.2% mAP; 99.6% precision; 99.1% recall
+overall: 
+front-player: 
 back-player:
 tennis-ball:
 </p>
@@ -48,10 +48,10 @@ Currently still using the Hough Lines method laid out in a previous post. Ideall
 </p>
 <p>
 <h5>Post-Processing of Tennis Players</h5>
-adf
+to be continued
 </p>
 <p>
 <h5>Post-Processing of Tennis Ball</h5>
-adf
+to be continued
 </p>
 
