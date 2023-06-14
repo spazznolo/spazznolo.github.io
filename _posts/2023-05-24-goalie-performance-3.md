@@ -30,7 +30,7 @@ There is definitely bias here. This potential solution has caused a compromise. 
 David suggests using a beta-binomial regression to fit batting averages to at-bats. Essentially, each at-bat total has its own prior. Though this is a good idea for his use case, it isn't great for mine. The problem is that I am heavily biased towards building something which can help in making decisions - I want to build towards a model which is useful for goalies who are playing right now, and we don't know how many shots they will face in the future! I need something different.
 </p>
 <h5>Combining Priors</h5>
-Fortunately, we may be able to address this by expanding our Bayesian framework to include two priors, glued together by a likelihood. Let's revisit the goalie career AdjSV% density plots, except this time split goalies into two equally sized groups - those facing over 200 shots, and those facing less.
+Fortunately, we may be able to address this by expanding our Bayesian framework to include two priors, glued together by a likelihood. Let's revisit the goalie career AdjSV% density plots, except this time split goalies into two groups - those facing over 1,500 shots, and those facing less.
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-three.png" width="60%" length="150"/></div>
@@ -40,12 +40,15 @@ Some thoughts:
     - From these group distributions, we can build two separate priors.
     - These can be merged by including a likelihood of a goalie belonging to each group.
     - The likelihood is the probability that a goalie belongs to each group.
-    - The likelihood will sum to 1, and begins at 50% for each group.
-    - This is because 50% of the goalies in our population have faced over 1500 shots.
+    - The likelihood will sum to 1, and begins at the observed occurence (in %) for each group.
+    - For example, 35% of the goalies in our population have faced over 1500 shots, so that is the initial weight.
     - This likelihood will shift depending on his performance as he faces more shots.
 </p>
 <p>
-Here's a simple idea for a likelihood: run a logistic regression using cumulative shots faced and AdjSV% onto the outcome wheter a goalie ended up facing over 1500 shots. It turns out such a model is not only simple but is well-calibrated.
+Here's a simple idea for a likelihood: run a logistic regression using cumulative shots faced and AdjSV% onto the outcome of whether a goalie ended up facing over 1500 shots. This model would be easy to train and interpret.
+</p>
+<p>
+And, it turns out, such a model is not only simple but is well-calibrated:
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-four.png" width="60%" length="150"/></div>
