@@ -5,11 +5,11 @@ date:   2023-05-17 8:52:05 -0400
 ---
 <h2>[Post 1] Goalie Performance: Empirical Bayes Save Percentage</h2>
 <p>
-Recall from the introductory paragraph of the series on goalie consistency:
+Recall from the introductory paragraph of the series on <a href="https://spazznolo.github.io/2022/03/28/goalie-consistency-1.html">goalie consistency</a>:
 "Goaltenders make up the least predictable position in hockey. Their behavior confounds analysts and casual fans alike. It isn’t uncommon for a good goalie to have a below replacement level year, or for an unknown goalie to come in and dominate the league for a stretch of time. This may partly explain the relative dearth of analysis on goalies - they're voodoo, it's often said."
 </p>
 <p>
-Let's shift our focus from the uncertainty of goalie performance to the uncertainty in goalie skill. There's a difference. In the previous three posts, I looked at the variance in game-to-game outcomes, but this time I want to look at the variance in a goalie's actual expected save percentage. To do this, we'll use empirical Bayes. This has been explored in <a href="https://hockey-graphs.com/2018/06/21/comparing-scoring-talent-with-empirical-bayes/">previous</a> <a href="http://varianceexplained.org/r/empirical_bayes_baseball/">papers</a>. This post is a launchpad for more detailed, rigorous research.
+Let's shift our focus from the uncertainty of goalie performance to the uncertainty in goalie skill. There's a difference. In the previous three posts, I looked at the variance in game-to-game outcomes, but this time I want to look at the variance in a goalie's actual expected save percentage. To do this, we'll use empirical Bayes. Similar applications were outlined in <a href="https://hockey-graphs.com/2018/06/21/comparing-scoring-talent-with-empirical-bayes/">previous</a> <a href="http://varianceexplained.org/r/empirical_bayes_baseball/">papers</a>. This post is a launchpad for more detailed, rigorous research.
 </p>
 <p>
 <h5>Step One</h5>

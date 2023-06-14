@@ -19,7 +19,7 @@ Goals have been <a href="http://www.hockeyanalytics.com/Research_files/Poisson_T
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-zero-one.png" width="60%" length="150"/></div>
 </p>
 <p>
-<em>The simulation of the Poisson to obtain outcomes for an exploration on inter-game goalie consistency occurs in the <a href="https://spazznolo.github.io/2022/04/04/goalie-consistency-1.html">first post</a> of this series.</em>
+<em>The simulation of the Poisson to obtain outcomes for an exploration on inter-game goalie consistency occurs in the <a href="https://spazznolo.github.io/2022/04/04/goalie-consistency-1.html">second post</a> of this series.</em>
 </p>
 <h5>Entropy</h5>
 <a href="https://en.wikipedia.org/wiki/Entropy_(information_theory)">Entropy</a> is a popular concept in information theory. It measures the orderliness in a sequence, usually of binary events. Good news - shots can be expressed as a sequence of binary events. Here’s what a sequence of outcomes from shots on goal can look like (1 goal, 0 save).
