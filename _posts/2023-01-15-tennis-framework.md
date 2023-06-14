@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Building a framework to track tennis games at scale"
+title:  "Tennis: Building a framework to track games at scale"
 date:   2023-01-15 12:00:00 -0400
 ---
 <h2>Building a framework to track tennis games at scale</h2>
@@ -28,7 +28,7 @@ I'm currently using <a href="https://colab.research.google.com/drive/1tM9Jbu3Xwl
 The object detection model I chose to start is <a href="https://pytorch.org/hub/ultralytics_yolov5/">YOLOv5</a>. It's incredibly fast. Inference is around 100fps, which makes it scalable when it comes time to track an entire tournament of gameplay. It works fine for players, but it doesn't leverage the spatio-temporal nature of tennis. This is particularly problematic when detecting a tennis ball, which, depending on the context, can appear as a blurred line, blend in with the court lines, be hidden behind a player, etc.
 </p>
 <p>
-Some results from the <a href="https://app.roboflow.com/tennistracker-dogbm/tennis-tracker-duufq/deploy/15">latest</a> model iteration:
+Some results from the <a href="https://app.roboflow.com/tennistracker-dogbm/tennis-tracker-duufq/deploy/15">latest</a> model iteration.
 overall: 
 front-player: 
 back-player:
