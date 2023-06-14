@@ -41,7 +41,7 @@ Some thoughts:
     - These can be merged by including a likelihood of a goalie belonging to each group.
     - The likelihood is the probability that a goalie belongs to each group.
     - The likelihood will sum to 1, and begins at 50% for each group.
-    - This is because 50% of the goalies in our population have faced over 200 shots.
+    - This is because 50% of the goalies in our population have faced over 1500 shots.
     - This likelihood will shift depending on his performance as he faces more shots.
 </p>
 <p>
