@@ -7,28 +7,28 @@ date:   2023-01-15 12:00:00 -0400
 I stepped away from the first iteration of this project last year when I realized I was going to have to annotate thousands of images to create a robust player/ball detection model. In the next few months, I'll design and build such a modelling framework. This post outlines the methods and services which will be used for the framework.
 <p>
 <h5>Tennis TV</h5>
-The ATP has a streaming service called Tennis TV which offers full games and daily highlights for most tournaments on the tour. The highlights are of particular interest given that they consist of condensed versions of various games. This offers a diversity of players, outfits, visibility, crowds, etc. which will make the model more robust.
+The ATP has a streaming service called <a href="https://www.tennistv.com/?gclid=CjwKCAjwyqWkBhBMEiwAp2yUFkALa-AHHRpKvKlqI7MypdHnL6eRs95eB9c-PsMZ3Oo81Niyo5yRRhoC1QIQAvD_BwE">Tennis TV</a> which offers full games and daily highlights for most tournaments on the tour. The highlights are of particular interest given that they consist of condensed versions of various games. This offers a diversity of players, outfits, visibility, crowds, etc. which will make the model more robust.
 </p>
 <p>
 To maximize the diversity of the labelled set, I downloaded the quarter-final highlight video of 15 tournaments. Each video contains highlights from four games and is roughly 8 minutes long, which at 25fps is 12,000 frames, or 3,000 frames per game. I clipped each minute of each video, then took every fifth frame, up to 25 frames per minute. This is roughly 200 frames per tournament (or 50 frames per game), for 3000 frames in total. A highlight video consists of roughly 65-70% of actual game-play, with the other 30-35% being replays, audience pans, etc. Therefore, the final modelling set is roughly 2000 frames. 
 </p>
 <p>
 <h5>Roboflow</h5>
-Using Roboflow, I labelled the front player, back player, and tennis ball for each frame that featured them. Roboflow is free, slick, and saved me hours of labelling work through it's label assist feature. Basically, I annotated a couple of games manually, trained a model on these games, then loaded the model into the label assist feature to automate much of the annotation process for the remaining games. 
+Using <a href="https://app.roboflow.com/tennistracker-dogbm">Roboflow</a>, I labelled the front player, back player, and tennis ball for each frame that featured them. Roboflow is free, slick, and saved me hours of labelling work through it's label assist feature. Basically, I annotated a couple of games manually, trained a model on these games, then loaded the model into the label assist feature to automate much of the annotation process for the remaining games.  The dataset is <a href="https://universe.roboflow.com/tennistracker-dogbm/tennis-tracker-duufq">publicly available</a>.
 </p>
 <p>
 Roboflow also has an API that plugs easily into Google Colab.
 </p>
 <p>
 <h5>Google Colab</h5>
-I'm currently using Google Colab to train the computer vision model. I've looked around, and for my current needs (research), it fits. Easy to use, compatible with Roboflow, offers a free-to-use GPU (though it disconnects with 90 minutes of inactivity). I'm currently using Google Colab to train a YOLOv5 model.
+I'm currently using <a href="https://colab.research.google.com/drive/1tM9Jbu3XwlDK8s8EVLB_lBQwNOr23u-3#scrollTo=G4fjA5X74FpF">Google Colab</a> to train the computer vision model. I've looked around, and for my current needs (research), it fits. Easy to use, compatible with Roboflow, offers a free-to-use GPU (though it disconnects with 90 minutes of inactivity). I'm currently using Google Colab to train a YOLOv5 model.
 </p>
 <p>
 <h5>YOLOv5</h5>
-The object detection model I chose to start is YOLOv5. It's incredibly fast. Inference is around 100fps, which makes it scalable when it comes time to track an entire tournament of gameplay. It works fine for players, but it doesn't leverage the spatio-temporal nature of tennis. This is particularly problematic when detecting a tennis ball, which, depending on the context, can appear as a blurred line, blend in with the court lines, be hidden behind a player, etc.
+The object detection model I chose to start is <a href="https://pytorch.org/hub/ultralytics_yolov5/">YOLOv5</a>. It's incredibly fast. Inference is around 100fps, which makes it scalable when it comes time to track an entire tournament of gameplay. It works fine for players, but it doesn't leverage the spatio-temporal nature of tennis. This is particularly problematic when detecting a tennis ball, which, depending on the context, can appear as a blurred line, blend in with the court lines, be hidden behind a player, etc.
 </p>
 <p>
-Some results:
+Some results from the <a href="https://app.roboflow.com/tennistracker-dogbm/tennis-tracker-duufq/deploy/15">latest</a> model iteration:
 overall: 
 front-player: 
 back-player:
@@ -36,7 +36,7 @@ tennis-ball:
 </p>
 <p>
 <h5>Video Example</h5>
-Here's an example of the inference: <a href = "https://www.youtube.com/watch?v=DwdfFsjQgFg">https://www.youtube.com/watch?v=DwdfFsjQgFg</a>
+For a short example of the inference, click <a href = "https://www.youtube.com/watch?v=DwdfFsjQgFg">here.</a>
 </p>
 <p>
 <h5>Game-State Classification</h5>
