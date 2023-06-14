@@ -24,7 +24,7 @@ This process led me from independent research in hockey, to an internship at the
 </p>
 <p>
 <h5>Current independent work</h5>
-I'm helping Prashanth Iyer build an <a href="https://piyer97.shinyapps.io/NHLDraft2023/">interactive NHL draft tool</a> by applying a rank-ordered logit model to draft rankings from publications over time.
+I'm helping Prashanth Iyer build an <a href="https://piyer97.shinyapps.io/NHLDraft2023/">interactive NHL draft tool</a> by applying a rank-ordered logit model to professional draft rankings.
 </p>
 <p>
 I'm building a <a href="https://spazznolo.github.io/2023/01/15/tennis-framework.html">tennis tracking program</a>, which hopefully will scale to the level where entities (players and ball) can be tracked for entire tournaments. Such a database could <a href = "https://hdsr.mitpress.mit.edu/pub/uy0zl4i1/release/4">prove useful</a> for researchers and players alike, pushing the sport forward.
