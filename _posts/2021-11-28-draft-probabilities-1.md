@@ -123,7 +123,7 @@ A gamma distribution is fit to adjusted data.
 <h5>Dampening Player Distributions</h5>
 Player distributions are dampened by the variance observed in prior years. This is superior to the variance in the raw data because, in this case, it is caused by actual deviations as opposed to what are likely bad user predicitons.
 <p>
-I wrote a similar article for the NBA Draft at Nylon Calculus which can be found <a href="https://fansided.com/2020/09/17/nba-draft-class-controversial-obi-toppin/">here</a>.
+I wrote a similar article for the NBA Draft at <a href="https://fansided.com/2020/09/17/nba-draft-class-controversial-obi-toppin/">Nylon Calculus</a>.
 </p>
 
 
