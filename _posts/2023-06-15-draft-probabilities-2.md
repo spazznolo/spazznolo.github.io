@@ -5,7 +5,7 @@ date:   2023-06-16 8:52:05 -0400
 ---
 <h2>Deriving pick probabilities from NHL draft rankings</h2>
 <p>
-The probabilities are generated through a process which primarily involves the application of a rank-ordered logit model to draft rankings released throughout the year. The methodology is a simplified version of "Predicting the NHL Draft with Rank-Ordered Logit Models".
+The probabilities are generated through a process which primarily involves the application of a rank-ordered logit model to draft rankings released throughout the year. The methodology is a simplified version of <a href="https://ecp.ep.liu.se/index.php/linhac/article/view/480">Predicting the NHL Draft with Rank-Ordered Logit Models</a>.
 </p>
 <p>
 There are three main components - first, partial draft rankings are made complete, then a rank-ordered logit model is fit, finally 100,000 drafts are simulated from model outputs. I will describe each component in this thread. Links are provided at the end.
@@ -22,7 +22,7 @@ First, we restrict the population to prospects ranked in the top 100 by at least
 As for the rank-ordered logit models, we're currently operating two. The first, a time-weighted frequentist method from the PlackettLuce package in R; the other, a Bayesian, tier-weighted implementation written in Stan by @TyrelStokes...
 </p>
 <p>
-The time-weighted frequentist implementation is a standard application of the Plackett-Luce, except that ranking lists are weighed based on their distance to the draft in days. The ranking weights were determined using my previous work on user mock drafts, and are linked at the end.
+The time-weighted frequentist implementation is a standard application of the Plackett-Luce, except that ranking lists are weighed based on their distance to the draft in days. The <a href = "https://github.com/spazznolo/draft-rankings/blob/main/data/weights_for_pl.csv">ranking weights</a> were determined using my previous work on user mock drafts.
 </p>
 <p>
 Here's a plot of user mock draft error against the distance to the draft in days. For example, using the draft day as the index, rankings published a month out are weighted at roughly 90%, two months at 77%, four months at 50%, and a year at 17%.
@@ -44,8 +44,7 @@ Theoretically, if draft rankings were actually full rankings, every single eligi
 <p>
 <h5>Links</h5>
 draft tool: https://piyer97.shinyapps.io/NHLDraft2023/
-article: https://ecp.ep.liu.se/index.php/linhac/article/view/480
-weights: https://github.com/spazznolo/draft-rankings/blob/main/data/weights_for_pl.csv
+weights: 
 Stokes stan script: https://github.com/tyrelstokes/Monaco_ranking/blob/main/plackett_luce_opt.stan
 project repo: https://github.com/spazznolo/draft-rankings
 </p>
