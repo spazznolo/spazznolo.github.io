@@ -3,11 +3,6 @@ layout: post
 title:  "Goalie Performance: Exploring the Distribution"
 date:   2023-05-24 8:52:05 -0400
 ---
-```
-```
-this is a little test
-```
-```
 <h2>[Post 3] Goalie Performance: Exploring the Distribution</h2>
 <p>
 In the <a href="https://spazznolo.github.io/2023/05/17/goalie-performance-1.html">first post</a>, I outlined a framework for measuring goalie talent using their career Fenwick 5v5 save percentage. In the second post, a prior from the beta family was fit to the goalie career AdjSV% distribution, which yielded the hyper-parameters we built the posterior from. There are two obvious problems with this methodology, though. 
