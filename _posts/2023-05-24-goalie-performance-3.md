@@ -3,16 +3,16 @@ layout: post
 title:  "Goalie Performance: Exploring the Distribution"
 date:   2023-05-24 8:52:05 -0400
 ---
-<h2>[Post 3] Goalie Performance: Exploring the Distribution</h2>
+<h2>[Post 3: Still Working on this] Goalie Performance: Exploring the Distribution</h2>
 <p>
-In the <a href="https://spazznolo.github.io/2023/05/17/goalie-performance-1.html">first post</a>, I outlined a framework for measuring goalie talent using their career Fenwick 5v5 save percentage. In the second post, a prior from the beta family was fit to the goalie career AdjSV% distribution, which yielded the hyper-parameters we built the posterior from. There are two obvious problems with this methodology, though. 
+In the <a href="https://spazznolo.github.io/2023/05/17/goalie-performance-1.html">first post</a>, I outlined a framework for measuring goalie talent using their career Fenwick 5v5 save percentage. In the second post, the methodology was adapted to consider shot quality. There are two obvious problems with this methodology, though. 
 </p>
 <p>
     1. Goalies facing less than 10 xG had to be thrown out.
-    2. Goalies were treated equally.
+    2. Goalies' career AdjSV% were treated equally.
 </p>
 <p>
-Even though we're only talking about a 10xG cut-off, this eliminates more goalies than I would have liked. To illustrate this, here's the cdf xxxx. It turns out 90 of 314 goalies (xx%) faced below 10xG in their careers!
+Even though we're only talking about a 10xG cut-off, this eliminates more goalies than I would have liked. To illustrate this, here's the cumulative distribution function. It turns out 90 of 314 goalies (28.7%) faced below 10xG in their careers!
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-six-one.png" width="60%" length="150"/></div>

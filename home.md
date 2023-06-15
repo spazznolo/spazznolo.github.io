@@ -3,6 +3,17 @@ title: home
 layout: home
 permalink: /
 ---
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DGRHZS5DNM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DGRHZS5DNM');
+</script>
+</head>
 <br>
 <div style="text-align: center"> <img src="figs/fifty-four.png" width="80%" length="280"/></div>
 <p>

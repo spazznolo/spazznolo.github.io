@@ -3,18 +3,7 @@ layout: post
 title:  "Goalie Performance: Age is Confounding"
 date:   2023-06-04 8:52:05 -0400
 ---
-<head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-DGRHZS5DNM"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-DGRHZS5DNM');
-</script>
-</head>
-<h2>[Post 4] Goalie Performance: Age is Confounding</h2>
+<h2>[Post 4: Still Working on this] Goalie Performance: Age is Confounding</h2>
 <p>
 In the first post, I outlined a framework for measuring goalie talent using their career Fenwick 5v5 save percentage. It concluded with the assumptions of the initial strategy, which I'll include again below.
 </p>

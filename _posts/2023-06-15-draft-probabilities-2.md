@@ -3,8 +3,8 @@ layout: post
 title:  "Deriving pick probabilities from NHL draft rankings"
 date:   2023-06-16 8:52:05 -0400
 ---
-<p>
 <h2>Deriving pick probabilities from NHL draft rankings</h2>
+<p>
 The probabilities are generated through a process which primarily involves the application of a rank-ordered logit model to draft rankings released throughout the year. The methodology is a simplified version of "Predicting the NHL Draft with Rank-Ordered Logit Models".
 </p>
 <p>
@@ -34,11 +34,18 @@ The tier-weighted Bayesian implementation is taken wholesale from @TyrelStokes' 
 <h5>Simulation of drafts</h5>
 These rank-ordered logit models attribute a "strength" score to each player. Drafts are simulated (100k times) by randomly drawing (without replacement) players using their strength score as weights.
 </p>
-Assumptions
-
-Links
+<p>
+<h5>Assumptions</h5>
+There are two main assumptions in this methodology. The first is that draft rankings aren't correlated with time (they are), the second is that the rankings are truly full rankings (they are not). Let's start with the second assumption since it's more simple.
+</p>
+<p>
+Theoretically, if draft rankings were actually full rankings, every single eligible prospect would be included in each ranking. Though this would be interesting in a vacuum, it's totally infeasible in practice, obviously. The question is then "how do we fit partial rankings into full rankings?". One way is to create a cut-off for the number of players included in the population. To my mind, the best way to create this cut-off is to clip rankings at 100 players (if a publication ranked 150 or 250 players, we ignore players ranked 101+; there isn't very much information loss, only a few publications rank past 100). Then, we <em>only</em> consider players appearing in our new set. We're left with roughly 190+ prospects this way. So... where's the problem? Well, the PL model doesn't understand that other prospects exist - it considers the rankings to be full. Therefore, the probability that, say the 190th ranked prospect is drafted is forced to 0%. This isn't really a problem for the first round or two, but as the draft progresses it becomes increasingly problematic. We are therefore <em>overestimating</em> the probability that our 190+ prospects are drafted during each pick. 
+</p>
+<p>
+<h5>Links</h5>
 draft tool: https://piyer97.shinyapps.io/NHLDraft2023/
 article: https://ecp.ep.liu.se/index.php/linhac/article/view/480
 weights: https://github.com/spazznolo/draft-rankings/blob/main/data/weights_for_pl.csv
 Stokes stan script: https://github.com/tyrelstokes/Monaco_ranking/blob/main/plackett_luce_opt.stan
 project repo: https://github.com/spazznolo/draft-rankings
+</p>
