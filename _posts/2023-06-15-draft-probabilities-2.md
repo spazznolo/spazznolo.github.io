@@ -5,7 +5,7 @@ date:   2023-06-16 12:00:00 -0400
 ---
 <h2>Deriving pick probabilities from NHL draft rankings</h2>
 <p>
-The probabilities are generated through a process which primarily involves the application of a rank-ordered logit model to draft rankings released throughout the year. The methodology is a simplified version of <a href="https://ecp.ep.liu.se/index.php/linhac/article/view/480">Predicting the NHL Draft with Rank-Ordered Logit Models</a>.
+The prospect pick probabilities in the "Draft Pick Probabilities" tab are generated through a process which primarily involves the application of a rank-ordered logit model to draft rankings released throughout the year. The methodology is a simplified version of <a href="https://ecp.ep.liu.se/index.php/linhac/article/view/480">Predicting the NHL Draft with Rank-Ordered Logit Models</a>, which itself was an extension of xxx. and so on...
 </p>
 <p>
 There are three main components - first, partial draft rankings are made complete, then a rank-ordered logit model is fit, finally 100,000 drafts are simulated from model outputs. I will describe each component in this thread. Links are provided at the end.
@@ -22,13 +22,10 @@ First, we restrict the population to prospects ranked in the top 100 by at least
 As for the rank-ordered logit models, we're currently operating two. The first, a time-weighted frequentist method from the PlackettLuce package in R; the other, a Bayesian, tier-weighted implementation written in Stan by @TyrelStokes...
 </p>
 <p>
-The time-weighted frequentist implementation is a standard application of the Plackett-Luce, except that ranking lists are weighed based on their distance to the draft in days. The <a href = "https://github.com/spazznolo/draft-rankings/blob/main/data/weights_for_pl.csv">ranking weights</a> were determined using my previous work on user mock drafts.
+The time-weighted frequentist implementation is a standard application of the Plackett-Luce, except that ranking lists are weighed based on their distance to the draft in days. The ranking weights were determined using my previous work on user mock drafts. The weights are available <a href = "https://github.com/spazznolo/draft-rankings/blob/main/data/weights_for_pl.csv">here</a> for those interested. Using the draft day as the index, rankings published a month out are weighted at roughly 90%, two months at 77%, four months at 50%, and a year at 17%. 
 </p>
 <p>
-Here's a plot of user mock draft error against the distance to the draft in days. For example, using the draft day as the index, rankings published a month out are weighted at roughly 90%, two months at 77%, four months at 50%, and a year at 17%. 
-</p>
-<p>
-The tier-weighted Bayesian implementation is taken wholesale from @TyrelStokes' work on track racing. His implementation contains weights, however they are determined by the Bayesian framework, which was not written with time, but tier importance + noise in mind.
+The tier-weighted Bayesian implementation is taken wholesale from Tyrel Stokes' <a href = "https://github.com/tyrelstokes/Monaco_ranking/blob/main/plackett_luce_opt.stan">work on track racing</a>. His implementation contains weights, however they are determined by the Bayesian framework, which was not written with time, but tier importance + noise in mind.
 </p>
 <p>
 <h5>Simulation of drafts</h5>
@@ -36,7 +33,7 @@ These rank-ordered logit models attribute a "strength" score to each player. Dra
 </p>
 <p>
 <h5>Assumptions</h5>
-There are two main assumptions in this methodology. The first is that draft rankings aren't autocorrelated (they are), the second is that the rankings are truly full rankings (they are not). Let's start with the second assumption since it's more simple.
+There are three main assumptions which don't quite fit in this methodology, so we'll explain them. The first is that the rankings are truly full rankings (they are not). The second is that draft rankings aren't related over time (they are). The third is that the population ranking publications is representative of NHL organizations (could be verified with historical data). 
 </p>
 <p>
 On "Full" Rankings
@@ -46,6 +43,8 @@ Theoretically, if draft rankings were actually full rankings, every single eligi
 On Time
 To simplify the model, time was included through weights. Essentially, we are flattening time by saying "a ranking published right before the draft is worth about twice as much as a ranking published four months ago". Even though this works for prediction, it is not actually how the dynamic works. The reason rankings change is <em>not</em> because of time, but because of <em>what prospects/scouts do during this time</em>. 
 </p>
+On Selection Bias
+The method necessarily assumes that prospect ranking publications are representative of NHL organizations. By "representative", we mean they value players similarly and experience similar variance in their evaluations. As an example - and this is only an example - let's imagine that ranking publications do not have the same resources as a professional hockey team, causing them to rely mostly on data instead of in-game observation, the "bias" in these publication rankings would reflect in the pick probabilities.
 <p>
 <h5>Links</h5>
 draft tool: https://piyer97.shinyapps.io/NHLDraft2023/
