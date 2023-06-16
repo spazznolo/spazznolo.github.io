@@ -44,5 +44,5 @@ On Selection Bias
 The method necessarily assumes that prospect ranking publications are representative of NHL organizations. By "representative", we mean they value players similarly and experience similar variance in their evaluations. As an example - and this is only an example - let's imagine that ranking publications do not have the same resources as a professional hockey team, causing them to rely mostly on data instead of in-game observation, therefore placing a higher value on prospects who perform in ways which are currently being measured through game logs. The "bias" in these publication rankings would be reflected in the pick probabilities published here.
 <p>
 <h5>Links</h5>
-project repo: https://github.com/spazznolo/draft-rankings
+The code used to generate these probabilities is available on GitHub <a href = "https://github.com/spazznolo/draft-rankings">here</a>.
 </p>
