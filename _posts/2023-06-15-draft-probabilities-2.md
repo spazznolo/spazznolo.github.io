@@ -40,8 +40,10 @@ Theoretically, if draft rankings were actually full rankings, every single eligi
 On Time
 To simplify the model, time was included through weights. Essentially, we are flattening time by saying "a ranking published right before the draft is worth about twice as much as a ranking published four months ago". Even though this works for prediction, it is not actually how the dynamic works. The reason rankings change is <em>not</em> because of time, but because of <em>what prospects/scouts do during this time</em>. This assumption is addressed in <em>Predicting the NHL Draft with Rank-Ordered Logit Models</em>, linked above.
 </p>
+<p>
 On Selection Bias
 The method necessarily assumes that prospect ranking publications are representative of NHL organizations. By "representative", we mean they value players similarly and experience similar variance in their evaluations. As an example - and this is only an example - let's imagine that ranking publications do not have the same resources as a professional hockey team, causing them to rely mostly on data instead of in-game observation, therefore placing a higher value on prospects who perform in ways which are currently being measured through game logs. The "bias" in these publication rankings would be reflected in the pick probabilities published here.
+</p>
 <p>
 <h5>Links</h5>
 The code used to generate these probabilities is available on GitHub <a href="https://github.com/spazznolo/draft-rankings">here</a>.
