@@ -5,7 +5,7 @@ date:   2023-06-16 12:00:00 -0400
 ---
 <h2>Deriving pick probabilities from NHL draft rankings</h2>
 <p>
-The prospect pick probabilities in the "Draft Pick Probabilities" tab are generated through a process which primarily involves the application of a rank-ordered logit model to draft rankings released throughout the year. The methodology is a simplified version of <a href="https://ecp.ep.liu.se/index.php/linhac/article/view/480">Predicting the NHL Draft with Rank-Ordered Logit Models</a>.
+The prospect pick probabilities in the "Draft Pick Probabilities" tab of the <a href="https://piyer97.shinyapps.io/NHLDraft2023/">2023 Draft Stock tool</a> are generated through a process which primarily involves the application of a rank-ordered logit model to draft rankings released throughout the year. The methodology is a simplified version of <a href="https://ecp.ep.liu.se/index.php/linhac/article/view/480">Predicting the NHL Draft with Rank-Ordered Logit Models</a>.
 </p>
 <p>
 There are three main components - first, partial draft rankings are made complete, then a rank-ordered logit model is fit, finally 100,000 drafts are simulated from model outputs. I will describe each component in this thread. Links are provided at the end.
@@ -15,6 +15,7 @@ There are three main components - first, partial draft rankings are made complet
 Technically, there are thousands of draft prospects. Consequently, draft rankings cannot include every prospect, and so, by definition, they are partial rankings. They need to be made complete to fit into our framework. We do this by first, restricting the population to prospects ranked in the top 100 by at least one publication. Then, through the <a href="https://cran.r-project.org/web/packages/PLMIX/PLMIX.pdf">PLMIX</a> package in R, rankings are made complete using the frequency of their appearance in rankings as weights.
 </p>
 <p>
+```
 ## Create full rankings
 
 # Get skater appearance counts
@@ -34,6 +35,7 @@ full_ranking_matrix <-
     format_input="ordering", 
     probitems=top_skater_freq) %>%
   .$completedata
+```
 </p>
 <p>
 <h5>Fitting of Plackett-Luce models</h5>
@@ -43,6 +45,7 @@ As for the rank-ordered logit models, we're currently operating two. The first, 
 The time-weighted frequentist implementation is a standard application of the Plackett-Luce, except that ranking lists are weighed based on their distance to the draft in days. The ranking weights were determined using my previous work on user mock drafts. The weights are available <a href="https://github.com/spazznolo/draft-rankings/blob/main/data/weights_for_pl.csv">here</a> for those interested. Using the draft day as the index, rankings published a month out are weighted at roughly 90%, two months at 77%, four months at 50%, and a year at 17%. 
 </p>
 <p>
+```
 ## Build Plackett-Luce model
 
 # Fit the Plackett-Luce model
@@ -50,6 +53,7 @@ pl_model <- PlackettLuce(full_ranking_matrix, weights = weights, npseudo = 0.1, 
 
 # Obtain maximum likelihood estimates from the Plackett-Luce model
 mle_estimates <- coef(pl_model, log = FALSE)
+```
 </p>
 <p>
 The tier-weighted Bayesian implementation is taken wholesale from Tyrel Stokes' work on <a href="https://github.com/tyrelstokes/Monaco_ranking">track racing</a>. His implementation contains weights, however they are determined by the Bayesian framework, which was not written with time, but tier importance + noise in mind.
@@ -59,8 +63,11 @@ The tier-weighted Bayesian implementation is taken wholesale from Tyrel Stokes' 
 These rank-ordered logit models attribute a "strength" score to each player. Drafts are simulated (100k times) by randomly drawing (without replacement) players using their strength score as weights.
 </p>
 <p>
+```
 # Simulate draft rankings
-draft_simulations <- replicate(100000, sample(1:skaters, skaters, replace = FALSE, prob = mle_estimates)</p>
+draft_simulations <- replicate(100000, sample(1:skaters, skaters, replace = FALSE, prob = mle_estimates)
+```
+</p>
 <p>
 <h5>Assumptions</h5>
 There are three main assumptions which don't quite fit in this methodology. The first is that the rankings are truly full rankings (they are not). The second is that draft rankings aren't related over time (they are). The third is that ranking publications are representative of NHL organizations (unsure, could be verified with historical data). We explain each below.
