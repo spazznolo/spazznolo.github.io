@@ -30,7 +30,7 @@ These rank-ordered logit models attribute a "strength" score to each player. Dra
 </p>
 <p>
 <h5>Assumptions</h5>
-There are three main assumptions which don't quite fit in this methodology. The first is that the rankings are truly full rankings (they are not). The second is that draft rankings aren't related over time (they are). The third is that the population ranking publications is representative of NHL organizations (could be verified with historical data). We explain each below.
+There are three main assumptions which don't quite fit in this methodology. The first is that the rankings are truly full rankings (they are not). The second is that draft rankings aren't related over time (they are). The third is that ranking publications are representative of NHL organizations (unsure, could be verified with historical data). We explain each below.
 </p>
 <p>
 On "Full" Rankings
@@ -44,5 +44,5 @@ On Selection Bias
 The method necessarily assumes that prospect ranking publications are representative of NHL organizations. By "representative", we mean they value players similarly and experience similar variance in their evaluations. As an example - and this is only an example - let's imagine that ranking publications do not have the same resources as a professional hockey team, causing them to rely mostly on data instead of in-game observation, therefore placing a higher value on prospects who perform in ways which are currently being measured through game logs. The "bias" in these publication rankings would be reflected in the pick probabilities published here.
 <p>
 <h5>Links</h5>
-The code used to generate these probabilities is available on GitHub <a href = "https://github.com/spazznolo/draft-rankings">here</a>.
+The code used to generate these probabilities is available on GitHub <a href="https://github.com/spazznolo/draft-rankings">here</a>.
 </p>
