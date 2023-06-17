@@ -34,7 +34,7 @@ Going into the draft, every team establishes a ranking based on their internal e
 Next, we can use our tool to estimate the probability that each player is still available at each pick. Here they are:
 </p>
 <p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/draft-probability-3-1.png" width="70%" length="100"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/draft-probability-3-1.png" width="75%" length="110"/></div>
 </p>
 <p>
 <h5>Pick Values</h5>
