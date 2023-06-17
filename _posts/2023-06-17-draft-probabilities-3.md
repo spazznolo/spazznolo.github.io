@@ -40,9 +40,11 @@ Next, we can use our tool to estimate the probability that each player is still 
 <p>
 <h5>Pick Values</h5>
 The value of each draft pick has long been established in the hockey analytics community. Here's the Athletic's:
+</p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/draft-probability-3-2.png" width="60%" length="150"/></div>
 </p>
+<p>
 It is important to clarify that these values are <em>averages</em>. There are weak drafts (like last year), and strong drafts (like this year). There are also heterogenous pockets, where strong players are clustered together, and then steep drops in value occur. Consequently, for our purposes, it is more appropriate to derive pick values based on the prospects <em>available in the draft</em>. As the Canadiens, we derive pick values by multiplying the probability a prospect is available at a certain pick by their predicted WAR. Obviously, we're going to take the player we value highest, so the pick values are calculated like so:
 </p>
 <p>
