@@ -59,11 +59,16 @@ Using the third pick as an example - there is a 0% chance Bedard is available, s
 </p>
 <p>
 <h5>Decisions, decisions</h5>
-With pick values derived from pick probabilities and prosepct values, the Canadiens now have a quantitive framework to determine the value difference between picks. We can return to the question we started the post with. 
+With pick values derived from pick probabilities and prospect values, the Canadiens now have a quantitive framework to determine the value difference between picks. This brings us back to the initial question: should the Canadiens consider trading down? 
 </p>
-So, should the Canadiens trade down? Well, in this case, they would need to give up less than 6.9420 (their internal value of the 4th pick) - 5.1084 (their internal value of the 5th pick) = 1.8336 WAR in order to <em>gain</em> value as an organization.
+<p>
+Let's explore this by examining a hypothetical scenario where they have the opportunity to trade down to the fourth pick. To gain organizational value, they would need to give up less than the value of the fourth pick (6.9420) minus the value of the fifth pick (5.1084), which equals 1.8336 WAR. With this, a complex decision becomes relatively simple, at least in theory.
+</p>
+<p>
+By combining prospect pick probabilities with internal evaluations, NHL organizations like the Canadiens can make more informed decisions about their draft strategies and potential trade scenarios.
+</p>
 <p>
 <h5>Next Step: Adding Uncertainty</h5>
 Certain prospects are riskier than others. They're often described as having high ceilings and low floors.
-We can include uncertainty in this framework by using probability distributions for prospect values instead of point estimates. Perhaps in another post.
+To account for these differences in riskiness, we can include uncertainty in this framework through the use of probability distributions for prospect values instead of point estimates. Perhaps in another post.
 </p>
