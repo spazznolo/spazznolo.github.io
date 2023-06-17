@@ -85,6 +85,5 @@ To simplify the model, time was included through weights. Essentially, we are fl
 The method employed in this model assumes that prospect ranking publications represent the perspectives of NHL organizations. By "representative," we mean that these publications assign similar value to players and exhibit comparable variance in their evaluations. For instance, it is plausible that ranking publications lack the same level of resources as professional hockey teams, leading them to rely predominantly on data rather than in-game observations. Consequently, they may place greater emphasis on prospects who excel in ways which are represented in game logs. Any inherent "bias" present in these publication rankings would consequently influence the published pick probabilities in this model.
 </p>
 <p>
-<h5>Links</h5>
 The code used to generate these probabilities is available on GitHub <a href="https://github.com/spazznolo/draft-rankings">here</a>.
 </p>
