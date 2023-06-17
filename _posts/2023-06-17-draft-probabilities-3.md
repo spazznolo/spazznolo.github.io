@@ -1,27 +1,26 @@
 ---
 layout: post
 title:  "An Application of Prospect Pick Probabilities"
-date:   2023-06-17 12:00:00 -0400
+date:   2023-06-16 12:00:00 -0400
 ---
 <h2>An Application of Prospect Pick Probabilities</h2>
 <p>
 The prospect pick probabilities available on the "Draft Pick Probabilities" tab of the <a href = "https://piyer97.shinyapps.io/NHLDraft2023/">2023 Draft Tool</a> are of obvious use for entertainment purposes, but I wanted to outline a potential way they can be used by NHL organizations as an input in their decision making process. I'll use the Montreal Canadiens as an example because I personally find them to be in an interesting position.
 </p>
 <p>
-The Canadiens pick fifth, which, depending on who you ask, is just outside the top tiers of prospects consisting of Connor Bedard, Adam Fantilli, Matvei Mitchkov, and Leo Carlsson. The next "tier" contains a handful of players who ranking publications seem to all diagree on. The question is then, if you're the Canadiens, do you trade up to guarantee the drafting of a potential superstar, or do you risk it and hope one of them slides in the draft? Regardless of which way you're leaning, the more interesting question is "How are you making this decision?"
+The Canadiens pick fifth, which, according to consensus, is just outside the top tiers of prospects consisting of Connor Bedard, Adam Fantilli, Matvei Mitchkov, and Leo Carlsson. The next "tier", contains a handful of players which ranking publications seem to all diagree on. The question is then, if you're the Canadiens, do you trade up to guarantee the drafting of a potential superstar, or do you risk it and hope one of them slides in the draft? Regardless of which way you're leaning, the more interesting question, in my opinion, is: "How are you making this decision?"
 </p>
 <p>
-The truth is, either way you're leaning, you are making a complex calculation with instinct. You're considering the probability that one of the four players falls, the strength of the next best prospect, and the potential cost in assets to move up in the draft. This is an exceedingly difficult calculation to make in the moment, especially in the heat of the draft. 
+The truth is, either way you're leaning, you are making a complex calculation with instinct. You're considering the probability that one of the four players falls, along with the strength of the next best prospect and the potential cost in assets to move up in the draft. This is an exceedingly difficult calculation to make in the moment, especially in the heat of the draft. 
 </p>
 <p>
 Thankfully, the probabilities in this tool can help.
 </p>
 <p>
-What every team has going into the draft is their internal prospect ranking. This ranking is derived from prospect values. For the purposes of this example, we're going to create the Canadiens prospect values by assigning quasi-random values to prospects. If you have your own, just plug them into the framework.
+Going into the draft, every team establishes a ranking based on their internal evaluation of prospects. Although various value frameworks are available, for the purpose of this discussion, let's assume the Canadiens evaluate prospects based on their predicted Wins Above Replacement (WAR) during their entry-level contracts, and the predicted WAR of their top five ranked prospects is as follows (feel free to use the metric and values of your choosing):
 </p>
 <p>
-There is a variety of value frameworks available, but here we're going to use WAR over the entry-level contact. Below are the Canadiens' WAR projections over their entry-level contract for each of their top 5 ranked prospects.
-<p>
+<h5>Prospect Strength</h5>
 Connor Bedard: 10
 Adam Fantilli: 8
 Matvei Mitchkov: 7.5
@@ -29,12 +28,21 @@ Leo Carlsson: 6.5
 Zach Benson: 5.5
 </p>
 <p>
-Value by pick:
-1: 1.00*10 = 10
-2: 0.99*8 = 
-3: 0.87*7.5 = 
-4:
-5: 
+Next, we can use our pick probability tool to estimate the likelihood that each player is available at each pick. Here they are:
+</p>
+<p>
+
+</p>
+<p>
+<h5>Pick Values</h5>
+The value of each draft pick has long been established in the hockey analytics community. It is important to clarify that these values are <em>averages</em>. There are weak drafts (like last year), and strong drafts (like this year). There are also heterogenous pockets, where strong players are clustered together, and then steep drops. Consequently, it is more appropriate to derive pick values based on the prospects <em>available in the draft</em>. As the Canadiens, we derive pick values like this:
+</p>
+<p>
+1OA - (1.0000*10) = 10.0000 (there is a 100% Bedard is available, and since he is the Canadiens highest rated prospect, they would choose him, receiving the predicted 10 WAR value).
+2 - (0.0024*10) + (0.9980*8) = 8.0080
+3 - (0.0000*10) + (0.2150*8) + (0.7850*7.5) = 7.6075
+4 - (0.0000*10) + (0.0288*8) + (0.3990*7.5) + (0.5722*6.5) = 6.9420
+5 - (0.0000*10) + (0.0021*8) + (0.1050*7.5) + (0.2930*6.5) + (0.5999*5.5) = 6.0083
 </p>
 
 

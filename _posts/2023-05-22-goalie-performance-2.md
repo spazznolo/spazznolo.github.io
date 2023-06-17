@@ -16,7 +16,7 @@ Assumptions:
     - Team systems are assumed to be identical.
 </p>
 <p>
-I'm going to address the fourth assumption, that all shots are assumed to be equal, in this post.
+I'm going to address the fourth assumption, that all shots are equal, in this post.
 </p>
 <p>
 <h5>Adjusted Save Percentage</h5>

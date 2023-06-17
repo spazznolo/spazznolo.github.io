@@ -5,11 +5,13 @@ date:   2023-05-17 8:52:05 -0400
 ---
 <h2>[Post 1] Goalie Performance: Empirical Bayes Save Percentage</h2>
 <p>
-Recall from the introductory paragraph of the series on <a href="https://spazznolo.github.io/2022/03/28/goalie-consistency-1.html">goalie consistency</a>:
-"Goaltenders make up the least predictable position in hockey. Their behavior confounds analysts and casual fans alike. It isn’t uncommon for a good goalie to have a below replacement level year, or for an unknown goalie to come in and dominate the league for a stretch of time. This may partly explain the relative dearth of analysis on goalies - they're voodoo, it's often said."
+Recall from the <a href="https://spazznolo.github.io/2022/03/28/goalie-consistency-1.html">introductory paragraph</a> of the series on goalie consistency: "Goaltenders make up the least predictable position in hockey. Their behavior confounds analysts and casual fans alike. It isn’t uncommon for a good goalie to have a below replacement level year, or for an unknown goalie to come in and dominate the league for a stretch of time. This may partly explain the relative dearth of analysis on goalies - they're voodoo, it's often said."
 </p>
 <p>
-Let's shift our focus from the uncertainty of goalie performance to the uncertainty in goalie skill. There's a difference. In the previous three posts, I looked at the variance in game-to-game outcomes, but this time I want to look at the variance in a goalie's actual expected save percentage. To do this, we'll use empirical Bayes. Similar applications were outlined in <a href="https://hockey-graphs.com/2018/06/21/comparing-scoring-talent-with-empirical-bayes/">previous</a> <a href="http://varianceexplained.org/r/empirical_bayes_baseball/">papers</a>. This post is a launchpad for more detailed, rigorous research.
+This new series is about goalie performance. In particular, I'm going to try to enhance the estimation of goalie performance using an empirical Bayes framework. Similar applications were outlined in <a href="https://hockey-graphs.com/2018/06/21/comparing-scoring-talent-with-empirical-bayes/">previous</a> <a href="http://varianceexplained.org/r/empirical_bayes_baseball/">papers</a>. One of the advantages of such a framework is the uncertainty of the measure is included. I'm going to start with a sketch of my idea, using raw save percentage, then with each post I'll refine the methodology. 
+</p>
+<p>
+There are essentially two steps; the first is to use the observed data to fit a prior distribution, the second is to update this prior using observed data.
 </p>
 <p>
 <h5>Step One</h5>
@@ -18,7 +20,7 @@ The first step of empirical Bayes is to use the observed data to fit a prior dis
 <p>
 *Fenwick save percentage is the total percentage of unblocked shots saved. This means that shots which miss the net are still counted. It has been proven that goalie skill is correlated with making players miss the net.
 <p>
-Here's a histogram of career 5v5 Fenwick save percentages for goalies having faced 750+ shots.
+Here's a histogram of career 5v5 Fenwick save percentages for goalies having faced 200+ shots.
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-four-one.png" width="60%" length="150"/></div>
@@ -58,6 +60,7 @@ These posterior distributions allow for some interesting insights, like:
 <p>
 Here are all the assumptions with this method, though:
     - The prior distribution is assumed to be beta with hyperparameters 1770 and 126.
+    - Goalies facing less than 200 shots are assumed to be irrelevant.
     - Age is assumed to be irrelevant.
     - Scoring rates are assumed to be constant.
     - All shots are assumed to be equal.
