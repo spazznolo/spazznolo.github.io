@@ -42,7 +42,7 @@ The value of each draft pick has long been established in the hockey analytics c
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/draft-probability-3-2.png" width="70%" length="80"/></div>
 </p>
 <p>
-It is important to clarify that these values are <em>averages</em>. There are weak drafts (like last year), and strong drafts (like this year). There are also heterogenous pockets, where strong players are clustered together, and there are steep drops in value. Consequently, for our purposes, it is more appropriate to derive pick values based on the prospects <em>eligible for this year's draft</em>. 
+It is important to clarify that these values are <em>averages</em>. There are weak drafts (like last year), and strong drafts (like this year). Even within a draft class, there can be pockets of heterogeneity where talented players are clustered together, as well as instances of significant drops in value. Consequently, for our purposes, it is more appropriate to derive pick values based on the prospects <em>eligible for this year's draft</em>.
 </p>
 <p>
 As the Canadiens, we derive pick values by multiplying the probability a prospect is available at a certain pick by their predicted WAR. Obviously, we're going to take the player we value highest, so the pick values are calculated like so:
@@ -58,7 +58,7 @@ As the Canadiens, we derive pick values by multiplying the probability a prospec
 Using the third pick as an example - there is a 0% chance Bedard - the Canadiens' highest ranked prospect - is available, so his value is multiplied by 0; there's a 21.5% chance Fantilli - the Canadiens' second ranked prospect - is available, so his value is multiplied by 0.2150. If neither Bedard nor Fantilli is available (78.5% chance), the Canadiens would select Mitchkov, whose value is multiplied by 0.785. In total, the pick is valued at 17.823 WAR.
 </p>
 <p>
-<h5>Decisions, decisions</h5>
+<h5>Decisions, Decisions</h5>
 With pick probabilities and prospect values, the Canadiens now have a quantitive framework to determine the value of a pick in the upcoming draft. This allows them to assess the value difference between picks and consider trade scenarios. Which brings us back to the initial question: should the Canadiens consider trading down? 
 </p>
 <p>
