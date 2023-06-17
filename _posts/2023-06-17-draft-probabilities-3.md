@@ -8,7 +8,7 @@ date:   2023-06-16 12:00:00 -0400
 The prospect pick probabilities available on the "Draft Pick Probabilities" tab of the <a href = "https://piyer97.shinyapps.io/NHLDraft2023/">2023 Draft Tool</a> are of obvious use for entertainment purposes, but I wanted to outline a potential way they can be used by NHL organizations as an input in their decision making process. I'll use the Montreal Canadiens as an example because I personally find them to be in an interesting position.
 </p>
 <p>
-The Canadiens pick fifth, which, according to consensus, is just outside the top tiers of prospects consisting of Connor Bedard, Adam Fantilli, Matvei Mitchkov, and Leo Carlsson. The next "tier", contains a handful of players which ranking publications seem to all diagree on. The question is then, if you're the Canadiens, do you trade up to guarantee the drafting of a potential superstar, or do you risk it and hope one of them slides in the draft? Regardless of which way you're leaning, the more interesting question, in my opinion, is: "How are you making this decision?"
+The Canadiens pick fifth, which, according to consensus, is just outside the top tiers of prospects consisting of Connor Bedard, Adam Fantilli, Matvei Mitchkov, and Leo Carlsson. The next "tier", contains a handful of players which ranking publications seem to all disagree on. The question is then, if you're the Canadiens, do you trade up to guarantee the drafting of a potential superstar, or do you risk it and hope one of them slides in the draft? Regardless of which way you're leaning, the more interesting question, in my opinion, is: "How are you making this decision?"
 </p>
 <p>
 The truth is, either way you're leaning, you are making a complex calculation with instinct. You're considering the probability that one of the big four prospects falls, along with the strength of the next best prospect and the potential cost in assets to move up in the draft. This is an exceedingly difficult calculation to make in the moment, especially in the heat of the draft. 
@@ -17,7 +17,7 @@ The truth is, either way you're leaning, you are making a complex calculation wi
 Thankfully, the probabilities in this tool can help.
 </p>
 <p>
-The only other piece of information we need are the prospect values the Canadiens might have for each of the top five prospects.
+The only other piece of information we need are the values assigned by the Canadiens for each of the top five prospects.
 </p>
 <p>
 <h5>Prospect Values</h5>
@@ -32,7 +32,7 @@ Going into the draft, every team establishes a ranking based on their internal e
 </p>
 <p>
 <h5>Prospect Pick Probabilities</h5>
-Next, we can use our tool to estimate the probability that each player is still available at each pick. Here they are:
+Next, we can use our tool to get the probability that each player is still available at each pick. Here they are:
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/draft-probability-3-1.png" width="85%" length="125"/></div>
@@ -59,10 +59,10 @@ Using the third pick as an example - there is a 0% chance Bedard is available, s
 </p>
 <p>
 <h5>Decisions, decisions</h5>
-With pick values derived from pick probabilities and prospect values, the Canadiens now have a quantitive framework to determine the value difference between picks. This brings us back to the initial question: should the Canadiens consider trading down? 
+With pick probabilities and prospect values, the Canadiens now have a quantitive framework to determine the value of a pick in the upcoming draft. It follows that they also have the <em>value difference</em> in picks. This brings us back to the initial question: should the Canadiens consider trading down? 
 </p>
 <p>
-Let's explore this by examining a hypothetical scenario where they have the opportunity to trade down to the fourth pick. To gain organizational value, they would need to give up less than the value of the fourth pick (6.9420) minus the value of the fifth pick (5.1084), which equals 1.8336 WAR. With this, a complex decision becomes relatively simple, at least in theory.
+Let's explore this by examining a hypothetical scenario where they have the opportunity to trade down to the fourth pick. To gain organizational value, they would need to give up less than the value of the fourth pick (6.9420) minus the value of their fifth pick (5.1084), which equals 1.8336 WAR. With this, a complex decision becomes relatively simple, at least in theory.
 </p>
 <p>
 By combining prospect pick probabilities with internal evaluations, NHL organizations like the Canadiens can make more informed decisions about their draft strategies and potential trade scenarios.
