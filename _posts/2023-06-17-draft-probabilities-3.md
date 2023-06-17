@@ -30,22 +30,24 @@ Going into the draft, every team establishes a ranking based on their internal e
 <p>
 Next, we can use our pick probability tool to estimate the likelihood that each player is available at each pick. Here they are:
 </p>
-<p>
-
-</p>
+IMAGE FOR GT
 <p>
 <h5>Pick Values</h5>
-The value of each draft pick has long been established in the hockey analytics community. It is important to clarify that these values are <em>averages</em>. There are weak drafts (like last year), and strong drafts (like this year). There are also heterogenous pockets, where strong players are clustered together, and then steep drops. Consequently, it is more appropriate to derive pick values based on the prospects <em>available in the draft</em>. As the Canadiens, we derive pick values like this:
+The value of each draft pick has long been established in the hockey analytics community. It is important to clarify that these values are <em>averages</em>. There are weak drafts (like last year), and strong drafts (like this year). There are also heterogenous pockets, where strong players are clustered together, and then steep drops in value. Consequently, it is more appropriate to derive pick values based on the prospects <em>available in the draft</em>. As the Canadiens, we derive pick values by multiplying the probability a prospect is available at a certain pick by their predicted WAR. Obviously, we're going to take the player we value highest, so the pick values are calculated like so:
 </p>
 <p>
-1OA - (1.0000*10) = 10.0000 (there is a 100% Bedard is available, and since he is the Canadiens highest rated prospect, they would choose him, receiving the predicted 10 WAR value).
+1OA - (1.0000*10) = 10.0000
 2 - (0.0024*10) + (0.9980*8) = 8.0080
 3 - (0.0000*10) + (0.2150*8) + (0.7850*7.5) = 7.6075
 4 - (0.0000*10) + (0.0288*8) + (0.3990*7.5) + (0.5722*6.5) = 6.9420
 5 - (0.0000*10) + (0.0021*8) + (0.1050*7.5) + (0.2930*6.5) + (0.5999*5.5) = 6.0083
 </p>
-
-
+<p>
+Using the third pick as an example - there is a 0% chance Bedard is available, so his value is multiplied by 0, there is a 21.5% chance Fantilli is available, and since the Canadiens have him ranked as the second best player available, there is a 21.5% chance they would draft him there. That leaves a 78.5% chance that neither Bedard nor Fantilli are available, in which case they select their third ranked player, Mitchkov.
+</p>
+<p>
+<h5>Decisions, decisions</h5>
+With pick values derived from pick probabilities and prosepct values, the Canadiens now have a quantitive framework to determine the value difference between picks. 
 <p>
 <h5>Next Step: Adding Uncertainty</h5>
 Certain prospects are riskier than others. They're often described as having high ceilings and low floors, etc.
