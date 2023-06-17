@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "An Application of Prospect Pick Probabilities"
-date:   2023-06-16 12:00:00 -0400
+date:   2023-06-17 12:00:00 -0400
 ---
 <h2>An Application of Prospect Pick Probabilities</h2>
 <p>
@@ -17,6 +17,7 @@ The truth is, either way you're leaning, you are making a complex calculation wi
 Thankfully, the probabilities in this tool can help.
 </p>
 <p>
+<h5>Prospect Values</h5>
 Going into the draft, every team establishes a ranking based on their internal evaluation of prospects. Although various value frameworks are available, for the purpose of this discussion, let's assume the Canadiens evaluate prospects based on their predicted Wins Above Replacement (WAR) during their entry-level contracts, and the predicted WAR of their top five ranked prospects is as follows (feel free to use the metric and values of your choosing):
 </p>
 <p>
