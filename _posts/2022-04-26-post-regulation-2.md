@@ -4,6 +4,7 @@ title:  "Post-regulation: Measuring the uncertainty caused by the current format
 date:   2022-04-26 8:52:05 -0400
 ---
 ```r
+library(tidyverse)
 test <-
     test %>%
     mutate(test = test)
