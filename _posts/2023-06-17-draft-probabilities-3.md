@@ -31,7 +31,7 @@ Going into the draft, every team establishes a ranking based on their internal e
   - Zach Benson: 4.0
 </p>
 <p>
-Next, we can use our pick probability tool to estimate the likelihood that each player is available at each pick. Here they are:
+Next, we can use our tool to estimate the probability that each player is still available at each pick. Here they are:
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/draft-probability-3-1.png" width="70%" length="100"/></div>
