@@ -21,11 +21,11 @@ Going into the draft, every team establishes a ranking based on their internal e
 </p>
 <p>
 <h5>Prospect Strength</h5>
-Connor Bedard: 10
-Adam Fantilli: 8
-Matvei Mitchkov: 7.5
-Leo Carlsson: 6.5
-Zach Benson: 5.5
+  - Connor Bedard: 10
+  - Adam Fantilli: 8
+  - Matvei Mitchkov: 7.5
+  - Leo Carlsson: 6.5
+  - Zach Benson: 5.5
 </p>
 <p>
 Next, we can use our pick probability tool to estimate the likelihood that each player is available at each pick. Here they are:
