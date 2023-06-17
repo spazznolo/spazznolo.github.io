@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "An Application of Prospect Pick Probabilities"
-date:   2023-06-17 12:00:00 -0400
+date:   2023-06-16 12:00:00 -0400
 ---
 <h2>An Application of Prospect Pick Probabilities</h2>
 <p>
