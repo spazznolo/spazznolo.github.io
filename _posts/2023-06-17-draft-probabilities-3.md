@@ -39,14 +39,18 @@ Next, we can use our tool to estimate the probability that each player is still 
 </p>
 <p>
 <h5>Pick Values</h5>
-The value of each draft pick has long been established in the hockey analytics community. It is important to clarify that these values are <em>averages</em>. There are weak drafts (like last year), and strong drafts (like this year). There are also heterogenous pockets, where strong players are clustered together, and then steep drops in value. Consequently, it is more appropriate to derive pick values based on the prospects <em>available in the draft</em>. As the Canadiens, we derive pick values by multiplying the probability a prospect is available at a certain pick by their predicted WAR. Obviously, we're going to take the player we value highest, so the pick values are calculated like so:
+The value of each draft pick has long been established in the hockey analytics community. Here's the Athletic's:
+<p>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/draft-probability-3-2.png" width="85%" length="125"/></div>
+</p>
+It is important to clarify that these values are <em>averages</em>. There are weak drafts (like last year), and strong drafts (like this year). There are also heterogenous pockets, where strong players are clustered together, and then steep drops in value occur. Consequently, for our purposes, it is more appropriate to derive pick values based on the prospects <em>available in the draft</em>. As the Canadiens, we derive pick values by multiplying the probability a prospect is available at a certain pick by their predicted WAR. Obviously, we're going to take the player we value highest, so the pick values are calculated like so:
 </p>
 <p>
-1 - (1.0000*10) = 10.0000
-2 - (0.0024*10) + (0.9980*8) = 8.0080
-3 - (0.0000*10) + (0.2150*8) + (0.7850*7.5) = 7.6075
-4 - (0.0000*10) + (0.0288*8) + (0.3990*7.5) + (0.5722*6.5) = 6.9420
-5 - (0.0000*10) + (0.0021*8) + (0.1050*7.5) + (0.2930*6.5) + (0.5999*4) = 5.1084
+1st pick - (1.0000*10) = 10.0000
+2nd pick - (0.0024*10) + (0.9980*8) = 8.0080
+3rd pick - (0.0000*10) + (0.2150*8) + (0.7850*7.5) = 7.6075
+4th pick - (0.0000*10) + (0.0288*8) + (0.3990*7.5) + (0.5722*6.5) = 6.9420
+5th pick - (0.0000*10) + (0.0021*8) + (0.1050*7.5) + (0.2930*6.5) + (0.5999*4) = 5.1084
 </p>
 <p>
 Using the third pick as an example - there is a 0% chance Bedard is available, so his value is multiplied by 0, there is a 21.5% chance Fantilli is available, and since the Canadiens have him ranked as the second best player available, they would draft him if available, so his value is multiplied by 0.2150. That leaves a 78.5% chance that neither Bedard nor Fantilli are available, in which case they select their third ranked player, Mitchkov, so we multiply his value by 0.7850.
@@ -55,9 +59,9 @@ Using the third pick as an example - there is a 0% chance Bedard is available, s
 <h5>Decisions, decisions</h5>
 With pick values derived from pick probabilities and prosepct values, the Canadiens now have a quantitive framework to determine the value difference between picks. We can return to the question we started the post with. 
 </p>
-So, should the Canadiens trade down? 
+So, should the Canadiens trade down? Well, in this case, they would need to give up less than 6.9420 (their internal value of the 4th pick) - 5.1084 (their internal value of the 5th pick) = 1.8336 WAR in order to <em>gain</em> value as an organization.
 <p>
 <h5>Next Step: Adding Uncertainty</h5>
-Certain prospects are riskier than others. They're often described as having high ceilings and low floors, etc.
-We can include uncertainty in this framework by using probability distributions for prospect values instead of point estimates. 
+Certain prospects are riskier than others. They're often described as having high ceilings and low floors.
+We can include uncertainty in this framework by using probability distributions for prospect values instead of point estimates. Perhaps in another post.
 </p>
