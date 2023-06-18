@@ -20,10 +20,10 @@ I'm going to address the fourth assumption, that all shots are equal, in this po
 </p>
 <p>
 <h5>Adjusted Save Percentage</h5>
-We already know that not all shots are equal. Countless Exepected Goals models have been produced to address this. Thankfully, Peter Tanner, through his website <a href="https://moneypuck.com/about.htm">MoneyPuck</a>, provides detailed data for each unblocked shot that occurs in the NHL (whether it hit the net or not) along with a prediction - the probability of the shot being a goal.
+It is well-known that not all shots are equal. Various Expected Goals (xG) models have been developed to account for this. Fortunately, Peter Tanner's website <a href="https://moneypuck.com/about.htm">MoneyPuck</a> provides detailed data on each unblocked shot in the NHL, including the probability of the shot being a goal.
 </p>
 <p>
-We can adjust a goalie's save percentage by taking into account these predictions from MoneyPuck. There are many ways to do this, but I've decided to derive one which would retain the performance measure as a rate. Here's what I came up with:
+To adjust a goalie's save percentage, we can incorporate these predictions from MoneyPuck. One approach to retain the performance measure as a rate is as follows:
 </p>
 <p>
 Fenwick Save Percentage (FSV%) = 1 - (Goals Against / Fenwick Shots Against)<br>
@@ -32,13 +32,12 @@ Median Save Percentage (MSV%) = Median of Goalie (20+ xG faced) Career Save Perc
 <b>Adjusted Save Percentage (AdjSV%) = MSV% + (FSV% - xFSV%)</b>
 </p>
 <p>
-For the sake of simplicity, let's flip the adjusted save percentage to the adjusted failure rate (1 - AdjSV%) and plot the distribution of career rates for goalies having faced more than 20 expected goals. We'll include a fitted beta distribution in white. The goodness of fit, which frankly was questionable in the last post, looks better this time. It'll improve as we try different distributions in future posts.
+For simplicity, let's represent the adjusted save percentage as the adjusted failure rate (1 - AdjSV%) and plot the distribution of career rates for goalies who have faced more than 20 expected goals. We will also include a fitted beta distribution in white. The goodness of fit appears better compared to the previous post, but further improvement can be achieved by exploring different distributions in future posts.
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-five-one.png" width="60%" length="150"/></div>
 </p>
 <p>
-Given that we are once again fitting a beta distribution, the rest of the work is the same as the previous post.
-</p>
+Since we are fitting a beta distribution once again, the remaining steps remain the same as the previous post.</p>
 <p>
 Let's revisit the Jake Oettinger and Jeremy Swayman comparison.
 <p>
@@ -51,19 +50,20 @@ The posteriors change as follows:
     - There's a 96.50% (previously 91.81%) chance that Swayman's AdjSV% is better than the MSV%.
 </p>
 <p>
-These changes are due to the fact that Swayman faces more difficult shots than Oettinger on a whole - his xFSV% is 94.07 while Oettinger's is 94.39.
+These changes occur because Swayman faces more difficult shots on average, with an xFSV% of 94.07 compared to Oettinger's 94.39.
 </p>
 <p>
 <h5>Appendix</h5>
-Below is a collection of plots which compare various save percentage metrics discussed in this + the last post.
+Below is a collection of plots which compare various save percentage metrics discussed in this and the previous post.
 </p>
 <p>
-Couple of points:
-    - Goalies who have a bad start to their career tend to not play many games (surprise, surprise).
-    - The relationship between a goalie's SV% and his AdjSV% seems to strengthen as he faces more shots.
-    - A goalie's AdjSV% converges with his posterior AdjSV% as he faces more shots (that's the yellow diagonal line).
-    - The consequence of the previous three points - there is heteroskedasticity in the relationship between a goalie's SV% and his posterior AdjSV%.
-    - There is almost certainly survivorship bias. 
+A couple of key points:
+
+    - Goalies who have a poor start to their career tend to play fewer games (surprise, surprise).
+    - The relationship between a goalie's SV% and their AdjSV% seems to strengthen as they face more shots.
+    - A goalie's AdjSV% converges with their posterior AdjSV% as they face more shots (indicated by the yellow diagonal line).
+    - Due to the previous points, there is heteroskedasticity in the relationship between a goalie's SV% and their posterior AdjSV%.
+    - There is likely survivorship bias present.
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-five-three.png" width="100%" length="250"/></div>
