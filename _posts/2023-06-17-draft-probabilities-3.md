@@ -5,7 +5,7 @@ date:   2023-06-16 12:00:00 -0400
 ---
 <h2>An Application of Prospect Pick Probabilities</h2>
 <p>
-The prospect pick probabilities available on the "Draft Pick Probabilities" tab of the <a href = "https://piyer97.shinyapps.io/NHLDraft2023/">2023 Draft Tool</a>, created by Pranshanth Iyer and myself, can be used by NHL organizations to inform their decision-making process. Let's take the Montreal Canadiens as an example, since I find them to be in an interesting position.
+The prospect pick probabilities available on the "Draft Pick Probabilities" tab of the <a href = "https://piyer97.shinyapps.io/NHLDraft2023/">2023 Draft Tool</a>, created by Pranshanth Iyer and myself, can be used by NHL organizations to inform their decision-making process. Let's take the Montreal Canadiens, who are in an interesting position, as an example.
 </p>
 <p>
 The Canadiens pick fifth, which, according to consensus, is just outside the top tiers of prospects consisting of Connor Bedard, Adam Fantilli, Matvei Mitchkov, and Leo Carlsson. The next "tier", contains a handful of players which ranking publications seem to mostly disagree on. One common question is, if you're the Canadiens, do you trade up to guarantee the drafting of a potential superstar, or do you take the risk and hope one of them slides in the draft? However a more interesting question, in my opinion, is: "How are you making this decision?"
@@ -49,12 +49,13 @@ As the Canadiens, we derive pick values by multiplying the probability a prospec
 Using the third pick as an example - there is a 0% chance Bedard - the Canadiens' highest ranked prospect - is available, so his value is multiplied by 0; there's a 21.5% chance Fantilli - the Canadiens' second ranked prospect - is available, so his value is multiplied by 0.2150. If neither Bedard nor Fantilli is available (78.5% chance), the Canadiens would select Mitchkov, whose value is multiplied by 0.785. In total, the pick is valued at 17.823 WAR.
 </p>
 <p>
+<h5>Previous Work</h5>
 Note that this is a step away from the usual draft pick value chart which has long been established in the hockey analytics community (below is an example of the Athletic's) which uses <em>average</em> pick values:</p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/draft-probability-3-2.png" width="70%" length="80"/></div>
 </p>
 <p>
-In practice, there are weak drafts (like last year), and strong drafts (like this year). Even within a draft class, there can be pockets of heterogeneity where talented players are clustered together, as well as instances of significant drops in value. Consequently, for our purposes, it is more appropriate to derive pick values based on the prospects <em>eligible for this year's draft</em>.
+In practice, there are weak drafts (like last year), and strong drafts (like this year). Even within a draft class, there can be pockets of heterogeneity where talented players are clustered together, as well as instances of significant drops in value. Consequently, for our purposes, it is more appropriate to derive pick values based on the prospects <em>eligible for this year's draft</em>. Moreover, since the historical value chart is well-established, the Canadiens should be trying to leverage it to find value gains.
 </p>
 <p>
 <h5>Decisions, Decisions</h5>
@@ -68,7 +69,7 @@ By combining prospect pick probabilities with internal evaluations, NHL organiza
 </p>
 <p>
 <h5>Next Step: Adding Uncertainty</h5>
-arriving at a single point estimate for prospect values can be challenging and may not fully account for the inherent uncertainty surrounding prospects. Different scouts and analysts may have varying evaluations and opinions on a player's potential. Additionally, prospects inherently come with different levels of risk.
+Arriving at a single point estimate for prospect values can be challenging and may not fully account for the inherent uncertainty surrounding prospects. Different scouts and analysts may have varying evaluations and opinions on a player's potential. Additionally, prospects inherently come with different levels of risk.
 </p>
 <p>
 To address this, we can include uncertainty in this framework by assigning probability distributions to prospect values rather than relying solely on point estimates. By considering the range of potential outcomes and assigning probabilities to different scenarios, a more comprehensive assessment can be made. Perhaps in another post.
