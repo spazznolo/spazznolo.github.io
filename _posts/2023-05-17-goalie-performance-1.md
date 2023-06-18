@@ -70,5 +70,5 @@ Here are all the assumptions with this method, though:
 These will be challenged and addressed in the following posts.
 </p>
 <p>
-Code available here: <a href="https://github.com/spazznolo/goalie-consistency/blob/main/post_4.R">https://github.com/spazznolo/goalie-consistency/blob/main/post_4.R</a>
+Code available here: <a href="https://github.com/spazznolo/goalie-performance/blob/main/post_1.R">https://github.com/spazznolo/goalie-consistency/blob/main/post_4.R</a>
 </p>
