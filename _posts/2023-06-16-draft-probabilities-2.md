@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Deriving pick probabilities from NHL draft rankings"
+title:  "NHL Draft: Deriving pick probabilities from draft rankings"
 date:   2023-06-16 12:00:00 -0400
 ---
 <h2>Deriving pick probabilities from NHL draft rankings</h2>

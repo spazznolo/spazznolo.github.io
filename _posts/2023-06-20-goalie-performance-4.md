@@ -78,5 +78,5 @@ Median Save Percentage (MSV%) = Median of Goalie (20+ xG faced) Career Save Perc
 <b>Adjusted (Age + xG) Save Percentage (AdjSV%) = MSV% + (FSV% - AdjxFSV%)</b>
 </p>
 <p>
-Code available here: <a href="https://github.com/spazznolo/goalie-consistency/blob/main/posts/post-7.R">https://github.com/spazznolo/goalie-consistency/blob/main/posts/post-6.R</a>
+Code available here: <a href="https://github.com/spazznolo/goalie-performance/blob/main/posts/post-4.R">https://github.com/spazznolo/goalie-consistency/blob/main/posts/post-6.R</a>
 </p>

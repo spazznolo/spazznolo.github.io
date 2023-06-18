@@ -69,5 +69,5 @@ The new equation to derive the posterior save percentage then becomes:
 In the next post, I'll explore age as a confounder in the assessment of goalie performance.
 </p>
 <p>
-Code available here: <a href="https://github.com/spazznolo/goalie-consistency/blob/main/posts/post-6.R">https://github.com/spazznolo/goalie-consistency/blob/main/posts/post-6.R</a>
+Code available here: <a href="https://github.com/spazznolo/goalie-performance/blob/main/posts/post-3.R">https://github.com/spazznolo/goalie-consistency/blob/main/posts/post-6.R</a>
 </p>

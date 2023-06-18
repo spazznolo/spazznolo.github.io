@@ -69,5 +69,5 @@ Couple of points:
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-five-three.png" width="100%" length="250"/></div>
 </p>
 <p>
-Code available here: <a href="https://github.com/spazznolo/goalie-consistency/blob/main/posts/post-5.R">https://github.com/spazznolo/goalie-consistency/blob/main/posts/post-5.R</a>
+Code available here: <a href="https://github.com/spazznolo/goalie-performance/blob/main/posts/post-2.R">https://github.com/spazznolo/goalie-consistency/blob/main/posts/post-5.R</a>
 </p>
