@@ -4,9 +4,6 @@ title: / about
 permalink: /about/
 ---
 <p>
-For questions, collaboration, or critiques: jeremie.spagnolo@gmail.com
-</p>
-<p>
 <h5>Background</h5>
 Around 2016, a few years removed from a Mathematics degree, my interest in proofs, statistics, and even logic puzzles was waning. I was leaning away from this towards creative pursuits. I was working odd jobs, reading fiction and making music. It was during this time, in this state of mind, that my brother lent me the book <em><a href = "http://www.hockeyabstract.com/statshot">Stat Shot</a></em>. 
 </p>
