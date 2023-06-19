@@ -90,6 +90,7 @@ Arriving at a single point estimate for prospect values can be challenging and m
 <p>
 To address this, we can include uncertainty in this framework by assigning probability distributions to prospect values rather than relying solely on point estimates. By considering the range of potential outcomes and assigning probabilities to different scenarios, a more comprehensive assessment can be made. Perhaps in another post.
 </p>
+<br>
 <script src="https://utteranc.es/client.js"
         repo="spazznolo/spazznolo.github.io"
         issue-term="pathname"
