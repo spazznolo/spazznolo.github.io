@@ -36,7 +36,7 @@ First, we need the value of the top 5 prospects accoridng to the Canadiens. For 
   - Adam Fantilli: 19.0
   - Matvei Mitchkov: 17.5
   - Leo Carlsson: 14.0
-  - Zach Benson: 10.0
+  - Will Smith: 10.0
 </p>
 <p>
 <h5>Prospect Pick Probabilities</h5>
@@ -47,22 +47,22 @@ Next, we can use our tool to get the probability that each player is still avail
 </p>
 <p>
 <h5>Pick Values</h5>
-As the Canadiens, we derive pick values by multiplying the probability a prospect is available at a certain pick by their predicted WAR. Obviously, we're going to take the highest-value player available, so the pick values are calculated like so:
+As the Canadiens, we derive our very own pick values by multiplying the probability a prospect is available at a certain pick by their predicted WAR. Obviously, we're going to take the highest-value player available, so the pick values are calculated like so:
 </p>
 <p>
 1st pick - (1.000*24) = 24.000
 2nd pick - (0.002*24) + (0.998*19) = 19.010
-3rd pick - (0.000*24) + (0.215*19) + (0.785*17.5) = 17.823
-4th pick - (0.000*24) + (0.029*19) + (0.399*17.5) + (0.572*14.0) = 15.542
-5th pick - (0.000*24) + (0.002*19) + (0.105*17.5) + (0.293*14.0) + (0.599*10.0) = 11.978
+3rd pick - (0.000*24) + (0.210*19) + (0.790*17.5) = 17.815
+4th pick - (0.000*24) + (0.028*19) + (0.420*17.5) + (0.552*14.0) = 15.610
+5th pick - (0.000*24) + (0.002*19) + (0.111*17.5) + (0.269*14.0) + (0.618*10.0) = 11.927
 </p>
 <p>
 Using the third pick as an example:
 
   - There is a 0% chance Bedard, the Canadiens' highest ranked prospect, is available, so his value is multiplied by 0.
-  - There's a 21.5% chance Fantilli, the Canadiens' second-ranked prospect, is available, so his value is multiplied by 0.2150.
-  - If neither Bedard nor Fantilli is available (78.5% chance), the Canadiens would select Mitchkov, whose value is multiplied by 0.785.
-  - In total, the pick is valued at 17.823 WAR.
+  - There's a 21.0% chance Fantilli, the Canadiens' second-ranked prospect, is available, so his value is multiplied by 0.210.
+  - If neither Bedard nor Fantilli is available (79.0% chance), the Canadiens would select Mitchkov, whose value is multiplied by 0.790.
+  - In total, the pick is valued at 17.815 WAR.
 </p>
 <p>
 <h5>Previous Work</h5>
@@ -78,10 +78,10 @@ The reason for this proposed departure is that, in practice, there are weak draf
 With pick probabilities and prospect values, the Canadiens now have a quantitive framework to determine the value of a pick in the upcoming draft. This allows them to assess the value difference between picks and consider trade scenarios. Which brings us back to the initial question: should the Canadiens consider trading up? 
 </p>
 <p>
-Let's explore this with a hypothetical scenario. Imagine they have the opportunity to trade up to the fourth pick. To gain organizational value, they would need to give up less than the value of the fourth pick (15.542) minus the value of their fifth pick (11.978), which equals 3.564 WAR. If they can trade their fifth plus a piece which is worth less than 3.564 WAR, they've gained value. With this, a complex decision becomes relatively simple, at least in theory.
+Let's explore this with a hypothetical scenario. Imagine they have the opportunity to trade up to the fourth pick. To gain organizational value, they would need to give up less than the value of the fourth pick (15.610) minus the value of their fifth pick (11.927), which equals 3.683 WAR. If they can trade their fifth plus a piece which is worth less than 3.564 WAR, they've gained value. With this, a complex decision becomes relatively simple, at least in theory.
 </p>
 <p>
-By combining prospect pick probabilities with internal evaluations, NHL organizations like the Canadiens can make more informed decisions about their draft strategies and potential trades.
+By combining prospect pick probabilities with internal evaluations, the Canadiens can make more informed decisions about their draft strategies and potential trades.
 </p>
 <p>
 <h5>Next Step: Adding Uncertainty</h5>
