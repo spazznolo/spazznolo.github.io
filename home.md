@@ -36,9 +36,10 @@ twitter: @spazznolo
 ---
 </p>
 <script src="https://utteranc.es/client.js"
-        repo="[ENTER REPO HERE]"
+        repo="spazznolo/spazznolo.github.io"
         issue-term="pathname"
-        theme="github-light"
+        label="Comment"
+        theme="github-dark"
         crossorigin="anonymous"
         async>
 </script>
