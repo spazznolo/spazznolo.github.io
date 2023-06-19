@@ -64,7 +64,7 @@ The reason for this proposed departure is that, in practice, there are weak draf
 </p>
 <p>
 <h5>Decisions, Decisions</h5>
-With pick probabilities and prospect values, the Canadiens now have a quantitive framework to determine the value of a pick in the upcoming draft. This allows them to assess the value difference between picks and consider trade scenarios. Which brings us back to the initial question: should the Canadiens consider trading down? 
+With pick probabilities and prospect values, the Canadiens now have a quantitive framework to determine the value of a pick in the upcoming draft. This allows them to assess the value difference between picks and consider trade scenarios. Which brings us back to the initial question: should the Canadiens consider trading up? 
 </p>
 <p>
 Let's explore this with a hypothetical scenario. Imagine they have the opportunity to trade down to the fourth pick. To gain organizational value, they would need to give up less than the value of the fourth pick (15.542) minus the value of their fifth pick (11.978), which equals 3.564 WAR. If they can trade their fifth plus a piece which is worth less than 3.564 WAR, they've gained value. With this, a complex decision becomes relatively simple, at least in theory.
