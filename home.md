@@ -28,6 +28,10 @@ I'm building a <a href="https://spazznolo.github.io/2023/01/15/tennis-framework.
 I'm <a href = "https://spazznolo.github.io/goalies/">incrementally</a> building a goalie performance model which (so far) includes empirical Bayes, expected goals, and age.
 </p>
 <p>
+<h5>Contact</h5>
+email: jeremie.spagnolo@gmail.com
+twitter: @spazznolo
+<p>
 ---
 </p>
 <h5>Posts in Chronological Order</h5>
