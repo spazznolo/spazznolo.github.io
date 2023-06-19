@@ -41,7 +41,7 @@ I'm helping Prashanth Iyer build an <a href="https://piyer97.shinyapps.io/NHLDra
 I'm building a <a href="https://spazznolo.github.io/2023/01/15/tennis-framework.html">tennis tracking program</a>, which hopefully will scale to the level where entities (players and ball) can be tracked for entire tournaments. Such a database could <a href = "https://hdsr.mitpress.mit.edu/pub/uy0zl4i1/release/4">prove useful</a> for researchers and players alike, pushing the sport forward.
 </p>
 <p>
-I'm <a href = "https://spazznolo.github.io/goalies/">incrementally</a> building a goalie performance model which (so far) includes empirical Bayes, expected goals, and goalie age.
+I'm <a href = "https://spazznolo.github.io/goalies/">incrementally</a> building a goalie performance model which (so far) includes empirical Bayes, expected goals, and age.
 </p>
 <p>
 ---
