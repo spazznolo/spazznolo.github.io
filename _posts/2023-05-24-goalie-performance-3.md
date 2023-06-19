@@ -3,6 +3,17 @@ layout: post
 title:  "Goalie Performance: Exploring the Distribution"
 date:   2023-05-24 8:52:05 -0400
 ---
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DGRHZS5DNM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DGRHZS5DNM');
+</script>
+</head>
 <h2>[Post 3: Still Working on this] Goalie Performance: Exploring the Distribution</h2>
 <p>
 In the first post, I outlined a framework for measuring goalie talent using their career Fenwick 5v5 save percentage. In the second post, the methodology was adapted to consider shot quality. However, there are two obvious problems with this methodology that need to be addressed.
