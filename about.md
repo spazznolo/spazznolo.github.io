@@ -14,10 +14,8 @@ permalink: /about/
   gtag('config', 'G-DGRHZS5DNM');
 </script>
 </head>
-<p>
 <h5>Background</h5>
 Around 2016, a few years removed from a Mathematics degree, my interest in proofs, statistics, and even logic puzzles was waning. I was leaning away from this towards creative pursuits. I was working odd jobs, reading fiction and making music. It was during this time, in this state of mind, that my brother lent me the book <em><a href = "http://www.hockeyabstract.com/statshot">Stat Shot</a></em>. 
-</p>
 <p>
 <em>Stat Shot</em> was written as an entry point for the casual fan to understand advanced hockey statistics - as a fun, entertaining way to explore a different perspective of the sport. It was meant to be a light read, but this was not how I read it. To me, it was a blueprint. I came to understand the research process as a creative one. 
 </p>
