@@ -35,12 +35,4 @@ twitter: @spazznolo
 <p>
 ---
 </p>
-<script src="https://utteranc.es/client.js"
-        repo="spazznolo/spazznolo.github.io"
-        issue-term="pathname"
-        label="Comment"
-        theme="github-dark"
-        crossorigin="anonymous"
-        async>
-</script>
 <h5>Posts in Chronological Order</h5>
