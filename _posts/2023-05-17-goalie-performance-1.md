@@ -3,6 +3,17 @@ layout: post
 title:  "Goalie Performance: Empirical Bayes Save Percentage"
 date:   2023-05-17 8:52:05 -0400
 ---
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DGRHZS5DNM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DGRHZS5DNM');
+</script>
+</head>
 <h2>[Post 1] Goalie Performance: Empirical Bayes Save Percentage</h2>
 <p>
 Recall from the <a href="https://spazznolo.github.io/2022/03/28/goalie-consistency-1.html">introductory paragraph</a> of the series on goalie consistency: "Goaltenders make up the least predictable position in hockey. Their behavior confounds analysts and casual fans alike. It isn’t uncommon for a good goalie to have a below replacement level year, or for an unknown goalie to come in and dominate the league for a stretch of time. This may partly explain the relative dearth of analysis on goalies - they're voodoo, it's often said."
