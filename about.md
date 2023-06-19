@@ -19,3 +19,5 @@ In my experience, research usually unfolds as follows: a curiosity arises from w
 <p>
 This process led me from independent research in hockey, to an internship at the St Lawrence River Institute, to my career as a Data Scientist in applied research at Statistics Canada, and to this blog. 
 </p>
+<br>
+<div style="text-align: center"> <img src="figs/fifty-four.png" width="80%" length="280"/></div>

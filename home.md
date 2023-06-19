@@ -14,7 +14,6 @@ permalink: /
   gtag('config', 'G-DGRHZS5DNM');
 </script>
 </head>
-<br>
 <p>
 <h5>About</h5>
 This blog serves as an outlet to explore ideas which naturally interest me. I try to keep an informal, back-of-the-napkin style to these posts, hopefully a little like <a href = "http://www.tangotiger.com/index.php">Tom Tango</a>. Posts are grouped by topic in the header, but can be accessed in chronological order below.
