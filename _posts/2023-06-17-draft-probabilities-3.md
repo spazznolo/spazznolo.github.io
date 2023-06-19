@@ -43,7 +43,7 @@ First, we need the value of the top 5 prospects accoridng to the Canadiens. For 
 Next, we can use our tool to get the probability that each player is still available at each pick. Here they are:
 </p>
 <p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/draft-probability-3-1.png" width="85%" length="125"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/draft-probabilities-3-1.png" width="85%" length="125"/></div>
 </p>
 <p>
 <h5>Pick Values</h5>
