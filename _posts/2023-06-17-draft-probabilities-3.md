@@ -5,7 +5,7 @@ date:   2023-06-16 12:00:00 -0400
 ---
 <h2>An Application of Prospect Pick Probabilities</h2>
 <p>
-The prospect pick probabilities available on the "Draft Pick Probabilities" tab of the <a href = "https://piyer97.shinyapps.io/NHLDraft2023/">2023 Draft Tool</a>, created by Pranshanth Iyer and myself, can be used by NHL organizations to inform their decision-making process. Let's take the Montreal Canadiens, who are in an interesting position, as an example.
+The prospect pick probabilities available on the "Draft Pick Probabilities" tab of the <a href = "https://piyer97.shinyapps.io/NHLDraft2023/">2023 Draft Tool</a>, created by Pranshanth Iyer and myself, can be used by NHL organizations to inform their decision-making process. Let's take the Montreal Canadiens as an example.
 </p>
 <p>
 The Canadiens pick fifth, which, according to consensus, is just outside the top tiers of prospects consisting of Connor Bedard, Adam Fantilli, Matvei Mitchkov, and Leo Carlsson. The next "tier", contains a handful of players which ranking publications seem to mostly disagree on. One common question is, if you're the Canadiens, do you trade up to guarantee the drafting of a potential superstar, or do you take the risk and hope one of them slides in the draft? However a more interesting question, in my opinion, is: "How are you making this decision?"
