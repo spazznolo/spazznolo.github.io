@@ -18,7 +18,7 @@ Thankfully, the probabilities in this tool can help.
 </p>
 <p>
 <h5>Prospect Values</h5>
-For this example, we need the value of the top 5 prospects accoridng to the Canadiens. Let's assume they evaluate prospects based on their predicted Wins Above Replacement (WAR) while their rights are held by the team (7 years), and the predicted WAR of their top five ranked prospects is as follows (feel free to use the metric and values of your choosing):
+First, we need the value of the top 5 prospects accoridng to the Canadiens. For this example, let's assume they evaluate prospects based on their predicted Wins Above Replacement (WAR) while their rights are held by the team (7 years), and the predicted WAR of their top five ranked prospects is as follows (feel free to use the metric and values of your choosing):
 </p>
 <p>
   - Connor Bedard: 24.0
@@ -36,7 +36,7 @@ Next, we can use our tool to get the probability that each player is still avail
 </p>
 <p>
 <h5>Pick Values</h5>
-As the Canadiens, we derive pick values by multiplying the probability a prospect is available at a certain pick by their predicted WAR. Obviously, we're going to take the player we value highest, so the pick values are calculated like so:
+As the Canadiens, we derive pick values by multiplying the probability a prospect is available at a certain pick by their predicted WAR. Obviously, we're going to take the highest-value player available, so the pick values are calculated like so:
 </p>
 <p>
 1st pick - (1.000*24) = 24.000
@@ -67,7 +67,7 @@ The reason for this proposed departure is that, in practice, there are weak draf
 With pick probabilities and prospect values, the Canadiens now have a quantitive framework to determine the value of a pick in the upcoming draft. This allows them to assess the value difference between picks and consider trade scenarios. Which brings us back to the initial question: should the Canadiens consider trading up? 
 </p>
 <p>
-Let's explore this with a hypothetical scenario. Imagine they have the opportunity to trade down to the fourth pick. To gain organizational value, they would need to give up less than the value of the fourth pick (15.542) minus the value of their fifth pick (11.978), which equals 3.564 WAR. If they can trade their fifth plus a piece which is worth less than 3.564 WAR, they've gained value. With this, a complex decision becomes relatively simple, at least in theory.
+Let's explore this with a hypothetical scenario. Imagine they have the opportunity to trade up to the fourth pick. To gain organizational value, they would need to give up less than the value of the fourth pick (15.542) minus the value of their fifth pick (11.978), which equals 3.564 WAR. If they can trade their fifth plus a piece which is worth less than 3.564 WAR, they've gained value. With this, a complex decision becomes relatively simple, at least in theory.
 </p>
 <p>
 By combining prospect pick probabilities with internal evaluations, NHL organizations like the Canadiens can make more informed decisions about their draft strategies and potential trades.
