@@ -1,7 +1,7 @@
 ---
 layout: page
-title: / about
-permalink: /about/
+title: / background
+permalink: /background/
 ---
 <head>
 <!-- Google tag (gtag.js) -->

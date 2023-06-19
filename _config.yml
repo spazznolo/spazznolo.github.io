@@ -6,7 +6,7 @@ google_analytics: UA-177238175-1
 
 header_pages:
   - home.md
-  - about.md
+  - background.md
   - goalies.md
   - tennis.md
   - draft.md
