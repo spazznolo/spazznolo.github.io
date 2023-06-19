@@ -35,3 +35,5 @@ twitter: @spazznolo
 ---
 </p>
 <h5>Posts in Chronological Order</h5>
+<br>
+<div style="text-align: center"> <img src="figs/fifty-four.png" width="80%" length="280"/></div>
