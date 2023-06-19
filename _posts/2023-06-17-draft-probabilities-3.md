@@ -36,7 +36,7 @@ First, we need the value of the top 5 prospects accoridng to the Canadiens. For 
   - Adam Fantilli: 19.0
   - Matvei Mitchkov: 17.5
   - Leo Carlsson: 14.0
-  - Will Smith: 10.0
+  - William Smith: 10.0
 </p>
 <p>
 <h5>Prospect Pick Probabilities</h5>
