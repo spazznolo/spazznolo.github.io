@@ -32,10 +32,10 @@ I'm going to address the first assumption in this post.
 </p>
 <p>
 <h5>Adjusted Save Percentage</h5>
-It is well-known that not all shots are equal. Various Expected Goals (xG) models have been developed to account for this. Fortunately, Peter Tanner's website <a href="https://moneypuck.com/about.htm">MoneyPuck</a> provides detailed data on each unblocked shot in the NHL, including the probability of the shot being a goal.
+All shots are not equal. This is established. Many Expected Goals (xG) models have been developed to account for this. Fortunately, Peter Tanner's website <a href="https://moneypuck.com/index.html">MoneyPuck</a> provides detailed data on each unblocked shot in the NHL, including the probability of the shot being a goal according to his <a href="https://moneypuck.com/about.htm">logistic regression model</a>.
 </p>
 <p>
-To adjust a goalie's save percentage, we can incorporate these predictions from MoneyPuck. One approach to retain the performance measure as a rate is as follows:
+To adjust a goalie's save percentage for shot quality, we can incorporate these expected goal probabilities from MoneyPuck. Usually, after accounting for shot quality, goalie performance is measured by the number of goals saved above expected. This changes the metric from a rate (percentage of shots saved) which is bounded by 0 and 1 to one that can include any real number. Unfortunately, the beta distribution only works with rates. One approach to retain the metric as a rate, and thus the beta distribution as prior, is as follows:
 </p>
 <p>
 Fenwick Save Percentage (FSV%) = 1 - (Goals Against / Fenwick Shots Against)<br>
