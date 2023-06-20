@@ -19,14 +19,14 @@ date:   2023-05-17 8:52:05 -0400
 Recall from the <a href="https://spazznolo.github.io/2022/03/28/goalie-consistency-1.html">introductory paragraph</a> of the series on goalie consistency: "Goaltenders make up the least predictable position in hockey. Their behavior confounds analysts and casual fans alike. It isn’t uncommon for a good goalie to have a below replacement level year, or for an unknown goalie to come in and dominate the league for a stretch of time. This may partly explain the relative dearth of analysis on goalies - they're voodoo, it's often said."
 </p>
 <p>
-This new series focuses on goalie performance and aims to enhance the estimation of goalie performance using an empirical Bayes framework. Similar applications were outlined in <a href="https://hockey-graphs.com/2018/06/21/comparing-scoring-talent-with-empirical-bayes/">previous</a> <a href="http://varianceexplained.org/r/empirical_bayes_baseball/">papers</a>. The strategy has several advantages over frequentist methods, chiefly the ability to measure uncertainty, which is crucial in describing goalie performance. In this post, the idea is sketched using raw save percentage, with further refinement of the methodology in subsequent posts.
+This new series focuses on goalie performance. It aims to enhance the estimation of goalie performance using an empirical Bayes framework. Similar applications were outlined in <a href="https://hockey-graphs.com/2018/06/21/comparing-scoring-talent-with-empirical-bayes/">previous</a> <a href="http://varianceexplained.org/r/empirical_bayes_baseball/">papers</a>. The strategy has several advantages over frequentist methods, chiefly the ability to measure uncertainty, which is crucial in describing goalie performance. In this post, the idea is sketched using raw save percentage as the performance metric, with further refinement of the methodology in subsequent posts.
 </p>
 <p>
 The empirical Bayes approach involves two steps. The first step is to use observed data to fit a prior distribution, and the second step is to update this prior using observed data.
 </p>
 <p>
 <h5>Step One</h5>
-The initial step of the empirical Bayes method is to use observed data to fit a prior distribution. Imagine a scenario where a new and unknown goalie emerges. What probability can we assign to their career Fenwick* save percentage being .930, .940, or .950?
+Imagine a scenario where a new and unknown goalie emerges. What probability can we assign to their career Fenwick* save percentage being .930, .940, or .950?
 </p>
 <p>
 *Fenwick save percentage refers to the total percentage of unblocked shots saved, including shots that miss the net. It has been established that goalie skill correlates with the ability to make players miss the net.
@@ -40,13 +40,13 @@ To represent the possible career Fenwick save percentage for a new goalie, we ca
 While the histogram provides a rough distribution, it contains random bumps throughout. To obtain a more structured representation, we fit a distribution to it.
 </p>
 <p>
-The beta distribution is a commonly used prior when the variable of interest is a percentage, as in the case of save percentage. Fitting a beta distribution to the career Fenwick save percentage distribution yields the following result.
+The beta distribution is a commonly used prior when the variable of interest is a percentage, as in the case of the raw save percentage. Fitting a beta distribution to the career Fenwick save percentage distribution yields the following result.
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-performance-1-2.png" width="60%" length="150"/></div>
 </p>
 <p>
-The fit is... not really good, and alternative distributions such as gamma or Weibull will be explored in future posts to find the best fit, but it serves its purpose as an introduction to the framework. The beta distribution has two hyperparameters, alpha and beta, which can be interpreted as successes (saves) and failures (goals). The fitted beta distribution in this case has hyperparameters 1770 and 126, indicating that we attribute 1770 saves and 126 goals to a goalie before knowing anything about them. This corresponds to a .934 Fenwick save percentage, which is the same as the median career save percentage for goalies who have faced 750+ shots.
+The fit is... not really good, and alternative distributions such as gamma or Weibull will be explored in future posts to find the best fit, but it serves its purpose as an introduction to the framework. The beta distribution has two hyperparameters, alpha and beta, which can be interpreted as successes (saves) and failures (goals). The fitted beta distribution in this case has hyperparameters 852 and 55.6, indicating that we attribute 852 saves and 55.6 goals to a goalie before knowing anything about them. This corresponds to a .9388 Fenwick save percentage, or, a little below the median save percentage for goalies facing 200+ shots (.9406).
 </p>
 <p>
 <h5>Step Two</h5>
@@ -70,7 +70,7 @@ These posterior distributions offer interesting insights, like:
 <p>
 It's important to list all the assumptions with this method:
     - All shots are assumed to be equal.
-    - The prior distribution is assumed to be beta with hyperparameters 1770 and 126.
+    - The prior distribution is assumed to be beta with hyperparameters 852 and 55.6.
     - Goalies facing less than 200 shots are ignored.
     - Age is assumed to be irrelevant.
     - Scoring rates are assumed to be constant.

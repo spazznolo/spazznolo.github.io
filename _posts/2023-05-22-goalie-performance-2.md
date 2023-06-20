@@ -21,7 +21,7 @@ In the <a href="https://spazznolo.github.io/2023/05/17/goalie-performance-1.html
 <p>
 Assumptions:
     - <b>All shots are assumed to be equal.</b>
-    - The prior distribution is assumed to be beta with hyperparameters 1770 and 126.
+    - The prior distribution is assumed to be beta with hyperparameters 852 and 55.6.
     - Goalies facing less than 200 shots are ignored.
     - Age is assumed to be irrelevant.
     - Scoring rates are assumed to be constant.
@@ -32,10 +32,10 @@ I'm going to address the first assumption in this post.
 </p>
 <p>
 <h5>Adjusted Save Percentage</h5>
-All shots are not equal. This is established. Many Expected Goals (xG) models have been developed to account for this. Fortunately, Peter Tanner's website <a href="https://moneypuck.com/index.html">MoneyPuck</a> provides detailed data on each unblocked shot in the NHL, including the probability of the shot being a goal according to his <a href="https://moneypuck.com/about.htm">logistic regression model</a>.
+All shots are not equal, in that they do not have the same probability of becoming a goal. This is established. Many Expected Goals (xG) models have been developed to account for this. Fortunately, Peter Tanner's website <a href="https://moneypuck.com/index.html">MoneyPuck</a> provides detailed data on each unblocked shot in the NHL, including the probability of the shot being a goal according to his <a href="https://moneypuck.com/about.htm">logistic regression model</a>.
 </p>
 <p>
-To adjust a goalie's save percentage for shot quality, we can incorporate these expected goal probabilities from MoneyPuck. Usually, after accounting for shot quality, goalie performance is measured by the number of goals saved above expected. This changes the metric from a rate (percentage of shots saved) which is bounded by 0 and 1 to one that can include any real number. Unfortunately, the beta distribution only works with rates. One approach to retain the metric as a rate, and thus the beta distribution as prior, is as follows:
+To adjust a goalie's save percentage for shot quality, we can incorporate these expected goal probabilities from MoneyPuck. Usually, after accounting for shot quality, goalie performance is measured by the number of goals saved above expected (GSAx). This changes the metric from a rate (percentage of shots saved) which is bounded by 0 and 1 to one that can include any real number. Unfortunately, the beta distribution only works with rates. One approach to retain the metric as a rate, and thus the beta distribution as prior, is as follows:
 </p>
 <p>
 Fenwick Save Percentage (FSV%) = 1 - (Goals Against / Fenwick Shots Against)<br>
@@ -44,16 +44,16 @@ Median Save Percentage (MSV%) = Median of Goalie (20+ xG faced) Career Save Perc
 <b>Adjusted Save Percentage (AdjSV%) = MSV% + (FSV% - xFSV%)</b>
 </p>
 <p>
-For simplicity, let's represent the adjusted save percentage as the adjusted failure rate (1 - AdjSV%) and plot the distribution of career rates for goalies who have faced more than 20 expected goals. We will also include a fitted beta distribution in white. The goodness of fit appears better compared to the previous post, but further improvement can be achieved by exploring different distributions in future posts.
+Let's plot the distribution of career AdjSV% for goalies who have faced 200+ shots. We will also include a fitted beta distribution in white, and a weibull in red.
 <p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-five-one.png" width="60%" length="150"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-performance-2-1.png" width="60%" length="150"/></div>
 </p>
 <p>
 Since we are fitting a beta distribution once again, the remaining steps remain the same as the previous post.</p>
 <p>
 Let's revisit the Jake Oettinger and Jeremy Swayman comparison.
 <p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-five-two.png" width="60%" length="150"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-performance-2-2.png" width="60%" length="150"/></div>
 </p>
 <p>
 The posteriors change as follows:
@@ -78,7 +78,7 @@ A couple of key points:
     - There is likely survivorship bias present.
 </p>
 <p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-five-three.png" width="100%" length="250"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-performance-2-3.png" width="100%" length="250"/></div>
 </p>
 <p>
 Code available here: <a href="https://github.com/spazznolo/goalie-performance/blob/main/posts/post-2.R">https://github.com/spazznolo/goalie-consistency/blob/main/posts/post-5.R</a>
