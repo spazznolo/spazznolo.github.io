@@ -28,7 +28,7 @@ Assumptions:
     - Team systems are assumed to be identical.
 </p>
 <p>
-I'm going to address the first assumption in this post.
+In this post, I'm going to address the first assumption and propose an adjustment.
 </p>
 <p>
 <h5>Adjusted Save Percentage</h5>
@@ -49,7 +49,7 @@ Let's plot the distribution of career AdjSV% for goalies who have faced 200+ sho
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-performance-2-1.png" width="60%" length="150"/></div>
 </p>
 <p>
-Since we are fitting a beta distribution once again, the remaining steps remain the same as the previous post.</p>
+At first glance, goalies' career AdjSV% seems to follow a weibull distribution! Cool, but we're going to sidestep this finding for the remainder of the post, because (hint, hint) <em>there maybe be more than one distribution here</em>. So we're fitting another beta, which means the remaining steps remain the same as the previous post.</p>
 <p>
 Let's revisit the Jake Oettinger and Jeremy Swayman comparison.
 <p>
