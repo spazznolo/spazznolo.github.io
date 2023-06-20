@@ -38,10 +38,10 @@ All shots are not equal, in that they do not have the same probability of becomi
 To adjust a goalie's save percentage for shot quality, we can incorporate these expected goal probabilities from MoneyPuck. Usually, after accounting for shot quality, goalie performance is measured by the number of goals saved above expected (GSAx). This changes the metric from a rate (percentage of shots saved) which is bounded by 0 and 1 to one that can include any real number. Unfortunately, the beta distribution only works with rates. One approach to retain the metric as a rate, and thus the beta distribution as prior, is as follows:
 </p>
 <p>
-Fenwick Save Percentage (FSV%) = 1 - (Goals Against / Fenwick Shots Against)<br>
-Expected Fenwick Save Percentage (xFSV%) = 1 - (Expected Goals Against / Fenwick Shots Against)<br>
-Median Save Percentage (MSV%) = Median of Goalie (20+ xG faced) Career Save Percentage<br>
-<b>Adjusted Save Percentage (AdjSV%) = MSV% + (FSV% - xFSV%)</b>
+    - Fenwick Save Percentage (FSV%) = 1 - (Goals Against / Fenwick Shots Against)
+    - Expected Fenwick Save Percentage (xFSV%) = 1 - (Expected Goals Against / Fenwick Shots Against)
+    - Median Save Percentage (MSV%) = Median of Goalie (20+ xG faced) Career Save Percentage
+    - <b>Adjusted Save Percentage (AdjSV%) = MSV% + (FSV% - xFSV%)</b>
 </p>
 <p>
 Let's plot the distribution of career AdjSV% for goalies who have faced 200+ shots. We will also include a fitted beta distribution in white, and a weibull in red.
