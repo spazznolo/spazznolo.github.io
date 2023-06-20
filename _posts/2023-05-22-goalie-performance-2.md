@@ -57,9 +57,9 @@ Let's revisit the Jake Oettinger and Jeremy Swayman comparison.
 </p>
 <p>
 The posteriors change as follows:
-    - There's a 77.03% (previously 57.18%) chance that Swayman's AdjSV% better than Oettinger's.
-    - There's a 86.88% (previously 92.57%) chance that Oettinger's AdjSV% is better than the MSV%.
-    - There's a 96.50% (previously 91.81%) chance that Swayman's AdjSV% is better than the MSV%.
+    - There's a 78.77% (previously 60.28%) chance that Swayman's AdjSV% better than Oettinger's.
+    - There's a 88.28% (previously 94.12%) chance that Oettinger's AdjSV% is better than the MSV%.
+    - There's a 97.30% (previously 93.81%) chance that Swayman's AdjSV% is better than the MSV%.
 </p>
 <p>
 These changes occur because Swayman faces more difficult shots on average, with an xFSV% of 94.07 compared to Oettinger's 94.39.

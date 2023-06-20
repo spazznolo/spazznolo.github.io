@@ -58,7 +58,7 @@ Updating the prior with observed goalie results is relatively straightforward. I
 <p>
 As an example, let's plot the posterior distributions for two 24-year-old goalies: Jake Oettinger and Jeremy Swayman.</p>
 <p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-four-three.png" width="60%" length="150"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-performance-1-3.png" width="60%" length="150"/></div>
 </p>
 <p>
 These posterior distributions offer interesting insights, like: 
