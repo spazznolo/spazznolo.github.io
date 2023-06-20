@@ -16,18 +16,19 @@ date:   2023-05-22 8:52:05 -0400
 </head>
 <h2>[Post 2] Goalie Performance: Empirical Bayes Adjusted Save Percentage</h2>
 <p>
-In the first post, I outlined a framework for measuring goalie talent using their career Fenwick 5v5 save percentage. It concluded with the assumptions of the initial strategy, which I'll include again below.
+In the <a href="https://spazznolo.github.io/2023/05/17/goalie-performance-1.html">first post</a>, I outlined a framework for measuring goalie talent using their career Fenwick 5v5 save percentage. It concluded with the assumptions of the initial strategy, which I'll include again below.
 </p>
 <p>
 Assumptions:
-    - The prior distribution is assumed to be from the beta family.
-    - Age is assumed to be irrelevant. 
-    - Scoring rates are assumed to be constant.
     - <b>All shots are assumed to be equal.</b>
+    - The prior distribution is assumed to be beta with hyperparameters 1770 and 126.
+    - Goalies facing less than 200 shots are ignored.
+    - Age is assumed to be irrelevant.
+    - Scoring rates are assumed to be constant.
     - Team systems are assumed to be identical.
 </p>
 <p>
-I'm going to address the fourth assumption, that all shots are equal, in this post.
+I'm going to address the first assumption in this post.
 </p>
 <p>
 <h5>Adjusted Save Percentage</h5>

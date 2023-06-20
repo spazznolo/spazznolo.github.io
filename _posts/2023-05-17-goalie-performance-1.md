@@ -31,10 +31,10 @@ The initial step of the empirical Bayes method is to use observed data to fit a 
 <p>
 *Fenwick save percentage refers to the total percentage of unblocked shots saved, including shots that miss the net. It has been established that goalie skill correlates with the ability to make players miss the net.
 <p>
-To represent the possible career Fenwick save percentage for a new goalie, we can utilize the provided histogram of career 5v5 Fenwick save percentages for goalies who have faced 200+ shots.
+To represent the possible career Fenwick save percentage for a new goalie, we can utilize the provided histogram of career 5v5 Fenwick save percentages for goalies who have faced 200+ shots (including those facing less adds noise - don't worry, it'll be addressed in a future post).
 </p>
 <p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-four-one.png" width="60%" length="150"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-performance-1-1.png" width="60%" length="150"/></div>
 </p>
 <p>
 While the histogram provides a rough distribution, it contains random bumps throughout. To obtain a more structured representation, we fit a distribution to it.
@@ -43,10 +43,10 @@ While the histogram provides a rough distribution, it contains random bumps thro
 The beta distribution is a commonly used prior when the variable of interest is a percentage, as in the case of save percentage. Fitting a beta distribution to the career Fenwick save percentage distribution yields the following result.
 </p>
 <p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-four-two.png" width="60%" length="150"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-performance-1-2.png" width="60%" length="150"/></div>
 </p>
 <p>
-The fit is not perfect, and alternative distributions such as gamma or Weibull will be explored in future posts to find the best fit, but good enough for now. The beta distribution has two hyperparameters, alpha and beta, which can be interpreted as successes (saves) and failures (goals). The fitted beta distribution in this case has hyperparameters 1770 and 126, indicating that we attribute 1770 saves and 126 goals to a goalie before knowing anything about them. This corresponds to a .934 Fenwick save percentage, which is the same as the median career save percentage for goalies who have faced 750+ shots.
+The fit is... not really good, and alternative distributions such as gamma or Weibull will be explored in future posts to find the best fit, but it serves its purpose as an introduction to the framework. The beta distribution has two hyperparameters, alpha and beta, which can be interpreted as successes (saves) and failures (goals). The fitted beta distribution in this case has hyperparameters 1770 and 126, indicating that we attribute 1770 saves and 126 goals to a goalie before knowing anything about them. This corresponds to a .934 Fenwick save percentage, which is the same as the median career save percentage for goalies who have faced 750+ shots.
 </p>
 <p>
 <h5>Step Two</h5>
@@ -62,18 +62,18 @@ As an example, let's plot the posterior distributions for two 24-year-old goalie
 </p>
 <p>
 These posterior distributions offer interesting insights, like: 
-    - There's a 57.18% chance that Swayman's save percentage is higher than Oettinger's.
-    - There's a 92.57% chance that Oettinger's save percentage is higher than average.
-    - There's a 91.81% chance that Swayman's save percentage is higher than average.
+    - There's a 60.28% chance that Swayman's save percentage is higher than Oettinger's.
+    - There's a 94.12% chance that Oettinger's save percentage is higher than average.
+    - There's a 93.81% chance that Swayman's save percentage is higher than average.
     - Oettinger's distribution is tighter than Swayman's because he's faced more shots.
 </p>
 <p>
 It's important to list all the assumptions with this method:
+    - All shots are assumed to be equal.
     - The prior distribution is assumed to be beta with hyperparameters 1770 and 126.
     - Goalies facing less than 200 shots are ignored.
     - Age is assumed to be irrelevant.
     - Scoring rates are assumed to be constant.
-    - All shots are assumed to be equal.
     - Team systems are assumed to be identical.
 </p>
 <p>
