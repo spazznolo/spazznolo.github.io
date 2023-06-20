@@ -91,7 +91,7 @@ Arriving at a single point estimate for prospect values can be challenging and m
 To address this, we can include uncertainty in this framework by assigning probability distributions to prospect values rather than relying solely on point estimates. By considering the range of potential outcomes and assigning probabilities to different scenarios, a more comprehensive assessment can be made. Perhaps in another post.
 </p>
 <p>
-For more information, please visit the <a href = "https://piyer97.shinyapps.io/NHLDraft2023/">2023 Draft Tool</a>.
+For more information, visit the <a href = "https://piyer97.shinyapps.io/NHLDraft2023/">2023 Draft Tool</a>. You can reach Prashanth and I on twitter (<a href = "https://twitter.com/iyer_prashanth">@iyer_prashanth</a>, <a href = "https://twitter.com/spazznolo">@spazznolo</a>). 
 </p>
 <br>
 <script src="https://utteranc.es/client.js"
