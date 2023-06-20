@@ -31,7 +31,7 @@ I'm <a href = "https://spazznolo.github.io/goalies/">incrementally</a> building 
 <p>
 <h5>Contact</h5>
 email: jeremie.spagnolo@gmail.com<br>
-twitter: @spazznolo
+twitter: <a href = "https://twitter.com/spazznolo">@spazznolo</a>
 <p>
 ---
 </p>
