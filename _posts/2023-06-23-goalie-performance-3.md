@@ -83,7 +83,7 @@ The cleanest way to adjust for age that I can think of is to bake it into the al
 <p>
 Fenwick Save Percentage (FSV%) = 1 - (GA/FSA)<br>
 <b>Age-Adjusted</b> Expected Fenwick Save Percentage (AdjxFSV%) = 1 - (xG/FSA) - Age Adjustment<br>
-Median Save Percentage (MSV%) = Median of Goalie (20+ xG faced) Career Save Percentage<br>
+Median Save Percentage (MSV%) = Median of Goalie Career Save Percentage<br>
 <b>Adjusted (Age + xG) Save Percentage (AdjSV%) = MSV% + (FSV% - AdjxFSV%)</b>
 </p>
 <p>
