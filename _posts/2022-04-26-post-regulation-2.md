@@ -3,12 +3,17 @@ layout: post
 title:  "Post-regulation: Measuring the uncertainty caused by the current format"
 date:   2022-04-26 8:52:05 -0400
 ---
-```r
-library(tidyverse)
-test <-
-    test %>%
-    mutate(test = test)
-```
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DGRHZS5DNM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DGRHZS5DNM');
+</script>
+</head>
 <h2>[Post 1] Measuring the uncertainty caused by the current overtime format</h2>
 <p>
 The conventional wisdom on the current 5 minute 3-on-3 overtime format is that its outcome is random. For this post, let's take this at face value (we'll save the skepticism for the <a href="https://spazznolo.github.io/2022/04/24/post-regulation-1.html">next post</a>). The consequence is that, after regulation time, the team's essentially flip a coin to determine the winner. If a given team happens to get lucky and land a bunch of heads, it gets more points than another team who happened to land a bunch of tails.  This added randomness is a problem - it causes uncertainty in the final standing points, which could have an effect on the final rankings and, importantly, if a team makes the playoffs or not - or a team's chance at winning the draft lottery.

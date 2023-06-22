@@ -3,6 +3,17 @@ layout: post
 title:  "Goalie Performance: Adjsuting for Age"
 date:   2023-06-23 12:00:05 -0400
 ---
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DGRHZS5DNM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DGRHZS5DNM');
+</script>
+</head>
 <h2>[Post 3] Goalie Performance: Adjusting for Age</h2>
 <p>
 In the first post, I outlined a framework for measuring goalie performance using their career Fenwick 5v5 save percentage. In the second post, the methodology was refined to consider shot quality. The outstanding assumptions of the current strategy are included below.
@@ -75,7 +86,7 @@ INCLUDE PHANTOM YEARS HERE
 </p>
 <p>
 <h5>Adjusting for Age</h5>
-The above plot confirms the intuition that expectations for goalies depends on age. It follows that if a goalie starts his NHL career at 18 and faces 1000 shots, we have a different expectation of how many saves he should make than if he faced those same shots starting his career at age 25. This is a definite shortcoming of the empirical Bayes strategy outlined in the first posts.
+If you believe that goalie performance depends on age, it follows there are different expectations for a goalie starting his NHL career at 18 than one starting at age 25. This is a definite shortcoming of the empirical Bayes strategy outlined in the first posts.
 </p>
 <p>
 The cleanest way to adjust for age that I can think of is to bake it into the already created adjustment for the probability of a shot being a goal. Taking the smoothed age curve presented above, we set the peak (age 27) as the standard and adjust for all other ages, so that, for example, an age 27 xFSV% of 0.940 is is worth (0.94000 - 0.00118) = 0.93882 at age 23 and (0.94000 - 0.00513) = 0.93487 at age 38.
