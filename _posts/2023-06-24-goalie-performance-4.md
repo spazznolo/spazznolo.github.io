@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Goalie Performance: Exploring the Distribution"
-date:   2023-05-24 8:52:05 -0400
+date:   2023-06-24 8:52:05 -0400
 ---
 <head>
 <!-- Google tag (gtag.js) -->
@@ -14,7 +14,7 @@ date:   2023-05-24 8:52:05 -0400
   gtag('config', 'G-DGRHZS5DNM');
 </script>
 </head>
-<h2>[Post 3] Goalie Performance: Exploring the Distribution</h2>
+<h2>[Post 4] Goalie Performance: Exploring the Distribution</h2>
 <p>
 In the first post, I outlined a framework for measuring goalie performance using their career Fenwick 5v5 save percentage. In the second post, the methodology was refined to consider shot quality. The outstanding assumptions of the refined strategy are included below.
 </p>
@@ -28,7 +28,7 @@ Assumptions:
     - Team systems are assumed to be identical.
 </p>
 <p>
-In this post, I'm going to address the first, second and third outstanding assumptions while proposing one sweeping adjustment to take care of them.
+In this post, I'm going to address the first, second and third outstanding assumptions and then propose one sweeping adjustment to take care of them.
 </p>
 <p>
 <h5>Goalies in the analysis</h5>
@@ -93,5 +93,5 @@ The new equation to derive the posterior save percentage then becomes:
 In the next post, I'll explore age as a confounder in the assessment of goalie performance.
 </p>
 <p>
-Code available here: <a href="https://github.com/spazznolo/goalie-performance/blob/main/posts/post-3.R">https://github.com/spazznolo/goalie-consistency/blob/main/posts/post-6.R</a>
+Code available here: <a href="https://github.com/spazznolo/goalie-performance/blob/main/posts/post-4.R">https://github.com/spazznolo/goalie-performance/blob/main/posts/post-4.R</a>
 </p>
