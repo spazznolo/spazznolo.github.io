@@ -23,6 +23,7 @@ Assumptions:
     - <b>All shots are assumed to be equal.</b>
     - The prior distribution is assumed to be beta with hyperparameters 852 and 55.6.
     - Goalies facing less than 200 shots are ignored.
+    - Goalie careers are equal.
     - Age is assumed to be irrelevant.
     - Scoring rates are assumed to be constant.
     - Team systems are assumed to be identical.
