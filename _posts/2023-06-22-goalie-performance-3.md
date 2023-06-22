@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Goalie Performance: Adjsuting for Age"
+title:  "Goalie Performance: Adjusting for Age"
 date:   2023-06-25 12:00:05 -0400
 ---
 <head>
