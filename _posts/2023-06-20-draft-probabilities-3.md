@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "NHL Draft: An Application of Prospect Pick Probabilities"
-date:   2023-06-16 12:00:00 -0400
+date:   2023-06-20 12:00:00 -0400
 ---
 <head>
 <!-- Google tag (gtag.js) -->
