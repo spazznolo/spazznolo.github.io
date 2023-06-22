@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Goalie Performance: Adjsuting for Age"
-date:   2023-06-23 12:00:05 -0400
+date:   2023-06-22 12:00:05 -0400
 ---
 <head>
 <!-- Google tag (gtag.js) -->
@@ -31,8 +31,7 @@ Assumptions:
 In this post, I'm going to address the first outstanding assumption.
 </p>
 <p>
-Like shot quality, the effect of age on performance is a well-researched concept. It has been shown that goalies improve as they age, peak at a certain age (which we won't assume until we see the data), and then recede for, well, forever. I'm going to re-create analyses on the age curve to get custom numbers for this project. Here are the steps:
-
+Like shot quality, the effect of age on performance is a well-researched concept. It has been shown that goalies improve as they age, peak at a certain age (which we won't assume until we see the data), and then recede for, well, forever. To customize the analysis for this project, I will recreate the age curve analysis. Here are the steps:
     - Obtain goalie birth dates, derive age for each game.
     - Define new analysis population (we won't find every goalie's date of birth).
     - Explore age.
