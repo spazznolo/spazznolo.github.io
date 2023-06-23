@@ -3,6 +3,17 @@ layout: post
 title:  "Goalie Consistency: The inter-game effect on expected standing points"
 date:   2022-03-29 11:52:05 -0400
 ---
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DGRHZS5DNM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DGRHZS5DNM');
+</script>
+</head>
 <h2>[Post 2] Goalie Consistency: The inter-game effect on expected standing points</h2>
 <p>
 Here’s an illustration: Imagine you’re the General Manager of a hockey team in a league where every single player and goalie is equally skilled. Since all players are equal, all teams are equal too. Now, a special opportunity comes up where you get to decide between five equally skilled goalies who have different levels of consistency.
