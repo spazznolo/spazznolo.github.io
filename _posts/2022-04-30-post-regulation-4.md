@@ -3,6 +3,17 @@ layout: post
 title:  "Post-regulation: Is the overtime random after each shot?"
 date:   2022-04-30 8:52:05 -0400
 ---
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DGRHZS5DNM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DGRHZS5DNM');
+</script>
+</head>
 <h2>[Post 3] Is the overtime random after each shot?</h2>
 <p>
 To measure this, <em>we'll regress various team and game characteristics, including who had the last shot, on the outcome of individual games which ended in overtime</em>. Specifically, the predictors will be: a team's xGF% throughout their season, game and overtime (before the winning goal was scored), and whether they had the last shot before the winning goal was scored. Think of the non-shot predictors as controls. A few examples of what an observation looks like:

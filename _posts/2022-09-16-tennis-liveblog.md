@@ -3,6 +3,17 @@ layout: post
 title:  "Tennis: A Liveblog"
 date:   2022-09-16 12:00:00 -0400
 ---
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DGRHZS5DNM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DGRHZS5DNM');
+</script>
+</head>
 <h2>[2022-09-16] Hello, tennis</h2>
 The other day I was at a bar and the US Open was on. I don't particularly watch much pro tennis, so I was surprised by the clean camerawork. It's very elegant. During gameplay, the camera is static on a lengthwise shot which captures the entire court. It only moves slightly when the ball is hit wide and then goes right back to that symmetric static shot. I figured tennis analytics must be booming ahead of other sports because of this, so I searched for what people have come up with and found... <a href="https://hdsr.mitpress.mit.edu/pub/uy0zl4i1/release/4">this</a>, where the author, a <a href="http://on-the-t.com/">tennis researcher</a>, lists all the reasons why tennis is decidedly NOT booming, and actually lagging all other major sports. 
 </p>

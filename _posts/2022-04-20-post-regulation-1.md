@@ -3,6 +3,17 @@ layout: post
 title:  "Post-regulation: How important is it?"
 date:   2022-04-20 8:52:05 -0400
 ---
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DGRHZS5DNM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DGRHZS5DNM');
+</script>
+</head>
 <h2>[Post 1] Post-regulation: How important is it?</h2>
 <p>
 Since 2015, when a game is tied after 60 minutes of play, both teams are awarded one standing point along with the opportunity for a second point in the overtime. Most of the rules from regulation carry over, except for a few important ones - the play goes from 5 players aside to 3, and the period lasts only 5 minutes (compared to 20 in regulation). The format change is geared towards increasing entertainment in the form of chaos - the ice surface is too large and the players are too fast and too skilled to prevent chances.

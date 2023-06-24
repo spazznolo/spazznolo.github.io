@@ -3,6 +3,17 @@ layout: post
 title:  "Goalie Consistency: The inter-shot effect using NHL data"
 date:   2022-04-07 8:52:05 -0400
 ---
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DGRHZS5DNM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DGRHZS5DNM');
+</script>
+</head>
 <h2>[Post 4] Goalie Consistency: The inter-shot effect using NHL data</h2>
 <p>
 In the <a href="https://spazznolo.github.io/2022/03/28/goalie-consistency-0.html">Introduction</a>, we defined entropy as a measure for inter-shot goalie consistency using the following equation:

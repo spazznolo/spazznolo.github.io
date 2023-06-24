@@ -3,6 +3,17 @@ layout: post
 title:  "Goalie Consistency: Does it matter?"
 date:   2022-03-28 11:52:05 -0400
 ---
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DGRHZS5DNM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DGRHZS5DNM');
+</script>
+</head>
 <h2>[Post 1] Goalie Consistency: Does it matter?</h2>
 <p>
 Goaltenders make up the least predictable position in hockey. Their behavior confounds analysts and casual fans alike. It isn’t uncommon for a strong goalie to have a below replacement level year, or for an unknown goalie to come in and dominate the league. This may partly explain the relative dearth of analysis on goalies - they're voodoo, it's often said.

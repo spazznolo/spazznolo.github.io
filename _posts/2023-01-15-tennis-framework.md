@@ -3,6 +3,17 @@ layout: post
 title:  "Tennis: Building a framework to track games at scale"
 date:   2023-01-15 12:00:00 -0400
 ---
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DGRHZS5DNM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DGRHZS5DNM');
+</script>
+</head>
 <h2>Building a framework to track tennis games at scale</h2>
 I stepped away from the first iteration of this project last year when I realized I was going to have to annotate thousands of images to create a robust player/ball detection model. In the next few months, I'll design and build such a modelling framework. This post outlines the methods and services which will be used for the framework.
 <p>

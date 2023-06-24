@@ -3,6 +3,17 @@ layout: post
 title:  "Post-regulation: Is the overtime random?"
 date:   2022-04-29 8:52:05 -0400
 ---
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DGRHZS5DNM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DGRHZS5DNM');
+</script>
+</head>
 <h2>[Post 2] Is the overtime random?</h2>
 <p>
 By most accounts, the outcome of the NHL's 5 minute 3-on-3 overtime is random. <a href="https://moneypuck.com/">MoneyPuck</a>, a popular website which predicts game outcomes in real time, assigns a coin flip probability for any team to win in overtime, regardless of their opponent. This is in line with sports betting sites, which, in a given overtime, usually offer -115 odds for both teams (even odds before the <a href="https://en.wikipedia.org/wiki/Vigorish">vig</a>). 
