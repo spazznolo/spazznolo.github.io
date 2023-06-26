@@ -5,6 +5,18 @@ date:   2023-06-30 8:52:05 -0400
 ---
 <h2>temp</h2>
 <p>
+<h5>Goalies in the analysis</h5>
+Whenever we decide on a range of years for an analysis (in this case, 2007-2022), we are cutting of goalies mid-career. Some, like Carter Hart, are beginning their careers. Others, like Lundqvist, ended them during in the middle of the analysis period. Since we are not yet adjusting for age, we can't include these goalies in the analysis. Therefore, only goalies who started their careers post-2007 and ended their careers pre-2022 can be included. This is a 15 year range.
+</p>
+<p>
+The analysis population changes as follows:
+    - Goalie population drops from 315 to 140.
+    - Harmonic mean of shots against rises from 12,690 to 14,568 (mean drops, 4,198 to 3,225).
+    - Harmonic mean of AdjSV% stays at .939 (mean drops, .932 to .927).
+    - Mean of career shots faced drops from 4,198 to 3,225.
+    - Mean of AdjSV% drops from .932 to .927.
+</p>
+<p>
 <h5>Contextualizing Experience</h5>
 Let's start simple: How long is the average goalie career? How many goalies face over 30 shots? How many make it past 200?... All of these questions can be answered by plotting the cumulative distribution function (cdf) of career shots faced for goalies.
 </p>

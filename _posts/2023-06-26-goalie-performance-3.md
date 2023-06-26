@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Goalie Performance: Adjusting for Age"
-date:   2023-06-25 12:00:05 -0400
+date:   2023-06-26 12:00:00 -0400
 ---
 <head>
 <!-- Google tag (gtag.js) -->
@@ -16,7 +16,7 @@ date:   2023-06-25 12:00:05 -0400
 </head>
 <h2>[Post 3] Goalie Performance: Adjusting for Age</h2>
 <p>
-In the first post, I outlined a framework for measuring goalie performance using their career Fenwick 5v5 save percentage. In the second post, the methodology was refined to consider shot quality. The outstanding assumptions of the current strategy are included below.
+In the <a href="https://spazznolo.github.io/2023/05/17/goalie-performance-1.html">first post</a>, I outlined a framework to measure goalie performance using their career Fenwick 5v5 save percentage. In the <a href="https://spazznolo.github.io/2023/05/22/goalie-performance-2.html">second post</a>, I refined the methodology to consider shot quality. The outstanding assumptions are included below.
 </p>
 <p>
 Assumptions:
@@ -28,18 +28,19 @@ Assumptions:
     - Team systems are assumed to be identical.
 </p>
 <p>
-In this post, I'm going to address the first outstanding assumption.
+In this post, I'm going to address the effect of age on goalie performance.
 </p>
 <p>
 <h5>Outline</h5>
-Like shot quality, the effect of age on performance is a well-researched concept. It has been shown that goalies improve as they age, peak at a certain age (which we won't assume until we see the data), and then recede for, well, forever. To customize the analysis for this project, I will recreate the age curve analysis. Here are the steps:
-    - Obtain goalie birth dates, derive age for each game.
+Like shot quality, the effect of age on performance is a well-researched concept. It has been shown that goalies tend to improve as they age, peak, and then recede for, well, forever. This concept is typically called an <em>age curve</em>. Though goalie age curves are already available elsewhere, they differ slightly, so I'm going to define a custom age curve based on the Moneypuck dataset. Here are the steps:
+    - Obtain goalie birth dates.
+    - Derive goalie age for each game.
     - Define new analysis population (we won't find every goalie's date of birth).
     - Explore age.
     - Adjust for age.
 </p>
 <h5>Obtain goalie birth dates</h5>
-I scraped hockey-reference for each goalie's date of birth (code available <a href="https://github.com/spazznolo/goalie-consistency/blob/main/import/scrape_goalie_data.R">here</a>). By combining the goalies' birth dates with the dates of each of their games, I determined the exact age of a goaltender when the corresponding shots.
+I scraped hockey-reference for each goalie's date of birth (code available <a href="https://github.com/spazznolo/goalie-consistency/blob/main/import/scrape_goalie_data.R">here</a>). By combining the goalies' birth dates with the dates of each of their games, I determined their exact age for every game played.
 </p>
 <p>
 <h5>Define new analysis population</h5>
@@ -49,8 +50,11 @@ The analysis population changes as follows (due to incomplete linkage):
     - Harmonic mean of AdjSV% stays at .939 (mean rises, .932 to .933).
 </p>
 <p>
+They barely differ.
+</p>
+<p>
 <h5>Explore age</h5>
-Let's start by simply grouping shots into bins by goalie age, rounded to the first decimal (ex: 26.0, 26.1, etc.), and then calculating the group-wide save percentage. Points belonging to groups with fewer shots pale in comparison to groups with many shots. Here's what that looks like:
+Let's start by simply grouping shots into bins by goalie age (rounded to the first decimal, ex: 26.0, 26.1, etc.), and then calculating the group-wide save percentage. Here's what that looks like, with points becoming paler as the group size decreases:
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-seven-one.png" width="60%" length="150"/></div>
@@ -62,7 +66,7 @@ Some thoughts:
     - This plot is riddled with bias (particularly for goalies with short or long careers).
 </p>
 <p>
-Let's fix some of the bias above with a few changes. Instead of simply grouping shots by age, we'll follow a well-worn strategy <a href = "https://hockey-graphs.com/2017/03/23/a-new-look-at-aging-curves-for-nhl-skaters-part-1">seemingly</a> developed by Tango Tiger <a href = "http://www.tangotiger.net/aging.html">here</a> called the delta method. Here are the steps:
+Let's fix some of the bias above with a few changes. We'll follow a well-worn strategy <a href = "https://hockey-graphs.com/2017/03/23/a-new-look-at-aging-curves-for-nhl-skaters-part-1">seemingly</a> developed by Tango Tiger <a href = "http://www.tangotiger.net/aging.html">here</a> called the delta method. Here are the steps:
     - Take change in save percentage (dSV%) from each goalie's age to the next. 
     - Take the harmonic mean of dSV% for each age as the the observed change in SV%.
     - Clip off underrepresented ages (-21, 39+).
@@ -86,16 +90,15 @@ INCLUDE PHANTOM YEARS HERE
 </p>
 <p>
 <h5>Adjusting for Age</h5>
-If you believe that goalie performance depends on age, it follows there are different expectations for a goalie starting his NHL career at 18 than one starting at age 25. This is a definite shortcoming of the empirical Bayes strategy outlined in the first posts.
+The cleanest way that I can think of adjusting for age is to bake it into the current framework which already adjusts shots by their probability of becoming a goal. This can easily by done by first setting the peak (age 27) as the standard and then adjusting for all other ages, so that, for example, an xFSV% of 0.940 at age 27 is equivalent to an xFSV% of 0.93882 at age 23 (0.94000 - 0.00118) and an xFSV% of 0.93487 at age 38 (0.94000 - 0.00513).
 </p>
 <p>
-The cleanest way to adjust for age that I can think of is to bake it into the already created adjustment for the probability of a shot being a goal. Taking the smoothed age curve presented above, we set the peak (age 27) as the standard and adjust for all other ages, so that, for example, an age 27 xFSV% of 0.940 is is worth (0.94000 - 0.00118) = 0.93882 at age 23 and (0.94000 - 0.00513) = 0.93487 at age 38.
+    - Adjusted (xG) Save Percentage (AdjSV%) = MSV% + (FSV% - xFSV%)
+    - Age Curve Adjustement (acAdj) = f(age), where f is the smoothed curve in the plot above.
+    - <b>Adjusted (Age + xG) Save Percentage (AdjSV%) = MSV% + (FSV% - xFSV% + acAdj)</b>
 </p>
 <p>
-Fenwick Save Percentage (FSV%) = 1 - (GA/FSA)<br>
-<b>Age-Adjusted</b> Expected Fenwick Save Percentage (AdjxFSV%) = 1 - (xG/FSA) - Age Adjustment<br>
-Median Save Percentage (MSV%) = Median of Goalie Career Save Percentage<br>
-<b>Adjusted (Age + xG) Save Percentage (AdjSV%) = MSV% + (FSV% - AdjxFSV%)</b>
+COMPARE TWO GOALIES WITH DIFFERING AGES
 </p>
 <p>
 Code available here: <a href="https://github.com/spazznolo/goalie-performance/blob/main/posts/post-3.R">https://github.com/spazznolo/goalie-performance/blob/main/posts/post-3.R</a>
