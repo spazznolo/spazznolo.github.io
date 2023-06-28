@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Goalie Performance: Exploring the Distribution"
-date:   2023-06-30 12:00:00 -0400
+date:   2023-07-03 12:00:00 -0400
 ---
 <head>
 <!-- Google tag (gtag.js) -->
