@@ -50,7 +50,7 @@ Let's plot the distribution of career AdjSV% for goalies who have faced 200+ sho
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-performance-2-1.png" width="60%" length="150"/></div>
 </p>
 <p>
-At first glance, goalies' career AdjSV% seems to follow a weibull distribution! Cool, but we're going to sidestep this finding for the remainder of the post, because (hint, hint) <em>there maybe be more than one distribution here</em>. So we're fitting another beta, which means the remaining steps remain the same as the previous post. The prior is similar, except this time we add 933 saves and 60 goals (up from 852 and 55.6)).
+At first glance, goalies' career AdjSV% seems to follow a weibull distribution! Cool, but we're going to sidestep this finding for the remainder of the post, because (hint, hint) <em>there maybe be more than one distribution here</em>. So we're fitting another beta, which means the remaining steps remain the same as the previous post. The prior is similar, except this time we add 933 saves and 60 goals (up from 852 and 55.6).
 </p>
 <p>
 Let's revisit the Jake Oettinger and Jeremy Swayman comparison.
@@ -59,7 +59,7 @@ Let's revisit the Jake Oettinger and Jeremy Swayman comparison.
 </p>
 <p>
 The posteriors change as follows:
-    - There's a 78.77% (previously 60.28%) chance that Swayman's AdjSV% better than Oettinger's.
+    - There's a 78.77% (previously 60.28%) chance that Swayman's AdjSV% is better than Oettinger's.
     - There's a 88.28% (previously 94.12%) chance that Oettinger's AdjSV% is better than the MSV%.
     - There's a 97.30% (previously 93.81%) chance that Swayman's AdjSV% is better than the MSV%.
 </p>
