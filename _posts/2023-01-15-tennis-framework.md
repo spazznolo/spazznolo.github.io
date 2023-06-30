@@ -15,7 +15,9 @@ date:   2023-01-15 12:00:00 -0400
 </script>
 </head>
 <h2>Building a framework to track tennis games at scale</h2>
+<p>
 I stepped away from the first iteration of this project last year when I realized I was going to have to annotate thousands of images to create a robust player/ball detection model. In the next few months, I'll design and build such a modelling framework. This post outlines the methods and services which will be used for the framework.
+</p>
 <p>
 <h5>Tennis TV</h5>
 The ATP has a streaming service called <a href="https://www.tennistv.com/?gclid=CjwKCAjwyqWkBhBMEiwAp2yUFkALa-AHHRpKvKlqI7MypdHnL6eRs95eB9c-PsMZ3Oo81Niyo5yRRhoC1QIQAvD_BwE">Tennis TV</a> which offers full games and daily highlights for most tournaments on the tour. The highlights are of particular interest given that they consist of condensed versions of various games. This offers a diversity of players, outfits, visibility, crowds, etc. which will make the model more robust.
