@@ -71,12 +71,14 @@ Below is a collection of plots which compare various save percentage metrics dis
 </p>
 <p>
 A couple of key points:
-
     - Goalies who have a poor start to their career tend to play fewer games (surprise, surprise).
     - The relationship between a goalie's SV% and their AdjSV% seems to strengthen as they face more shots.
     - A goalie's AdjSV% converges with their posterior AdjSV% as they face more shots (indicated by the yellow diagonal line).
     - Due to the previous points, there is heteroskedasticity in the relationship between a goalie's SV% and their posterior AdjSV%.
     - There is likely survivorship bias present.
+</p>
+<p>
+In the next posts, I'll adress the outstanding assumptions listed at the start.
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-performance-2-3.png" width="100%" length="250"/></div>
