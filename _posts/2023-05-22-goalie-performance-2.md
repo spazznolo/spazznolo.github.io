@@ -36,7 +36,7 @@ In this post, I'm going to address the first assumption and propose an adjustmen
 All shots are not equal, in that they do not have the same probability of becoming a goal. This is established. Many Expected Goals (xG) models have been developed to account for this. Fortunately, Peter Tanner's website <a href="https://moneypuck.com/index.html">MoneyPuck</a> provides detailed data on each unblocked shot in the NHL, including the probability of the shot being a goal according to his <a href="https://moneypuck.com/about.htm">logistic regression model</a>.
 </p>
 <p>
-To adjust a goalie's save percentage for shot quality, we can incorporate these expected goal probabilities from MoneyPuck. Usually, after accounting for shot quality, goalie performance is measured by the number of goals saved above expected (GSAx). This changes the metric from a rate (percentage of shots saved) which is bounded by 0 and 1 to one that can include any real number. Unfortunately, the beta distribution only works with rates. One approach to retain the metric as a rate, and thus the beta distribution as prior, is as follows:
+To adjust a goalie's save percentage for shot quality, we can incorporate these expected goal probabilities from MoneyPuck. Usually, after accounting for shot quality, goalie performance is measured by the number of goals saved above expected (GSAx). This changes the metric from a rate (percentage of shots saved) which is bounded by 0 and 1 to one that can include any real number. Unfortunately, the beta distribution only works with rates. One approach to retain the metric as a rate, and thus the beta distribution as a prior, is as follows:
 </p>
 <p>
     - Fenwick Save Percentage (FSV%) = 1 - (Goals Against / Fenwick Shots Against)
@@ -50,7 +50,8 @@ Let's plot the distribution of career AdjSV% for goalies who have faced 200+ sho
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-performance-2-1.png" width="60%" length="150"/></div>
 </p>
 <p>
-At first glance, goalies' career AdjSV% seems to follow a weibull distribution! Cool, but we're going to sidestep this finding for the remainder of the post, because (hint, hint) <em>there maybe be more than one distribution here</em>. So we're fitting another beta, which means the remaining steps remain the same as the previous post.</p> The prior is similar, except this time we add 933 saves and 60 goals.
+At first glance, goalies' career AdjSV% seems to follow a weibull distribution! Cool, but we're going to sidestep this finding for the remainder of the post, because (hint, hint) <em>there maybe be more than one distribution here</em>. So we're fitting another beta, which means the remaining steps remain the same as the previous post. The prior is similar, except this time we add 933 saves and 60 goals.
+</p>
 <p>
 Let's revisit the Jake Oettinger and Jeremy Swayman comparison.
 <p>
