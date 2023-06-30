@@ -50,7 +50,7 @@ Let's plot the distribution of career AdjSV% for goalies who have faced 200+ sho
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-performance-2-1.png" width="60%" length="150"/></div>
 </p>
 <p>
-At first glance, goalies' career AdjSV% seems to follow a weibull distribution! Cool, but we're going to sidestep this finding for the remainder of the post, because (hint, hint) <em>there maybe be more than one distribution here</em>. So we're fitting another beta, which means the remaining steps remain the same as the previous post. The prior is similar, except this time we add 933 saves and 60 goals.
+At first glance, goalies' career AdjSV% seems to follow a weibull distribution! Cool, but we're going to sidestep this finding for the remainder of the post, because (hint, hint) <em>there maybe be more than one distribution here</em>. So we're fitting another beta, which means the remaining steps remain the same as the previous post. The prior is similar, except this time we add 933 saves and 60 goals (up from 852 and 55.6)).
 </p>
 <p>
 Let's revisit the Jake Oettinger and Jeremy Swayman comparison.
