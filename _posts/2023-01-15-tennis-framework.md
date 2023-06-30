@@ -34,7 +34,7 @@ Roboflow also has an API that plugs easily into Google Colab.
 </p>
 <p>
 <h5>Google Colab</h5>
-I'm currently using <a href="https://colab.research.google.com/drive/1tM9Jbu3XwlDK8s8EVLB_lBQwNOr23u-3#scrollTo=G4fjA5X74FpF">Google Colab</a> to train the computer vision model. I've looked around, and for my current needs (research), it fits. Easy to use, compatible with Roboflow, offers a free-to-use GPU (though it disconnects with 90 minutes of inactivity). I'm currently using Google Colab to train a YOLOv5 model.
+I'm currently using <a href="https://colab.research.google.com/drive/1tM9Jbu3XwlDK8s8EVLB_lBQwNOr23u-3#scrollTo=G4fjA5X74FpF">Google Colab</a> to train the computer vision model. I've looked around, and for my current needs (research), it fits. Easy to use, compatible with Roboflow, offers a free-to-use GPU (though it disconnects with 90 minutes of inactivity). I'm using it to train a YOLOv5 objection detection model.
 </p>
 <p>
 <h5>YOLOv5</h5>
