@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "NHL Draft: Enhancing the Draft Pick Value Framework"
-date:   2023-07-05 12:00:00 -0400
+title:  "NHL Draft: An Application of Prospect Pick Probabilities [Part 2]"
+date:   2023-07-02 12:00:00 -0400
 ---
 <head>
 <!-- Google tag (gtag.js) -->
@@ -14,9 +14,9 @@ date:   2023-07-05 12:00:00 -0400
   gtag('config', 'G-DGRHZS5DNM');
 </script>
 </head>
-<h2>Enhancing the Draft Pick Value Framework</h2>
+<h2>An Application of Prospect Pick Probabilities [Part 2]</h2>
 <p>
-In <a href="https://spazznolo.github.io/2023/06/20/draft-probabilities-3.html">An Application of Prospect Pick Probabilities</a>, I introduced a new perspective on draft pick value using Prashanth Iyer and I's <a href="https://piyer97.shinyapps.io/NHLDraft2023/">draft probability tool</a>. Here, I extend the methodology to include prospect value uncertainty. Then I build a framework to optimize pick value.
+In <a href="https://spazznolo.github.io/2023/06/20/draft-probabilities-3.html">An Application of Prospect Pick Probabilities</a>, I introduced a new perspective on draft pick value using Prashanth Iyer and I's <a href="https://piyer97.shinyapps.io/NHLDraft2023/">draft probability tool</a>. Here, I extend the methodology to include prospect value uncertainty.
 </p>
 <p>
 <h5>Accounting for Uncertainty</h5>
@@ -48,10 +48,7 @@ In this example:
 Like the point estimates in the first post, the actual distribution doesn't matter, it's just an example to illustrate the framework I'm introducing.
 </p>
 <p>
-Let's assign these value distributions to each player, making sure Michkov's value has higher uncertainty by increasing the standard deviation of his distribution.
-</p>
-<p>
-Prospect values now look like this:
+Let's assign these value distributions to each player, making sure Michkov's value has higher uncertainty by increasing the standard deviation of his distribution. Prospect values now look like this:
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/draft-probabilities-4-2.png" width="60%" length="150"/></div>
@@ -63,27 +60,13 @@ Then, these probability distributions are multiplied by the probability a prospe
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/draft-probabilities-4-3.png" width="60%" length="150"/></div>
 </p>
 <p>
-The probability distributions offer some bonuses:
-  - there is now a difference between the mean and median WAR.
-  - we can now estimate the probability that a given pick will be more valuable than another.
-  - higher certainty player cause pick values to shift towards them.
+With these pick value distributions you get the same comparisons as you did in the previous post, plus:
+  - the probability that a given pick will be more valuable than another.
+  - WAR for whichever "outcome" you're interested in (like top 10% scenario, bottom 10%, etc.)
 </p>
 <p>
-<h5>Optimization</h5>
-The optimization of draft value in the NHL is similar to that of a fantasy draft for a sportsbook (include link to roster optimization), and has been explored specifically for the NHL <a href="http://statsportsconsulting.com/main/wp-content/uploads/Nandakumar_PerfectDraft-1.pdf">here</a>. In this section, I'll optimize draft value by combining the new pick values with the prospect value distributions assigned above.
-</p>
-To illustrate
-<p>
+Let's re-visit the Montreal example where I suggested they should only trade up if the value of the fourth pick (15.610) exceeded that of their package (fifth pick (11.927) plus a piece). After including uncertainty, these point estimates become probability distributions. The difference between the two picks looks like this:
 </p>
 <p>
-</p>
-<p>
-</p>
-<p>
-</p>
-<p>
-</p>
-<p>
-</p>
-<p>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/draft-probabilities-4-4.png" width="60%" length="150"/></div>
 </p>

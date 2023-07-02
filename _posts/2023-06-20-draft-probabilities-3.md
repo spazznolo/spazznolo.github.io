@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "NHL Draft: An Application of Prospect Pick Probabilities"
+title:  "NHL Draft: An Application of Prospect Pick Probabilities [Part 1]"
 date:   2023-06-20 12:00:00 -0400
 ---
 <head>
@@ -14,7 +14,7 @@ date:   2023-06-20 12:00:00 -0400
   gtag('config', 'G-DGRHZS5DNM');
 </script>
 </head>
-<h2>An Application of Prospect Pick Probabilities</h2>
+<h2>An Application of Prospect Pick Probabilities [Part 1]</h2>
 <p>
 The prospect pick probabilities available on the "Draft Pick Probabilities" tab of the <a href = "https://piyer97.shinyapps.io/NHLDraft2023/">2023 Draft Tool</a>, created by Pranshanth Iyer and myself, can be used by NHL organizations to inform their decision-making process. Let's take the Montreal Canadiens as an example.
 </p>
