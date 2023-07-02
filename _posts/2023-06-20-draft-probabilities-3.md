@@ -22,7 +22,7 @@ The prospect pick probabilities available on the "Draft Pick Probabilities" tab 
 The Canadiens pick fifth, which, according to consensus, is just outside the top tiers of prospects consisting of Connor Bedard, Adam Fantilli, Matvei Mitchkov, and Leo Carlsson. The next "tier", contains a handful of players which ranking publications seem to mostly disagree on. One common question is, if you're the Canadiens, do you trade up to guarantee the drafting of a potential superstar, or do you take the risk and hope one of them slides in the draft? However a more interesting question, in my opinion, is: "How are you making this decision?"
 </p>
 <p>
-The truth is that either way you're leaning, you are making a complex calculation with instinct. You're considering 1) the value of each prospect, 2) the probability of each prospect being available at a given pick, and 3) the appropriate cost in assets to move up in the draft. This is an exceedingly difficult calculation to make in the moment, especially in the heat of the draft. 
+The truth is that either way you're leaning, you are making a complex calculation with instinct. You're considering 1) the value of each prospect, 2) the probability each prospect is available at a given pick, and 3) the appropriate cost in assets to move up in the draft. This is an exceedingly difficult calculation to make in the moment, especially in the heat of the draft. 
 </p>
 <p>
 Thankfully, the probabilities in this tool can help.
