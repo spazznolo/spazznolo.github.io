@@ -71,5 +71,5 @@ Let's re-visit the Montreal example where I suggested they should only trade up 
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/draft-probabilities-4-4.png" width="60%" length="150"/></div>
 </p>
 <p>
-Code available here: <a href="https://github.com/spazznolo/draft-rankings/blob/main/posts/post-4.R">https://github.com/spazznolo/draft-rankings/blob/main/posts/post-4.R</a>
+Code available here: <a href="https://github.com/spazznolo/draft-rankings/blob/main/scripts/post_4.R">https://github.com/spazznolo/draft-rankings/blob/main/scripts/post_4.R</a>
 </p>
