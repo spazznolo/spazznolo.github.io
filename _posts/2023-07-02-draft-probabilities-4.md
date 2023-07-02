@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "NHL Draft: An Application of Prospect Pick Probabilities [Part 2]"
-date:   2023-07-02 12:00:00 -0400
+date:   2023-07-02 1:00:00 -0400
 ---
 <head>
 <!-- Google tag (gtag.js) -->
@@ -65,7 +65,7 @@ With these pick value distributions you get the same comparisons as you did in t
   - WAR for whichever "outcome" you're interested in (like top 10% scenario, bottom 10%, etc.)
 </p>
 <p>
-Let's re-visit the Montreal example where I suggested they should only trade up if the value of the fourth pick (15.610) exceeded that of their package (fifth pick (11.927) plus a piece). After including uncertainty, these point estimates become probability distributions. The difference between the two picks looks like this:
+Let's re-visit the Montreal example where I suggested they should only trade up if the value of the fourth pick (15.87) exceeded that of their package (fifth pick (13.15) plus a piece). After including uncertainty, these point estimates become probability distributions and the difference between the two picks looks like this:
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/draft-probabilities-4-4.png" width="60%" length="150"/></div>
