@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "NHL Draft: Enhancing the Draft Pick Value Framework"
-date:   2023-07-01 12:00:00 -0400
+date:   2023-07-05 12:00:00 -0400
 ---
 <head>
 <!-- Google tag (gtag.js) -->
@@ -29,6 +29,7 @@ Unless!
 Unless, prospect value uncertainty is quantified and included in the decision process.
 </p>
 <p>
+<h5>Assigning Uncertainty</h5>
 Adapting the previous post to include uncertainty is actually easy. Instead of assigning prospect values through point estimates (Bedard was at 24 WAR, Michkov at 17.5), prospects are assigned <a href="https://www.scribbr.com/statistics/probability-distributions/#:~:text=A%20probability%20distribution%20is%20a,using%20graphs%20or%20probability%20tables.">probability distributions</a> which reflect the uncertainty of their value. 
 </p>
 <p>
@@ -47,8 +48,7 @@ In this example:
 Like the point estimates in the first post, the actual distribution doesn't matter, it's just an example to illustrate the framework I'm introducing.
 </p>
 <p>
-<h5>Assigning Uncertainty</h5>
-Next, each player is assigned a value distribution, making sure Michkov's value has higher uncertainty by increasing the standard deviation of his distribution. Then, these probability distributions are multiplied by the probability a prospect is available at each pick, as in the previous post.
+Let's assign these value distributions to each player, making sure Michkov's value has higher uncertainty by increasing the standard deviation of his distribution.
 </p>
 <p>
 Prospect values now look like this:
@@ -57,7 +57,7 @@ Prospect values now look like this:
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/draft-probabilities-4-2.png" width="60%" length="150"/></div>
 </p>
 <p>
-... and pick values now look like this:
+Then, these probability distributions are multiplied by the probability a prospect is available at each pick, as in the previous post. Pick values now look like this:
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/draft-probabilities-4-3.png" width="60%" length="150"/></div>
@@ -69,11 +69,8 @@ The probability distributions offer some bonuses:
   - higher certainty player cause pick values to shift towards them.
 </p>
 <p>
-SHOW EXAMPLE OF NEW PICK VALUES
-</p>
-<p>
 <h5>Optimization</h5>
-The optimization of draft value in the NHL is similar to that of a fantasy draft for a sportsbook (include link to roster optimization), and has been explored specifically for the NHL <a href="http://statsportsconsulting.com/main/wp-content/uploads/Nandakumar_PerfectDraft-1.pdf">here</a>. In this section, I'll optimize draft value by combining the pick probabilities in our draft tool with the prospect value distributions assigned above.
+The optimization of draft value in the NHL is similar to that of a fantasy draft for a sportsbook (include link to roster optimization), and has been explored specifically for the NHL <a href="http://statsportsconsulting.com/main/wp-content/uploads/Nandakumar_PerfectDraft-1.pdf">here</a>. In this section, I'll optimize draft value by combining the new pick values with the prospect value distributions assigned above.
 </p>
 To illustrate
 <p>
