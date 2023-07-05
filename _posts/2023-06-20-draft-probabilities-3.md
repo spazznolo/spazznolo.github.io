@@ -29,7 +29,7 @@ Thankfully, the probabilities in this tool can help.
 </p>
 <p>
 <h5>Prospect Values</h5>
-First, we need the value of the top 5 prospects accoridng to the Canadiens. For this example, let's assume they evaluate prospects based on their predicted Wins Above Replacement (WAR) while their rights are held by the team (7 years), and the predicted WAR of their top five ranked prospects is as follows (feel free to use the metric and values of your choosing):
+First, we need the value of the top 5 prospects according to the Canadiens. For this example, let's assume they evaluate prospects based on their predicted Wins Above Replacement (WAR) while their rights are held by the team (7 years), and the predicted WAR of their top five ranked prospects is as follows (feel free to use the metric and values of your choosing):
 </p>
 <p>
   - Connor Bedard: 24.0
