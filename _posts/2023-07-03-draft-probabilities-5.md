@@ -19,24 +19,17 @@ date:   2023-07-05 12:00:00 -0400
 In <a href="https://spazznolo.github.io/2023/06/20/draft-probabilities-3.html">An Application of Prospect Pick Probabilities</a>, I used Prashanth Iyer and I's <a href="https://piyer97.shinyapps.io/NHLDraft2023/">draft probability tool</a> to create a new pick value framework which captured the unique dynamics of a given draft. Then, I <a href="https://spazznolo.github.io/2023/06/25/draft-probabilities-4.html">extended the methodology</a> to include prospect value uncertainty. Here, I introduce a new drafting strategy for NHL teams by optimizing the pick value framework.
 </p>
 <p>
-<h5>Background</h5>
-The optimization of draft value has been explored specifically for the NHL by now Kraken analyst <a href="https://twitter.com/nnstats">@nnstats</a> in this 2017 <a href="https://www.statsportsconsulting.com/wp-content/uploads/Nandakumar_PerfectDraft-1.pdf">paper</a>. It was a counter to the prevalent discourse at the time, which assumed the optimal draft was simply picking the best players as they were available. She argued that a team should only draft the best player available (BPA) if he won't be available for their next pick. For instance, Jamie Benn, a sixth round pick, should have been drafted in the fifth round to maximize total draft value.
-</p>
-<p>
-The key outstanding question from this work was: "How can we determine if a prospect will still be available for a team's next pick?" In this post, I'll show that the prospect pick probabilities from our draft tool can provide the answer.
-</p>
-<p>
 But first, a visual recap for those who don't want to read the <a href="https://spazznolo.github.io/2023/06/16/draft-probabilities-2.html">previous</a> <a href="https://spazznolo.github.io/2023/06/20/draft-probabilities-3.html">three</a> <a href="https://spazznolo.github.io/2023/07/02/draft-probabilities-4.html">posts</a> (I get it).
 </p>
 <p>
 <h5>Visual Recap</h5>
-1. A rank-ordered logit model was built from numerous publication rankings throughout the draft year to derive prospect pick probabilities, like this:
+1. A rank-ordered logit model was built using numerous publication rankings throughout the draft year to derive prospect pick probabilities, like this:
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/draft-probabilities-4-4.png" width="60%" length="150"/></div>
 </p>
 <p>
-2. Prospect values were derived using a historical draft pick value chart (values are placeholders for teams' actual internal projections), along with uncertainty estimates.
+2. Prospect values were derived using a historical draft pick value chart (values are placeholders for teams' actual internal projections), along with uncertainty estimates, like this:
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/draft-probabilities-4-4.png" width="60%" length="150"/></div>
@@ -55,8 +48,15 @@ As an example, the value of the third pick for a team who ranked the top 3 playe
   - These three values are summed to get the third pick's value.
 </p>
 <p>
+<h5>Background on Optimization</h5>
+The optimization of draft value has been explored specifically for the NHL by now Kraken analyst <a href="https://twitter.com/nnstats">@nnstats</a> in this 2017 <a href="https://www.statsportsconsulting.com/wp-content/uploads/Nandakumar_PerfectDraft-1.pdf">paper</a>. It was a counter to the prevalent discourse at the time, which assumed the optimal draft was simply picking the best players as they were available. She argued that a team should only draft the best player available (BPA) if he won't be available for their next pick. For instance, Jamie Benn, a sixth round pick, should have been drafted in the fifth round to maximize total draft value.
+</p>
+<p>
+The key outstanding question from this work was: "How can we determine if a prospect will still be available for a team's next pick?" In this post, I'll show that the prospect pick probabilities from our draft tool can provide the answer.
+</p>
+<p>
 <h5>Introducing a new NHL drafting strategy</h5>
-A team's draft value is optimized when they, in aggregate, maximize the possible value from their draft picks. This cannot be done in retrospect - it can only be done looking ahead, which means there is uncertainty, which means the framework must be probablistic.
+A team's draft value is optimized when they, in aggregate, maximize the possible value from their draft picks. This cannot be done in retrospect - it can only be done looking ahead, which means the framework must be probablistic.
 </p>
 <p>
 A team's draft value is not taken at the pick level, but at the draft level. These may often converge, but when they don't, a team must forego drafting the best player available in order to maximize draft value.
