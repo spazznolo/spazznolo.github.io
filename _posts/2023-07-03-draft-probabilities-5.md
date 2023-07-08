@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "NHL Draft: Introducing a new drafting strategy"
+title:  "NHL Draft: Introducing a new NHL drafting strategy"
 date:   2023-07-07 12:00:00 -0400
 ---
 <head>
@@ -16,7 +16,7 @@ date:   2023-07-07 12:00:00 -0400
 </head>
 <h2>Introducing a new NHL drafting strategy</h2>
 <p>
-In <a href="https://spazznolo.github.io/2023/06/20/draft-probabilities-3.html">An Application of Prospect Pick Probabilities</a>, I used Prashanth Iyer and myself's <a href="https://piyer97.shinyapps.io/NHLDraft2023/">draft probability tool</a> to create a new pick value framework which captured the unique dynamics of a given draft. Then, I <a href="https://spazznolo.github.io/2023/06/25/draft-probabilities-4.html">extended the methodology</a> to include prospect value uncertainty. Here, I'll introduce a brand new drafting strategy for the NHL by optimizing the pick value framework. But first, some background.
+In <a href="https://spazznolo.github.io/2023/06/20/draft-probabilities-3.html">An Application of Prospect Pick Probabilities</a>, I used Prashanth Iyer and myself's <a href="https://piyer97.shinyapps.io/NHLDraft2023/">draft probability tool</a> to create a new pick value framework which captured the unique dynamics of a given draft. Then, I <a href="https://spazznolo.github.io/2023/06/25/draft-probabilities-4.html">extended the methodology</a> to include the uncertainty of prospect values. Here, I'll introduce a brand new drafting strategy for the NHL which aims to maximize draft value. But first, some background.
 <p>
 <h5>Background on Optimization</h5>
 The optimization of draft value has been explored specifically for the NHL by now Kraken analyst <a href="https://twitter.com/nnstats">@nnstats</a> in this 2017 <a href="https://www.statsportsconsulting.com/wp-content/uploads/Nandakumar_PerfectDraft-1.pdf">paper</a>. It was a counter to the prevalent discourse at the time, which assumed the optimal draft was achieved by simply picking the best players as they were available. Instead, she argued that a team should only draft the best player available (BPA) if he won't be available for their next pick. For instance, Jamie Benn, a sixth round pick, should have been drafted in the fifth round to maximize total draft value.
@@ -26,9 +26,8 @@ The key outstanding question from this work was: "How do we determine if the ris
 </p>
 <p>
 <h5>Introducing a new NHL drafting strategy</h5>
-The strategy aims to determine a team's maximum conditional draft value at each pick. The maximum value is selected from a list of conditional draft values associated with each available prospect. Using a team's first two picks as an example, the strategy can be written in mathematical notation like this:
+The strategy aims to determine a team's maximum conditional draft value at each pick. The maximum value is selected from a list of conditional draft values associated with each available prospect. Using a team's first two picks as an example, the strategy can be written (somehwat) formally like this:
 </p>
-<p>
 for n remaining prospects, ranked 1 to n<br>
 <em>max draft value</em> = max(v1, v2, ..., vn)<br>
 where,<br>
@@ -37,8 +36,7 @@ vi = v(pi) + (Pj(p2)*v(p2)) + ... + ((1 - p2 - ... - p(x-1))*v(px))<br>
 where,<br>
 v(pi) = value of prospect i,<br>
 Pj(pi) = probability that propsect i is available at pick j,<br>
-p2 + ... + p(x-1) < 1 and p2 + ... + p(x-1) + p
-</p>
+p2 + ... + p(x-1) < 1 and p2 + ... + p(x-1) + p(x) >= 1<br>
 <p>
 To further illustrate, let's consider the first round of this year's draft up to pick 17.
 </p>
