@@ -28,14 +28,15 @@ The key outstanding question from this work was: "How do we determine if the ris
 <h5>Introducing a new NHL drafting strategy</h5>
 The strategy aims to determine a team's maximum conditional draft value at each pick. The maximum value is selected from a list of conditional draft values associated with each available prospect. Using a team's first two picks as an example, the strategy can be written (somehwat) formally like this:
 </p>
+<br>
 for n remaining prospects, ranked 1 to n<br>
-<em>max draft value</em> = max(v1, v2, ..., vn)<br>
+max draft value = max(v1, v2, ..., vn)<br>
 where,<br>
-vi = conditional draft value when choosing prospect i with the next pick, specifically<br>
+vi = estimated draft value when choosing prospect i with the next pick, specifically<br>
 vi = v(pi) + (Pj(p2)*v(p2)) + ... + ((1 - p2 - ... - p(x-1))*v(px))<br>
 where,<br>
 v(pi) = value of prospect i,<br>
-Pj(pi) = probability that propsect i is available at pick j,<br>
+Pj(pi) = probability that propsect i is available at pick j, and<br>
 p2 + ... + p(x-1) < 1 and p2 + ... + p(x-1) + p(x) >= 1<br>
 <p>
 To further illustrate, let's consider the first round of this year's draft up to pick 17.
