@@ -33,11 +33,11 @@ for n remaining prospects, ranked 1 to n<br>
 max draft value = max(v1, v2, ..., vn)<br>
 where,<br>
 vi = estimated draft value when choosing prospect i with the next pick, specifically<br>
-vi = v(pi) + (Pj(p2)*v(p2)) + ... + ((1 - p2 - ... - p(x-1))*v(px))<br>
+vi = v(pi) + (Pj(p2)*v(p2)) + ... + ((1 - Pj(p2) - ... - Pj(p(x-1)))*v(px))<br>
 where,<br>
 v(pi) = value of prospect i,<br>
 Pj(pi) = probability that propsect i is available at pick j, and<br>
-p2 + ... + p(x-1) < 1 and p2 + ... + p(x-1) + p(x) >= 1<br>
+Pj(p2) + ... + Pj(p(x-1)) < 1 and p2 + ... + Pj(p(x-1)) + Pj(p(x))) >= 1<br>
 <p>
 To further illustrate, let's consider the first round of this year's draft up to pick 17.
 </p>
