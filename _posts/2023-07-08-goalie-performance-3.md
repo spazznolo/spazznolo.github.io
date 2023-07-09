@@ -16,7 +16,7 @@ date:   2023-07-08 12:00:00 -0400
 </head>
 <h2>[Post 3] Goalie Performance: Adjusting for Age</h2>
 <p>
-In the <a href="https://spazznolo.github.io/2023/05/17/goalie-performance-1.html">first post</a>, I outlined a framework to measure goalie performance using their career Fenwick 5v5 save percentage. In the <a href="https://spazznolo.github.io/2023/05/22/goalie-performance-2.html">second post</a>, I refined the methodology to consider shot quality. The outstanding assumptions are included below.
+In the <a href="https://spazznolo.github.io/2023/05/17/goalie-performance-1.html">first post</a>, I outlined a framework to measure goalie performance using their career 5v5 Fenwick save percentage and empirical Bayes. In the <a href="https://spazznolo.github.io/2023/05/22/goalie-performance-2.html">second post</a>, I refined the methodology to consider shot quality. The outstanding assumptions are included below.
 </p>
 <p>
 Assumptions:
@@ -33,6 +33,8 @@ In this post, I'm going to address the effect of age on goalie performance.
 <p>
 <h5>Outline</h5>
 Like shot quality, the effect of age on performance is a well-researched concept. It has been shown that goalies tend to improve as they age, peak, and then recede for, well, forever. This concept is typically called an <em>age curve</em>. Though goalie age curves are already available elsewhere, they differ slightly, so I'm going to define a custom age curve based on the Moneypuck dataset. Here are the steps:
+</p>
+<p>
     - Obtain goalie birth dates.
     - Derive goalie age for each game.
     - Define new analysis population (we won't find every goalie's date of birth).
