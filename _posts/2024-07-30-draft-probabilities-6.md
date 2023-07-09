@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "NHL Draft: Post-Draft Analysis"
-date:   2023-07-20 12:00:00 -0400
+date:   2024-07-20 12:00:00 -0400
 ---
 <head>
 <!-- Google tag (gtag.js) -->

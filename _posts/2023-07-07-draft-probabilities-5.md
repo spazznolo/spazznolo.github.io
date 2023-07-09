@@ -52,7 +52,7 @@ At pick 9 of the draft, these analysts had the remaining players ranked as such:
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/draft-probabilities-5-4.png" width="80%" length="200"/></div>
 </p>
 <p>
-The question: "who should each analyst draft at 9 in order to maximize their expected draft value for picks 9 and 17?" To answer, we use the equation shown above, which requires: 1) the value of the prospect taken at 9, 2) the conditional probabilities of the remaining prospects being available at 17, and 3) the values of these remaining prospects. 
+Let's determine who should each analyst draft at 9 in order to maximize their expected draft value for picks 9 and 17. To answer, we use the equation shown above, which requires: 1) the value of the prospect taken at 9, 2) the conditional probabilities of the remaining prospects being available at 17, and 3) the values of these remaining prospects. 
 </p>
 <p>
 <div style="text-align: center"> <img src="https://spazznolo.github.io/figs/draft-probabilities-5-5.png" width="80%" length="200"/></div>

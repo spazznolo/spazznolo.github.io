@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Goalie Performance: Adjusting for Age"
-date:   2023-07-30 12:00:00 -0400
+date:   2023-07-15 12:00:00 -0400
 ---
 <head>
 <!-- Google tag (gtag.js) -->
@@ -54,10 +54,10 @@ They barely differ.
 </p>
 <p>
 <h5>Explore age</h5>
-Let's start by simply grouping shots into bins by goalie age (rounded to the first decimal, ex: 26.0, 26.1, etc.), and then calculating the group-wide save percentage. Here's what that looks like, with points becoming paler as the group size decreases:
+Let's start by simply grouping shots into bins by goalie age (rounded to the first decimal, ex: 26.0, 26.1, etc.), and then calculating the group-wide save percentage. Here's what that looks like, with points becoming paler for smaller groups sizes:
 </p>
 <p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-seven-one.png" width="60%" length="150"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-performance-3-1.png" width="60%" length="150"/></div>
 </p>
 <p>
 Some thoughts:
@@ -70,27 +70,24 @@ Let's fix some of the bias above with a few changes. We'll follow a well-worn st
     - Take change in save percentage (dSV%) from each goalie's age to the next. 
     - Take the harmonic mean of dSV% for each age as the the observed change in SV%.
     - Clip off underrepresented ages (-21, 39+).
+    - Clip off the final year of each goalie's career.
     - Take the cumulative sum of dSV% throughout the retained age range.
 </p>
 <p>
 Altogether, this gives us the curve below:
 </p>
 <p>
-<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-seven-two.png" width="60%" length="150"/></div>
+<div style="text-align: center"> <img src="https://spazznolo.github.io/figs/goalie-performance-3-2.png" width="60%" length="150"/></div>
 </p>
 <p>
 Some thoughts:
-    - With this method, goalies peak around the age of 27.
+    - With this method, goalies peak around the age of 25.
     - This agrees with <a href="https://hockeyviz.com/txt/age22">some</a> past research.
     - This disagrees with <a href="https://hockey-graphs.com/2014/03/21/how-well-do-goalies-age-a-look-at-a-goalie-aging-curve/">other</a> past research.
-    - There is well documented survivorship bias.
-</p>
-<p>
-INCLUDE PHANTOM YEARS HERE
 </p>
 <p>
 <h5>Adjusting for Age</h5>
-The cleanest way that I can think of adjusting for age is to bake it into the current framework which already adjusts shots by their probability of becoming a goal. This can easily by done by first setting the peak (age 27) as the standard and then adjusting for all other ages, so that, for example, an xFSV% of 0.940 at age 27 is equivalent to an xFSV% of 0.93882 at age 23 (0.94000 - 0.00118) and an xFSV% of 0.93487 at age 38 (0.94000 - 0.00513).
+The cleanest way that I can think of adjusting for age is to bake it into the current framework which already adjusts shots by their probability of becoming a goal. This can easily by done by first setting the peak (age 25) as the standard and then adjusting for all other ages, so that, for example, an xFSV% of 0.940 at age 25 is equivalent to an xFSV% of 0.93976 at age 22 (0.94000 - 0.000237) and an xFSV% of 0.93586 at age 38 (0.94000 - 0.00414).
 </p>
 <p>
     - Adjusted (xG) Save Percentage (AdjSV%) = MSV% + (FSV% - xFSV%)
@@ -98,7 +95,12 @@ The cleanest way that I can think of adjusting for age is to bake it into the cu
     - <b>Adjusted (Age + xG) Save Percentage (AdjSV%) = MSV% + (FSV% - xFSV% + acAdj)</b>
 </p>
 <p>
-COMPARE TWO GOALIES WITH DIFFERING AGES
+With this adjustment, Lundqvist's career save percentages work out like this:
+    - SV%:                      0.948638
+    - SQ AdjSV%:                0.947320
+    - Age SQ AdjSV%:            0.948619
+    - posterior SQ AdjSV%:      0.947082
+    - posterior Age SQ AdjSV%:  0.948338
 </p>
 <p>
 Code available here: <a href="https://github.com/spazznolo/goalie-performance/blob/main/posts/post-3.R">https://github.com/spazznolo/goalie-performance/blob/main/posts/post-3.R</a>
