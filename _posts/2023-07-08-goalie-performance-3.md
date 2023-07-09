@@ -68,7 +68,10 @@ Some thoughts:
     - This plot is riddled with bias (particularly for goalies with short or long careers).
 </p>
 <p>
-Let's fix some of the bias above with a few changes. We'll follow a well-worn strategy <a href = "https://hockey-graphs.com/2017/03/23/a-new-look-at-aging-curves-for-nhl-skaters-part-1">seemingly</a> developed by Tango Tiger <a href = "http://www.tangotiger.net/aging.html">here</a> called the delta method. Here are the steps:
+Let's fix some of the bias above with a few changes. We'll follow a well-worn strategy <a href = "https://hockey-graphs.com/2017/03/23/a-new-look-at-aging-curves-for-nhl-skaters-part-1">seemingly</a> developed by Tango Tiger <a href = "http://www.tangotiger.net/aging.html">here</a> called the delta method.
+</p>
+<p>
+Here are the steps:
     - Take change in save percentage (dSV%) from each goalie's age to the next. 
     - Take the harmonic mean of dSV% for each age as the the observed change in SV%.
     - Clip off underrepresented ages (-21, 39+).
