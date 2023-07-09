@@ -43,7 +43,7 @@ To further illustrate, let's consider the first round of this year's draft up to
 </p>
 <p>
 <h5>An example using the Red Wings' first round picks</h5>
-The Red Wings held the 9th and 17th picks in this year's draft. I'm going to calculate the optimal drafting strategy for the Red Wings using a set of <a href="https://twitter.com/spazznolo/status/1674392375018307585">well-performing</a> prospect rankings from Bob McKenzie, Cam Robinson, and Chris Peters, while assigning prospect value using the hisotrical pick value chart.
+The Red Wings held the 9th and 17th picks in this year's draft. I'm going to calculate the optimal drafting strategy for the Red Wings using a set of <a href="https://twitter.com/spazznolo/status/1674392375018307585">well-performing</a> prospect rankings from Bob McKenzie, Cam Robinson, and Chris Peters, while assigning prospect value using the historical pick value chart.
 </p>
 <p>
 At pick 9 of the draft, these analysts had the remaining players ranked as such:
