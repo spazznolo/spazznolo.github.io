@@ -45,7 +45,6 @@ Like shot quality, the effect of age on performance is a well-researched concept
 I scraped hockey-reference for each goalie's date of birth (code available <a href="https://github.com/spazznolo/goalie-consistency/blob/main/import/scrape_goalie_data.R">here</a>). By combining the goalies' birth dates with the dates of each of their games, I determined their exact age for every game played.
 </p>
 <p>
-<h5>Define new analysis population</h5>
 The analysis population changes as follows (due to incomplete linkage):
     - Goalie population drops from 315 to 308.
     - Harmonic mean of shots against rises from 12,690 to 12,721 (mean rises, 4,198 to 4,286).
