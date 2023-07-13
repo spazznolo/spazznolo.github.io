@@ -72,11 +72,11 @@ Tanner, through his website <a href="https://moneypuck.com/about.htm">MoneyPuck<
 </p>
 <p>
 Posts in this series:
-<a href="https://spazznolo.github.io/2022/03/29/goalie-consistency-1.html">
+<a href="https://spazznolo.github.io/2022/03/30/goalie-consistency-2.html">
 [Post 1] The effect of inter-game goalie consistency on expected standing points
-</a> <a href="https://spazznolo.github.io/2022/04/02/goalie-consistency-2.html">
+</a> <a href="https://spazznolo.github.io/2022/04/02/goalie-consistency-3.html">
 [Post 2] The effect of inter-shot goalie consistency on expected standing points
-</a> <a href="https://spazznolo.github.io/2022/04/04/goalie-consistency-3.html">
+</a> <a href="https://spazznolo.github.io/2022/04/07/goalie-consistency-4.html">
 [Post 3] The effects of inter-shot goalie consistency (using real data)
 </a>
 
