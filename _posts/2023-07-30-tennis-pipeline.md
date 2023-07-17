@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Tennis: Building a framework to track games at scale"
-date:   2023-01-15 12:00:00 -0400
+title:  "Tennis: Tracking Pipeline"
+date:   2023-07-30 12:00:00 -0400
 ---
 <head>
 <!-- Google tag (gtag.js) -->
@@ -14,7 +14,30 @@ date:   2023-01-15 12:00:00 -0400
   gtag('config', 'G-DGRHZS5DNM');
 </script>
 </head>
-<h2>Building a framework to track tennis games at scale</h2>
+<h2>Tracking Pipeline</h2>
+<p>
+broadcast video of tennis game ->
+object detection (YOLOv5) ->
+instance segmentation (YOLOv5 instance-seg) ->
+perspective transform 
+
+object detection (YOLOv5) ->
+post-processing of objects ->
+event prediction (bounces, hits) ->
+
+instance segmentation (YOLOv5 instance-seg) ->
+simplify polygon ->
+detect corners
+
+scrape scores from tennis24 ->
+get point-by-point results + player info ->
+join point-by-point results + player info
+
+outstanding questions
+how to ensure events are coherent?
+how to ensure points correspond?
+
+
 <p>
 I stepped away from the first iteration of this project last year when I realized I was going to have to annotate thousands of images to create a robust player/ball detection model. In the next few months, I'll design and build such a modelling framework. This post outlines the methods and services which will be used for the framework.
 </p>
