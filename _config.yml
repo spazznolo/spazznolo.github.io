@@ -14,7 +14,7 @@ header_pages:
   
 style: dark
 
-footer: <a href = 'https://spazznolo.github.io>'@spazznolo'</a>
+footer: ''
 
 # Build settings
 markdown: kramdown
