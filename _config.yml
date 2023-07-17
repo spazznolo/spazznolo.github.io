@@ -14,7 +14,7 @@ header_pages:
   
 style: dark
 
-footer: ''
+footer: 'I'm also on <a href="https://twitter.com/spazznolo">twitter</a>'
 
 # Build settings
 markdown: kramdown
