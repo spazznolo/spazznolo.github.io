@@ -27,7 +27,7 @@ The Tennis Tracker is at the stage where outside input is necessary to move forw
 </p>
 <p>
 <h5>Data dictionary</h5>
-Frame-level set<br>
+Frame-level set
 frame: frame number of match.
 front_player_x: x-coordinate of the front player in a given frame.
   - front_player_y: y-coordinate of the front player in a given frame.
