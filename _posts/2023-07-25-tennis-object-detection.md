@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Tennis: Summary of Object Detection"
-date:   2023-07-25 12:00:00 -0400
+date:   2024-07-25 12:00:00 -0400
 ---
 <head>
 <!-- Google tag (gtag.js) -->
