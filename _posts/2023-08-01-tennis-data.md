@@ -31,7 +31,7 @@ adfafs
 
 <h5>Frame-level set</h5>
 <b>frame:</b> frame number of match.<br>
-front_player_x: x-coordinate of the front player in a given frame.
+<b>front_player_x:</b> x-coordinate of the front player in a given frame.
 front_player_y: y-coordinate of the front player in a given frame.
   - back_player_x: x-coordinate of the back player in a given frame.
   - back_player_y: y-coordinate of the back player in a given frame.
