@@ -75,3 +75,7 @@ The Tennis Tracker relies on a single broadcast feed at 720p and 30fps. This is 
 <p>
 One measure I am very interested in seeing / potentially deriving, is "return probability". As more games are tracked, the output from the Tennis Tracker could provide the foundation for a general probability of return statistic, where each shot has a probability of return attributed to it. From this, we can observe which players tend to return difficult balls, which make the most mistakes (beyond "unforced errors"), and a plethora of other metrics.
 </p>
+<p>
+<h5>Court Coordinates</h5>
+The full court coordinates (doubles) are: x1 = 150, x2 = 510, y1 = 150, y2 = 930. Combining this with the <a href="https://www.google.com/search?q=tennis+court+dimensions&rlz=1C5CHFA_enCA935CA935&oq=tennis+court&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7MgYIARBFGDkyBggCEEUYOzIGCAMQRRg7MgYIBBBFGDwyBggFEEUYPDIGCAYQRRg8MgYIBxBFGEHSAQgxMTgyajBqMagCALACAA&sourceid=chrome&ie=UTF-8">standard court dimensions</a>, you can get all the lines you need.
+</p>
