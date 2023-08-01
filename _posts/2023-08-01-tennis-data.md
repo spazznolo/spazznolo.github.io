@@ -60,4 +60,8 @@ I chose the US Open Womens' semi-final in 2022 between Iga Swiatek and Aryna Sab
 </p>
 <p>
 <h5>About the data</h5>
-The Tennis Tracker relies on a single broadcast feed at 720p and 30fps. This is decidedly <em>not</em> Hawkeye. Here's the thing: it doesn't have to <em>be</em> Hawkeye for it to be valuable. My goal in building this program was to contribute to tennis analytics by supplying data which is more detailed than what's currently on offer. I believe I am close to succeeding. That being said, there are still some things which I wouldn't recommend you use without analyzing if the measure is stable enough for your needs. These include: ball speed
+The Tennis Tracker relies on a single broadcast feed at 720p and 30fps. This is decidedly <em>not</em> Hawkeye. Here's the thing: it doesn't have to <em>be</em> Hawkeye for it to be valuable. My goal in building this program was to contribute to tennis analytics by supplying data which is more detailed than what's currently on offer. I believe I am close to succeeding. That being said, there are still some measures which I wouldn't recommend you use without analyzing if it is stable enough for your needs. These include: ball speed, ace counts/locations, among others (I'll add to this as I work through them).
+</p>
+<p>
+One measure I am very interested in seeing / potentially deriving, is "return probability". As more games are tracked, the output from the Tennis Tracker could provide the foundation for a general probability of return statistic, where each shot has a probability of return attributed to it. From this, we can observe which players tend to return difficult to return balls, which make the most mistakes (beyond "unforced errors"), and a plethora of other metrics.
+</p>
