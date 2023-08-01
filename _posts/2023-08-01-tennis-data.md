@@ -19,7 +19,16 @@ date:   2023-07-30 12:00:00 -0400
 The Tennis Tracker is at the stage where feedback is necessary to move forward. In this post, I'll write a technical summary of the data, then at the end I'll describe a few ways in which you can use the data. The output contains three datasets. The point-level set provides descriptive statistics for a given point. Most of this set is taken from tennis24. The event-level set provides each (predicted) event in the tennis match, along with descriptive information like the time of the event, the type of event, the location of the ball, etc. The frame-level set provides the location of each player throughout the match at each frame.
 </p>
 <p>
-I chose the US Open Womens' semi-final in 2022 between Iga Swiatek and Aryna Sabalenka as the first release for no particular reason, other than it was available and that this year's US Open is soon. I suppose you can consider this post a form of "marketing", because if it's successful and people (that's you!) pull interesting information from the data, I plan to scale the program to map out entire tournaments.
+I chose the US Open Women's semi-final in 2022 between Iga Swiatek and Aryna Sabalenka as the first release for no particular reason, other than it was available and that this year's US Open is soon. I suppose you can consider this post a form of "marketing", because if it's successful and people (that's you!) pull interesting information from the data, I plan to scale the program to map out entire tournaments.
+</p>
+<p>
+<h5>Links to data</h5>
+<b>Frame-level data</b>
+https://drive.google.com/file/d/1_z_og5IunLnr5mN-biNcOGC970TXyirJ/view?usp=sharing
+<b>Event-level data</b>
+https://drive.google.com/file/d/1IFjteOqwf-Gr0EqNFqKEmiy3hAWaFXGg/view?usp=sharing
+<b>Point-level data</b>
+https://drive.google.com/file/d/1F69wCb3sezmVESG8qgeb5HM00bfd2Ccd/view?usp=sharing
 </p>
 <p>
 <h5>Data dictionaries</h5>
