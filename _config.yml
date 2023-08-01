@@ -14,7 +14,7 @@ header_pages:
   
 style: dark
 
-footer: "test"
+footer: "A blog by Jeremie Spagnolo"
 
 # Build settings
 markdown: kramdown
