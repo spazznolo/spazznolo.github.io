@@ -35,4 +35,4 @@ twitter: <a href = "https://twitter.com/spazznolo">@spazznolo</a>
 <p>
 ---
 </p>
-<h5>Posts in Chronological Order</h5>
+<h5>Posts in Chronologi Order</h5>
