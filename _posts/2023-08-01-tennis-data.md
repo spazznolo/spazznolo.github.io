@@ -19,7 +19,7 @@ date:   2023-07-30 12:00:00 -0400
 The Tennis Tracker is at the stage where feedback is necessary to move forward. In this post, I'll write a technical summary of the data, then at the end I'll describe a few ways in which you can use the data. The output contains three datasets. The point-level set provides descriptive statistics for a given point. Most of this set is taken from tennis24. The event-level set provides each (predicted) event in the tennis match, along with descriptive information like the time of the event, the type of event, the location of the ball, etc. The frame-level set provides the location of each player throughout the match at each frame.
 </p>
 <p>
-I chose the US Open Womens' semi-final in 2022 between Iga Swiatek and Aryna Sabalenka as the first release, for no particular reason other than it was available and that this year's US Open is soon. I suppose you can consider this a form of "marketing", because if it's successful and people (that's you!) pull interesting information from the data, I plan to scale the program to map out entire tournaments.
+I chose the US Open Womens' semi-final in 2022 between Iga Swiatek and Aryna Sabalenka as the first release for no particular reason, other than it was available and that this year's US Open is soon. I suppose you can consider this post a form of "marketing", because if it's successful and people (that's you!) pull interesting information from the data, I plan to scale the program to map out entire tournaments.
 </p>
 <p>
 <b>Frame-level set</b>
@@ -37,7 +37,7 @@ I chose the US Open Womens' semi-final in 2022 between Iga Swiatek and Aryna Sab
 <b>ball_y:</b> y-coordinate of the tennis ball during an event.
 <b>actor:</b> player or location of event (front, back).
 <b>state:</b> whether ball is in play (in) or not (out); only applicable for bounces.
- <b>point:</b> point number of match.
+<b>point:</b> point number of match.
 </p>
 <p>
 <b>Point-level set</b>
@@ -58,3 +58,6 @@ I chose the US Open Womens' semi-final in 2022 between Iga Swiatek and Aryna Sab
 <b>processing time:</b> 129 minutes
 <b>processing tools:</b> Colab T4 GPU, personal Macbook Pro
 </p>
+<p>
+<h5>About the data</h5>
+The Tennis Tracker relies on a single broadcast feed at 720p and 30fps. This is decidedly <em>not</em> Hawkeye. Here's the thing: it doesn't have to <em>be</em> Hawkeye for it to be valuable. My goal in building this program was to contribute to tennis analytics by supplying data which is more detailed than what's currently on offer. I believe I am close to succeeding. That being said, there are still some things which I wouldn't recommend you use without analyzing if the measure is stable enough for your needs. These include: ball speed
