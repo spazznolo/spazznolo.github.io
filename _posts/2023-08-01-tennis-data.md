@@ -14,7 +14,7 @@ date:   2023-07-30 12:00:00 -0400
   gtag('config', 'G-DGRHZS5DNM');
 </script>
 </head>
-<h2>Tennis Tracker (alpha): Initial Data Release</h2>
+<h2>Tennis Tracker (alpha): Data Release</h2>
 <p>
 The Tennis Tracker is at the stage where outside input is necessary to move forward. In this post, I'll write a technical summary of the data, then at the end I'll include how the data can be used, and how it shouldn't be used. 
 </p>
@@ -28,32 +28,43 @@ The Tennis Tracker is at the stage where outside input is necessary to move forw
 <p>
 <h5>Data dictionaries</h5>
 adfafs
-
+<p>
 <h5>Frame-level set</h5>
+tadfafs
+</p>
+<p>
 <b>frame:</b> frame number of match.<br>
 <b>front_player_x:</b> x-coordinate of the front player in a given frame.
-front_player_y: y-coordinate of the front player in a given frame.
-  - back_player_x: x-coordinate of the back player in a given frame.
-  - back_player_y: y-coordinate of the back player in a given frame.
-
-Event-level set
-  - frame: frame number of match.
-  - event: name of event (serve, hit, bounce, net).
-  - ball_x: x-coordinate of the tennis ball during an event.
-  - ball_y: y-coordinate of the tennis ball during an event.
-  - actor: player or location of event (front, back).
-  - state: whether ball is in play (in) or not (out); only applicable for bounces.
-  - point: point number of match.
-
-  Point-level set
-  - point: point number of match.
-  - serve: player holding the serve (home, away).
-  - serve_side: side of serve for point (ad, deuce).
-  - serve_location: side of serve for point (front, back).
-  - home_point_score: number of points won in game by home player.
-  - away_point_score: number of points won in game by away player.
-  - home_game_score: number of games won in set by home player.
-  - away_game_score: number of games won in set by away player.
-  - home_set_score: number of sets won in match by home player.
-  - away_set_score: number of sets won in match by away player.
+<b>front_player_y:</b> y-coordinate of the front player in a given frame.
+<b>back_player_x:</b> x-coordinate of the back player in a given frame.
+<b>back_player_y:</b> y-coordinate of the back player in a given frame.
+</p>
+<p>
+<h5>Event-level set</h5>
+asdfasdf
+</p>
+<p>
+<b>frame:</b> frame number of match.
+<b>event:</b> name of event (serve, hit, bounce, net).
+<b>ball_x:</b> x-coordinate of the tennis ball during an event.
+<b>ball_y:</b> y-coordinate of the tennis ball during an event.
+<b>actor:</b> player or location of event (front, back).
+<b>state:</b> whether ball is in play (in) or not (out); only applicable for bounces.
+ <b>point:</b> point number of match.
+</p>
+<p>
+<h5>Point-level set</h5>
+asdfasdf
+</p>
+<p>
+<b>point:</b> point number of match.
+<b>serve:</b> player holding the serve (home, away).
+<b>serve_side:</b> side of serve for point (ad, deuce).
+<b>serve_location:</b> side of serve for point (front, back).
+<b>home_point_score:</b> number of points won in game by home player.
+<b>away_point_score:</b> number of points won in game by away player.
+<b>home_game_score:</b> number of games won in set by home player.
+<b>away_game_score:</b> number of games won in set by away player.
+<b>home_set_score:</b> number of sets won in match by home player.
+<b>away_set_score:</b> number of sets won in match by away player.
 </p>
