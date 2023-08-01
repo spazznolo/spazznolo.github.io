@@ -26,9 +26,11 @@ The Tennis Tracker is at the stage where outside input is necessary to move forw
   - processing tools: Colab T4 GPU, personal Macbook Pro
 </p>
 <p>
-<h5>Data dictionary</h5>
-Frame-level set<br>
-frame: frame number of match.<br>
+<h5>Data dictionaries</h5>
+adfafs
+
+<h5>Frame-level set</h5>
+<b>frame:</b> frame number of match.<br>
 front_player_x: x-coordinate of the front player in a given frame.
 front_player_y: y-coordinate of the front player in a given frame.
   - back_player_x: x-coordinate of the back player in a given frame.
