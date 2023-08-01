@@ -24,11 +24,11 @@ I chose the US Open Women's semi-final in 2022 between Iga Swiatek and Aryna Sab
 <p>
 <h5>Links to data</h5>
 <b>Frame-level data</b>
-https://drive.google.com/file/d/1_z_og5IunLnr5mN-biNcOGC970TXyirJ/view?usp=sharing
+<a href="https://drive.google.com/file/d/1_z_og5IunLnr5mN-biNcOGC970TXyirJ/view?usp=sharing">https://drive.google.com/file/d/1_z_og5IunLnr5mN-biNcOGC970TXyirJ/view?usp=sharing</a>
 <b>Event-level data</b>
-https://drive.google.com/file/d/1IFjteOqwf-Gr0EqNFqKEmiy3hAWaFXGg/view?usp=sharing
+<a href="https://drive.google.com/file/d/1IFjteOqwf-Gr0EqNFqKEmiy3hAWaFXGg/view?usp=sharing">https://drive.google.com/file/d/1IFjteOqwf-Gr0EqNFqKEmiy3hAWaFXGg/view?usp=sharing</a>
 <b>Point-level data</b>
-https://drive.google.com/file/d/1F69wCb3sezmVESG8qgeb5HM00bfd2Ccd/view?usp=sharing
+<a href="https://drive.google.com/file/d/1F69wCb3sezmVESG8qgeb5HM00bfd2Ccd/view?usp=sharing">https://drive.google.com/file/d/1F69wCb3sezmVESG8qgeb5HM00bfd2Ccd/view?usp=sharing</a>
 </p>
 <p>
 <h5>Data dictionaries</h5>
