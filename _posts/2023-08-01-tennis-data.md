@@ -16,34 +16,21 @@ date:   2023-07-30 12:00:00 -0400
 </head>
 <h2>Tennis Tracker (alpha): Data Release</h2>
 <p>
-The Tennis Tracker is at the stage where outside input is necessary to move forward. In this post, I'll write a technical summary of the data, then at the end I'll include how the data can be used, and how it shouldn't be used. 
+The Tennis Tracker is at the stage where outside input is necessary to move forward. In this post, I'll write a technical summary of the data, then at the end I'll describe a few ways the data should/shouldn't be used. The output contains three datasets. The point-level set provides descriptive statistics for a given point. Most of this set is taken from tennis24. The event-level set provides each (predicted) event in the tennis match, along with descriptive information like the time of the event, the type of event, the location of the ball, etc. The frame-level set provides the location of each player throughout the match at each frame.
 </p>
 <p>
-<h5>Specifications</h5>
-
-  - broadcast time: 132 minutes
-  - processing time: 129 minutes
-  - processing tools: Colab T4 GPU, personal Macbook Pro
+I chose the US Open Womens' semi-final in 2022 between Iga Swiatek and Aryna Sabalenka as the first release, for no particular reason other than it was available and that this year's US Open is soon. I suppose you can consider this a form of "marketing", because if it's successful and people (that's you!) pull interesting information from the data, I plan to scale the program to map out entire tournaments.
 </p>
 <p>
-<h5>Data dictionaries</h5>
-adfafs
-<p>
-<h5>Frame-level set</h5>
-tadfafs
-</p>
-<p>
-<b>frame:</b> frame number of match.<br>
+<b>Frame-level set</b>
+<b>frame:</b> frame number of match.
 <b>front_player_x:</b> x-coordinate of the front player in a given frame.
 <b>front_player_y:</b> y-coordinate of the front player in a given frame.
 <b>back_player_x:</b> x-coordinate of the back player in a given frame.
 <b>back_player_y:</b> y-coordinate of the back player in a given frame.
 </p>
 <p>
-<h5>Event-level set</h5>
-asdfasdf
-</p>
-<p>
+<b>Event-level set</b>
 <b>frame:</b> frame number of match.
 <b>event:</b> name of event (serve, hit, bounce, net).
 <b>ball_x:</b> x-coordinate of the tennis ball during an event.
@@ -53,10 +40,7 @@ asdfasdf
  <b>point:</b> point number of match.
 </p>
 <p>
-<h5>Point-level set</h5>
-asdfasdf
-</p>
-<p>
+<b>Point-level set</b>
 <b>point:</b> point number of match.
 <b>serve:</b> player holding the serve (home, away).
 <b>serve_side:</b> side of serve for point (ad, deuce).
@@ -67,4 +51,10 @@ asdfasdf
 <b>away_game_score:</b> number of games won in set by away player.
 <b>home_set_score:</b> number of sets won in match by home player.
 <b>away_set_score:</b> number of sets won in match by away player.
+</p>
+<p>
+<h5>Runtime Specifications</h5>
+  - broadcast time: 132 minutes
+  - processing time: 129 minutes
+  - processing tools: Colab T4 GPU, personal Macbook Pro
 </p>
