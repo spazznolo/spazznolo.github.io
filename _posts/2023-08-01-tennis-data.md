@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Tennis Tracker (alpha): US Open W SF 2022"
-date:   2023-07-31 12:00:00 -0400
+date:   2023-07-30 12:00:00 -0400
 ---
 <head>
 <!-- Google tag (gtag.js) -->
