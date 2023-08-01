@@ -53,7 +53,7 @@ I chose the US Open Womens' semi-final in 2022 between Iga Swiatek and Aryna Sab
 <b>away_set_score:</b> number of sets won in match by away player.
 </p>
 <p>
-<h5>Runtime Specifications</h5>
+<b>Runtime Specifications</b>
 <b>broadcast time:</b> 132 minutes
 <b>processing time:</b> 129 minutes
 <b>processing tools:</b> Colab T4 GPU, personal Macbook Pro
