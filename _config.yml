@@ -14,7 +14,7 @@ header_pages:
   
 style: dark
 
-footer: ""
+footer: "test"
 
 # Build settings
 markdown: kramdown
