@@ -14,8 +14,6 @@ header_pages:
   
 style: dark
 
-footer:
-
 # Build settings
 markdown: kramdown
 remote_theme: spazznolo/jekyll-theme-console
