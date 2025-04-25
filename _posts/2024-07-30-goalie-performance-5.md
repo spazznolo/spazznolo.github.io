@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "temp"
+title:  "Goalie Performance: Sample Sizes"
 date:   2024-07-30 8:52:05 -0400
 ---
-<h2>temp</h2>
+<h2>[Post 5] Goalie Performance: Sample Sizes</h2>
 <p>
 <h5>Goalies in the analysis</h5>
 Whenever we decide on a range of years for an analysis (in this case, 2007-2022), we are cutting of goalies mid-career. Some, like Carter Hart, are beginning their careers. Others, like Lundqvist, ended them during in the middle of the analysis period. Since we are not yet adjusting for age, we can't include these goalies in the analysis. Therefore, only goalies who started their careers post-2007 and ended their careers pre-2022 can be included. This is a 15 year range.
