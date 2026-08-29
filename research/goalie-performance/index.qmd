@@ -1,0 +1,173 @@
+---
+title: "Goalie Performance"
+description: "Estimating NHL goalie performance with empirical Bayes, shot-quality adjustment, age context, and honest sample-size limits."
+date: 2023-05-17
+date-modified: 2026-08-28
+categories:
+  - Bayesian statistics
+  - Distributions and sampling
+  - Regression and calibration
+sports:
+  - Hockey
+  - Goalies
+status: canonical
+reading-time: true
+toc: true
+execute:
+  enabled: false
+---
+
+::: {.archive-notice}
+This article consolidates five posts published between 2023 and 2024. It reorganizes the original prose, results, and figures, and retains the original analysis; the underlying data and models were not reconstructed for this edition.
+:::
+
+The question behind this series is simple to ask and difficult to answer: how good is a goalie, really? Goaltenders make up the least predictable position in hockey. A good goalie can have a below-replacement-level year, while an unknown goalie can dominate the league for a stretch. That unpredictability makes goalie evaluation a useful setting for an empirical Bayes framework, because uncertainty is part of the answer rather than an inconvenience to hide.
+
+This article brings together five installments published between May 2023 and July 2024. It starts with raw Fenwick save percentage, adds shot-quality and age adjustments, explores the distribution of goalie careers, and then returns to the practical question of how much evidence a goalie gives us. The figures and results are the ones reported in the original posts. This is an editorial consolidation, not a fresh analysis or a reproducibility exercise.
+
+## Why goalie performance needs shrinkage
+
+Observed save percentage is noisy, especially when a goalie has faced only a small number of shots. Treating every observed rate as if it were an equally reliable measurement creates an awkward comparison: a goalie with a short run of excellent results can look identical to one who has sustained that performance over thousands of shots. The first post therefore used career 5v5 Fenwick save percentage (Fenwick save percentage includes unblocked shots, including shots that miss the net) and asked how to estimate an unknown goalie's underlying performance while retaining the uncertainty around that estimate.
+
+The empirical Bayes strategy has two steps. First, use the observed population of goalies to fit a prior distribution. Second, update that prior with the saves and shots observed for the goalie of interest. A short career remains close to the population expectation because there is not enough evidence to move it very far. As more shots arrive, the estimate is allowed to move, and the posterior distribution becomes narrower.
+
+This is shrinkage in a useful sense. It does not say that all goalies are average, and it does not erase unusual performance. It says that an extreme rate supported by little information should be treated differently from an extreme rate supported by a long career. The posterior distribution makes that distinction visible.
+
+## Estimating talent with empirical Bayes
+
+The first version of the model begins with a histogram of career 5v5 Fenwick save percentages for goalies who faced at least 200 shots. The cutoff was chosen to avoid the most obvious small-sample noise, while acknowledging that it excludes some goalies who still belong to the population of interest.
+
+![Distribution of career 5v5 Fenwick save percentages for goalies facing 200 or more shots.](/figs/goalie-performance-1-1.png){fig-alt="Distribution of career 5v5 Fenwick save percentages for goalies facing 200 or more shots." width="60%"}
+
+The histogram has random bumps, so a beta distribution was fitted as a more structured representation of possible career rates. The fit is not especially good; gamma and Weibull alternatives were left for later exploration. It is nevertheless a useful introduction because a beta distribution is naturally defined on a percentage between zero and one.
+
+![Fitted beta distribution for career Fenwick save percentages.](/figs/goalie-performance-1-2.png){fig-alt="Fitted beta distribution for career Fenwick save percentages." width="60%"}
+
+The fitted beta distribution had hyperparameters 852 and 55.6. These can be read as the equivalent of 852 saves and 55.6 goals attributed to a goalie before seeing that goalie's own results. Together they correspond to a Fenwick save percentage of .9388, a little below the reported median of .9406 among goalies facing 200 or more shots. The numbers are prior hyperparameters, not a claim that an actual goalie faced exactly that many shots before entering the model.
+
+Updating the prior is straightforward: add the observed successes and failures to the prior hyperparameters. A goalie with only a few shots is pulled toward the prior mean, and their posterior remains wide. A goalie with many shots is pulled less strongly and has a tighter posterior.
+
+The first post illustrated this with two 24-year-old goalies, Jake Oettinger and Jeremy Swayman.
+
+![Posterior save percentage distributions for Jake Oettinger and Jeremy Swayman.](/figs/goalie-performance-1-3.png){fig-alt="Posterior save percentage distributions for Jake Oettinger and Jeremy Swayman." width="60%"}
+
+The reported comparison gave Swayman a 60.28% chance of having the higher save percentage. Oettinger's posterior had a 94.12% chance of being above average, while Swayman's had a 93.81% chance of being above average. Oettinger's distribution was tighter because he had faced more shots. These are posterior comparisons under the stated model, not direct measurements of latent talent.
+
+The initial assumptions were intentionally strong: all shots were treated as equal; age was irrelevant; the prior was beta with the stated hyperparameters; goalies facing fewer than 200 shots were ignored; goalie careers were treated as equal; scoring rates were constant; and team systems were identical. The later installments challenge each of these assumptions rather than presenting the first model as finished.
+
+## Adjusting for shot quality
+
+All shots do not have the same probability of becoming goals. To address that problem, the second post used the detailed unblocked-shot data and expected-goal probabilities supplied by MoneyPuck's logistic-regression model. The goal was to retain a rate, so that the beta-prior framework could still be used, while accounting for the difficulty of the shots faced.
+
+The reported quantities were:
+
+- Fenwick Save Percentage (FSV%) = 1 - (Goals Against / Fenwick Shots Against)
+- Expected Fenwick Save Percentage (xFSV%) = 1 - (Expected Goals Against / Fenwick Shots Against)
+- Median Save Percentage (MSV%) = median career save percentage among goalies with 20 or more expected goals faced
+- Adjusted Save Percentage (AdjSV%) = MSV% + (FSV% - xFSV%)
+
+The adjustment preserves the difference between a goalie's actual and expected results, but centers the rate around the median rather than treating the raw shot mix as identical across goalies.
+
+![Career adjusted save percentage distribution with fitted beta and Weibull distributions.](/figs/goalie-performance-2-1.png){fig-alt="Career adjusted save percentage distribution with fitted beta and Weibull distributions." width="60%"}
+
+The career adjusted rates appeared to follow a Weibull distribution at first glance. The post deliberately set that observation aside because the population may contain more than one distribution. A second beta prior was fitted so the rest of the calculation remained comparable to the first post; its reported hyperparameters were 933 saves and 60 goals.
+
+The adjusted comparison changed the Oettinger-Swayman result. The reported probability that Swayman's adjusted save percentage was better rose to 78.77%. Oettinger's probability of being above the median became 88.28%, while Swayman's became 97.30%. The proposed explanation was shot difficulty: Swayman's xFSV% was reported as 94.07, compared with Oettinger's 94.39.
+
+![Posterior adjusted save percentage distributions for Jake Oettinger and Jeremy Swayman.](/figs/goalie-performance-2-2.png){fig-alt="Posterior adjusted save percentage distributions for Jake Oettinger and Jeremy Swayman." width="60%"}
+
+The appendix compared the raw, expected, adjusted, and posterior adjusted metrics.
+
+![Comparison of save percentage metrics and posterior adjusted save percentage.](/figs/goalie-performance-2-3.png){fig-alt="Comparison of save percentage metrics and posterior adjusted save percentage." width="100%"}
+
+The comparisons suggested that goalies with poor starts tend to play fewer games, that raw and adjusted rates become more closely related as shot totals increase, and that the adjusted rate converges toward its posterior as more shots are observed. They also showed heteroskedasticity and likely survivorship bias. Those observations matter because they connect shot quality to the opportunity and selection problems addressed later.
+
+## Age, opportunity, and selection
+
+The third post addressed age. Goalies tend to improve, peak, and then decline, so treating age as irrelevant can confound a comparison between careers at different stages. Birth dates were linked from Hockey-Reference to game dates in order to calculate exact age for each game. Because the linkage was incomplete, the population fell from 315 to 308 goalies. The reported harmonic means changed only slightly: shots against rose from 12,690 to 12,721, while harmonic mean adjusted save percentage remained .939. The source's conclusion was that the linked and original populations barely differed.
+
+![Save percentage by goalie age, with lighter points for smaller groups.](/figs/goalie-performance-3-1.png){fig-alt="Save percentage by goalie age, with lighter points for smaller groups." width="60%"}
+
+Grouping shots by age showed most observations between ages 23 and 35 and a possible age curve, but the plot was strongly affected by short and long careers. The delta method was used to reduce that bias: calculate the change in save percentage from one age to the next for each goalie, take the harmonic mean change at each age, remove underrepresented ages and the final season of each career, and cumulatively sum the retained changes.
+
+![Smoothed goalie age curve based on cumulative changes in save percentage.](/figs/goalie-performance-3-2.png){fig-alt="Smoothed goalie age curve based on cumulative changes in save percentage." width="60%"}
+
+The resulting curve peaked around age 25. That agreed with some earlier research and disagreed with other published goalie aging curves. To incorporate it, age 25 was treated as the standard and the age-curve value was added to the shot-quality adjustment:
+
+`Adjusted (Age + xG) Save Percentage (AdjSV%) = MSV% + (FSV% - xFSV% + acAdj)`
+
+The source illustrated the adjustment with Lundqvist's career and reported the raw, shot-quality-adjusted, age-and-shot-quality-adjusted, posterior, and posterior age-and-shot-quality rates. Those values are retained as a historical example, not as a new estimate.
+
+Opportunity creates a second selection problem. A 200-shot cutoff removed 90 of 314 goalies, or 28.7% in the distributional exploration. A negative-binomial approach based on shots faced and adjusted saves could include short careers, but it would also weight the analysis toward goalies who received more opportunities. Goalies who perform well are more likely to keep playing, so career length is not independent of performance.
+
+The later mixture approach addressed that compromise by allowing separate priors for goalies facing fewer than 1,500 shots and those facing 1,500 or more, then combining them with a probability that a goalie would belong to either group. A logistic regression using cumulative shots faced and adjusted save percentage predicted the probability of reaching the long-career group. The reported calibration plot suggested that this classifier was well calibrated, but it remains a model of opportunity and selection, not a direct measurement of talent.
+
+## What the distribution looks like
+
+The distributional post made the cutoff and opportunity issues concrete. In the population described there, the 200-shot cutoff removed nearly 30% of goalies, although the excluded group represented less than 1% of shots faced. That is an important distinction: weighting by shots gives a stable estimate for the shots that occurred, while treating careers equally keeps the short-career population visible. Neither choice is automatically correct for a tool meant to evaluate goalies who are still playing.
+
+![Cumulative distribution of career shots faced for goalies.](/figs/goalie-six-one.png){fig-alt="Cumulative distribution of career shots faced for goalies." width="60%"}
+
+The two-prior idea split the career adjusted-save-percentage density into goalies below 1,500 shots and goalies at or above 1,500 shots. The class probability changes as additional shots arrive, allowing the posterior to reflect both current performance and the possibility of a longer career.
+
+![Career adjusted save percentage distributions split by career shots faced.](/figs/goalie-six-three.png){fig-alt="Career adjusted save percentage distributions split by career shots faced." width="60%"}
+
+![Calibration of the logistic regression predicting a long goalie career.](/figs/goalie-six-four.png){fig-alt="Calibration of the logistic regression predicting a long goalie career." width="60%"}
+
+The shape of the observed distribution therefore carries two kinds of information. It describes how adjusted save percentages are distributed among observed careers, and it reflects who received enough opportunity to produce those careers. A fitted distribution can summarize the first without fully solving the second.
+
+## How much evidence is enough?
+
+The sample-size post returned to the population definition. Choosing 2007–2022 as the analysis window cuts some goalies off mid-career: Carter Hart was beginning his career, while Henrik Lundqvist's career ended during the period. Without an age adjustment, the analysis retained only goalies whose careers began after 2007 and ended before 2022. The population consequently fell from 315 to 140. The reported harmonic mean of shots against rose from 12,690 to 14,568, while the mean of career shots faced fell from 4,198 to 3,225 and the mean adjusted save percentage fell from .932 to .927. These changes describe the selected historical population and should not be treated as universal career averages.
+
+The reported cumulative distribution gave a useful sense of how uneven goalie experience is: 25% of goalies faced 33 shots or fewer, 50% faced 202 or fewer (about seven games), and 75% faced 2,606 or fewer. Looking at seasons instead, 42% played only one season, 74% played five seasons or fewer, and 90% played twelve seasons or fewer.
+
+![Average adjusted save percentage by career seasons played.](/figs/goalie-six-two.png){fig-alt="Average adjusted save percentage by career seasons played." width="60%"}
+
+The posterior can be evaluated after every shot, which makes a career a path rather than one final rate. The source divided careers into groups below 300 shots, 300–1,500, 1,500–6,000, and above 6,000. Braden Holtby's reported path moved from 0.9417 before any shots, to 0.9421 after 1,000, 0.9425 after 5,000, 0.9452 after 10,000, 0.9450 after 15,000, and 0.9433 after 19,555.
+
+![Braden Holtby's posterior adjusted save percentage over shots faced.](/figs/goalie-six-three.png){fig-alt="Braden Holtby's posterior adjusted save percentage over shots faced." width="60%"}
+
+The group summaries suggested that nearly every goalie below 6,000 shots ended below expected, that the 1,500–6,000 group faded over its career, and that the 1,500–6,000 group could start above the 6,000-plus group before fading. The post interpreted this as a combination of randomness and age rather than a simple ranking of groups.
+
+![Average posterior adjusted save percentage through shots faced by career-size group.](/figs/goalie-six-four.png){fig-alt="Average posterior adjusted save percentage through shots faced by career-size group." width="60%"}
+
+The age comparison helped explain the pattern: goalies in the 1,500–6,000 group were about 1.5 years older than the 6,000-plus group throughout their careers, including the age range in which the custom curve suggested improvement.
+
+![Average goalie age through shots faced by career-size group.](/figs/goalie-six-six.png){fig-alt="Average goalie age through shots faced by career-size group." width="60%"}
+
+The practical lesson is not that there is one magic shot threshold. More shots generally narrow the posterior, but the amount and meaning of evidence depend on age, opportunity, shot quality, and who remains in the population. For an active goalie, the mixture prior is intended to express that uncertainty rather than pretending the eventual career length is already known.
+
+## Limitations
+
+The model estimates observed performance under a set of chosen adjustments; it does not reveal latent talent directly. A posterior adjusted save percentage is still conditional on the shot-quality model, the age curve, the prior, the observation window, and the population that received an opportunity to play.
+
+The prior is sensitive to the population and to the chosen distributional form. The first beta fit was explicitly described as imperfect, and the adjusted-rate distribution appeared to have more than one component. The mixture construction is a response to that issue, but it introduces its own class-probability model and its own choices about the 1,500-shot boundary.
+
+Selection and survivorship bias remain central. Poor starts can lead to fewer games, while strong performance can create more opportunity. Restricting the population to complete careers avoids censoring but discards active or incomplete careers and changes the population being described. Age is similarly confounded with career length and opportunity.
+
+The shot-quality and age adjustments also deserve caution. Derived adjustments can carry information from outcomes into a quantity later used to explain or predict those outcomes; this creates a possible outcome-leakage problem unless the construction is separated carefully in a new validation design. The historical posts did not provide such a fresh validation run. Accordingly, this consolidated article reports the original analysis and its caveats without claiming that the models were reconstructed, re-estimated, or independently validated here.
+
+## Technical appendix
+
+The initial framework uses a beta prior for a rate. If the prior has parameters alpha and beta, and the observed goalie contributes saves and failures, the posterior parameters are obtained by adding those counts to the prior parameters. The posterior mean therefore has the usual beta-binomial form:
+
+`(alpha + saves) / (alpha + beta + shots)`
+
+This is the shrinkage mechanism: the prior contributes pseudo-counts, while the goalie contributes observed counts. The uncertainty decreases as the shot total grows.
+
+For the shot-quality version, the reported adjusted rate was:
+
+`AdjSV% = MSV% + (FSV% - xFSV%)`
+
+and the age-adjusted version added the age-curve term:
+
+`AdjSV% = MSV% + (FSV% - xFSV% + acAdj)`
+
+The distributional extension used two beta priors. Let `P(1500+)` be the predicted probability that a goalie reaches at least 1,500 career shots, and let `P(-1500)` be the predicted probability of remaining below that boundary. Let `(alphaO, betaO)` and `(alphaU, betaU)` be the fitted beta parameters for the observed long- and short-career groups. The source expressed the combined posterior as a probability-weighted sum of the two group posteriors:
+
+`P(1500+) * (alphaO + adjusted-save contribution) / (alphaO + betaO + S) + P(-1500) * (alphaU + adjusted-save contribution) / (alphaU + betaU + S)`
+
+Here `S` denotes the relevant shots-faced total. The original compact expression used `AdjSV%` in the numerator; the phrase “adjusted-save contribution” makes explicit that the posterior update requires a count-like contribution, while preserving the intended two-prior construction. The exact fitted values and model inputs are not reconstructed in this edition.
+
+The historical series also used harmonic means for grouped changes and for several population summaries, cumulative distribution functions for career opportunity, and repeated posterior updates after each shot. Those choices are part of the reported analysis. They should be treated as context for reading the figures, not as a claim that the underlying data pipeline can be rerun from this page.

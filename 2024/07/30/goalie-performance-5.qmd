@@ -15,6 +15,10 @@ execute:
   enabled: false
 ---
 
+::: {.archive-notice}
+This installment is preserved in its original context. Read the consolidated [Goalie Performance](/research/goalie-performance/) article for the complete argument.
+:::
+
 ## Goalies in the analysis
 
 Whenever we decide on a range of years for an analysis (in this case, 2007-2022), we are cutting of goalies mid-career. Some, like Carter Hart, are beginning their careers. Others, like Lundqvist, ended them during in the middle of the analysis period. Since we are not yet adjusting for age, we can't include these goalies in the analysis. Therefore, only goalies who started their careers post-2007 and ended their careers pre-2022 can be included. This is a 15 year range.

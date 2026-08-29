@@ -15,6 +15,10 @@ execute:
   enabled: false
 ---
 
+::: {.archive-notice}
+This installment is preserved in its original context. Read the consolidated [Goalie Performance](/research/goalie-performance/) article for the complete argument.
+:::
+
 Recall from the [introductory paragraph](/2022/03/28/goalie-consistency-1.html) of the series on goalie consistency: "Goaltenders make up the least predictable position in hockey. Their behavior confounds analysts and casual fans alike. It isn’t uncommon for a good goalie to have a below replacement level year, or for an unknown goalie to come in and dominate the league for a stretch of time. This may partly explain the relative dearth of analysis on goalies - they're voodoo, it's often said."
 
 This new series focuses on goalie performance. It aims to enhance the estimation of goalie performance using an empirical Bayes framework. Similar applications were outlined in [previous](https://hockey-graphs.com/2018/06/21/comparing-scoring-talent-with-empirical-bayes/) [papers](http://varianceexplained.org/r/empirical_bayes_baseball/). The strategy has several advantages over frequentist methods, chiefly the ability to measure uncertainty, which is crucial in describing goalie performance. In this post, the idea is sketched using raw save percentage as the performance metric, with further refinement of the methodology in subsequent posts.

@@ -15,6 +15,10 @@ execute:
   enabled: false
 ---
 
+::: {.archive-notice}
+This installment is preserved in its original context. Read the consolidated [Goalie Performance](/research/goalie-performance/) article for the complete argument.
+:::
+
 In the [first post](/2023/05/17/goalie-performance-1.html), I outlined a framework for measuring goalie talent using their career Fenwick 5v5 save percentage. It concluded with the assumptions of the initial strategy, which I'll include again below.
 
 Assumptions:

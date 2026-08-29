@@ -15,6 +15,10 @@ execute:
   enabled: false
 ---
 
+::: {.archive-notice}
+This installment is preserved in its original context. Read the consolidated [Goalie Performance](/research/goalie-performance/) article for the complete argument.
+:::
+
 In the first post, I outlined a framework for measuring goalie performance using their career Fenwick 5v5 save percentage. In the second post, the methodology was refined to consider shot quality. The outstanding assumptions of the refined strategy are included below.
 
 Assumptions:

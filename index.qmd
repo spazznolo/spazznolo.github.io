@@ -18,7 +18,7 @@ This blog serves as an outlet to explore ideas which naturally interest me. I tr
 
 ## Featured research
 
-- [Goalie Performance](/2023/05/17/goalie-performance-1.html) — Estimating talent while respecting small-sample uncertainty. · 12 min
+- [Goalie Performance](/research/goalie-performance/) — Estimating talent while respecting small-sample uncertainty. · 18 min
 - [NHL Pick Probability](/2023/06/16/draft-probabilities-2.html) — Turning rankings into pick distributions and decisions. · 9 min
 
 ## Statistical subjects
