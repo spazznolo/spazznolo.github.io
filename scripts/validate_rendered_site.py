@@ -135,7 +135,8 @@ def validate_document_contract(site: Path) -> list[str]:
                 f"{expected_canonical}"
             )
         for image in parser.images:
-            if not image.get("alt", "").strip():
+            alt = image.get("alt")
+            if alt is None or (alt and not alt.strip()):
                 errors.append(f"{rel}: image missing alt text: {image.get('src', '')}")
     return errors
 

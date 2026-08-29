@@ -25,6 +25,6 @@ To finish the introduction, let's look at how many overtime games a team can exp
 
 There isn't much of a relationship between a team's regular season performance and the number of times they make it to overtime. You might have thought - like me - that average teams tend to have more overtime appearances because they're more closely skilled with the rest of the league than exceedingly strong/weak teams, but no, there isn't much there*. Let's assume going forward in this series that the number of OT appearances of a given team is random and centered around 23%.
 
-![Pre-overtime standing points per game compared with the percentage of games going to overtime.](/figs/post-regulation-zero-one.png){fig-alt="Pre-overtime standing points per game compared with the percentage of games going to overtime." width="70%"}
+![](/figs/post-regulation-zero-one.png){fig-alt="Pre-overtime standing points per game compared with the percentage of games going to overtime." width="70%"}
 
 *Technically, you could make the case to drop the few historically [bad](https://www.hockey-reference.com/teams/COL/2017.html) [teams](https://www.hockey-reference.com/teams/DET/2020.html) as outliers, in which case there would be a slight but statistically significant decrease in overtime games as a team's standing performance increased, which would amount to roughly a 2.5% (about 2 games) difference in overtime games per season between the worst and best teams, but this is moving away from the spirit of the analysis and will be ignored.*

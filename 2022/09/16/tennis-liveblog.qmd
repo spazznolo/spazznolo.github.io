@@ -14,7 +14,7 @@ execute:
 ## [2022-09-16] Hello, tennis
 The other day I was at a bar and the US Open was on. I don't particularly watch much pro tennis, so I was surprised by the clean camerawork. It's very elegant. During gameplay, the camera is static on a lengthwise shot which captures the entire court. It only moves slightly when the ball is hit wide and then goes right back to that symmetric static shot. I figured tennis analytics must be booming ahead of other sports because of this, so I searched for what people have come up with and found... [this](https://hdsr.mitpress.mit.edu/pub/uy0zl4i1/release/4), where the author, a [tennis researcher](http://on-the-t.com/), lists all the reasons why tennis is decidedly NOT booming, and actually lagging all other major sports.
 
-![Broadcast tennis court frame.](/figs/frame_1173.jpg){fig-alt="Broadcast tennis court frame." width="60%"}
+![](/figs/frame_1173.jpg){fig-alt="Broadcast tennis court frame." width="60%"}
 
 I've made a career out of statistical analysis and the implementation of traditional machine learning alogrithms, but recently I've been thinking of messing around with computer vision. I tend to learn best by trying (and failing and failing) to apply a new subject to a real-world problem I'm interested in.
 
@@ -102,7 +102,7 @@ Grzegorz Chlebus created a [repository](https://github.com/gchlebus/tennis-court
 **Robust Camera Calibration for Sports Videos using Court Models**
 This is the paper that Chlebus adapted in the first method on the list. The paper is available in full [here](https://www.researchgate.net/publication/220979520_Robust_camera_calibration_for_sport_videos_using_court_models). Notice the first word in the title is "robust", meaning the method was developed for various sports, some of which having dynamic camerawork where field vision is complex. This is a departure from the tennis broadcasts where camera perspectives barely change at all during gameplay. In the paper, they mention how a fitted model is necessary in their method because the court lines are not always obvious (model flow chart below). From tracking a few games, this just doesn't ring true for tennis so far. I'm going to be a little greedy here and try to get away with a set of heuristics based on the output from the hough line algo on openCV (memory, speed).
 
-![Robust camera calibration model flow.](/figs/robust-camera-model-flow.png){fig-alt="Robust camera calibration model flow." width="60%"}
+![](/figs/robust-camera-model-flow.png){fig-alt="Robust camera calibration model flow." width="60%"}
 
 **Ben's Iterative Approach using RANSAC**
 Ben, a user on Stack Overflow, suggested a possible solution for a [similar problem](https://stackoverflow.com/questions/24135289/python-opencv-detect-lines-in-a-tennis-court-using-two-differents-methods-of-h). This solution actually seems pretty close to the previous robust approach, except it's more lightweight. I'm probably going to try to implement Ben's suggestion simply because I want to try my hand at the RANSAC, which I've never used before. However, I *still* feel like the remarkable simplicity of the camerawork in tennis is not being fully leveraged here.
@@ -125,7 +125,7 @@ In the last Court Detection post, I wrote vaguely about detecting the tennis cou
     a. y-coordinates between the minimum and maximum y-coordinates lengthwise lines (+/- 10 pixels)
     b. x-coordinates equal to or between the minimum and maximum x-coordinates lengthwise lines (+/- 5 pixels)
 
-![Hough-line court detection example.](/figs/hough-line-ex-2.jpg){fig-alt="Hough-line court detection example." width="60%"}
+![](/figs/hough-line-ex-2.jpg){fig-alt="Hough-line court detection example." width="60%"}
 
 ## [2022-09-23] Tracking Games 02
 I tracked all the clay and grass games yesterday. That's 80 minutes of broadcast time. It took two hours in total. Tracking at 1.5x realtime is twice as fast as I did in my test runs with the Williams final, which is encouraging. I'll probably finish the rest today.
@@ -154,7 +154,7 @@ As a reminder:
 
 **Results (Iteration 1)**
 
-![Hough-line court detection results, iteration 1.](/figs/hough-collage-1.jpg){fig-alt="Hough-line court detection results, iteration 1." width="90%"}
+![](/figs/hough-collage-1.jpg){fig-alt="Hough-line court detection results, iteration 1." width="90%"}
 
 Obviously, there are large problems here. Mostly they stem from either the false positives or false continuations of the lengthwise lines. The widthwise lines rely on a correct y-range, and a false positive/continuation changes the range for the worse. In retrospect, it was naive to try a deterministic approach, but I'm happy to have tried, because it folds in nicely to the next step.
 
@@ -165,25 +165,25 @@ Also, to remind myself: the camera is mostly static. This means there should be 
 
 **Results (Iteration 2)**
 
-![Hough-line court detection results, iteration 2.](/figs/hough-collage-2.jpg){fig-alt="Hough-line court detection results, iteration 2." width="90%"}
+![](/figs/hough-collage-2.jpg){fig-alt="Hough-line court detection results, iteration 2." width="90%"}
 
 ## [2022-09-27] Court Detection 05
 The clustering has made the strategy much more robust, especially in combination with taking the median slope and intercept of the lines. Next is to plot these lines through the whole image, creating a plane where the court should be. This should be ready later today.
 
 **Results (Iteration 3)**
 
-![Hough-line court detection results, iteration 3.](/figs/hough-collage-3.jpg){fig-alt="Hough-line court detection results, iteration 3." width="90%"}
+![](/figs/hough-collage-3.jpg){fig-alt="Hough-line court detection results, iteration 3." width="90%"}
 
 ## [2022-09-28] Change-up 06
 The final iteration of the first version of the lengthwise court line capture is complete. Next is to get the widthwise lines. I can either rely on more clustering around the ends of the lengthwise lines or try for a new approach. Currently, the strategy runs at about 1.5x realtime, which I think is unacceptable for actual production but is fine for now. Here it is below.
 
-![Hough-line court boundary detection.](/figs/hough-line-ex-4.jpg){fig-alt="Hough-line court boundary detection." width="90%"}
+![](/figs/hough-line-ex-4.jpg){fig-alt="Hough-line court boundary detection." width="90%"}
 
 I'm going to change things up for the next bit and temporarily abandon the court detection bit to work on player detection. This was originally supposed to train my computer vision muscle, but lately I've mostly been working with filtering Hough lines and I'm looking for a change of pace.
 
 Update: While reading various strategies to detect players, I came across a [paper](https://www.researchgate.net/publication/221411677_Player_Detection_and_Tracking_in_Broadcast_Tennis_Video) outlining a strategy which uses non-dominant color extraction. I found an example of this on Stack and interpreted the code to get this:
 
-![Non-dominant color extraction example for player detection.](/figs/hough-line-ex-3.jpg){fig-alt="Non-dominant color extraction example for player detection." width="90%"}
+![](/figs/hough-line-ex-3.jpg){fig-alt="Non-dominant color extraction example for player detection." width="90%"}
 
 ## [2022-09-29] Player Detection 01
 Literature review today. Read a *fantastic* paper on table tennis tracking. Not only is the methodology explained clearly, the author provides details on the modules and parameters used in their research. Much appreciated. I'll try their method for ball detection. I can say some of their ideas will definitely make an impact on the court detection algorithm I've been writing.
@@ -195,7 +195,7 @@ More literature review. This [paper](https://www.researchgate.net/publication/28
 
 In many of these papers, accuracy is measured as the percentage of time a player/ball is correctly located on the screen. This is a little more stringent than what I'm going for in this project. With tracking data, these misses (if they're known) probably can be imputed. Weird inaccuracies might be smoothed when the frames are connected into a sequence.
 
-![Player detection result.](/figs/player-detect-1.png){fig-alt="Player detection result." width="60%"}
+![](/figs/player-detect-1.png){fig-alt="Player detection result." width="60%"}
 
 ## [2022-10-02] Player Detection 03
 I'm going to call today a soft implementation of the strategies used in the papers I read yesterday. Many of these concepts are covered in opencv, so the implementation is pretty easy. I'm calibrating the thresholds and blurs and running random chunks of gameplay through it. Mostly I do this to capture patterns, but I'm realizing the more I use these clips to calibrate, the more I'm biasing my methods on the collection of games I've tracked. Probably, I should download a bunch of different game highlights to better diversify the chunks I'm "training" on.

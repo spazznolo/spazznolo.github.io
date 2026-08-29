@@ -14,7 +14,7 @@ listing:
     - "posts/**/index.qmd"
   sort: "date desc"
   type: table
-  fields: [date, title, reading-time, categories]
+  fields: [date, title, reading-time]
   sort-ui: false
   filter-ui: false
   page-size: 5
@@ -23,7 +23,7 @@ listing:
 
 ::: {.home-stream}
 ::: {.home-image}
-![A warm, grainy overhead image from the original blog homepage.](/figs/fifty-four.png){fig-alt="A warm, grainy overhead image from the original blog homepage."}
+![](/figs/fifty-four.png){alt=""}
 :::
 
 ::: {.home-about}
@@ -34,22 +34,8 @@ This blog serves as an outlet to explore ideas which naturally interest me. I tr
 
 ## Featured research
 
-- [Goalie Performance](/research/goalie-performance/) — Estimating talent while respecting small-sample uncertainty. · 15 min
-- [NHL Pick Probability](/research/nhl-pick-probability/) — Turning rankings into pick distributions and decisions. · 19 min
-
-## Statistical subjects
-
-### Bayesian statistics
-Empirical Bayes, priors and posteriors, and shrinkage.
-
-### Probability and simulation
-Draft uncertainty, overtime formats, and expected value.
-
-### Distributions and sampling
-Beta-binomial models, mixture models, and sample size.
-
-### Regression and calibration
-Logistic models, age curves, and model reliability.
+- [Goalie Performance](/research/goalie-performance/) — Estimating talent while respecting small-sample uncertainty. · 18 min
+- [NHL Pick Probability](/research/nhl-pick-probability/) — Turning rankings into pick distributions and decisions. · 24 min
 
 ## Recent writing
 

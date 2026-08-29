@@ -58,7 +58,7 @@ They barely differ.
 
 Let's start by simply grouping shots into bins by goalie age (rounded to the first decimal, ex: 26.0, 26.1, etc.), and then calculating the group-wide save percentage. Here's what that looks like, with points becoming paler for smaller groups sizes:
 
-![Save percentage by goalie age, with lighter points for smaller groups.](/figs/goalie-performance-3-1.png){fig-alt="Save percentage by goalie age, with lighter points for smaller groups." width="60%"}
+![](/figs/goalie-performance-3-1.png){fig-alt="Save percentage by goalie age, with lighter points for smaller groups." width="60%"}
 
 Some thoughts:
 
@@ -78,7 +78,7 @@ Here are the steps:
 
 Altogether, this gives us the curve below:
 
-![Smoothed goalie age curve based on cumulative changes in save percentage.](/figs/goalie-performance-3-2.png){fig-alt="Smoothed goalie age curve based on cumulative changes in save percentage." width="60%"}
+![](/figs/goalie-performance-3-2.png){fig-alt="Smoothed goalie age curve based on cumulative changes in save percentage." width="60%"}
 
 Some thoughts:
 

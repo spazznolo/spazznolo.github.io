@@ -28,15 +28,15 @@ But first, a visual recap for those who don't want to read the [previous](https:
 
 1. A rank-ordered logit model was built using numerous publication rankings throughout the draft year to derive prospect pick probabilities, like this:
 
-   ![Distribution of the difference in pick values, measured in 7-year predicted WAR, with an expected difference of 2.72 WAR.](/figs/draft-probabilities-4-4.png){fig-alt="Distribution of the difference in pick values, measured in 7-year predicted WAR, with an expected difference of 2.72 WAR." width="60%"}
+   ![](/figs/draft-probabilities-4-4.png){fig-alt="Distribution of the difference in pick values, measured in 7-year predicted WAR, with an expected difference of 2.72 WAR." width="60%"}
 
 2. Prospect values were derived using a historical draft pick value chart (values are placeholders for teams' actual internal projections), along with uncertainty estimates, like this:
 
-   ![Distribution of the difference in pick values, measured in 7-year predicted WAR, with an expected difference of 2.72 WAR.](/figs/draft-probabilities-4-4.png){fig-alt="Distribution of the difference in pick values, measured in 7-year predicted WAR, with an expected difference of 2.72 WAR." width="60%"}
+   ![](/figs/draft-probabilities-4-4.png){fig-alt="Distribution of the difference in pick values, measured in 7-year predicted WAR, with an expected difference of 2.72 WAR." width="60%"}
 
 3. The previous two points were combined to create new pick value charts, like this:
 
-   ![Distribution of the difference in pick values, measured in 7-year predicted WAR, with an expected difference of 2.72 WAR.](/figs/draft-probabilities-4-4.png){fig-alt="Distribution of the difference in pick values, measured in 7-year predicted WAR, with an expected difference of 2.72 WAR." width="60%"}
+   ![](/figs/draft-probabilities-4-4.png){fig-alt="Distribution of the difference in pick values, measured in 7-year predicted WAR, with an expected difference of 2.72 WAR." width="60%"}
 
 As an example, the value of the third pick for a team who ranked the top 3 players in the draft as Bedard-Fantilli-Carlsson would be calculated as follows:
 

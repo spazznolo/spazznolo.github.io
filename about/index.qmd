@@ -12,6 +12,6 @@ That process led from independent hockey research to an internship at the St. La
 
 I have also been building a tennis-tracking program intended to scale from individual matches to tournament-level data. That project is **paused with intent to return**.
 
-My public work currently lives in sports, but the statistical subjects are broader: Bayesian inference, probability, simulation, distributions, sampling, regression, and calibration.
+My public work currently lives in sports, though the methods range from Bayesian inference and simulation to regression and calibration.
 
 [GitHub](https://github.com/spazznolo)

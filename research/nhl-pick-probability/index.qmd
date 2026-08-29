@@ -2,7 +2,7 @@
 title: "NHL Pick Probability"
 description: "Turning draft rankings into prospect pick distributions, decision value, and a probability-aware drafting strategy."
 date: 2021-11-28
-date-modified: 2026-08-28
+date-modified: 2026-08-29
 categories:
   - Probability and simulation
   - Regression and calibration
@@ -18,50 +18,137 @@ execute:
 ---
 
 ::: {.archive-notice}
-This article consolidates six posts published between 2021 and 2024. It reorganizes the original prose, results, and figures, and retains the original analysis; the underlying data and models were not reconstructed for this edition.
+This article consolidates six posts published between 2021 and 2024.
 :::
 
-The question behind this series is deceptively simple: if a team has a draft pick, which prospects might still be available, and what is that pick worth to this team? A single ranking gives one answer. A probability distribution gives a better description of the uncertainty around that answer. Once those distributions are combined with a team's own prospect valuations, they can support decisions about trading up, trading down, or waiting for a player to slide.
+## NHL Draft: Assigning pick probabilities from user mock drafts
 
-This article brings together six installments published from November 2021 through July 2024. The first post began with user mock drafts, the later model used professional rankings and a rank-ordered logit formulation, and the application posts converted availability into pick values and a multi-pick drafting strategy. The final installment looked back at calibration after the draft. The figures and reported results below are historical material from those posts. This is an editorial consolidation, not a fresh model run or a reproducibility exercise.
+<span class="part-date">Originally published 2021-11-28.</span>
 
-## From rankings to probabilities
+If you’re picking first at the next NHL draft, you want Lafreniere. If you’re picking second or third, you want Byfield or Stutzle. If you’re picking fourth, or fifth, or sixth, or seventh, you’re picking Rossi or Perffeti, or Raymond, or Drysdale… Notice how the list lengthens as you make your way through the draft? That’s because the uncertainty of a player being better than all other available players increases the deeper you get into the draft. So maybe you really like Rossi, but you’re picking sixth, and you want to be reasonably certain he will still be available. Well, what are the odds Rossi is still available at six? It’s hard to say.
 
-If a team is picking first, the decision may feel straightforward: a short list of players is likely to be available. Deeper in the draft, the list lengthens. A player a team likes may still be available at its pick, but the team needs to express how likely that is before deciding whether to trade up or down. The first post used Marco Rossi as an example and showed how a distribution over picks can describe his possible draft result.
+Let’s say we only have our own rankings to go on. Instead of only predicting each player’s draft position, we could create probabilities of each prospect being drafted at each pick. Let’s use Rossi again as an example. Here’s how we might place probabilities on Rossi’s draft result:
 
-![Probability distribution of Marco Rossi’s predicted draft result.](/figs/first-plot.png){fig-alt="Probability distribution of Marco Rossi’s predicted draft result." width="70%"}
+![](/figs/first-plot.png){fig-alt="Probability distribution of Rossi’s predicted draft result." width="70%"}
 
-That first distribution represents one set of beliefs. If teams drafting ahead view Rossi differently, his distribution changes and his chance of sliding to a later pick can be higher than the first estimate suggests.
+This is a probability distribution of Rossi’s predicted draft result. Though this is a step in the right direction, these are only our predictions of where Rossi might go. What if the teams drafting ahead of us don't rank him as highly? Their probability distribution for Rossi might look like this:
 
-In practice, no team knows exactly how every other team has ranked every prospect. The first post therefore proposed using hundreds of user mock drafts from [Draft Site](https://www.draftsite.com/) to approximate player-pick probability density functions. A 2015 user mock-draft distribution for Mikko Rantanen illustrates the raw material.
+![](/figs/second-plot.png){fig-alt="Alternative probability distribution of Rossi’s predicted draft result." width="70%"}
 
-![Mikko Rantanen’s 2015 user mock-draft pick distribution.](/figs/third-plot.png){fig-alt="Mikko Rantanen’s 2015 user mock-draft pick distribution." width="70%"}
+If the teams ahead of us view Rossi closer to the plot above, then he’ll likely slide lower than we predicted he would, and our chances of drafting him are higher than we previously thought. In fact, if we knew what other teams thought of him, we could pretty accurately predict where he’ll still be available in the draft, which allows us to either a) be comfortable we have a strong chance of picking him without trading up, or b) slide down a couple spots, pick up a mid-round pick and still get him. An important thing to remember is that Rossi’s draft position is much less affected by how we think of him than it is by how [everyone else thinks of him](http://statsportsconsulting.com/main/wp-content/uploads/Nandakumar_PerfectDraft-1.pdf).
 
-The raw distribution needed smoothing and some treatment of mock-draft quality. The source compared a user's difference from the average user draft with that user's error against the actual draft order from 2015–2019. It found a strong relationship between the two.
+In practice, no team will ever know exactly how every other team has ranked each prospect. Instead, player-pick probability distributions need to be approximated by other means. Dawson Sprigings outlined one way of doing this for [Hockey-Graphs](https://hockey-graphs.com/2016/06/08/nhl-draft-probability-tool/) which used bayesian inference and pro rankings publishers. I’m going to outline another possible way, which uses mock drafts generated by users on [Draft Site](https://www.draftsite.com/) to derive probability density functions for each player.
 
-![Relationship between user mock-draft differences and errors.](/figs/fourth-plot.png){fig-alt="Relationship between user mock-draft differences and errors." width="70%"}
+### An Example
 
-It also reported that user mock drafts became more accurate as draft day approached.
+[Draft Site](https://www.draftsite.com/), gets hundreds of user mock drafts each year. These mock drafts naturally create probability distributions for each player’s potential pick placement. For example, here was Mikko Rantanen’s in 2015 where each user's draft was weighted equally.
 
-![User mock-draft accuracy by days before the draft.](/figs/fifth-plot.png){fig-alt="User mock-draft accuracy by days before the draft." width="70%"}
+![](/figs/third-plot.png){fig-alt="Mikko Rantanen’s 2015 user mock-draft pick distribution." width="70%"}
 
-The treatments filtered likely low-quality drafts, weighted remaining users, fit player distributions, and dampened them using variance observed in prior years. The source compared raw, filtered, weighted, fitted, and dampened versions of Rantanen's distribution.
+This distribution should be smoothed, but first, I'd like to address the fact that some mock drafts are more informative than others. A user who can more correctly predict a draft’s order is more valuable than one who cannot. Therefore, larger weights should be given to users who are likely more accurate in their mock draft. Thankfully, there are a couple quality indicators available: a user’s difference to the average user draft, and the number of days before the draft date that a user last updated their mock draft.
 
-![Effects of treatments on player-pick probability distributions.](/figs/sixth-plot.png){fig-alt="Effects of treatments on player-pick probability distributions." width="70%"}
+### Mock Draft Quality Indicators
 
-To check whether treated user data was useful, rankings were derived by iterating through each pick and selecting the player with the highest probability of being taken, then re-approximating the remaining distributions. Compared with professional projections from 2015–2019, the treated user data was competitive at predicting draft order. The comparison included Bobby McKenzie as a gold-standard reference and a group average.
+#### Difference to the Average Draft
 
-![Mean absolute error of derived user draft rankings versus professional projections.](/figs/seventh-plot.png){fig-alt="Mean absolute error of derived user draft rankings versus professional projections." width="70%"}
+Mikko Rantanen’s median pick from the raw user data was 9. If a user selected him 25th, they would be 16 spots off. A user’s absolute error rate can be computed for each pick in their mock draft. Below is the relationship of users’ mean absolute pick difference and their mean absolute pick error to the actual draft from 2015-2019. There’s a strong relationship between the two.
 
-The user-mock-draft approach supplied a useful intuition: a distribution tells us more than a single predicted pick. The later work moved to published rankings, which are more natural inputs for a current draft tool and provide a consistent way to combine several ranking lists.
+![](/figs/fourth-plot.png){fig-alt="Relationship between user mock-draft differences and errors." width="70%"}
 
-## The rank-ordered logit model
+#### Days to the Draft
 
-The 2023 Draft Stock tool's Draft Pick Probabilities tab used a process built around a rank-ordered logit model applied to rankings released throughout the draft year. The historical implementation had three main stages: make partial rankings complete, fit rank-ordered models, and simulate 100,000 drafts from the model outputs.
+Usually, ranking publications will release a preliminary rankings list about a year before the draft. Then, as the draft approaches and player’s develop – or don’t - the rankings are updated. The plot below demonstrates that user data becomes more accurate as draft day approaches.
 
-### Making partial rankings complete
+![](/figs/fifth-plot.png){fig-alt="User mock-draft accuracy by days before the draft." width="70%"}
 
-There are thousands of eligible prospects, but ranking publications list only a subset. The source restricted the population to prospects ranked in the top 100 by at least one publication. It then used each player's frequency of appearance as a weight in the R `PLMIX` package to impute complete rankings. The historical excerpt was:
+The variables discussed above were used to (1) filter what are likely low quality drafts and (2) create weights for each user mock draft. Players’ adjusted pick probabilities were then fit and dampened (more information on these decisions is available in the Notes section).
+
+### Comparing Probability Distributions
+
+#### The Effect of Treatments on Player-Pick Probability Distributions
+
+Here’s a visualization of the effects various treatments have on the user rankings.
+
+![](/figs/sixth-plot.png){fig-alt="Effects of treatments on player-pick probability distributions." width="70%"}
+
+The downside to user mock drafts is that prospect ranking is likely a hobby for most users. They may mostly rely on second hand information provided by hockey sites, experts, and prospect ranking models. Before going further, it’s important to measure its capacity for prediction. One way of doing this is to build a draft ranking from the data, and then measure its accuracy against professional ranking publishers.
+
+### Derived User Rankings vs the Pros
+
+Draft rankings are derived from player-pick probability distributions by iterating through each pick of each draft, and drafting the player with the highest probability of being taken. After each pick, the player distributions are re-approximated (more information is available in the Analysis Notes section).
+
+Here is the mean absolute error of derived user draft rankings from 2015-2019 compared to various pro projections. All experts but Bobby Mackenzie, the gold standard of draft projections, have been greyed out. It's worth noting that the goal of some professional draft analysts is to predict which players will have the best careers, and not necessarily the order they might be picked. Purple is the group average.
+
+![](/figs/seventh-plot.png){fig-alt="Mean absolute error of derived user draft rankings versus professional projections." width="70%"}
+
+User data, when properly treated, is competitive with pro ranking publications at predicting draft order. The advantage is that user data has built-in player-pick distributions which can be used to answer important questions about the draft.
+
+### Another Perspective on Probability Distributions
+
+Here’s the probability Mikko Rantanen had of being selected at specific picks: 1, 0.1%; 2, 1.0%; 3, 2.6%; 4, 4.6%; 5, 7.9%. Another way to look at this is to say the probability Mikko Rantanen would be selected in the first five picks was 16.3% (the addition of each pick probability for picks 1-5). These cumulative probabilities can be calculated for each pick. Here’s what this looks like on a plot.
+
+![](/figs/eigth-plot.png){fig-alt="Cumulative probability of Mikko Rantanen being selected by each pick." width="70%"}
+
+This is called a cumulative distribution (each pick takes the cumulative sum of all previous pick-probabilities). A pick-probability curve like the one visualized above can be derived for each player. Given that these cumulative pick-probabilities are the cornerstone of the analysis, it’s important to measure their accuracy. The fit of these curves can be evaluated by going through each pick and asking the questions: what was the probability of this player being drafted by this pick and was he drafted by this pick?
+
+### Evaluating the Fit
+
+Either a player was drafted by a certain pick, or they weren’t. This is called a binary event, with values 0 (he wasn’t) and 1 (he was). Mikko Rantanen had a 55.5% probability of being drafted by the eighth pick, and the result was that he wasn’t yet picked (0). The error for the probability attributed to this event can be seen as 0.555-0 = 0.555. Rantanen also had an 86.4% probability of being drafted by the twelfth pick, and the result was that he was picked (1). The error for the probability attributed to this event can be seen as 0.864-1 = -0.136.
+
+Each player has probabilities attached for the first thirty picks of the draft. This is roughly 7,000 events. Errors can be attributed for these events the same way as they were outlined in the previous paragraph. Since the aim is to build well calibrated probability distributions, the brier score will be used to evaluate the fit. The calibration plot is plotted below along with Brier scores.
+
+![](/figs/tenth-plot.png){fig-alt="Calibration plot and Brier scores for player-pick probabilities." width="70%"}
+
+The perfect fit is the grey line, where outcomes occur the predicted percentage of time. Whenever a curve slides away underneath the line of perfect fit, like it does with the raw user data (and to a lesser extent the adjusted user data), it means the method tends to be overconfident in its assignment of probabilities. The plot above, along with the Brier scores, suggest the adjusted user data (score ~ 0.0604) is a better fit than raw user data (score ~ 0.198).
+
+Cumulative player-pick probabilities for the 2020 draft are available [here](https://drive.google.com/file/d/150JF4tPGQ0fRmMsXonIa5CJ_wVVCXBa9/view?usp=drivesdk).
+
+### Notes
+
+#### Filtering Users
+
+Adjusted to User Average:
+
+1. RMSE to user average < 15
+2. Days to draft < 150
+
+Adjusted to Pro Consensus:
+
+1. RMSE to pro consensus < 15
+2. Days to draft < 150
+
+#### Attributing Weights to Users
+
+A linear regression is fit using: RMSE to user average, days to draft, (and RMSE to pro consensus for data weighted to pro consensus) as predictors and the RMSE to actual draft order as target. User weights are the inverse of the linear model predicted RMSE of user ranking to the actual draft order.
+
+#### Fitting Player Distributions
+
+A gamma distribution is fit to adjusted data.
+
+#### Dampening Player Distributions
+
+Player distributions are dampened by the variance observed in prior years. This is superior to the variance in the raw data because, in this case, it is caused by actual deviations as opposed to what are likely bad user predicitons.
+
+I wrote a similar article for the NBA Draft at [Nylon Calculus](https://fansided.com/2020/09/17/nba-draft-class-controversial-obi-toppin/).
+
+::: {.part-break}
+:::
+
+## NHL Draft: Deriving pick probabilities from draft rankings
+
+<span class="part-date">Originally published 2023-06-16.</span>
+
+The prospect pick probabilities in the "Draft Pick Probabilities" tab of the [2023 Draft Stock tool](https://piyer97.shinyapps.io/NHLDraft2023/) are generated through a process which primarily involves the application of a rank-ordered logit model to draft rankings released throughout the year. The methodology is a simplified version of [Predicting the NHL Draft with Rank-Ordered Logit Models](https://ecp.ep.liu.se/index.php/linhac/article/view/480).
+
+There are three main components - first, partial draft rankings are made complete, then a rank-ordered logit model is fit, finally 100,000 drafts are simulated from model outputs. I will describe each component in this thread. Links are provided at the end.
+
+### Imputation of partial rankings
+
+Technically, there are thousands of draft prospects. Consequently, draft rankings cannot include every prospect, and so, by definition, they are partial rankings. They need to be made complete to fit into our framework. We do this by first, restricting the population to prospects ranked in the top 100 by at least one publication. Then, through the [PLMIX](https://cran.r-project.org/web/packages/PLMIX/PLMIX.pdf) package in R, rankings are made complete using the frequency of their appearance in rankings as weights.
+
+#### Create full rankings
+
+The following historical code excerpt shows the ranking-imputation step:
 
 ```r
 # Get skater appearance counts
@@ -83,13 +170,15 @@ full_ranking_matrix <-
   .$completedata
 ```
 
-This is a modeling convenience, not a claim that the resulting matrix contains every eligible player. The source explicitly noted that the current model gives no probability to prospects outside the modeled set, so probabilities for the included group become overestimated—particularly after the first two rounds.
+### Fitting of Plackett-Luce models
 
-### Fitting Plackett–Luce models
+As for the rank-ordered logit models, we're currently operating two. The first, a time-weighted frequentist method from the [PlackettLuce](https://cran.r-project.org/web/packages/PlackettLuce/PlackettLuce.pdf) package in R; the other, a Bayesian, [tier-weighted implementation written in Stan](https://github.com/tyrelstokes/Monaco_ranking/blob/main/plackett_luce_opt.stan) by [Tyrel Stokes](https://twitter.com/TyrelStokes).
 
-The historical tool operated two related models. The first was a time-weighted frequentist implementation from the `PlackettLuce` R package. Ranking lists were weighted according to their distance from draft day, using weights informed by the earlier mock-draft work. The reported approximate weights were 90% for a ranking published a month before the draft, 77% at two months, 50% at four months, and 17% at one year. The second was a tier-weighted Bayesian implementation written in Stan by Tyrel Stokes and adapted from his track-racing work.
+The time-weighted frequentist implementation is a standard application of the Plackett-Luce, except that ranking lists are weighed based on their distance to the draft in days. The ranking weights were determined using my previous work on user mock drafts. The weights are available [here](https://github.com/spazznolo/draft-rankings/blob/main/data/weights_for_pl.csv) for those interested. Using the draft day as the index, rankings published a month out are weighted at roughly 90%, two months at 77%, four months at 50%, and a year at 17%.
 
-The time-weighted model-fitting excerpt was:
+#### Build Plackett-Luce model
+
+The following historical code excerpt shows the model-fitting step:
 
 ```r
 # Fit the Plackett-Luce model
@@ -99,84 +188,186 @@ pl_model <- PlackettLuce(full_ranking_matrix, weights = weights, npseudo = 0.1, 
 mle_estimates <- coef(pl_model, log = FALSE)
 ```
 
-Each model attributes a strength score to each player. Those scores are not themselves pick probabilities; they are used as sampling weights when drafts are simulated without replacement. The historical simulation excerpt was:
+The tier-weighted Bayesian implementation is taken wholesale from Tyrel Stokes' work on [track racing](https://github.com/tyrelstokes/Monaco_ranking). His implementation contains weights, however they are determined by the Bayesian framework, which was not written with time, but tier importance + noise in mind.
+
+### Simulation of drafts
+
+These rank-ordered logit models attribute a "strength" score to each player. Drafts are simulated (100k times) by randomly drawing (without replacement) players using their strength score as weights.
+
+The following historical code excerpt shows the simulation step:
 
 ```r
 # Simulate draft rankings
 draft_simulations <- replicate(100000, sample(1:skaters, skaters, replace = FALSE, prob = mle_estimates))
 ```
 
-The published rankings carry several assumptions. The first is that the imputed rankings are meaningfully full. The second is that ranking lists can be summarized with time weights even though rankings change because of what prospects and scouts do during the intervening time. The third is that ranking publications are representative of NHL organizations. A publication may rely more heavily on game-log information than a professional team, so any systematic difference in evaluation can flow through to the final probabilities.
+### Assumptions
 
-The historical model therefore offers a structured approximation, not an oracle. It is useful precisely because it makes its assumptions visible: which rankings are included, how missing placements are imputed, how time is weighted, which players are in the modeled population, and how much uncertainty is generated by simulation.
+There are three main assumptions which don't quite fit in this methodology. The first is that the rankings are truly full rankings (they are not). The second is that draft rankings aren't related over time (they are). The third is that ranking publications are representative of NHL organizations (unsure, could be verified with historical data). We explain each below.
 
-## Prospect pick distributions
+#### On "Full" Rankings
 
-The outputs of the rank-ordered models can be summarized as a probability that each prospect is drafted at each pick. They can also be expressed cumulatively. The first post described this with Rantanen: the source-reported aggregate for picks 1 through 5 was 16.3%, while the displayed rounded components (0.1%, 1.0%, 2.6%, 4.6%, and 7.9%) sum to 16.2% at the shown precision. This is a transcription of the historical report, not a fresh recomputation.
+In an ideal scenario, full rankings would encompass every eligible prospect in each ranking, providing a comprehensive view. However, this is impractical in reality. The challenge lies in incorporating partial rankings into a complete ranking system. One approach is to establish a cut-off point for the number of players included in the rankings. In my opinion, a suitable cut-off would be to limit the rankings to the top 100 prospects. If a publication ranks more than 100 prospects (e.g., 150 or 250), we disregard prospects ranked 101 and beyond. This approach minimizes information loss since only a few publications extend their rankings beyond 100. By focusing on the players within this new set, we are left with approximately 200+ prospects and growing. However, it's important to note that the current model does not acknowledge the existence of other prospects outside this set. Consequently, the model assigns a 0% probability to a prospect ranked 250 being drafted within the top 100. As a result, the estimated probability of the 200+ prospects being drafted becomes overestimated. This issue becomes increasingly problematic as the draft progresses, and the model's effectiveness is limited after the first two rounds. One potential way to address this is by adjusting for historical undercoverage, but unfortunately, we lack the necessary data for such adjustments.
 
-The cumulative view asks a slightly different question at every pick: what is the probability that this player has been selected by now? The historical figure is explicitly a selection-after-picks curve.
+#### On Time
 
-![Cumulative probability of Mikko Rantanen being selected by each pick.](/figs/eigth-plot.png){fig-alt="Cumulative probability of Mikko Rantanen being selected by each pick." width="70%"}
+To simplify the model, time was included through weights. Essentially, we are flattening time by saying "a ranking published right before the draft is worth about twice as much as a ranking published four months ago". Even though this works for prediction, it is not actually how the dynamic works. The reason rankings change is *not* because of time, but because of *what prospects/scouts do during this time*. This assumption is addressed in *Predicting the NHL Draft with Rank-Ordered Logit Models*, linked above.
 
-The distinction between a pick-specific distribution and its cumulative version matters operationally. A team picking fifth needs the probability that its preferred player survives to five, while a team evaluating a prospect's likely range may want the complete distribution. The cumulative curve is also the natural object for calibration: at each pick, either the player had been drafted by that point or he had not.
+#### On Selection Bias
 
-To evaluate fit, the source treated each player-pick combination as a binary event. For example, if the model assigned Rantanen a 55.5% probability of being drafted by pick eight and he had not yet been selected, the error was 0.555. If it assigned an 86.4% probability by pick twelve and he had been selected, the error was -0.136. Across roughly 7,000 events covering players and the first thirty picks, the Brier score summarized the squared probability error.
+The method employed in this model assumes that prospect ranking publications represent the perspectives of NHL organizations. By "representative," we mean that these publications assign similar value to players and exhibit comparable variance in their evaluations. For instance, it is plausible that ranking publications lack the same level of resources as professional hockey teams, leading them to rely predominantly on data rather than in-game observations. Consequently, they may place greater emphasis on prospects who excel in ways which are represented in game logs. Any inherent "bias" present in these publication rankings would consequently influence the published pick probabilities in this model.
 
-![Calibration plot and Brier scores for player-pick probabilities.](/figs/tenth-plot.png){fig-alt="Calibration plot and Brier scores for player-pick probabilities." width="70%"}
+The code used to generate these probabilities is available on GitHub [here](https://github.com/spazznolo/draft-rankings).
 
-The historical calibration plot showed the raw user data as overconfident, with the adjusted approaches closer to the line of perfect fit. The rendered historical figure labels the Brier scores 0.1981 (raw), 0.0607 (adjusted-to-user), and 0.0641 (adjusted-to-pro). The source prose instead describes adjusted-to-user as approximately 0.0604; both numbers are retained as historical artifacts, and neither is a fresh recomputation. The adjusted user result was therefore the best of those reported versions in that comparison. These are historical fit results, not an updated evaluation of the later rank-ordered model.
+::: {.part-break}
+:::
 
-## Applying uncertainty to draft value
+## NHL Draft: An Application of Prospect Pick Probabilities [Part 1]
 
-Pick probabilities become decisions only after a team supplies its own prospect values. The 2023 application used a hypothetical Montreal Canadiens board. Montreal picked fifth, just outside a top tier containing Connor Bedard, Adam Fantilli, Matvei Michkov, and Leo Carlsson. The example assumed that the team valued prospects using predicted seven-year Wins Above Replacement (WAR): Bedard 24.0, Fantilli 19.0, Michkov 17.5, Carlsson 14.0, and William Smith 10.0.
+<span class="part-date">Originally published 2023-06-20.</span>
 
-The corresponding availability table reported the probability that each player remained available at picks 1–5.
+The prospect pick probabilities available on the "Draft Pick Probabilities" tab of the [2023 Draft Tool](https://piyer97.shinyapps.io/NHLDraft2023/), created by Pranshanth Iyer and myself, can be used by NHL organizations to inform their decision-making process. Let's take the Montreal Canadiens as an example.
 
-![Prospect pick probabilities by draft pick.](/figs/draft-probabilities-3-1.png){fig-alt="Prospect pick probabilities by draft pick." width="85%"}
+The Canadiens pick fifth, which, according to consensus, is just outside the top tiers of prospects consisting of Connor Bedard, Adam Fantilli, Matvei Mitchkov, and Leo Carlsson. The next "tier", contains a handful of players which ranking publications seem to mostly disagree on. One common question is, if you're the Canadiens, do you trade up to guarantee the drafting of a potential superstar, or do you take the risk and hope one of them slides in the draft? However a more interesting question, in my opinion, is: "How are you making this decision?"
 
-At each pick, the team takes the highest-valued available prospect. The source multiplied each prospect's value by the probability that the prospect was available and summed those terms. Its examples were:
+The truth is that either way you're leaning, you are making a complex calculation with instinct. You're considering 1) the value of each prospect, 2) the probability each prospect is available at a given pick, and 3) the appropriate cost in assets to move up in the draft. This is an exceedingly difficult calculation to make in the moment, especially in the heat of the draft.
 
-```text
+Thankfully, the probabilities in this tool can help.
+
+### Prospect Values
+
+First, we need the value of the top 5 prospects according to the Canadiens. For this example, let's assume they evaluate prospects based on their predicted Wins Above Replacement (WAR) while their rights are held by the team (7 years), and the predicted WAR of their top five ranked prospects is as follows (feel free to use the metric and values of your choosing):
+
+- Connor Bedard: 24.0
+- Adam Fantilli: 19.0
+- Matvei Mitchkov: 17.5
+- Leo Carlsson: 14.0
+- William Smith: 10.0
+
+### Prospect Pick Probabilities
+
+Next, we can use our tool to get the probability that each player is still available at each pick. Here they are:
+
+![](/figs/draft-probabilities-3-1.png){fig-alt="Prospect pick probabilities by draft pick." width="85%"}
+
+### Pick Values
+
+As the Canadiens, we derive our very own pick values by multiplying the probability a prospect is available at a certain pick by their predicted WAR. Obviously, we're going to take the highest-value player available, so the pick values are calculated like so:
+
+::: {.equation-note}
+```{.text .equation-expression}
 1st pick - (1.000*24) = 24.000
 2nd pick - (0.002*24) + (0.998*19) = 19.010
 3rd pick - (0.000*24) + (0.210*19) + (0.790*17.5) = 17.815
 4th pick - (0.000*24) + (0.028*19) + (0.420*17.5) + (0.552*14.0) = 15.610
 5th pick - (0.000*24) + (0.002*19) + (0.111*17.5) + (0.269*14.0) + (0.618*10.0) = 11.927
 ```
+:::
 
-The point is not that these five WAR values are universal. They stand in for a team's internal evaluations, and a different team could use a different scale. The framework is team-specific because the value of a pick depends on which prospects that team prefers and how it quantifies their outcomes.
+Using the third pick as an example:
 
-This is a departure from a conventional historical pick-value chart that assigns an average value to each draft slot. The historical chart remains useful as a reference, but draft classes vary in strength and can contain clusters of talent or sudden drops. A current-year board can therefore produce a more relevant value estimate. The source's historical average chart is retained here as context.
+- There is a 0% chance Bedard, the Canadiens' highest ranked prospect, is available, so his value is multiplied by 0.
+- There's a 21.0% chance Fantilli, the Canadiens' second-ranked prospect, is available, so his value is multiplied by 0.210.
+- If neither Bedard nor Fantilli is available (79.0% chance), the Canadiens would select Mitchkov, whose value is multiplied by 0.790.
+- In total, the pick is valued at 17.815 WAR.
 
-![Historical average draft pick value chart.](/figs/draft-probability-3-2.png){fig-alt="Historical average draft pick value chart." width="70%"}
+### Previous Work
 
-The same framework can be extended to uncertainty in prospect outcomes. Instead of treating Bedard's value as exactly 24 WAR, assign a distribution to it. The source illustrated this with a normal distribution centered on 24 with standard deviation 3.
+Note that this is a departure from the usual draft pick value chart which has long been established in the hockey analytics community (below is an example of the Athletic's) which uses *average* pick values:
 
-![Illustrative distribution for Bedard’s prospect value.](/figs/draft-probabilities-4-1.png){fig-alt="Illustrative distribution for Bedard’s prospect value." width="60%"}
+![](/figs/draft-probability-3-2.png){fig-alt="Historical average draft pick value chart." width="70%"}
 
-The quartile statements attached to that normal curve were deliberately illustrative. They describe the hypothetical distribution chosen for the example; they are not an empirical probability claim about Bedard or any other prospect. The distribution's purpose is to show how a team can represent uncertainty, not to establish a new forecast.
+The reason for this proposed departure is that, in practice, there are weak drafts (like last year), and strong drafts (like this year). Even within a draft class, there can be pockets of heterogeneity where talented players are clustered together, as well as instances of significant drops in value. Consequently, for our purposes, it is more appropriate to derive pick values based on the prospects *eligible for this year's draft*. Moreover, since the historical value chart is well-established, the Canadiens should be trying to leverage it to find value gains.
 
-Assigning each prospect a value distribution, with a wider distribution for a more uncertain prospect such as Michkov, gives a set of prospect-value distributions.
+### Decisions, Decisions
 
-![Prospect value distributions with varying uncertainty.](/figs/draft-probabilities-4-2.png){fig-alt="Prospect value distributions with varying uncertainty." width="60%"}
+With pick probabilities and prospect values, the Canadiens now have a quantitive framework to determine the value of a pick in the upcoming draft. This allows them to assess the value difference between picks and consider trade scenarios. Which brings us back to the initial question: should the Canadiens consider trading up?
 
-Multiplying those distributions by the corresponding availability probabilities produces a distribution for the value of each pick.
+Let's explore this with a hypothetical scenario. Imagine they have the opportunity to trade up to the fourth pick. To gain organizational value, they would need to give up less than the value of the fourth pick (15.610) minus the value of their fifth pick (11.927), which equals 3.683 WAR. If they can trade their fifth plus a piece which is worth less than 3.564 WAR, they've gained value. With this, a complex decision becomes relatively simple, at least in theory.
 
-![Pick value distributions after accounting for prospect availability.](/figs/draft-probabilities-4-3.png){fig-alt="Pick value distributions after accounting for prospect availability." width="60%"}
+By combining prospect pick probabilities with internal evaluations, the Canadiens can make more informed decisions about their draft strategies and potential trades.
 
-This extension provides comparisons unavailable to point estimates: the probability that one pick is more valuable than another and the WAR associated with a selected upper- or lower-tail outcome. The application returned to Montreal's possible trade from pick five to pick four. The source posts contain different point-value examples and conflicting arithmetic totals for the incremental value of that move, so this consolidation omits the disputed total. The directional comparison is consistent: trading up is attractive only when the assets surrendered are worth less than the gain represented by the fourth-versus-fifth-pick value difference.
+### Next Step: Adding Uncertainty
 
-The difference distribution makes that comparison visible.
+Arriving at a single point estimate for prospect values can be challenging and may not fully account for the inherent uncertainty surrounding prospects. Different scouts and analysts may have varying evaluations and opinions on a player's potential. Additionally, prospects inherently come with different levels of risk.
 
-![Difference between the fourth and fifth pick value distributions.](/figs/draft-probabilities-4-4.png){fig-alt="Difference between the fourth and fifth pick value distributions." width="60%"}
+To address this, we can include uncertainty in this framework by assigning probability distributions to prospect values rather than relying solely on point estimates. By considering the range of potential outcomes and assigning probabilities to different scenarios, a more comprehensive assessment can be made. Perhaps in another post.
 
-## A probability-aware drafting strategy
+For more information, visit the [2023 Draft Tool](https://piyer97.shinyapps.io/NHLDraft2023/). You can reach Prashanth and I on twitter ([@iyer_prashanth](https://twitter.com/iyer_prashanth), [@spazznolo](https://twitter.com/spazznolo)).
 
-The next application asked a different question. If a team has two picks, should it always select the best available player at the first pick, or could it defer on that player and select another prospect who is more likely to be available later? Earlier NHL work argued that a team should select the best player available only when that player would not be available at the team's next pick. Pick probabilities and team values make the tradeoff explicit.
+::: {.part-break}
+:::
 
-The strategy's objective is to maximize conditional draft value at each pick. For `n` remaining prospects ranked from 1 to `n`, the historical formulation was:
+## NHL Draft: An Application of Prospect Pick Probabilities [Part 2]
 
-```text
+<span class="part-date">Originally published 2023-07-02.</span>
+
+In [An Application of Prospect Pick Probabilities](https://spazznolo.github.io/2023/06/20/draft-probabilities-3.html), I introduced a new perspective on draft pick value using Prashanth Iyer and I's [draft probability tool](https://piyer97.shinyapps.io/NHLDraft2023/). Here, I extend the methodology to include prospect value uncertainty.
+
+### Accounting for Uncertainty
+
+One of the main considerations for teams drafting in the 2-7 spot this year was whether they should risk their extremely valuable lottery pick on Matvei Michkov. He signed a 3-year contract in Russia. He only met with a few teams. He might be the most talented player in the draft. He may never come to North America... etc. Essentially, the question these teams were asking is this: is it worth drafting Michkov's uncertainty when more reliable, though perhaps less skilled, players are available? Once again, teams have to make a complex calculation. Once again, they're left with mostly instinct.
+
+Unless!
+
+Unless, prospect value uncertainty is quantified and included in the decision process.
+
+### Assigning Uncertainty
+
+Adapting the previous post to include uncertainty is actually easy. Instead of assigning prospect values through point estimates (Bedard was at 24 WAR, Michkov at 17.5), prospects are assigned [probability distributions](https://www.scribbr.com/statistics/probability-distributions/#:~:text=A%20probability%20distribution%20is%20a,using%20graphs%20or%20probability%20tables.) which reflect the uncertainty of their value.
+
+As an example: instead of Bedard's value being 24 WAR, it will be normally distributed with mean 24 and standard deviation 3. Here's what that looks like:
+
+![](/figs/draft-probabilities-4-1.png){fig-alt="Illustrative distribution for Bedard's prospect value." width="60%"}
+
+In this example:
+
+- Bedard has a 50% chance of providing 22-26 WAR.
+- Bedard has a 25% chance of providing 26+ WAR.
+- Bedard has a 25% chance of providing -22 WAR.
+
+Like the point estimates in the first post, the actual distribution doesn't matter, it's just an example to illustrate the framework I'm introducing.
+
+Let's assign these value distributions to each player, making sure Michkov's value has higher uncertainty by increasing the standard deviation of his distribution. Prospect values now look like this:
+
+![](/figs/draft-probabilities-4-2.png){fig-alt="Prospect value distributions with varying uncertainty." width="60%"}
+
+Then, these probability distributions are multiplied by the probability a prospect is available at each pick, as in the previous post. Pick values now look like this:
+
+![](/figs/draft-probabilities-4-3.png){fig-alt="Pick value distributions after accounting for prospect availability." width="60%"}
+
+With these pick value distributions you get the same comparisons as you did in the previous post, plus:
+
+- the probability that a given pick will be more valuable than another.
+- WAR for whichever "outcome" you're interested in (like top 10% scenario, bottom 10%, etc.)
+
+Let's re-visit the Montreal example where I suggested they should only trade up if the value of the fourth pick (15.87) exceeded that of their package (fifth pick (13.15) plus a piece). After including uncertainty, these point estimates become probability distributions and the difference between the two picks looks like this:
+
+![](/figs/draft-probabilities-4-4.png){fig-alt="Difference between the fourth and fifth pick value distributions." width="60%"}
+
+Code available here: [https://github.com/spazznolo/draft-rankings/blob/main/scripts/post_4.R](https://github.com/spazznolo/draft-rankings/blob/main/scripts/post_4.R)
+
+::: {.part-break}
+:::
+
+## NHL Draft: Introducing a new NHL drafting strategy
+
+<span class="part-date">Originally published 2023-07-07.</span>
+
+In [An Application of Prospect Pick Probabilities](https://spazznolo.github.io/2023/06/20/draft-probabilities-3.html), I used Prashanth Iyer and myself's [draft probability tool](https://piyer97.shinyapps.io/NHLDraft2023/) to create a new pick value framework which captured the unique dynamics of a given draft. Then, I [extended the methodology](https://spazznolo.github.io/2023/07/02/draft-probabilities-4.html) to include the uncertainty of prospect values. Here, I'll introduce a brand new drafting strategy for the NHL which aims to maximize draft value. But first, some background.
+
+### Background on Optimization
+
+The optimization of draft value has been explored specifically for the NHL by now Kraken analyst [@nnstats](https://twitter.com/nnstats) in this 2017 [paper](https://www.statsportsconsulting.com/wp-content/uploads/Nandakumar_PerfectDraft-1.pdf). It was a counter to the prevalent discourse at the time, which assumed the optimal draft was achieved by simply picking the best players as they were available. Instead, she argued that a team should only draft the best player available (BPA) if he won't be available for their next pick. For instance, Jamie Benn, a sixth round pick, should have been drafted in the fifth round to maximize total draft value.
+
+The key outstanding question from this work was: "How can we determine if the risk of deferring on the BPA and potentially losing them is worth the reward of drafting another quality prospect before landing the BPA later?" In this post, I'll show that the prospect pick probabilities from our draft tool, when combined with prospect values, allow for a probablistic framework to make such a decision.
+
+### Introducing a new NHL drafting strategy
+
+The core objective of this strategy is to determine a team's maximum conditional draft value at each pick. The maximum value is selected from a list of conditional draft values associated with each available prospect. Using a team's first two picks as an example, the strategy can be written (somewhat) formally like this:
+
+::: {.equation-note}
+```{.text .equation-expression}
 for n remaining prospects, ranked 1 to n
 max draft value = max(v1, v2, ..., vn)
 where,
@@ -184,58 +375,53 @@ vi = estimated draft value when choosing prospect i with the next pick, specific
 vi = v(pi) + (Pj(p1) x v(p1)) + ... + ((1 - Pj(p1) - ... - Pj(p(x-1))) x v(px))
 where,
 v(pi) = value of prospect i,
-Pj(pi) = probability that prospect i is available at pick j, and
+Pj(pi) = probability that propsect i is available at pick j, and
 Pj(p1) + ... + Pj(p(x-1)) < 1 and Pj(p1) + ... + Pj(p(x-1)) + Pj(p(x))) >= 1
 ```
+:::
 
-In words, choosing a prospect now contributes that prospect's value. The remainder of the expression follows the first prospect who is available at the next pick, weighted by the conditional probabilities that the earlier prospects have already gone. The strategy is not “always take the best player” or “always defer”; it compares the value of taking each available prospect now with the value of the next decision the team expects to face.
+To further illustrate, let's consider the first round of this year's draft up to pick 17.
 
-The source illustrated the framework with the Detroit Red Wings, who held picks nine and seventeen. Three sets of rankings—Bob McKenzie, Cam Robinson, and Chris Peters—were assigned values from the historical pick-value chart. The table shows the prospects remaining at pick nine in that example.
+### An example using the Red Wings' first round picks
 
-![Remaining prospect rankings at pick 9.](/figs/draft-probabilities-5-4.png){fig-alt="Remaining prospect rankings at pick 9." width="80%"}
+The Red Wings held the 9th and 17th picks in this year's draft. I'm going to calculate the optimal drafting strategy for the Red Wings using a set of [well-performing](https://twitter.com/spazznolo/status/1674392375018307585) prospect rankings from Bob McKenzie, Cam Robinson, and Chris Peters. Prospect values are assigned using their respective rankings in the historical pick value chart.
 
-To evaluate each candidate at pick nine, the calculation needed the candidate's value now, the conditional probability that each remaining prospect would still be available at pick seventeen, and those prospects' values. The resulting conditional values differed by analyst.
+At the 9th pick of the draft, the remaining prospects were ranked as follows:
 
-![Conditional draft values for the Red Wings’ pick 9 options.](/figs/draft-probabilities-5-5.png){fig-alt="Conditional draft values for the Red Wings’ pick 9 options." width="80%"}
+![](/figs/draft-probabilities-5-4.png){fig-alt="Remaining prospect rankings at pick 9." width="80%"}
 
-In that historical example, McKenzie and Robinson selected their best available prospect to maximize conditional value, while Peters deferred and selected his second-best option, Zach Benson. The result demonstrates the intended use of the strategy: disagreement in rankings or uncertainty in availability can change the best first move even when the decision rule is the same.
+Let's determine who each analyst should draft at the 9th pick to maximize their expected draft value for picks 9 and 17. To answer, we use the equation shown above, which requires: 1) the value of the prospect taken at 9, 2) the conditional probabilities of the remaining prospects being available at 17, and 3) the values of these remaining prospects.
 
-The strategy also clarifies why average pick charts are insufficient on their own. The chart can provide a common scale, but the probability-aware decision depends on the current draft's prospect distribution, the team's values, its pick inventory, and the conditional availability at later picks. The output should be read as decision support, not as a replacement for scouting judgment.
+![](/figs/draft-probabilities-5-5.png){fig-alt="Conditional draft values for the Red Wings' pick 9 options." width="80%"}
 
-## What the post-draft results showed
+Here, McKenzie and Robinson should take the BPA to maximize conditional draft value, but Peters should defer and take his second BPA, Zach Benson.
 
-The July 2024 retrospective reported that the probabilities were generally pretty well calibrated, but that the model was too certain in the top ten picks. The post described that as a practical problem because overconfidence in the top of the draft affected the resulting decisions and sportsbook comparisons. This is an observation from that draft cycle, not a new validation of the consolidated article.
+::: {.part-break}
+:::
 
-The retrospective summarized the workflow: rankings were combined in a rank-ordered logit model to derive pick probabilities; prospect values were represented with a historical value chart plus uncertainty estimates; and those pieces were combined into current-year pick-value distributions. The underlying visual recap reused the fourth-versus-fifth-pick difference plot already shown above. The canonical article keeps that figure once, under the caption that matches the pixels in the committed binary, rather than repeating the source's three identical image references under different captions.
+## NHL Draft: Post-Draft Analysis
 
-The useful retrospective conclusion is therefore qualified. Calibration looked reasonable overall, with excess certainty concentrated among the first ten picks. That pattern is evidence about the historical model and draft, not proof that the same calibration holds for later drafts or a different ranking population. It reinforces the need to inspect calibration and to carry model uncertainty into the decision rather than treating every probability as equally reliable.
+<span class="part-date">Originally published 2024-07-20.</span>
 
-## Limitations
+### Enhancing the Draft Pick Value Framework
 
-The probabilities depend on the rankings supplied to the model. User mock drafts and professional publications are not interchangeable sources, and the publication set can change from one draft year to the next. Any systematic difference between a publication's evaluation process and an NHL organization's process becomes part of the output.
+In general the probabilities were pretty well calibrated. However, the model was too certain in the top 10 picks. As a result, the sportsbooks cooked us.
 
-The imputation step assumes that a population defined by top-100 appearance can stand in for a full ranking. Prospects outside that set receive no modeled probability of being selected within the modeled picks, so the included prospects' probabilities are inflated. The source specifically noted that this problem becomes more important after the first two rounds. A historical undercoverage correction was suggested but not implemented in the source material.
+But first, a visual recap for those who don't want to read the [previous](https://spazznolo.github.io/2023/06/16/draft-probabilities-2.html) [three](https://spazznolo.github.io/2023/06/20/draft-probabilities-3.html) [posts](https://spazznolo.github.io/2023/07/02/draft-probabilities-4.html) (I get it).
 
-Time weighting is a useful simplification, but it flattens a dynamic process. A ranking published near draft day receives more weight than one published months earlier, yet the reason rankings change is not simply elapsed time. It is the information gathered about players during that period. The rank-ordered model also treats related ranking lists as if their information can be summarized by the chosen weighting scheme, an assumption that deserves new validation.
+### Visual Recap
 
-Calibration and confidence are not guaranteed by simulation. The historical Brier scores and calibration curve describe the reported event set. The post-draft retrospective found reasonable calibration overall but too much certainty in the top ten. That result should temper the interpretation of probabilities near the top of the draft, particularly when a decision depends on a small difference between two modeled outcomes.
+1. A rank-ordered logit model was built using numerous publication rankings throughout the draft year to derive prospect pick probabilities, like this:
 
-The value layer is equally dependent on assumptions. A seven-year WAR projection is a placeholder for a team's internal valuation, not an objective property of a pick. Historical average pick-value charts summarize a different population and may not reflect the strength or shape of the current class. Prospect-value distributions introduce another set of assumptions about means, spread, and dependence between outcomes.
+   ![](/figs/draft-probabilities-4-4.png){fig-alt="Distribution of the difference in pick values, measured in 7-year predicted WAR, with an expected difference of 2.72 WAR." width="60%"}
 
-The strategy depends on the team's board and on conditional availability. It can identify a value tradeoff, but it does not include every asset, roster, contract, or organizational constraint that affects a real trade. A recommendation to defer on the best available prospect is meaningful only relative to the stated next pick, values, and probabilities.
+2. Prospect values were derived using a historical draft pick value chart (values are placeholders for teams' actual internal projections), along with uncertainty estimates, like this:
 
-Finally, this page does not claim temporal generalization or a fresh model run. It preserves reported examples, figures, and caveats from work published between 2021 and 2024. The underlying data and models were not reconstructed for this edition, so the historical results should be read as an account of that analysis rather than as newly validated estimates.
+3. The previous two points were combined to create new pick value charts, like this:
 
-## Technical appendix
+As an example, the value of the third pick for a team who ranked the top 3 players in the draft as Bedard-Fantilli-Carlsson would be calculated as follows:
 
-The early mock-draft method treated a player's adjusted pick frequencies as data from which a gamma distribution could be fit. User quality was handled in two ways: drafts were filtered using thresholds such as RMSE to the user average or pro consensus below 15 and days to draft below 150, and the remaining drafts received weights from a linear regression. The regression used RMSE to user average, days to draft, and, when appropriate, RMSE to pro consensus as predictors of error against the actual draft order. User weights were the inverse of the predicted RMSE. The fitted distributions were then dampened by variance observed in prior years.
-
-The later rank-ordered model starts with ranking lists represented as orderings. Let the frequency of a prospect's appearance in the source lists determine an imputation weight. A completion algorithm creates a full ranking matrix from the partial lists. A time-weighted Plackett–Luce model then estimates each prospect's relative strength, while the Bayesian tier-weighted implementation uses its own weights based on tier importance and noise. The model outputs are sampled without replacement to produce simulated draft orders.
-
-For a player `p`, let `P_j(p)` denote the probability that the player is available at pick `j`. If a team values player `p` at `v(p)`, the simplest value of a pick is the sum of each available player's value multiplied by its probability, subject to the team's ordering of available players. The cumulative availability curve is formed by summing pick probabilities through each pick. Calibration treats each player-pick pair as an observed binary event and evaluates the predicted probability against that event with the Brier score.
-
-For uncertain values, replace the scalar `v(p)` with a random variable. Availability probabilities then weight distributions rather than single numbers. The resulting pick-value distribution supports questions about expected value, the chance that one pick exceeds another, and selected tail outcomes. The source's illustrative normal distributions are examples of the representation; the historical post did not establish that those distributions are calibrated forecasts for actual prospects.
-
-For multiple picks, conditional value is calculated by taking a candidate now and adding the expected value of the best relevant prospect available at the next pick. If the team's top prospect has probability `P_j(p1)` of remaining at that later pick, the next term is weighted accordingly; subsequent terms cover the event that earlier prospects are unavailable. Maximizing those candidate-specific conditional values yields the drafting strategy shown in the Detroit example.
-
-These equations and snippets document the structure of the historical methods. They are included so a reader can follow the argument and connect the figures to the decisions they describe. They are not an executable pipeline, and this consolidated article makes no claim that the original inputs, package versions, or model fits can be reproduced from this page alone.
+- There's a 0% chance Bedard is available, so his value is multiplied by 0.
+- There's a 21.0% chance Fantilli is available, so his value is multiplied by 0.210.
+- There's a 79% that neither Bedard nor Fantilli is available, so Carlsson's value is multiplied by 0.790.
+- These three values are summed to get the third pick's value.

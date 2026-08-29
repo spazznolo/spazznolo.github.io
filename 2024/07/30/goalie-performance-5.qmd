@@ -43,7 +43,7 @@ Some thoughts:
 
 We can gain another perspective on goalie experience by repeating the plot above for goalie career seasons played.
 
-![Average goalie career seasons and experience distribution.](/figs/goalie-six-two.png){fig-alt="Average goalie career seasons and experience distribution." width="60%"}
+![](/figs/goalie-six-two.png){fig-alt="Average goalie career seasons and experience distribution." width="60%"}
 
 Some thoughts:
 
@@ -71,7 +71,7 @@ As an example, Braden Holtby's pAdjSV% after facing various shot totals:
 - 15,000 shots: 0.9450
 - 19,555 shots: 0.9433
 
-![Braden Holtby's posterior adjusted save percentage over shots faced.](/figs/goalie-six-three.png){fig-alt="Braden Holtby's posterior adjusted save percentage over shots faced." width="60%"}
+![](/figs/goalie-six-three.png){fig-alt="Braden Holtby's posterior adjusted save percentage over shots faced." width="60%"}
 
 Some thoughts:
 
@@ -82,7 +82,7 @@ Some thoughts:
 
 To get a clearer sense of the dynamics described above, let's take the group average pAdjSV% through each shot faced.
 
-![Average posterior adjusted save percentage through shots faced by career-size group.](/figs/goalie-six-four.png){fig-alt="Average posterior adjusted save percentage through shots faced by career-size group." width="60%"}
+![](/figs/goalie-six-four.png){fig-alt="Average posterior adjusted save percentage through shots faced by career-size group." width="60%"}
 
 Some thoughts:
 
@@ -95,7 +95,7 @@ Some thoughts:
 
 Let's revisit the unintuive plot comparing pAdjSV% over goalie careers, grouped by career length. This time, we'll plot the average age of goalies in each group as they face shots over their career.
 
-![Average goalie age through shots faced by career-size group.](/figs/goalie-six-six.png){fig-alt="Average goalie age through shots faced by career-size group." width="60%"}
+![](/figs/goalie-six-six.png){fig-alt="Average goalie age through shots faced by career-size group." width="60%"}
 
 Some thoughts:
 

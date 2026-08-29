@@ -25,7 +25,7 @@ But before that, in this post, I'll briefly explain a few concepts that will com
 
 Goals have been [shown](http://www.hockeyanalytics.com/Research_files/Poisson_Toolbox.pdf) to follow a [Poisson process](https://en.wikipedia.org/wiki/Poisson_distribution). Fortunately, the Poisson is easy to simulate. Here's what 100,000 simulations of goals allowed in a game look like when a goalie is expected to allow 3 goals.
 
-![Distribution of simulated goals allowed when a goalie is expected to allow three goals.](/figs/goalie-zero-one.png){fig-alt="Distribution of simulated goals allowed when a goalie is expected to allow three goals." width="60%"}
+![](/figs/goalie-zero-one.png){fig-alt="Distribution of simulated goals allowed when a goalie is expected to allow three goals." width="60%"}
 
 *The simulation of the Poisson to obtain outcomes for an exploration on inter-game goalie consistency occurs in the [second post](/2022/03/29/goalie-consistency-2.html) of this series.*
 
@@ -39,7 +39,7 @@ Because of this, entropy can be used to measure the inter-shot consistency of go
 
 The application of entropy as a measure of consistency in sport was first (I think!) introduced [here](https://repository.upenn.edu/cgi/viewcontent.cgi?article=1081&context=statistics_papers), and then [repurposed](https://github.com/namitanandakumar/Draft-Analysis/blob/master/Streakiness/VanHAC%202018.pdf) for teams and shooters in hockey. We adapt this previous work to obtain the starting formula for goalie entropy (below).
 
-![Starting formula for goalie entropy based on save streaks.](/figs/goalie-formula-entropy.png){fig-alt="Starting formula for goalie entropy based on save streaks." width="50%"}
+![](/figs/goalie-formula-entropy.png){fig-alt="Starting formula for goalie entropy based on save streaks." width="50%"}
 
 Since entropy sums streaks of saves, it follows that higher entropy equates to a lack of consistency - or conversely that low entropy equates to consistency.
 

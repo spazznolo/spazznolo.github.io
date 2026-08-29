@@ -50,10 +50,10 @@ The Red Wings held the 9th and 17th picks in this year's draft. I'm going to cal
 
 At the 9th pick of the draft, the remaining prospects were ranked as follows:
 
-![Remaining prospect rankings at pick 9.](/figs/draft-probabilities-5-4.png){fig-alt="Remaining prospect rankings at pick 9." width="80%"}
+![](/figs/draft-probabilities-5-4.png){fig-alt="Remaining prospect rankings at pick 9." width="80%"}
 
 Let's determine who each analyst should draft at the 9th pick to maximize their expected draft value for picks 9 and 17. To answer, we use the equation shown above, which requires: 1) the value of the prospect taken at 9, 2) the conditional probabilities of the remaining prospects being available at 17, and 3) the values of these remaining prospects.
 
-![Conditional draft values for the Red Wings' pick 9 options.](/figs/draft-probabilities-5-5.png){fig-alt="Conditional draft values for the Red Wings' pick 9 options." width="80%"}
+![](/figs/draft-probabilities-5-5.png){fig-alt="Conditional draft values for the Red Wings' pick 9 options." width="80%"}
 
 Here, McKenzie and Robinson should take the BPA to maximize conditional draft value, but Peters should defer and take his second BPA, Zach Benson.

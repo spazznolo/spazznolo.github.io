@@ -7,7 +7,7 @@ listing:
   contents: "../20*/**/*.qmd"
   sort: "date desc"
   type: table
-  fields: [date, title, reading-time, categories, sports]
+  fields: [date, title, reading-time]
   sort-ui: false
   filter-ui: false
   page-size: 30

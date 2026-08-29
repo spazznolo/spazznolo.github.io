@@ -33,13 +33,13 @@ Imagine a scenario where a new and unknown goalie emerges. What probability can 
 
 To represent the possible career Fenwick save percentage for a new goalie, we can utilize the provided histogram of career 5v5 Fenwick save percentages for goalies who have faced 200+ shots (including those facing less adds noise - don't worry, it'll be addressed in a future post).
 
-![Distribution of career 5v5 Fenwick save percentages for goalies facing 200 or more shots.](/figs/goalie-performance-1-1.png){fig-alt="Distribution of career 5v5 Fenwick save percentages for goalies facing 200 or more shots." width="60%"}
+![](/figs/goalie-performance-1-1.png){fig-alt="Distribution of career 5v5 Fenwick save percentages for goalies facing 200 or more shots." width="60%"}
 
 While the histogram provides a rough distribution, it contains random bumps throughout. To obtain a more structured representation, we fit a distribution to it.
 
 The beta distribution is a commonly used prior when the variable of interest is a percentage, as in the case of the raw save percentage. Fitting a beta distribution to the career Fenwick save percentage distribution yields the following result.
 
-![Fitted beta distribution for career Fenwick save percentages.](/figs/goalie-performance-1-2.png){fig-alt="Fitted beta distribution for career Fenwick save percentages." width="60%"}
+![](/figs/goalie-performance-1-2.png){fig-alt="Fitted beta distribution for career Fenwick save percentages." width="60%"}
 
 The fit is... not really good, and alternative distributions such as gamma or Weibull will be explored in future posts to find the best fit, but it serves its purpose as an introduction to the framework. The beta distribution has two hyperparameters, alpha and beta, which can be interpreted as successes (saves) and failures (goals). The fitted beta distribution in this case has hyperparameters 852 and 55.6, indicating that we attribute 852 saves and 55.6 goals to a goalie before knowing anything about them. This corresponds to a .9388 Fenwick save percentage, or, a little below the median save percentage for goalies facing 200+ shots (.9406).
 
@@ -51,7 +51,7 @@ Updating the prior with observed goalie results is relatively straightforward. I
 
 As an example, let's plot the posterior distributions for two 24-year-old goalies: Jake Oettinger and Jeremy Swayman.
 
-![Posterior save percentage distributions for Jake Oettinger and Jeremy Swayman.](/figs/goalie-performance-1-3.png){fig-alt="Posterior save percentage distributions for Jake Oettinger and Jeremy Swayman." width="60%"}
+![](/figs/goalie-performance-1-3.png){fig-alt="Posterior save percentage distributions for Jake Oettinger and Jeremy Swayman." width="60%"}
 
 These posterior distributions offer interesting insights, like:
 

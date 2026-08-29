@@ -46,13 +46,13 @@ To adjust a goalie's save percentage for shot quality, we can incorporate these 
 
 Let's plot the distribution of career AdjSV% for goalies who have faced 200+ shots. We will also include a fitted beta distribution in white, and a weibull in red.
 
-![Career adjusted save percentage distribution with fitted beta and Weibull distributions.](/figs/goalie-performance-2-1.png){fig-alt="Career adjusted save percentage distribution with fitted beta and Weibull distributions." width="60%"}
+![](/figs/goalie-performance-2-1.png){fig-alt="Career adjusted save percentage distribution with fitted beta and Weibull distributions." width="60%"}
 
 At first glance, goalies' career AdjSV% seems to follow a weibull distribution! Cool, but we're going to sidestep this finding for the remainder of the post, because (hint, hint) *there maybe be more than one distribution here*. So we're fitting another beta, which means the remaining steps remain the same as the previous post. The prior is similar, except this time we add 933 saves and 60 goals (up from 852 and 55.6).
 
 Let's revisit the Jake Oettinger and Jeremy Swayman comparison.
 
-![Posterior adjusted save percentage distributions for Jake Oettinger and Jeremy Swayman.](/figs/goalie-performance-2-2.png){fig-alt="Posterior adjusted save percentage distributions for Jake Oettinger and Jeremy Swayman." width="60%"}
+![](/figs/goalie-performance-2-2.png){fig-alt="Posterior adjusted save percentage distributions for Jake Oettinger and Jeremy Swayman." width="60%"}
 
 The posteriors change as follows:
 
@@ -76,6 +76,6 @@ A couple of key points:
 
 In the next posts, I'll adress the outstanding assumptions listed at the start.
 
-![Comparison of save percentage metrics and posterior adjusted save percentage.](/figs/goalie-performance-2-3.png){fig-alt="Comparison of save percentage metrics and posterior adjusted save percentage." width="100%"}
+![](/figs/goalie-performance-2-3.png){fig-alt="Comparison of save percentage metrics and posterior adjusted save percentage." width="100%"}
 
 Code available here: [https://github.com/spazznolo/goalie-performance/blob/main/posts/post-2.R](https://github.com/spazznolo/goalie-performance/blob/main/posts/post-2.R)

@@ -106,6 +106,19 @@ class RouteValidationTest(unittest.TestCase):
             errors = validate_document_contract(site)
         self.assertEqual(errors, [])
 
+    def test_document_contract_accepts_explicit_empty_alt_for_decorative_image(self):
+        with TemporaryDirectory() as directory:
+            site = Path(directory)
+            (site / "index.html").write_text(
+                '<title>Home</title>'
+                '<meta name="description" content="A useful description.">'
+                '<link rel="canonical" href="https://spazznolo.github.io/">'
+                '<img src="decorative.png" alt="">',
+                encoding="utf-8",
+            )
+            errors = validate_document_contract(site)
+        self.assertEqual(errors, [])
+
     def test_document_contract_rejects_missing_canonical_url(self):
         with TemporaryDirectory() as directory:
             site = Path(directory)

@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
-const pages = ['/', '/research/', '/subjects/', '/about/', '/archive/', '/404.html', '/research/goalie-performance/', '/research/nhl-pick-probability/'];
+const pages = ['/', '/research/', '/about/', '/archive/', '/404.html', '/research/goalie-performance/', '/research/nhl-pick-probability/'];
 const widths = [320, 768, 1440];
 const responsivePages = ['/research/goalie-performance/', '/research/nhl-pick-probability/', '/2022/03/28/goalie-consistency-1.html', '/2022/09/16/tennis-liveblog.html'];
 
@@ -87,17 +87,18 @@ test('homepage starts with the approved image and About content', async ({ page 
 
 test('homepage featured reading times match the rendered listings', async ({ page }) => {
   await page.goto('/');
-  await expect(page.getByText(/Goalie Performance.*15 min/)).toBeVisible();
-  await expect(page.getByText(/NHL Pick Probability.*19 min/)).toBeVisible();
-  await expect(page.getByText(/Goalie Performance.*18 min/)).toHaveCount(0);
-  await expect(page.getByText(/NHL Pick Probability.*23 min/)).toHaveCount(0);
+  for (const title of ['Goalie Performance', 'NHL Pick Probability']) {
+    const featured = await page.locator('#featured-research li').filter({ hasText: title }).innerText();
+    const listingTime = await page.locator('#listing-recent-writing tbody tr').filter({ hasText: title }).locator('.listing-reading-time').innerText();
+    expect(featured).toContain(listingTime);
+  }
 });
 
 test('top navigation exposes only approved destinations', async ({ page }) => {
   await page.goto('/');
   const nav = page.locator('nav');
   await expect(nav.getByRole('link', { name: 'Research' })).toBeVisible();
-  await expect(nav.getByRole('link', { name: 'Subjects' })).toBeVisible();
+  await expect(nav.getByRole('link', { name: 'Subjects' })).toHaveCount(0);
   await expect(nav.getByRole('link', { name: 'About' })).toBeVisible();
   await expect(nav.getByRole('link', { name: 'GitHub' })).toHaveAttribute('href', 'https://github.com/spazznolo');
   await expect(nav.getByRole('link', { name: /LinkedIn|Twitter/i })).toHaveCount(0);
@@ -114,23 +115,10 @@ test('keyboard focus reaches navigation and activates Research', async ({ page }
 });
 
 for (const path of ['/research/goalie-performance/', '/2022/03/28/goalie-consistency-1.html']) {
-  test(`${path} activates category links without failed local requests`, async ({ page }) => {
-    const failedLocal = [];
-    page.on('response', (response) => {
-      if (response.url().startsWith('http://127.0.0.1:4173/') && response.status() >= 400) {
-        failedLocal.push(`${response.status()} ${response.url()}`);
-      }
-    });
+  test(`${path} does not show subjects beneath the post title`, async ({ page }) => {
     await page.goto(path);
-    const category = page.locator('header.quarto-title-block .quarto-category-link').first();
-    await expect(category).toBeVisible();
-    await expect(category).toHaveAttribute('href', /\/subjects\/#[-a-z0-9]+$/);
-    const categoryText = (await category.textContent()).trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-    await expect(category).toHaveAttribute('href', new RegExp(`/subjects/#${categoryText}$`));
-    expect(new URL(await category.getAttribute('href'), await page.url()).pathname).toBe('/subjects/');
-    await expect(page.locator('#quarto-search')).toHaveCount(0);
-    await page.waitForTimeout(250);
-    expect(failedLocal).toEqual([]);
+    await expect(page.locator('header.quarto-title-block .quarto-categories')).toHaveCount(0);
+    await expect(page.locator('header.quarto-title-block .quarto-category-link')).toHaveCount(0);
   });
 }
 
@@ -139,22 +127,49 @@ test('recent writing uses readable stacked rows at 320px', async ({ page }) => {
   await page.goto('/');
   const listing = page.locator('#listing-recent-writing');
   const table = listing.locator('table');
-  await expect(table.locator('thead th')).toHaveCount(4);
+  await expect(table.locator('thead th')).toHaveCount(3);
   const row = table.locator('tbody tr').first();
   await expect(row).toHaveCSS('display', 'block');
   await expect(row.locator('td').first()).toHaveCSS('display', 'grid');
   await expect(row.locator('.listing-title')).toContainText('Goalie Performance');
-  await expect(row.locator('.listing-categories')).toContainText('Bayesian statistics');
   const titleBox = await row.locator('.listing-title').boundingBox();
-  const categoriesBox = await row.locator('.listing-categories').boundingBox();
   expect(titleBox?.width ?? 0).toBeGreaterThan(140);
-  expect(categoriesBox?.width ?? 0).toBeGreaterThan(140);
+  await expect(row.locator('.listing-categories')).toHaveCount(0);
+  await expect(row).toHaveCSS('border-style', 'none');
   const labels = await page.evaluate(() =>
     [...document.querySelectorAll('#listing-recent-writing tbody tr:first-child td')].map((cell) =>
       getComputedStyle(cell, '::before').content,
     ),
   );
-  expect(labels).toEqual(['"Date"', '"Title"', '"Reading time"', '"Subjects"']);
+  expect(labels).toEqual(['"Date"', '"Title"', '"Reading time"']);
+});
+
+test('homepage framing is restrained and the decorative image has no caption', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('.home-image')).toHaveCSS('border-bottom-style', 'none');
+  await expect(page.locator('.home-about')).toHaveCSS('border-bottom-style', 'none');
+  await expect(page.locator('.home-stream h2').first()).toHaveCSS('border-bottom-style', 'none');
+  await expect(page.locator('.home-image figcaption')).toHaveCount(0);
+
+  await page.goto('/research/goalie-performance/');
+  await expect(page.locator('#TOC h2')).toHaveCSS('border-bottom-style', 'none');
+  await expect(page.locator('main section.level2 > h2').first()).toHaveCSS('border-bottom-style', 'none');
+});
+
+test('equations use the informal working-note treatment', async ({ page }) => {
+  await page.goto('/research/goalie-performance/');
+  const equation = page.locator('.equation-note').first();
+  await expect(equation).toBeVisible();
+  await expect(equation).toHaveCSS('border-left-style', 'solid');
+  await expect(equation).toHaveCSS('border-top-style', 'none');
+  await expect(equation).toHaveCSS('border-right-style', 'none');
+  await expect(equation).toHaveCSS('border-bottom-style', 'none');
+  await expect(equation.locator('details')).toHaveCount(0);
+
+  await page.goto('/research/nhl-pick-probability/');
+  const draftEquation = page.locator('.equation-note').first();
+  await expect(draftEquation).toBeVisible();
+  await expect(draftEquation.locator('details')).toHaveCount(0);
 });
 
 test('historical video has an in-element fallback link', async ({ page }) => {

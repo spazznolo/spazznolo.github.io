@@ -17,7 +17,7 @@ execute:
 
 In the [first post](/2022/03/28/goalie-consistency-1.html), we defined entropy as a measure for inter-shot goalie consistency using the following equation:
 
-![Starting formula for goalie entropy based on save streaks.](/figs/goalie-formula-entropy.png){fig-alt="Starting formula for goalie entropy based on save streaks." width="40%"}
+![](/figs/goalie-formula-entropy.png){fig-alt="Starting formula for goalie entropy based on save streaks." width="40%"}
 
 In order to advance this idea to include Expected Goals, we need to modify two parts: the simulation of seasons - we can no longer randomize seasons through sampling shot outcomes without replacement; and the entropy equation listed above - which needs to include the probability of shots becoming goals.
 
@@ -31,7 +31,7 @@ For example, in 2020 Thatcher Demko was scored on 99 times, but was expected to 
 
 The entropy equation is modified in the following way: instead of the number of shots saved in a row (or, the save streak) between goals, we sum the number of Expected Goals saved in between goals (the Expected Goals saved streak).
 
-![Adjusted entropy formula using Expected Goals saved streaks.](/figs/goalie-formula-entropy-two.png){fig-alt="Adjusted entropy formula using Expected Goals saved streaks." width="80%"}
+![](/figs/goalie-formula-entropy-two.png){fig-alt="Adjusted entropy formula using Expected Goals saved streaks." width="80%"}
 
 ## The Results
 
@@ -41,16 +41,16 @@ With this, we can measure the effect of inter-shot goalie consistency on various
 
 ### Inter-shot goalie consistency does not have an effect on overall performance.
 
-![Overall performance compared with inter-shot goalie consistency.](/figs/goalie-three-one.png){fig-alt="Overall performance compared with inter-shot goalie consistency." width="60%"}
+![](/figs/goalie-three-one.png){fig-alt="Overall performance compared with inter-shot goalie consistency." width="60%"}
 
 ### The 10 streakiest goalie careers.
 
-![The ten streakiest goalie careers ranked by inter-shot consistency.](/figs/goalie-three-two.png){fig-alt="The ten streakiest goalie careers ranked by inter-shot consistency." width="60%"}
+![](/figs/goalie-three-two.png){fig-alt="The ten streakiest goalie careers ranked by inter-shot consistency." width="60%"}
 
 ### The 10 least streaky goalie careers.
 
-![The ten least streaky goalie careers ranked by inter-shot consistency.](/figs/goalie-three-three.png){fig-alt="The ten least streaky goalie careers ranked by inter-shot consistency." width="60%"}
+![](/figs/goalie-three-three.png){fig-alt="The ten least streaky goalie careers ranked by inter-shot consistency." width="60%"}
 
 ### Goalie inter-shot consistency does not have an effect on career season-over-season consistency.
 
-![Career season-over-season consistency compared with inter-shot goalie consistency.](/figs/goalie-three-four.png){fig-alt="Career season-over-season consistency compared with inter-shot goalie consistency." width="60%"}
+![](/figs/goalie-three-four.png){fig-alt="Career season-over-season consistency compared with inter-shot goalie consistency." width="60%"}

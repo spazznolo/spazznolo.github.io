@@ -8,7 +8,6 @@ project:
     - "*.qmd"
     - "about/**/*.qmd"
     - "research/**/*.qmd"
-    - "subjects/**/*.qmd"
     - "archive/**/*.qmd"
     - "background/**/*.qmd"
     - "goalies/**/*.qmd"
@@ -32,8 +31,6 @@ website:
     right:
       - text: "Research"
         href: /research/
-      - text: "Subjects"
-        href: /subjects/
       - text: "About"
         href: /about/
       - text: "GitHub"
@@ -51,12 +48,12 @@ format:
     respect-user-color-scheme: false
     toc: true
     toc-location: body
+    title-block-categories: false
     code-fold: true
     code-summary: "Show code"
     syntax-highlighting: arrow
     fig-cap-location: bottom
     link-external-newwindow: true
-    include-after-body: filters/category-links.html
 
 execute:
   freeze: auto

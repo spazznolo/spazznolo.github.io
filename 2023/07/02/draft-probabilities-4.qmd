@@ -34,7 +34,7 @@ Adapting the previous post to include uncertainty is actually easy. Instead of a
 
 As an example: instead of Bedard's value being 24 WAR, it will be normally distributed with mean 24 and standard deviation 3. Here's what that looks like:
 
-![Illustrative distribution for Bedard's prospect value.](/figs/draft-probabilities-4-1.png){fig-alt="Illustrative distribution for Bedard's prospect value." width="60%"}
+![](/figs/draft-probabilities-4-1.png){fig-alt="Illustrative distribution for Bedard's prospect value." width="60%"}
 
 In this example:
 
@@ -46,11 +46,11 @@ Like the point estimates in the first post, the actual distribution doesn't matt
 
 Let's assign these value distributions to each player, making sure Michkov's value has higher uncertainty by increasing the standard deviation of his distribution. Prospect values now look like this:
 
-![Prospect value distributions with varying uncertainty.](/figs/draft-probabilities-4-2.png){fig-alt="Prospect value distributions with varying uncertainty." width="60%"}
+![](/figs/draft-probabilities-4-2.png){fig-alt="Prospect value distributions with varying uncertainty." width="60%"}
 
 Then, these probability distributions are multiplied by the probability a prospect is available at each pick, as in the previous post. Pick values now look like this:
 
-![Pick value distributions after accounting for prospect availability.](/figs/draft-probabilities-4-3.png){fig-alt="Pick value distributions after accounting for prospect availability." width="60%"}
+![](/figs/draft-probabilities-4-3.png){fig-alt="Pick value distributions after accounting for prospect availability." width="60%"}
 
 With these pick value distributions you get the same comparisons as you did in the previous post, plus:
 
@@ -59,6 +59,6 @@ With these pick value distributions you get the same comparisons as you did in t
 
 Let's re-visit the Montreal example where I suggested they should only trade up if the value of the fourth pick (15.87) exceeded that of their package (fifth pick (13.15) plus a piece). After including uncertainty, these point estimates become probability distributions and the difference between the two picks looks like this:
 
-![Difference between the fourth and fifth pick value distributions.](/figs/draft-probabilities-4-4.png){fig-alt="Difference between the fourth and fifth pick value distributions." width="60%"}
+![](/figs/draft-probabilities-4-4.png){fig-alt="Difference between the fourth and fifth pick value distributions." width="60%"}
 
 Code available here: [https://github.com/spazznolo/draft-rankings/blob/main/scripts/post_4.R](https://github.com/spazznolo/draft-rankings/blob/main/scripts/post_4.R)

@@ -1,4 +1,9 @@
 local function disclosure(block)
+  for _, class_name in ipairs(block.classes) do
+    if class_name == "equation-expression" then
+      return block
+    end
+  end
   return {
     pandoc.RawBlock(
       "html",

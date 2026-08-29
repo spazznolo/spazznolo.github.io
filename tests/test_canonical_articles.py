@@ -14,8 +14,16 @@ def source_contract(relative_path, headings, minimum_words, maximum_words):
     words = re.findall(r"\b[\w’'-]+\b", text)
     if not minimum_words <= len(words) <= maximum_words:
         raise AssertionError(f"{relative_path}: {len(words)} words outside {minimum_words}-{maximum_words}")
-    if "retains the original analysis" not in text:
-        raise AssertionError(f"{relative_path}: missing historical-analysis note")
+    if text.count("This article consolidates") != 1:
+        raise AssertionError(f"{relative_path}: consolidation note must be one sentence")
+    for editorial_phrase in [
+        "retains the original analysis",
+        "underlying data and models were not reconstructed",
+        "This is an editorial consolidation",
+        "not a fresh analysis",
+    ]:
+        if editorial_phrase in text:
+            raise AssertionError(f"{relative_path}: contains added editorial prose: {editorial_phrase}")
 
 
 class CanonicalArticleTest(unittest.TestCase):
@@ -23,16 +31,13 @@ class CanonicalArticleTest(unittest.TestCase):
         source_contract(
             "research/goalie-performance/index.qmd",
             [
-                "Why goalie performance needs shrinkage",
-                "Estimating talent with empirical Bayes",
-                "Adjusting for shot quality",
-                "Age, opportunity, and selection",
-                "What the distribution looks like",
-                "How much evidence is enough?",
-                "Limitations",
-                "Technical appendix",
+                "Goalie Performance: Empirical Bayes Save Percentage",
+                "Goalie Performance: Empirical Bayes Adjusted Save Percentage",
+                "Goalie Performance: Adjusting for Age",
+                "Goalie Performance: Exploring the Distribution",
+                "Goalie Performance: Sample Sizes",
             ],
-            2500,
+            3400,
             4200,
         )
 
@@ -44,27 +49,22 @@ class CanonicalArticleTest(unittest.TestCase):
             "Age SQ AdjSV%: 0.948619",
             "posterior SQ AdjSV%: 0.947082",
             "posterior Age SQ AdjSV%: 0.948338",
-            "mean shots against changed from 4,198 to 4,286",
-            "mean adjusted save percentage changed from .932 to .933",
+            "mean rises, 4,198 to 4,286",
+            "mean rises, .932 to .933",
+            "The fit is... not really good",
+            "surprise, surprise",
         ]:
             self.assertIn(fact, text)
         self.assertNotIn(
-            "![Braden Holtby's posterior adjusted save percentage over shots faced.]"
-            "(/figs/goalie-six-three.png)",
+            'fig-alt="Braden Holtby\'s posterior adjusted save percentage over shots faced."',
             text,
         )
         self.assertIn(
-            "![Average posterior adjusted save percentage paths by career-size group.]"
             "(/figs/goalie-six-seven.png)",
             text,
         )
         self.assertIn(
-            "![Average goalie age through shots faced by career-size group.]"
             "(/figs/goalie-six-six.png)",
-            text,
-        )
-        self.assertIn(
-            "weighting observed careers by shots emphasizes the high-opportunity careers and can introduce performance-selection bias",
             text,
         )
 
@@ -72,16 +72,14 @@ class CanonicalArticleTest(unittest.TestCase):
         source_contract(
             "research/nhl-pick-probability/index.qmd",
             [
-                "From rankings to probabilities",
-                "The rank-ordered logit model",
-                "Prospect pick distributions",
-                "Applying uncertainty to draft value",
-                "A probability-aware drafting strategy",
-                "What the post-draft results showed",
-                "Limitations",
-                "Technical appendix",
+                "NHL Draft: Assigning pick probabilities from user mock drafts",
+                "NHL Draft: Deriving pick probabilities from draft rankings",
+                "NHL Draft: An Application of Prospect Pick Probabilities [Part 1]",
+                "NHL Draft: An Application of Prospect Pick Probabilities [Part 2]",
+                "NHL Draft: Introducing a new NHL drafting strategy",
+                "NHL Draft: Post-Draft Analysis",
             ],
-            3200,
+            4400,
             5500,
         )
 
@@ -91,11 +89,10 @@ class CanonicalArticleTest(unittest.TestCase):
             "draft_simulations <- replicate(100000, sample(1:skaters, skaters, replace = FALSE, prob = mle_estimates))",
             text,
         )
-        self.assertIn("source-reported aggregate for picks 1 through 5 was 16.3%", text)
-        self.assertIn("displayed rounded components", text)
-        self.assertIn("sum to 16.2% at the shown precision", text)
-        self.assertIn("historical figure labels", text)
-        self.assertIn("source prose instead describes adjusted-to-user as approximately 0.0604", text)
+        self.assertIn("probability Mikko Rantanen would be selected in the first five picks was 16.3%", text)
+        self.assertIn("adjusted user data (score ~ 0.0604)", text)
+        self.assertIn("Unless!", text)
+        self.assertIn("the sportsbooks cooked us", text)
 
 
 if __name__ == "__main__":

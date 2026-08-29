@@ -28,11 +28,20 @@ class RenderedSiteSmokeTest(unittest.TestCase):
             SITE / "sitemap.xml",
             SITE / "404.html",
             SITE / "research" / "index.html",
-            SITE / "subjects" / "index.html",
             SITE / "archive" / "index.html",
         ]
         missing = [str(path.relative_to(ROOT)) for path in required if not path.is_file()]
         self.assertEqual(missing, [])
+
+    def test_statistical_subjects_are_not_a_public_surface(self):
+        homepage = (SITE / "index.html").read_text(encoding="utf-8")
+        self.assertNotIn("Statistical subjects", homepage)
+        self.assertNotIn('href="./subjects/"', homepage)
+        self.assertFalse((SITE / "subjects" / "index.html").exists())
+
+    def test_homepage_image_has_no_redundant_visible_caption(self):
+        homepage = (SITE / "index.html").read_text(encoding="utf-8")
+        self.assertNotIn("A warm, grainy overhead image", homepage)
 
     def test_homepage_open_graph_title_is_meaningful(self):
         html = (SITE / "index.html").read_text(encoding="utf-8")
