@@ -17,6 +17,7 @@ project:
     - "post-regulation/**/*.qmd"
     - "20*/**/*.qmd"
     - "posts/**/*.qmd"
+    - "!templates/**/*.qmd"
 
 website:
   title: "jeremie.spagnolo"

@@ -6,7 +6,8 @@ const widths = [320, 768, 1440];
 
 for (const path of pages) {
   test(`${path} has no serious accessibility violations`, async ({ page }) => {
-    await page.goto(path);
+    const response = await page.goto(path);
+    expect(response?.ok()).toBe(true);
     const results = await new AxeBuilder({ page }).analyze();
     const serious = results.violations.filter(v => ['serious', 'critical'].includes(v.impact));
     expect(serious).toEqual([]);
