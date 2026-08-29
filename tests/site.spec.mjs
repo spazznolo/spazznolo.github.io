@@ -23,6 +23,18 @@ for (const width of widths) {
   });
 }
 
+for (const path of ['/research/goalie-performance/', '/research/nhl-pick-probability/']) {
+  for (const width of widths) {
+    test(`${path} fits ${width}px`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 900 });
+      const response = await page.goto(path);
+      expect(response?.ok()).toBe(true);
+      const overflow = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth);
+      expect(overflow).toBe(false);
+    });
+  }
+}
+
 test('approved homepage presentation is retained', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('.navbar-brand')).toHaveCount(1);

@@ -51,7 +51,12 @@ pre.text {
   overflow-wrap: anywhere;
   word-break: break-word;
 }
-pre.text code { color: inherit; }
+pre.text code {
+  color: inherit;
+  white-space: inherit;
+  overflow-wrap: inherit;
+  word-break: inherit;
+}
 
 @media (max-width: 680px) {
   #quarto-content, .page-layout-full main { width: min(100% - 2rem, var(--reading-width)); }
