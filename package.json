@@ -1,0 +1,13 @@
+{
+  "name": "spazznolo-quarto-site",
+  "private": true,
+  "engines": { "node": "20.20.1" },
+  "scripts": {
+    "test": "playwright test",
+    "test:site": "playwright test"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.13.0",
+    "@playwright/test": "1.62.1"
+  }
+}

@@ -1,0 +1,7 @@
+---
+title: "Archive"
+description: "Earlier sports statistics posts, preserved in their original context."
+toc: false
+---
+
+The archive preserves earlier work and its original publication context. Some installments now point to a consolidated article, but the original pages remain available.

@@ -1,0 +1,17 @@
+---
+title: "About"
+description: "About Jeremie Spagnolo and the ideas behind this sports statistics blog."
+toc: false
+---
+
+Around 2016, a few years removed from a mathematics degree, my interest in proofs, statistics, and even logic puzzles was waning. I was leaning toward creative pursuits—working odd jobs, reading fiction, and making music. During that time, my brother lent me *[Stat Shot](http://www.hockeyabstract.com/statshot)*.
+
+The book was written as an entry point for casual fans to understand advanced hockey statistics. I read it as a blueprint. It helped me understand the research process as a creative one: curiosity gives way to a qualitative argument, possible quantitative frameworks take shape, and an idea is either pursued or set aside.
+
+That process led from independent hockey research to an internship at the St. Lawrence River Institute, then to applied research at Statistics Canada. I now work as a **Data science contractor for the Chicago Blackhawks**.
+
+I have also been building a tennis-tracking program intended to scale from individual matches to tournament-level data. That project is **paused with intent to return**.
+
+My public work currently lives in sports, but the statistical subjects are broader: Bayesian inference, probability, simulation, distributions, sampling, regression, and calibration.
+
+[GitHub](https://github.com/spazznolo)

@@ -1,0 +1,36 @@
+---
+title: "New statistical note"
+description: "A draft sports-statistics analysis."
+date: 2026-08-28
+date-modified: 2026-08-28
+categories:
+  - Bayesian statistics
+sports:
+  - Hockey
+status: current
+reading-time: true
+draft: true
+execute:
+  freeze: auto
+toc: true
+---
+
+## Question
+
+State the sports question and why it matters before introducing the model.
+
+## Data and assumptions
+
+Identify the data source, sampling unit, exclusions, assumptions, and any unavailable inputs.
+
+## Analysis
+
+Keep executable code close to the result it creates. Prefer a static figure unless interaction adds analytical value.
+
+## Validation and uncertainty
+
+Report calibration, out-of-sample behavior, uncertainty, and important failure modes.
+
+## Takeaway
+
+Return to the sports question and separate the evidence from the interpretation.

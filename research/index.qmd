@@ -1,0 +1,7 @@
+---
+title: "Research"
+description: "Sports statistics research in chronological order."
+toc: false
+---
+
+Current and renovated work will appear here first. The complete historical collection remains available in the [Archive](/archive/).

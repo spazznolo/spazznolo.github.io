@@ -1,0 +1,21 @@
+---
+title: "Statistical subjects"
+description: "Research organized by the statistical ideas used."
+toc: false
+---
+
+## Bayesian statistics
+
+Empirical Bayes, priors and posteriors, and shrinkage.
+
+## Probability and simulation
+
+Draft uncertainty, overtime formats, and expected value.
+
+## Distributions and sampling
+
+Beta-binomial models, mixture models, and sample-size questions.
+
+## Regression and calibration
+
+Logistic models, age curves, and model reliability.

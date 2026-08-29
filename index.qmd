@@ -7,7 +7,7 @@ page-layout: full
 
 ::: {.home-stream}
 ::: {.home-image}
-![A warm, grainy overhead image from the original blog homepage.](/figs/fifty-four.png)
+![A warm, grainy overhead image from the original blog homepage.](/figs/fifty-four.png){fig-alt="A warm, grainy overhead image from the original blog homepage."}
 :::
 
 ::: {.home-about}
