@@ -1,0 +1,7 @@
+---
+title: "Tennis tracking"
+description: "Computer-vision notes from a tennis-tracking project."
+toc: false
+---
+
+The tennis-tracking project is **paused with intent to return**. Its framework, object-detection, pipeline, data, and liveblog posts remain in the [Archive](/archive/).

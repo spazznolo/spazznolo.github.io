@@ -1,0 +1,7 @@
+---
+title: "Background"
+description: "The original background page now lives in the expanded About page."
+toc: false
+---
+
+This material now lives on the expanded [About](/about/) page. The original story—from *Stat Shot*, through independent research and Statistics Canada, to current work—has been retained there.

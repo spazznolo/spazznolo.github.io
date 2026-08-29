@@ -1,0 +1,7 @@
+---
+title: "NHL Draft"
+description: "Archived and consolidated research about NHL pick probability."
+toc: false
+---
+
+Draft research is now organized by statistical subject. Start with [NHL Pick Probability](/research/nhl-pick-probability/) or browse the complete [Archive](/archive/).

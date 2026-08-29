@@ -1,0 +1,7 @@
+---
+title: "Goalies"
+description: "Archived and consolidated research about goalie performance and consistency."
+toc: false
+---
+
+Goalie research is now organized by statistical subject. Start with [Goalie Performance](/research/goalie-performance/) or browse the complete [Archive](/archive/).

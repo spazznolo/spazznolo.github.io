@@ -1,0 +1,7 @@
+---
+title: "Post-regulation"
+description: "Research about overtime, shootouts, randomness, and standings uncertainty."
+toc: false
+---
+
+The original four-part post-regulation analysis remains in the [Archive](/archive/). It will be consolidated in a later editorial pass.
