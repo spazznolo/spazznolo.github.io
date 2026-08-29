@@ -43,6 +43,7 @@ website:
 
 format:
   html:
+    canonical-url: true
     theme:
       dark: [cosmo, styles/dark.scss, styles/site.scss]
       light: [cosmo, styles/light.scss, styles/site.scss]

@@ -8,11 +8,14 @@ from unittest.mock import patch
 
 from scripts.validate_rendered_site import (
     main,
+    listing_input_paths,
     route_to_output,
     validate_asset_sizes,
     validate_document_contract,
     validate_internal_links,
+    validate_listing_inputs,
     validate_routes,
+    validate_source_front_matter,
 )
 
 
@@ -76,14 +79,16 @@ class RouteValidationTest(unittest.TestCase):
         with TemporaryDirectory() as directory:
             site = Path(directory)
             (site / "index.html").write_text(
-                '<title>  </title><img src="figure.png" alt="  ">', encoding="utf-8"
+                '<title>  </title>'
+                '<meta name="description" content="A description">'
+                '<link rel="canonical" href="https://spazznolo.github.io/">'
+                '<img src="figure.png" alt="  ">', encoding="utf-8"
             )
             errors = validate_document_contract(site)
         self.assertEqual(
             errors,
             [
                 "index.html: missing title",
-                "index.html: missing meta description",
                 "index.html: image missing alt text: figure.png",
             ],
         )
@@ -94,11 +99,111 @@ class RouteValidationTest(unittest.TestCase):
             (site / "index.html").write_text(
                 '<title>Home</title>'
                 '<meta name="description" content="A useful description.">'
+                '<link rel="canonical" href="https://spazznolo.github.io/">'
                 '<img src="figure.png" alt="A plotted result">',
                 encoding="utf-8",
             )
             errors = validate_document_contract(site)
         self.assertEqual(errors, [])
+
+    def test_document_contract_rejects_missing_canonical_url(self):
+        with TemporaryDirectory() as directory:
+            site = Path(directory)
+            (site / "index.html").write_text(
+                '<title>Home</title>'
+                '<meta name="description" content="A useful description.">',
+                encoding="utf-8",
+            )
+            errors = validate_document_contract(site)
+        self.assertEqual(errors, ["index.html: expected exactly one canonical URL, found 0"])
+
+    def test_document_contract_rejects_duplicate_or_mismatched_canonical_url(self):
+        with TemporaryDirectory() as directory:
+            site = Path(directory)
+            (site / "about").mkdir()
+            (site / "about" / "index.html").write_text(
+                '<title>About</title>'
+                '<meta name="description" content="About this site.">'
+                '<link rel="canonical" href="https://spazznolo.github.io/about/">'
+                '<link rel="canonical" href="https://example.com/about/">',
+                encoding="utf-8",
+            )
+            errors = validate_document_contract(site)
+        self.assertEqual(
+            errors,
+            ["about/index.html: expected exactly one canonical URL, found 2"],
+        )
+
+    def test_document_contract_rejects_canonical_url_that_does_not_match_route(self):
+        with TemporaryDirectory() as directory:
+            site = Path(directory)
+            (site / "about").mkdir()
+            (site / "about" / "index.html").write_text(
+                '<title>About</title>'
+                '<meta name="description" content="About this site.">'
+                '<link rel="canonical" href="https://example.com/about/">',
+                encoding="utf-8",
+            )
+            errors = validate_document_contract(site)
+        self.assertEqual(
+            errors,
+            [
+                "about/index.html: canonical URL must be absolute and use "
+                "https://spazznolo.github.io/about/"
+            ],
+        )
+
+    def test_listing_input_discovery_is_complete(self):
+        root = Path(__file__).resolve().parents[1]
+        paths = listing_input_paths(root)
+        self.assertEqual(len(paths), 26)
+        self.assertEqual(
+            {path.relative_to(root).as_posix() for path in paths[:2]},
+            {
+                "research/goalie-performance/index.qmd",
+                "research/nhl-pick-probability/index.qmd",
+            },
+        )
+        relative_paths = [path.relative_to(root) for path in paths]
+        self.assertEqual(sum(path.parts[0].startswith("20") for path in relative_paths), 24)
+        self.assertEqual(validate_listing_inputs(root), [])
+
+    def test_source_front_matter_rejects_missing_or_blank_required_fields(self):
+        required = ("title", "date", "description", "status")
+        with TemporaryDirectory() as directory:
+            source = Path(directory) / "source.qmd"
+            for field in required:
+                with self.subTest(field=field, mode="missing"):
+                    lines = [
+                        "---",
+                        'title: "Valid title"',
+                        "date: 2024-01-01",
+                        'description: "Valid description."',
+                        "status: archived",
+                        "---",
+                        "",
+                    ]
+                    lines = [line for line in lines if not line.startswith(f"{field}:")]
+                    source.write_text("\n".join(lines), encoding="utf-8")
+                    errors = validate_source_front_matter([source])
+                    self.assertEqual(errors, [f"source.qmd: missing required field '{field}'"])
+                with self.subTest(field=field, mode="blank"):
+                    lines = [
+                        "---",
+                        'title: "Valid title"',
+                        "date: 2024-01-01",
+                        'description: "Valid description."',
+                        "status: archived",
+                        "---",
+                        "",
+                    ]
+                    lines = [
+                        f"{field}: \"\"" if line.startswith(f"{field}:") else line
+                        for line in lines
+                    ]
+                    source.write_text("\n".join(lines), encoding="utf-8")
+                    errors = validate_source_front_matter([source])
+                    self.assertEqual(errors, [f"source.qmd: missing required field '{field}'"])
 
     def test_oversized_asset_is_reported(self):
         with TemporaryDirectory() as directory:

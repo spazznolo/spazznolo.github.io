@@ -3,7 +3,16 @@ import argparse
 from html.parser import HTMLParser
 import json
 from pathlib import Path
+import re
 from urllib.parse import unquote, urlsplit
+
+
+CANONICAL_BASE_URL = "https://spazznolo.github.io"
+LISTING_REQUIRED_FIELDS = ("title", "date", "description", "status")
+CANONICAL_LISTING_INPUTS = (
+    "research/goalie-performance/index.qmd",
+    "research/nhl-pick-probability/index.qmd",
+)
 
 
 class ReferenceParser(HTMLParser):
@@ -15,6 +24,7 @@ class ReferenceParser(HTMLParser):
         self.title_text = ""
         self._in_title = False
         self.description = False
+        self.canonical_urls = []
 
     def handle_starttag(self, tag, attrs):
         values = dict(attrs)
@@ -22,6 +32,9 @@ class ReferenceParser(HTMLParser):
             self.references.append(values["href"])
         if tag == "link" and values.get("href"):
             self.references.append(values["href"])
+            rel = {part.lower() for part in values.get("rel", "").split()}
+            if "canonical" in rel:
+                self.canonical_urls.append(values["href"])
         if tag in {"img", "script", "video", "source"} and values.get("src"):
             self.references.append(values["src"])
         if tag == "img":
@@ -108,9 +121,88 @@ def validate_document_contract(site: Path) -> list[str]:
             errors.append(f"{rel}: missing title")
         if not parser.description:
             errors.append(f"{rel}: missing meta description")
+        expected_canonical = canonical_url_for_output(rel)
+        if len(parser.canonical_urls) != 1:
+            errors.append(
+                f"{rel}: expected exactly one canonical URL, found "
+                f"{len(parser.canonical_urls)}"
+            )
+        elif parser.canonical_urls[0] != expected_canonical:
+            errors.append(
+                f"{rel}: canonical URL must be absolute and use "
+                f"{expected_canonical}"
+            )
         for image in parser.images:
             if not image.get("alt", "").strip():
                 errors.append(f"{rel}: image missing alt text: {image.get('src', '')}")
+    return errors
+
+
+def canonical_url_for_output(relative_output: str) -> str:
+    """Return Quarto's canonical URL for a rendered HTML output path."""
+    relative = Path(relative_output).as_posix()
+    if relative == "index.html":
+        route = "/"
+    elif relative.endswith("/index.html"):
+        route = f"/{relative[:-len('index.html')]}"
+    else:
+        route = f"/{relative}"
+    return f"{CANONICAL_BASE_URL}{route}"
+
+
+def listing_input_paths(root: Path) -> list[Path]:
+    """Discover the canonical and historical source files consumed by listings."""
+    canonical = [root / relative for relative in CANONICAL_LISTING_INPUTS]
+    historical = sorted(root.glob("20*/**/*.qmd"))
+    return canonical + historical
+
+
+def _source_front_matter(source: Path) -> dict[str, str]:
+    lines = source.read_text(encoding="utf-8").splitlines()
+    if not lines or lines[0].strip() != "---":
+        return {}
+    try:
+        end = lines.index("---", 1)
+    except ValueError:
+        return {}
+    metadata = {}
+    for line in lines[1:end]:
+        match = re.match(r"^([A-Za-z][A-Za-z0-9_-]*):(\s*(.*))?$", line)
+        if match:
+            value = (match.group(3) or "").strip()
+            metadata[match.group(1)] = value.strip("\"'").strip()
+    return metadata
+
+
+def validate_source_front_matter(sources: list[Path]) -> list[str]:
+    errors = []
+    for source in sources:
+        try:
+            metadata = _source_front_matter(source)
+        except OSError as error:
+            errors.append(f"{source.as_posix()}: unable to read source ({error})")
+            continue
+        rel = source.name
+        for field in LISTING_REQUIRED_FIELDS:
+            if not metadata.get(field, "").strip():
+                errors.append(f"{rel}: missing required field '{field}'")
+    return errors
+
+
+def validate_listing_inputs(root: Path) -> list[str]:
+    errors = []
+    sources = listing_input_paths(root)
+    if len(sources) != len(CANONICAL_LISTING_INPUTS) + 24:
+        errors.append(
+            "listing input discovery expected 26 sources, "
+            f"found {len(sources)}"
+        )
+    missing = [source for source in sources if not source.is_file()]
+    errors.extend(
+        f"missing listing input: {source.relative_to(root).as_posix()}"
+        for source in missing
+    )
+    errors.extend(validate_source_front_matter([source for source in sources if source.is_file()]))
     return errors
 
 
@@ -146,6 +238,7 @@ def main() -> int:
         errors.extend(validate_internal_links(args.site))
         errors.extend(validate_document_contract(args.site))
         errors.extend(validate_asset_sizes(args.site))
+        errors.extend(validate_listing_inputs(args.routes.resolve().parent.parent))
 
     for error in sorted(set(errors)):
         print(error)
