@@ -1,0 +1,36 @@
+{
+  "pages": [
+    {"route": "/", "source": "index.qmd", "series": "page"},
+    {"route": "/background/", "source": "background/index.qmd", "series": "page"},
+    {"route": "/goalies/", "source": "goalies/index.qmd", "series": "page"},
+    {"route": "/tennis/", "source": "tennis/index.qmd", "series": "page"},
+    {"route": "/draft/", "source": "draft/index.qmd", "series": "page"},
+    {"route": "/post-regulation/", "source": "post-regulation/index.qmd", "series": "page"}
+  ],
+  "posts": [
+    {"route": "/2021/11/28/draft-probabilities-1.html", "source": "2021/11/28/draft-probabilities-1.qmd", "series": "draft"},
+    {"route": "/2022/03/28/goalie-consistency-1.html", "source": "2022/03/28/goalie-consistency-1.qmd", "series": "goalie"},
+    {"route": "/2022/03/29/goalie-consistency-2.html", "source": "2022/03/29/goalie-consistency-2.qmd", "series": "goalie"},
+    {"route": "/2022/04/02/goalie-consistency-3.html", "source": "2022/04/02/goalie-consistency-3.qmd", "series": "goalie"},
+    {"route": "/2022/04/07/goalie-consistency-4.html", "source": "2022/04/07/goalie-consistency-4.qmd", "series": "goalie"},
+    {"route": "/2022/04/20/post-regulation-1.html", "source": "2022/04/20/post-regulation-1.qmd", "series": "post-regulation"},
+    {"route": "/2022/04/26/post-regulation-2.html", "source": "2022/04/26/post-regulation-2.qmd", "series": "post-regulation"},
+    {"route": "/2022/04/29/post-regulation-3.html", "source": "2022/04/29/post-regulation-3.qmd", "series": "post-regulation"},
+    {"route": "/2022/04/30/post-regulation-4.html", "source": "2022/04/30/post-regulation-4.qmd", "series": "post-regulation"},
+    {"route": "/2022/09/16/tennis-liveblog.html", "source": "2022/09/16/tennis-liveblog.qmd", "series": "tennis"},
+    {"route": "/2023/01/15/tennis-framework.html", "source": "2023/01/15/tennis-framework.qmd", "series": "tennis"},
+    {"route": "/2023/05/17/goalie-performance-1.html", "source": "2023/05/17/goalie-performance-1.qmd", "series": "goalie"},
+    {"route": "/2023/05/22/goalie-performance-2.html", "source": "2023/05/22/goalie-performance-2.qmd", "series": "goalie"},
+    {"route": "/2023/06/16/draft-probabilities-2.html", "source": "2023/06/16/draft-probabilities-2.qmd", "series": "draft"},
+    {"route": "/2023/06/20/draft-probabilities-3.html", "source": "2023/06/20/draft-probabilities-3.qmd", "series": "draft"},
+    {"route": "/2023/07/02/draft-probabilities-4.html", "source": "2023/07/02/draft-probabilities-4.qmd", "series": "draft"},
+    {"route": "/2023/07/07/draft-probabilities-5.html", "source": "2023/07/07/draft-probabilities-5.qmd", "series": "draft"},
+    {"route": "/2023/07/08/goalie-performance-3.html", "source": "2023/07/08/goalie-performance-3.qmd", "series": "goalie"},
+    {"route": "/2023/07/30/tennis-data.html", "source": "2023/07/30/tennis-data.qmd", "series": "tennis"},
+    {"route": "/2024/07/20/draft-probabilities-6.html", "source": "2024/07/20/draft-probabilities-6.qmd", "series": "draft"},
+    {"route": "/2024/07/25/tennis-object-detection.html", "source": "2024/07/25/tennis-object-detection.qmd", "series": "tennis"},
+    {"route": "/2024/07/30/goalie-performance-4.html", "source": "2024/07/30/goalie-performance-4.qmd", "series": "goalie"},
+    {"route": "/2024/07/30/goalie-performance-5.html", "source": "2024/07/30/goalie-performance-5.qmd", "series": "goalie"},
+    {"route": "/2024/07/30/tennis-pipeline.html", "source": "2024/07/30/tennis-pipeline.qmd", "series": "tennis"}
+  ]
+}
