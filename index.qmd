@@ -3,7 +3,9 @@ title: "Home"
 description: "Sports statistics, applied modeling, and research notes by Jeremie Spagnolo."
 toc: false
 page-layout: full
-title-block: false
+format:
+  html:
+    title-block: false
 listing:
   id: recent-writing
   contents:
@@ -32,8 +34,8 @@ This blog serves as an outlet to explore ideas which naturally interest me. I tr
 
 ## Featured research
 
-- [Goalie Performance](/research/goalie-performance/) — Estimating talent while respecting small-sample uncertainty. · 18 min
-- [NHL Pick Probability](/research/nhl-pick-probability/) — Turning rankings into pick distributions and decisions. · 23 min
+- [Goalie Performance](/research/goalie-performance/) — Estimating talent while respecting small-sample uncertainty. · 15 min
+- [NHL Pick Probability](/research/nhl-pick-probability/) — Turning rankings into pick distributions and decisions. · 19 min
 
 ## Statistical subjects
 

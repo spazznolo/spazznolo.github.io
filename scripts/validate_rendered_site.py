@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import argparse
+from datetime import date
 from html.parser import HTMLParser
 import json
 from pathlib import Path
@@ -9,6 +10,7 @@ from urllib.parse import unquote, urlsplit
 
 CANONICAL_BASE_URL = "https://spazznolo.github.io"
 LISTING_REQUIRED_FIELDS = ("title", "date", "description", "status")
+LISTING_ALLOWED_STATUSES = ("canonical", "archived")
 CANONICAL_LISTING_INPUTS = (
     "research/goalie-performance/index.qmd",
     "research/nhl-pick-probability/index.qmd",
@@ -174,19 +176,43 @@ def _source_front_matter(source: Path) -> dict[str, str]:
     return metadata
 
 
-def validate_source_front_matter(sources: list[Path]) -> list[str]:
+def _relative_source_path(source: Path, root: Path | None) -> str:
+    if root is not None:
+        try:
+            return source.resolve().relative_to(root.resolve()).as_posix()
+        except ValueError:
+            pass
+    return source.name
+
+
+def validate_source_front_matter(sources: list[Path], root: Path | None = None) -> list[str]:
     errors = []
     for source in sources:
+        rel = _relative_source_path(source, root)
         try:
             metadata = _source_front_matter(source)
         except OSError as error:
-            errors.append(f"{source.as_posix()}: unable to read source ({error})")
+            errors.append(f"{rel}: unable to read source ({error})")
             continue
-        rel = source.name
         for field in LISTING_REQUIRED_FIELDS:
             if not metadata.get(field, "").strip():
                 errors.append(f"{rel}: missing required field '{field}'")
+        raw_date = metadata.get("date", "").strip()
+        if raw_date and (not re.fullmatch(r"\d{4}-\d{2}-\d{2}", raw_date) or _invalid_iso_date(raw_date)):
+            errors.append(f"{rel}: invalid ISO date '{raw_date}'")
+        status = metadata.get("status", "").strip()
+        if status and status not in LISTING_ALLOWED_STATUSES:
+            allowed = ", ".join(LISTING_ALLOWED_STATUSES)
+            errors.append(f"{rel}: status must be one of {allowed} (got '{status}')")
     return errors
+
+
+def _invalid_iso_date(value: str) -> bool:
+    try:
+        date.fromisoformat(value)
+    except ValueError:
+        return True
+    return False
 
 
 def validate_listing_inputs(root: Path) -> list[str]:
@@ -202,7 +228,11 @@ def validate_listing_inputs(root: Path) -> list[str]:
         f"missing listing input: {source.relative_to(root).as_posix()}"
         for source in missing
     )
-    errors.extend(validate_source_front_matter([source for source in sources if source.is_file()]))
+    errors.extend(
+        validate_source_front_matter(
+            [source for source in sources if source.is_file()], root=root
+        )
+    )
     return errors
 
 

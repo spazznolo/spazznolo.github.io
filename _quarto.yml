@@ -45,8 +45,9 @@ format:
   html:
     canonical-url: true
     theme:
-      dark: [cosmo, styles/dark.scss, styles/site.scss]
-      light: [cosmo, styles/light.scss, styles/site.scss]
+      dark: [cosmo, styles/dark.scss]
+      light: [cosmo, styles/light.scss]
+    css: styles/site.css
     respect-user-color-scheme: false
     toc: true
     toc-location: body
@@ -55,7 +56,7 @@ format:
     syntax-highlighting: arrow
     fig-cap-location: bottom
     link-external-newwindow: true
-    include-after-body: []
+    include-after-body: filters/category-links.html
 
 execute:
   freeze: auto

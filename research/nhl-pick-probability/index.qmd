@@ -65,20 +65,20 @@ There are thousands of eligible prospects, but ranking publications list only a 
 
 ```r
 # Get skater appearance counts
-top_skater_freq <- 
+top_skater_freq <-
   rank_summaries(
-    data=ranking_matrix, 
-    format_input="ordering", 
+    data=ranking_matrix,
+    format_input="ordering",
     mean_rank=TRUE,
     pc=FALSE) %>%
   .$marginals %>%
   colSums()
 
 # Impute partial rankings to create full ranking matrix
-full_ranking_matrix <- 
+full_ranking_matrix <-
   make_complete(
-    data=ranking_matrix, 
-    format_input="ordering", 
+    data=ranking_matrix,
+    format_input="ordering",
     probitems=top_skater_freq) %>%
   .$completedata
 ```

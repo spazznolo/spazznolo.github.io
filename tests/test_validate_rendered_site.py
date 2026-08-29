@@ -187,6 +187,7 @@ class RouteValidationTest(unittest.TestCase):
                     source.write_text("\n".join(lines), encoding="utf-8")
                     errors = validate_source_front_matter([source])
                     self.assertEqual(errors, [f"source.qmd: missing required field '{field}'"])
+
                 with self.subTest(field=field, mode="blank"):
                     lines = [
                         "---",
@@ -205,6 +206,45 @@ class RouteValidationTest(unittest.TestCase):
                     errors = validate_source_front_matter([source])
                     self.assertEqual(errors, [f"source.qmd: missing required field '{field}'"])
 
+    def test_source_front_matter_rejects_invalid_dates_and_statuses(self):
+        with TemporaryDirectory() as directory:
+            source = Path(directory) / "nested" / "source.qmd"
+            source.parent.mkdir()
+            source.write_text(
+                "---\n"
+                'title: "Valid title"\n'
+                "date: 2024-02-30\n"
+                'description: "Valid description."\n'
+                "status: draft\n"
+                "---\n",
+                encoding="utf-8",
+            )
+            errors = validate_source_front_matter([source], root=Path(directory))
+        self.assertEqual(
+            errors,
+            [
+                "nested/source.qmd: invalid ISO date '2024-02-30'",
+                "nested/source.qmd: status must be one of canonical, archived (got 'draft')",
+            ],
+        )
+
+    def test_source_front_matter_diagnostics_are_repository_relative(self):
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            source = root / "research" / "nested" / "source.qmd"
+            source.parent.mkdir(parents=True)
+            source.write_text(
+                "---\n"
+                'title: "Valid title"\n'
+                "date: 2024-01-01\n"
+                'description: "Valid description."\n'
+                "status: canonical\n"
+                "---\n",
+                encoding="utf-8",
+            )
+            source.write_text(source.read_text(encoding="utf-8").replace("title: \"Valid title\"", "title: \"\""), encoding="utf-8")
+            errors = validate_source_front_matter([source], root=root)
+        self.assertEqual(errors, ["research/nested/source.qmd: missing required field 'title'"])
     def test_oversized_asset_is_reported(self):
         with TemporaryDirectory() as directory:
             site = Path(directory)

@@ -7,3 +7,12 @@ $navbar-fg: #211d17;
 $border-color: #c9bda9;
 $code-bg: #eee5d6;
 $code-color: #211d17;
+
+body.quarto-light {
+  --warm-accent: #4f3900;
+}
+
+body.quarto-light .navbar .nav-link,
+body.quarto-light .quarto-color-scheme-toggle {
+  color: #4f3900 !important;
+}

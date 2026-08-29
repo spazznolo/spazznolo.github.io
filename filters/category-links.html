@@ -1,0 +1,13 @@
+<script>
+(() => {
+  const slugify = (text) => text.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  document.querySelectorAll("header.quarto-title-block .quarto-category").forEach((category) => {
+    const text = category.textContent.trim();
+    const link = document.createElement("a");
+    link.className = "quarto-category-link";
+    link.href = `/subjects/#${slugify(text)}`;
+    link.textContent = text;
+    category.replaceWith(link);
+  });
+})();
+</script>
