@@ -1,0 +1,41 @@
+---
+title: ""
+description: "Sports statistics, applied modeling, and research notes by Jeremie Spagnolo."
+toc: false
+page-layout: full
+---
+
+::: {.home-stream}
+::: {.home-image}
+![A warm, grainy overhead image from the original blog homepage.](/figs/fifty-four.png)
+:::
+
+::: {.home-about}
+# About
+
+This blog serves as an outlet to explore ideas which naturally interest me. I try to keep an informal, back-of-the-napkin style to these posts, hopefully a little like [Tom Tango](http://www.tangotiger.com/index.php). Posts are grouped by topic in the header, but can be accessed in chronological order below.
+:::
+
+## Featured research
+
+- [Goalie Performance](/2023/05/17/goalie-performance-1.html) — Estimating talent while respecting small-sample uncertainty. · 12 min
+- [NHL Pick Probability](/2023/06/16/draft-probabilities-2.html) — Turning rankings into pick distributions and decisions. · 9 min
+
+## Statistical subjects
+
+### Bayesian statistics
+Empirical Bayes, priors and posteriors, and shrinkage.
+
+### Probability and simulation
+Draft uncertainty, overtime formats, and expected value.
+
+### Distributions and sampling
+Beta-binomial models, mixture models, and sample size.
+
+### Regression and calibration
+Logistic models, age curves, and model reliability.
+
+## Recent writing
+
+The complete chronological collection is available under [Research](/research/).
+:::

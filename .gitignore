@@ -4,3 +4,11 @@ _site/
 .jekyll-metadata
 .DS_Store
 .worktrees/
+.quarto/
+node_modules/
+test-results/
+playwright-report/
+.superpowers/
+
+/.quarto/
+**/*.quarto_ipynb

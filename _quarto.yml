@@ -1,0 +1,62 @@
+project:
+  type: website
+  output-dir: _site
+  resources:
+    - figs/**
+    - robots.txt
+  render:
+    - "*.qmd"
+    - "about/**/*.qmd"
+    - "research/**/*.qmd"
+    - "subjects/**/*.qmd"
+    - "archive/**/*.qmd"
+    - "background/**/*.qmd"
+    - "goalies/**/*.qmd"
+    - "tennis/**/*.qmd"
+    - "draft/**/*.qmd"
+    - "post-regulation/**/*.qmd"
+    - "20*/**/*.qmd"
+    - "posts/**/*.qmd"
+
+website:
+  title: "jeremie.spagnolo"
+  site-url: "https://spazznolo.github.io"
+  description: "Sports statistics, applied modeling, and research notes by Jeremie Spagnolo."
+  google-analytics: "G-DGRHZS5DNM"
+  open-graph: true
+  search: false
+  navbar:
+    title: "jeremie.spagnolo"
+    collapse: true
+    right:
+      - text: "Research"
+        href: /research/
+      - text: "Subjects"
+        href: /subjects/
+      - text: "About"
+        href: /about/
+      - text: "GitHub"
+        href: "https://github.com/spazznolo"
+  page-footer:
+    border: false
+
+format:
+  html:
+    theme:
+      dark: [cosmo, styles/dark.scss, styles/site.scss]
+      light: [cosmo, styles/light.scss, styles/site.scss]
+    respect-user-color-scheme: false
+    toc: true
+    toc-location: body
+    code-fold: true
+    code-summary: "Show code"
+    syntax-highlighting: arrow
+    fig-cap-location: bottom
+    link-external-newwindow: true
+    include-after-body: []
+
+execute:
+  freeze: auto
+
+filters:
+  - filters/reading-time.lua

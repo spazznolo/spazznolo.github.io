@@ -1,0 +1,36 @@
+/*-- scss:defaults --*/
+$font-family-sans-serif: "Source Code Pro", monospace;
+$font-family-monospace: "Source Code Pro", monospace;
+$font-size-root: 13px;
+
+/*-- scss:rules --*/
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500;700&display=swap");
+
+:root {
+  --warm-accent: #ddb85c;
+  --warm-divider: #393228;
+  --reading-width: 800px;
+}
+
+body { line-height: 1.65; }
+.navbar { border-bottom: 1px solid var(--warm-divider); }
+.navbar-brand { font-size: 0.92rem; font-weight: 500; }
+.navbar-nav { gap: 0.55rem; }
+.nav-link, .quarto-color-scheme-toggle { color: var(--warm-accent) !important; }
+
+#quarto-content, .page-layout-full main { max-width: var(--reading-width); margin-inline: auto; }
+.home-stream { display: block; }
+.home-image { border-bottom: 1px solid var(--warm-divider); margin-bottom: 2rem; }
+.home-image img { display: block; width: 100%; max-height: 420px; object-fit: cover; }
+.home-about { border-bottom: 1px solid var(--warm-divider); padding-bottom: 2rem; margin-bottom: 2.4rem; }
+.home-about h1, main > h2 { color: var(--warm-accent); font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.home-about p { color: #f2f0eb; font-size: 1rem; }
+body.quarto-light .home-about p { color: #211d17; }
+.article-reading-time, .archive-notice, .article-context { color: var(--warm-accent); font-size: 0.84rem; }
+.listing-table, .quarto-listing { width: 100%; }
+img, video, iframe { max-width: 100%; }
+
+@media (max-width: 680px) {
+  #quarto-content, .page-layout-full main { width: min(100% - 2rem, var(--reading-width)); }
+  .navbar > .container-fluid { align-items: flex-start; }
+}

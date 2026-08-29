@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://spazznolo.github.io/sitemap.xml
