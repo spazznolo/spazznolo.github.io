@@ -1,0 +1,54 @@
+---
+title: "Tennis: Summary of Object Detection"
+description: "A historical summary of the Tennis Tracker object-detection model and post-processing."
+date: 2024-07-25
+categories: []
+sports:
+  - Tennis
+status: archived
+reading-time: true
+toc: true
+execute:
+  enabled: false
+---
+
+I stepped away from the first iteration of this project last year when I realized I was going to have to annotate thousands of images to create a robust player/ball detection model. In the next few months, I'll design and build such a modelling framework. This post outlines the methods and services which will be used for the framework.
+
+## YOLOv5
+
+The current object detection model is [YOLOv5](https://pytorch.org/hub/ultralytics_yolov5/). Recall some of the results from the [latest](https://app.roboflow.com/tennistracker-dogbm/tennis-tracker-duufq/deploy/15) model iteration were:
+
+```
+overall:      91.0% P, 85.5% R, 85.8 mAP50
+front-player: 99.5% P, 99.6% R, 99.5 mAP50
+back-player:  99.5% P, 99.4% R, 99.3 mAP50
+tennis-ball:  74.1% P, 57.0% R, 58.7 mAP50
+```
+
+## Video Example
+
+For a short example of the inference, click [here](https://www.youtube.com/watch?v=DwdfFsjQgFg).
+
+## When does the model tend to *not classify* an object?
+
+For players, xxx.
+
+For tennis balls, xxx.
+
+## When does the model tend to *mis-classify* an object?
+
+For players, xxx.
+
+For tennis balls, xxx.
+
+## Post-Processing of Tennis Players
+
+The model performs strongly, so a simple imputation strategy using interpolation has worked so far. Interpolation is done through Python's xxx module. Here are the specs:
+
+- window:
+- function: mean
+- na length:
+
+## Post-Processing of Tennis Ball
+
+to be continued
