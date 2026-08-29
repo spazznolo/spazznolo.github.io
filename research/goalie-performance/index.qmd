@@ -84,7 +84,7 @@ The comparisons suggested that goalies with poor starts tend to play fewer games
 
 ## Age, opportunity, and selection
 
-The third post addressed age. Goalies tend to improve, peak, and then decline, so treating age as irrelevant can confound a comparison between careers at different stages. Birth dates were linked from Hockey-Reference to game dates in order to calculate exact age for each game. Because the linkage was incomplete, the population fell from 315 to 308 goalies. The reported harmonic means changed only slightly: shots against rose from 12,690 to 12,721, while harmonic mean adjusted save percentage remained .939. The source's conclusion was that the linked and original populations barely differed.
+The third post addressed age. Goalies tend to improve, peak, and then decline, so treating age as irrelevant can confound a comparison between careers at different stages. Birth dates were linked from Hockey-Reference to game dates in order to calculate exact age for each game. Because the linkage was incomplete, the population fell from 315 to 308 goalies. The reported harmonic means changed only slightly: shots against rose from 12,690 to 12,721, while harmonic mean adjusted save percentage remained .939. The corresponding arithmetic means changed too: mean shots against changed from 4,198 to 4,286, and mean adjusted save percentage changed from .932 to .933. The source's conclusion was that the linked and original populations barely differed.
 
 ![Save percentage by goalie age, with lighter points for smaller groups.](/figs/goalie-performance-3-1.png){fig-alt="Save percentage by goalie age, with lighter points for smaller groups." width="60%"}
 
@@ -96,7 +96,13 @@ The resulting curve peaked around age 25. That agreed with some earlier research
 
 `Adjusted (Age + xG) Save Percentage (AdjSV%) = MSV% + (FSV% - xFSV% + acAdj)`
 
-The source illustrated the adjustment with Lundqvist's career and reported the raw, shot-quality-adjusted, age-and-shot-quality-adjusted, posterior, and posterior age-and-shot-quality rates. Those values are retained as a historical example, not as a new estimate.
+The source illustrated the adjustment with Lundqvist's career. The following five values are the source's historical example, not new estimates:
+
+- SV%: 0.948638
+- SQ AdjSV%: 0.947320
+- Age SQ AdjSV%: 0.948619
+- posterior SQ AdjSV%: 0.947082
+- posterior Age SQ AdjSV%: 0.948338
 
 Opportunity creates a second selection problem. A 200-shot cutoff removed 90 of 314 goalies, or 28.7% in the distributional exploration. A negative-binomial approach based on shots faced and adjusted saves could include short careers, but it would also weight the analysis toward goalies who received more opportunities. Goalies who perform well are more likely to keep playing, so career length is not independent of performance.
 
@@ -104,7 +110,7 @@ The later mixture approach addressed that compromise by allowing separate priors
 
 ## What the distribution looks like
 
-The distributional post made the cutoff and opportunity issues concrete. In the population described there, the 200-shot cutoff removed nearly 30% of goalies, although the excluded group represented less than 1% of shots faced. That is an important distinction: weighting by shots gives a stable estimate for the shots that occurred, while treating careers equally keeps the short-career population visible. Neither choice is automatically correct for a tool meant to evaluate goalies who are still playing.
+The distributional post made the cutoff and opportunity issues concrete. In the population described there, the 200-shot cutoff removed nearly 30% of goalies, although the excluded group represented less than 1% of shots faced. That is an important tradeoff: weighting observed careers by shots emphasizes the high-opportunity careers and can introduce performance-selection bias, while treating careers equally keeps the short-career population visible but loses nearly 30% of the goalie population. Neither choice is automatically correct for a tool meant to evaluate goalies who are still playing.
 
 ![Cumulative distribution of career shots faced for goalies.](/figs/goalie-six-one.png){fig-alt="Cumulative distribution of career shots faced for goalies." width="60%"}
 
@@ -124,13 +130,11 @@ The reported cumulative distribution gave a useful sense of how uneven goalie ex
 
 ![Average adjusted save percentage by career seasons played.](/figs/goalie-six-two.png){fig-alt="Average adjusted save percentage by career seasons played." width="60%"}
 
-The posterior can be evaluated after every shot, which makes a career a path rather than one final rate. The source divided careers into groups below 300 shots, 300–1,500, 1,500–6,000, and above 6,000. Braden Holtby's reported path moved from 0.9417 before any shots, to 0.9421 after 1,000, 0.9425 after 5,000, 0.9452 after 10,000, 0.9450 after 15,000, and 0.9433 after 19,555.
-
-![Braden Holtby's posterior adjusted save percentage over shots faced.](/figs/goalie-six-three.png){fig-alt="Braden Holtby's posterior adjusted save percentage over shots faced." width="60%"}
+The posterior can be evaluated after every shot, which makes a career a path rather than one final rate. The source divided careers into groups below 300 shots, 300–1,500, 1,500–6,000, and above 6,000. Braden Holtby's reported path moved from 0.9417 before any shots, to 0.9421 after 1,000, 0.9425 after 5,000, 0.9452 after 10,000, 0.9450 after 15,000, and 0.9433 after 19,555. No distinct matching binary for that historical Holtby plot is available in the migrated figures, so the reported values are retained in prose without reproducing a mismatched image.
 
 The group summaries suggested that nearly every goalie below 6,000 shots ended below expected, that the 1,500–6,000 group faded over its career, and that the 1,500–6,000 group could start above the 6,000-plus group before fading. The post interpreted this as a combination of randomness and age rather than a simple ranking of groups.
 
-![Average posterior adjusted save percentage through shots faced by career-size group.](/figs/goalie-six-four.png){fig-alt="Average posterior adjusted save percentage through shots faced by career-size group." width="60%"}
+![Average posterior adjusted save percentage paths by career-size group.](/figs/goalie-six-seven.png){fig-alt="Average posterior adjusted save percentage paths by career-size group." width="60%"}
 
 The age comparison helped explain the pattern: goalies in the 1,500–6,000 group were about 1.5 years older than the 6,000-plus group throughout their careers, including the age range in which the custom curve suggested improvement.
 

@@ -36,6 +36,38 @@ class CanonicalArticleTest(unittest.TestCase):
             4200,
         )
 
+    def test_goalie_performance_retains_source_facts_and_matching_figures(self):
+        text = (ROOT / "research/goalie-performance/index.qmd").read_text(encoding="utf-8")
+        for fact in [
+            "SV%: 0.948638",
+            "SQ AdjSV%: 0.947320",
+            "Age SQ AdjSV%: 0.948619",
+            "posterior SQ AdjSV%: 0.947082",
+            "posterior Age SQ AdjSV%: 0.948338",
+            "mean shots against changed from 4,198 to 4,286",
+            "mean adjusted save percentage changed from .932 to .933",
+        ]:
+            self.assertIn(fact, text)
+        self.assertNotIn(
+            "![Braden Holtby's posterior adjusted save percentage over shots faced.]"
+            "(/figs/goalie-six-three.png)",
+            text,
+        )
+        self.assertIn(
+            "![Average posterior adjusted save percentage paths by career-size group.]"
+            "(/figs/goalie-six-seven.png)",
+            text,
+        )
+        self.assertIn(
+            "![Average goalie age through shots faced by career-size group.]"
+            "(/figs/goalie-six-six.png)",
+            text,
+        )
+        self.assertIn(
+            "weighting observed careers by shots emphasizes the high-opportunity careers and can introduce performance-selection bias",
+            text,
+        )
+
     def test_nhl_pick_probability_contract(self):
         source_contract(
             "research/nhl-pick-probability/index.qmd",
