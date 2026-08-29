@@ -156,6 +156,30 @@ test('homepage framing is restrained and the decorative image has no caption', a
   await expect(page.locator('main section.level2 > h2').first()).toHaveCSS('border-bottom-style', 'none');
 });
 
+test('homepage section labels use the compact type scale', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.getByRole('heading', { name: 'Featured research' })).toHaveCSS('font-size', '9.75px');
+  await expect(page.getByRole('heading', { name: 'Recent writing' })).toHaveCSS('font-size', '9.75px');
+});
+
+test('article section headings use the smaller reading hierarchy', async ({ page }) => {
+  await page.goto('/research/goalie-performance/');
+  await expect(page.getByRole('heading', { name: 'Accounting for shot quality' })).toHaveCSS('font-size', '16.25px');
+});
+
+test('article table of contents omits its redundant title', async ({ page }) => {
+  await page.goto('/research/goalie-performance/');
+  await expect(page.getByRole('heading', { name: 'On this page' })).toBeHidden();
+  await expect(page.locator('#TOC a').first()).toBeVisible();
+});
+
+test('article reading frame is wider on desktop', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/research/goalie-performance/');
+  const frame = await page.locator('#quarto-content').boundingBox();
+  expect(frame?.width ?? 0).toBeGreaterThanOrEqual(900);
+});
+
 test('equations use the informal working-note treatment', async ({ page }) => {
   await page.goto('/research/goalie-performance/');
   const equation = page.locator('.equation-note').first();
