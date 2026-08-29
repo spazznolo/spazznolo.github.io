@@ -2,6 +2,7 @@
 /*-- scss:rules --*/
 @import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500;700&display=swap");
 :root {
+  font-size: 13px;
   --warm-accent: #ddb85c;
   --warm-divider: #393228;
   --reading-width: 800px;

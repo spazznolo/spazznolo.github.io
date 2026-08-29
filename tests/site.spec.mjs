@@ -54,6 +54,23 @@ test('approved homepage presentation is retained', async ({ page }) => {
   await expect(page.locator('body')).toHaveCSS('font-family', /Source Code Pro/);
 });
 
+for (const mode of ['dark', 'light']) {
+  for (const width of [320, 1440]) {
+    test(`body type scale stays at 13px in ${mode} mode at ${width}px`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto('/');
+      if (mode === 'light') {
+        await page.locator('.quarto-color-scheme-toggle').click();
+        await expect(page.locator('body')).toHaveClass(/quarto-light/);
+      } else {
+        await expect(page.locator('body')).toHaveClass(/quarto-dark/);
+      }
+      await expect(page.locator('html')).toHaveCSS('font-size', '13px');
+      await expect(page.locator('body')).toHaveCSS('font-size', '13px');
+    });
+  }
+}
+
 test('homepage starts with the approved image and About content', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('#title-block-header')).toBeHidden();

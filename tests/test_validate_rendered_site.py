@@ -168,6 +168,28 @@ class RouteValidationTest(unittest.TestCase):
         self.assertEqual(sum(path.parts[0].startswith("20") for path in relative_paths), 24)
         self.assertEqual(validate_listing_inputs(root), [])
 
+    def test_listing_input_discovery_includes_current_posts_and_excludes_templates(self):
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            post = root / "posts" / "current-note" / "index.qmd"
+            post.parent.mkdir(parents=True)
+            post.write_text(
+                "---\n"
+                'title: "Current note"\n'
+                "date: 2026-08-28\n"
+                'description: "A current note."\n'
+                "status: current\n"
+                "---\n",
+                encoding="utf-8",
+            )
+            template = root / "templates" / "post.qmd"
+            template.parent.mkdir()
+            template.write_text("---\nstatus: current\n---\n", encoding="utf-8")
+            paths = listing_input_paths(root)
+            self.assertIn(post, paths)
+            self.assertNotIn(template, paths)
+            self.assertEqual(validate_source_front_matter([post], root=root), [])
+
     def test_source_front_matter_rejects_missing_or_blank_required_fields(self):
         required = ("title", "date", "description", "status")
         with TemporaryDirectory() as directory:
@@ -224,7 +246,7 @@ class RouteValidationTest(unittest.TestCase):
             errors,
             [
                 "nested/source.qmd: invalid ISO date '2024-02-30'",
-                "nested/source.qmd: status must be one of canonical, archived (got 'draft')",
+                "nested/source.qmd: status must be one of canonical, archived, current (got 'draft')",
             ],
         )
 

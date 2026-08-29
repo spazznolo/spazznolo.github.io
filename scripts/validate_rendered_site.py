@@ -10,7 +10,7 @@ from urllib.parse import unquote, urlsplit
 
 CANONICAL_BASE_URL = "https://spazznolo.github.io"
 LISTING_REQUIRED_FIELDS = ("title", "date", "description", "status")
-LISTING_ALLOWED_STATUSES = ("canonical", "archived")
+LISTING_ALLOWED_STATUSES = ("canonical", "archived", "current")
 CANONICAL_LISTING_INPUTS = (
     "research/goalie-performance/index.qmd",
     "research/nhl-pick-probability/index.qmd",
@@ -156,7 +156,8 @@ def listing_input_paths(root: Path) -> list[Path]:
     """Discover the canonical and historical source files consumed by listings."""
     canonical = [root / relative for relative in CANONICAL_LISTING_INPUTS]
     historical = sorted(root.glob("20*/**/*.qmd"))
-    return canonical + historical
+    current_posts = sorted(root.glob("posts/**/index.qmd"))
+    return canonical + historical + current_posts
 
 
 def _source_front_matter(source: Path) -> dict[str, str]:
@@ -218,9 +219,12 @@ def _invalid_iso_date(value: str) -> bool:
 def validate_listing_inputs(root: Path) -> list[str]:
     errors = []
     sources = listing_input_paths(root)
-    if len(sources) != len(CANONICAL_LISTING_INPUTS) + 24:
+    expected_sources = len(CANONICAL_LISTING_INPUTS) + 24 + len(
+        list(root.glob("posts/**/index.qmd"))
+    )
+    if len(sources) != expected_sources:
         errors.append(
-            "listing input discovery expected 26 sources, "
+            f"listing input discovery expected {expected_sources} sources, "
             f"found {len(sources)}"
         )
     missing = [source for source in sources if not source.is_file()]
