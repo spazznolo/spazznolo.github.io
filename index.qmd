@@ -1,8 +1,22 @@
 ---
-title: ""
+title: "Home"
 description: "Sports statistics, applied modeling, and research notes by Jeremie Spagnolo."
 toc: false
 page-layout: full
+title-block: false
+listing:
+  id: recent-writing
+  contents:
+    - "research/goalie-performance/index.qmd"
+    - "research/nhl-pick-probability/index.qmd"
+    - "posts/**/index.qmd"
+  sort: "date desc"
+  type: table
+  fields: [date, title, reading-time, categories]
+  sort-ui: false
+  filter-ui: false
+  page-size: 5
+  feed: true
 ---
 
 ::: {.home-stream}
@@ -37,5 +51,8 @@ Logistic models, age curves, and model reliability.
 
 ## Recent writing
 
-The complete chronological collection is available under [Research](/research/).
+::: {#recent-writing}
+:::
+
+[Browse all research and the historical archive.](/research/)
 :::

@@ -2,6 +2,18 @@
 title: "Archive"
 description: "Earlier sports statistics posts, preserved in their original context."
 toc: false
+listing:
+  id: archive-list
+  contents: "../20*/**/*.qmd"
+  sort: "date desc"
+  type: table
+  fields: [date, title, reading-time, categories, sports]
+  sort-ui: false
+  filter-ui: false
+  page-size: 30
 ---
 
 The archive preserves earlier work and its original publication context. Some installments now point to a consolidated article, but the original pages remain available.
+
+::: {#archive-list}
+:::

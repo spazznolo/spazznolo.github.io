@@ -2,6 +2,35 @@
 title: "Research"
 description: "Sports statistics research in chronological order."
 toc: false
+listing:
+  - id: current-research
+    contents:
+      - "goalie-performance/index.qmd"
+      - "nhl-pick-probability/index.qmd"
+      - "../posts/**/index.qmd"
+    sort: "date desc"
+    type: table
+    fields: [date, title, reading-time, categories, sports]
+    sort-ui: false
+    filter-ui: false
+  - id: historical-research
+    contents: "../20*/**/*.qmd"
+    sort: "date desc"
+    type: table
+    fields: [date, title, reading-time, categories, sports]
+    sort-ui: false
+    filter-ui: false
+    page-size: 30
 ---
 
-Current and renovated work will appear here first. The complete historical collection remains available in the [Archive](/archive/).
+## Current and consolidated
+
+::: {#current-research}
+:::
+
+## Archive
+
+Earlier work remains available in its original context.
+
+::: {#historical-research}
+:::

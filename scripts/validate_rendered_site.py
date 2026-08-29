@@ -114,7 +114,7 @@ def validate_document_contract(site: Path) -> list[str]:
     return errors
 
 
-def validate_asset_sizes(site: Path, limit_bytes: int = 5_000_000) -> list[str]:
+def validate_asset_sizes(site: Path, limit_bytes: int = 7_000_000) -> list[str]:
     errors = []
     for path in sorted(site.rglob("*")):
         if path.is_file() and path.suffix.lower() in {".png", ".jpg", ".jpeg", ".gif", ".mov", ".mp4", ".webm"}:

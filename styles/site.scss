@@ -28,6 +28,16 @@ body { line-height: 1.65; }
 body.quarto-light .home-about p { color: #211d17; }
 .article-reading-time, .archive-notice, .article-context { color: var(--warm-accent); font-size: 0.84rem; }
 .listing-table, .quarto-listing { width: 100%; }
+.quarto-listing-table {
+  table-layout: fixed;
+  width: 100%;
+}
+.quarto-listing-table th,
+.quarto-listing-table td {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
 img, video, iframe { max-width: 100%; }
 
 // Keep historical code excerpts readable in both themes without requiring a

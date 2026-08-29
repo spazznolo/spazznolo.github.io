@@ -8,14 +8,29 @@ toc: false
 
 Empirical Bayes, priors and posteriors, and shrinkage.
 
+- [Goalie Performance](/research/goalie-performance/)
+- [Empirical Bayes Save Percentage](/2023/05/17/goalie-performance-1.html)
+- [Empirical Bayes Adjusted Save Percentage](/2023/05/22/goalie-performance-2.html)
+
 ## Probability and simulation
 
 Draft uncertainty, overtime formats, and expected value.
+
+- [NHL Pick Probability](/research/nhl-pick-probability/)
+- [Goalie Consistency: Does it matter?](/2022/03/28/goalie-consistency-1.html)
+- [Post-regulation: Measuring uncertainty](/2022/04/26/post-regulation-2.html)
 
 ## Distributions and sampling
 
 Beta-binomial models, mixture models, and sample-size questions.
 
+- [Goalie Performance](/research/goalie-performance/)
+- [NHL Pick Probability](/research/nhl-pick-probability/)
+- [Goalie Performance: Sample Sizes](/2024/07/30/goalie-performance-5.html)
+
 ## Regression and calibration
 
 Logistic models, age curves, and model reliability.
+
+- [NHL Pick Probability](/research/nhl-pick-probability/)
+- [Goalie Performance: Adjusting for Age](/2023/07/08/goalie-performance-3.html)

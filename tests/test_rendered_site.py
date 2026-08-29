@@ -22,6 +22,22 @@ class RenderedSiteSmokeTest(unittest.TestCase):
         self.assertIn(sentence, html)
         self.assertIn("fifty-four.png", html)
 
+    def test_discovery_outputs_exist(self):
+        required = [
+            SITE / "index.xml",
+            SITE / "sitemap.xml",
+            SITE / "404.html",
+            SITE / "research" / "index.html",
+            SITE / "subjects" / "index.html",
+            SITE / "archive" / "index.html",
+        ]
+        missing = [str(path.relative_to(ROOT)) for path in required if not path.is_file()]
+        self.assertEqual(missing, [])
+
+    def test_homepage_open_graph_title_is_meaningful(self):
+        html = (SITE / "index.html").read_text(encoding="utf-8")
+        self.assertIn('property="og:title" content="Home – jeremie.spagnolo"', html)
+
 
 if __name__ == "__main__":
     unittest.main()
