@@ -30,6 +30,29 @@ body.quarto-light .home-about p { color: #211d17; }
 .listing-table, .quarto-listing { width: 100%; }
 img, video, iframe { max-width: 100%; }
 
+// Keep historical code excerpts readable in both themes without requiring a
+// keyboard user to discover a horizontally scrolling, non-focusable region.
+div.sourceCode {
+  color: var(--bs-code-color);
+  background-color: var(--bs-body-bg);
+  border-color: var(--warm-divider);
+  overflow-x: visible;
+}
+div.sourceCode pre > code.sourceCode {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+pre.text {
+  color: var(--bs-code-color);
+  background-color: var(--bs-body-bg);
+  white-space: pre-wrap;
+  overflow: visible;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+pre.text code { color: inherit; }
+
 @media (max-width: 680px) {
   #quarto-content, .page-layout-full main { width: min(100% - 2rem, var(--reading-width)); }
   .navbar > .container-fluid { align-items: flex-start; }

@@ -85,6 +85,18 @@ class CanonicalArticleTest(unittest.TestCase):
             5500,
         )
 
+    def test_nhl_pick_probability_preserves_historical_presentation_notes(self):
+        text = (ROOT / "research/nhl-pick-probability/index.qmd").read_text(encoding="utf-8")
+        self.assertIn(
+            "draft_simulations <- replicate(100000, sample(1:skaters, skaters, replace = FALSE, prob = mle_estimates))",
+            text,
+        )
+        self.assertIn("source-reported aggregate for picks 1 through 5 was 16.3%", text)
+        self.assertIn("displayed rounded components", text)
+        self.assertIn("sum to 16.2% at the shown precision", text)
+        self.assertIn("historical figure labels", text)
+        self.assertIn("source prose instead describes adjusted-to-user as approximately 0.0604", text)
+
 
 if __name__ == "__main__":
     unittest.main()

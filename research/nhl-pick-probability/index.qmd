@@ -103,7 +103,7 @@ Each model attributes a strength score to each player. Those scores are not them
 
 ```r
 # Simulate draft rankings
-draft_simulations <- replicate(100000, sample(1:skaters, skaters, replace = FALSE, prob = mle_estimates)
+draft_simulations <- replicate(100000, sample(1:skaters, skaters, replace = FALSE, prob = mle_estimates))
 ```
 
 The published rankings carry several assumptions. The first is that the imputed rankings are meaningfully full. The second is that ranking lists can be summarized with time weights even though rankings change because of what prospects and scouts do during the intervening time. The third is that ranking publications are representative of NHL organizations. A publication may rely more heavily on game-log information than a professional team, so any systematic difference in evaluation can flow through to the final probabilities.
@@ -112,7 +112,7 @@ The historical model therefore offers a structured approximation, not an oracle.
 
 ## Prospect pick distributions
 
-The outputs of the rank-ordered models can be summarized as a probability that each prospect is drafted at each pick. They can also be expressed cumulatively. The first post described this with Rantanen: probabilities for picks 1 through 5 were 0.1%, 1.0%, 2.6%, 4.6%, and 7.9%, so the probability of being selected in the first five picks was 16.3%.
+The outputs of the rank-ordered models can be summarized as a probability that each prospect is drafted at each pick. They can also be expressed cumulatively. The first post described this with Rantanen: the source-reported aggregate for picks 1 through 5 was 16.3%, while the displayed rounded components (0.1%, 1.0%, 2.6%, 4.6%, and 7.9%) sum to 16.2% at the shown precision. This is a transcription of the historical report, not a fresh recomputation.
 
 The cumulative view asks a slightly different question at every pick: what is the probability that this player has been selected by now? The historical figure is explicitly a selection-after-picks curve.
 
@@ -124,7 +124,7 @@ To evaluate fit, the source treated each player-pick combination as a binary eve
 
 ![Calibration plot and Brier scores for player-pick probabilities.](/figs/tenth-plot.png){fig-alt="Calibration plot and Brier scores for player-pick probabilities." width="70%"}
 
-The historical calibration plot showed the raw user data as overconfident, with the adjusted approaches closer to the line of perfect fit. The reported Brier scores were approximately 0.198 for raw user data, 0.0607 for adjusted-to-user data, and 0.0641 for adjusted-to-pro data. The adjusted user result was therefore the best of those reported versions in that comparison. These are historical fit results, not an updated evaluation of the later rank-ordered model.
+The historical calibration plot showed the raw user data as overconfident, with the adjusted approaches closer to the line of perfect fit. The rendered historical figure labels the Brier scores 0.1981 (raw), 0.0607 (adjusted-to-user), and 0.0641 (adjusted-to-pro). The source prose instead describes adjusted-to-user as approximately 0.0604; both numbers are retained as historical artifacts, and neither is a fresh recomputation. The adjusted user result was therefore the best of those reported versions in that comparison. These are historical fit results, not an updated evaluation of the later rank-ordered model.
 
 ## Applying uncertainty to draft value
 
