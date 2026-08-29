@@ -1,0 +1,34 @@
+---
+title: "Post-regulation: Is the overtime random?"
+description: "An exploration of whether NHL overtime outcomes are random."
+date: 2022-04-29
+categories:
+  - Probability and simulation
+  - Distributions and sampling
+sports:
+  - Hockey
+  - Overtime
+status: archived
+reading-time: true
+toc: true
+execute:
+  enabled: false
+---
+
+By most accounts, the outcome of the NHL's 5 minute 3-on-3 overtime is random. [MoneyPuck](https://moneypuck.com/), a popular website which predicts game outcomes in real time, assigns a coin flip probability for any team to win in overtime, regardless of their opponent. This is in line with sports betting sites, which, in a given overtime, usually offer -115 odds for both teams (even odds before the [vig](https://en.wikipedia.org/wiki/Vigorish)).
+
+Is overtime *completely* random, though?
+
+Let's explore this thought with a set of basic descriptive models. First, we'll regress a team's regulation point percentage on their overtime point percentage, then we'll regress two characteristics (one team and one game) on the outcome of individual games which ended in overtime. Specifically, the predictors will be: a team's xGF% throughout their season and game.
+
+## Comparing regulation points percentage to overtime points percentage
+
+![Regulation points percentage compared with overtime points percentage.](/figs/post-regulation-two-one.png){fig-alt="Regulation points percentage compared with overtime points percentage." width="60%"}
+
+There's nothing there. I added the regression results, but you don't need a regression to see that.
+
+Another way to look at this is to regress regulation point percentage and regulation time xGF% on the outcome of individual games. But it's the same result - there's nothing there.
+
+![Regression of regulation point percentage and regulation-time xGF% on individual overtime-game outcomes.](/figs/post-regulation-two-twoo.png){fig-alt="Regression of regulation point percentage and regulation-time xGF% on individual overtime-game outcomes." width="30%"}
+
+This series so far has been full of insignificance, but that is still useful in understanding overtime. Also, the [next post](/2022/04/30/post-regulation-4.html) finds some statistical significance. It's about the randomness in overtime *during the overtime*.
