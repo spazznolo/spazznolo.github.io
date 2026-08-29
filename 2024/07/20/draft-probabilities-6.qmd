@@ -1,0 +1,42 @@
+---
+title: "NHL Draft: Post-Draft Analysis"
+description: "A post-draft review of calibration and the NHL draft pick value framework."
+date: 2024-07-20
+categories:
+  - Probability and simulation
+sports:
+  - Hockey
+  - NHL Draft
+status: archived
+reading-time: true
+toc: true
+execute:
+  enabled: false
+---
+
+## Enhancing the Draft Pick Value Framework
+
+In general the probabilities were pretty well calibrated. However, the model was too certain in the top 10 picks. As a result, the sportsbooks cooked us.
+
+But first, a visual recap for those who don't want to read the [previous](https://spazznolo.github.io/2023/06/16/draft-probabilities-2.html) [three](https://spazznolo.github.io/2023/06/20/draft-probabilities-3.html) [posts](https://spazznolo.github.io/2023/07/02/draft-probabilities-4.html) (I get it).
+
+## Visual Recap
+
+1. A rank-ordered logit model was built using numerous publication rankings throughout the draft year to derive prospect pick probabilities, like this:
+
+   ![Illustrative prospect pick probability distribution.](/figs/draft-probabilities-4-4.png){fig-alt="Illustrative prospect pick probability distribution." width="60%"}
+
+2. Prospect values were derived using a historical draft pick value chart (values are placeholders for teams' actual internal projections), along with uncertainty estimates, like this:
+
+   ![Illustrative prospect value distribution with uncertainty.](/figs/draft-probabilities-4-4.png){fig-alt="Illustrative prospect value distribution with uncertainty." width="60%"}
+
+3. The previous two points were combined to create new pick value charts, like this:
+
+   ![Illustrative draft pick value chart.](/figs/draft-probabilities-4-4.png){fig-alt="Illustrative draft pick value chart." width="60%"}
+
+As an example, the value of the third pick for a team who ranked the top 3 players in the draft as Bedard-Fantilli-Carlsson would be calculated as follows:
+
+- There's a 0% chance Bedard is available, so his value is multiplied by 0.
+- There's a 21.0% chance Fantilli is available, so his value is multiplied by 0.210.
+- There's a 79% that neither Bedard nor Fantilli is available, so Carlsson's value is multiplied by 0.790.
+- These three values are summed to get the third pick's value.
