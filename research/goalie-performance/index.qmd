@@ -21,13 +21,11 @@ execute:
 This article consolidates five posts published between 2023 and 2024.
 :::
 
-## Goalie Performance: Empirical Bayes Save Percentage
-
-<span class="part-date">Originally published 2023-05-17.</span>
+## Starting with empirical Bayes
 
 Recall from the [introductory paragraph](/2022/03/28/goalie-consistency-1.html) of the series on goalie consistency: "Goaltenders make up the least predictable position in hockey. Their behavior confounds analysts and casual fans alike. It isn’t uncommon for a good goalie to have a below replacement level year, or for an unknown goalie to come in and dominate the league for a stretch of time. This may partly explain the relative dearth of analysis on goalies - they're voodoo, it's often said."
 
-This new series focuses on goalie performance. It aims to enhance the estimation of goalie performance using an empirical Bayes framework. Similar applications were outlined in [previous](https://hockey-graphs.com/2018/06/21/comparing-scoring-talent-with-empirical-bayes/) [papers](http://varianceexplained.org/r/empirical_bayes_baseball/). The strategy has several advantages over frequentist methods, chiefly the ability to measure uncertainty, which is crucial in describing goalie performance. In this post, the idea is sketched using raw save percentage as the performance metric, with further refinement of the methodology in subsequent posts.
+This analysis focuses on goalie performance. It aims to enhance the estimation of goalie performance using an empirical Bayes framework. Similar applications were outlined in [previous](https://hockey-graphs.com/2018/06/21/comparing-scoring-talent-with-empirical-bayes/) [papers](http://varianceexplained.org/r/empirical_bayes_baseball/). The strategy has several advantages over frequentist methods, chiefly the ability to measure uncertainty, which is crucial in describing goalie performance. The idea is first sketched using raw save percentage as the performance metric, then refined.
 
 The empirical Bayes approach involves two steps. The first step is to use observed data to fit a prior distribution, and the second step is to update this prior using observed data.
 
@@ -76,32 +74,11 @@ It's important to list all the assumptions with this method:
 - Scoring rates are assumed to be constant.
 - Team systems are assumed to be identical.
 
-These will be challenged and addressed in the following posts.
+These will be challenged and addressed below.
 
 Code available here: [https://github.com/spazznolo/goalie-performance/blob/main/posts/post-1.R](https://github.com/spazznolo/goalie-performance/blob/main/posts/post-1.R)
 
-::: {.part-break}
-:::
-
-## Goalie Performance: Empirical Bayes Adjusted Save Percentage
-
-<span class="part-date">Originally published 2023-05-22.</span>
-
-In the [first post](/2023/05/17/goalie-performance-1.html), I outlined a framework for measuring goalie talent using their career Fenwick 5v5 save percentage. It concluded with the assumptions of the initial strategy, which I'll include again below.
-
-Assumptions:
-
-- **All shots are assumed to be equal.**
-- Age is assumed to be irrelevant.
-- The prior distribution is assumed to be beta with hyperparameters 852 and 55.6.
-- Goalies facing less than 200 shots are ignored.
-- Goalie careers are equal.
-- Scoring rates are assumed to be constant.
-- Team systems are assumed to be identical.
-
-In this post, I'm going to address the first assumption and propose an adjustment.
-
-### Adjusted Save Percentage
+## Accounting for shot quality
 
 All shots are not equal, in that they do not have the same probability of becoming a goal. This is established. Many Expected Goals (xG) models have been developed to account for this. Fortunately, Peter Tanner's website [MoneyPuck](https://moneypuck.com/index.html) provides detailed data on each unblocked shot in the NHL, including the probability of the shot being a goal according to his [logistic regression model](https://moneypuck.com/about.htm).
 
@@ -116,7 +93,7 @@ Let's plot the distribution of career AdjSV% for goalies who have faced 200+ sho
 
 ![](/figs/goalie-performance-2-1.png){fig-alt="Career adjusted save percentage distribution with fitted beta and Weibull distributions." width="60%"}
 
-At first glance, goalies' career AdjSV% seems to follow a weibull distribution! Cool, but we're going to sidestep this finding for the remainder of the post, because (hint, hint) *there maybe be more than one distribution here*. So we're fitting another beta, which means the remaining steps remain the same as the previous post. The prior is similar, except this time we add 933 saves and 60 goals (up from 852 and 55.6).
+At first glance, goalies' career AdjSV% seems to follow a weibull distribution! Cool, but we're going to sidestep this finding for now, because (hint, hint) *there maybe be more than one distribution here*. So we're fitting another beta, which means the remaining steps stay the same. The prior is similar, except this time we add 933 saves and 60 goals (up from 852 and 55.6).
 
 Let's revisit the Jake Oettinger and Jeremy Swayman comparison.
 
@@ -130,9 +107,9 @@ The posteriors change as follows:
 
 These changes occur because Swayman faces more difficult shots on average, with an xFSV% of 94.07 compared to Oettinger's 94.39.
 
-### Appendix
+### Comparing the estimates
 
-Below is a collection of plots which compare various save percentage metrics discussed in this and the previous post.
+Below is a collection of plots which compare the save percentage metrics discussed above.
 
 A couple of key points:
 
@@ -142,35 +119,13 @@ A couple of key points:
 - Due to the previous points, there is heteroskedasticity in the relationship between a goalie's SV% and their posterior AdjSV%.
 - There is likely survivorship bias present.
 
-In the next posts, I'll adress the outstanding assumptions listed at the start.
-
 ![](/figs/goalie-performance-2-3.png){fig-alt="Comparison of save percentage metrics and posterior adjusted save percentage." width="100%"}
 
 Code available here: [https://github.com/spazznolo/goalie-performance/blob/main/posts/post-2.R](https://github.com/spazznolo/goalie-performance/blob/main/posts/post-2.R)
 
-::: {.part-break}
-:::
+## Adjusting for age
 
-## Goalie Performance: Adjusting for Age
-
-<span class="part-date">Originally published 2023-07-08.</span>
-
-In the [first post](/2023/05/17/goalie-performance-1.html), I outlined a framework to measure goalie performance using their career 5v5 Fenwick save percentage and empirical Bayes. In the [second post](/2023/05/22/goalie-performance-2.html), I refined the methodology to consider shot quality. The outstanding assumptions are included below.
-
-Assumptions:
-
-- **Age is assumed to be irrelevant.**
-- The prior distribution is assumed to be beta with hyperparameters 852 and 55.6.
-- Goalies facing less than 200 shots are ignored.
-- Goalie careers are equal.
-- Scoring rates are assumed to be constant.
-- Team systems are assumed to be identical.
-
-In this post, I'm going to address the effect of age on goalie performance.
-
-### Outline
-
-Like shot quality, the effect of age on performance is a well-researched concept. It has been shown that goalies tend to improve as they age, peak, and then recede for, well, forever. This concept is typically called an *age curve*. Though goalie age curves are already available elsewhere, they differ slightly, so I'm going to define a custom age curve based on the Moneypuck dataset. Here are the steps:
+Like shot quality, the effect of age on performance is a well-researched concept. It has been shown that goalies tend to improve as they age, peak, and then recede for, well, forever. This concept is typically called an *age curve*. Though goalie age curves are already available elsewhere, they differ slightly, so I'm going to define a custom age curve based on the Moneypuck dataset.
 
 - Obtain goalie birth dates.
 - Derive goalie age for each game.
@@ -178,7 +133,7 @@ Like shot quality, the effect of age on performance is a well-researched concept
 - Explore age.
 - Adjust for age.
 
-### Obtain goalie birth dates
+### Finding goalie birth dates
 
 I scraped hockey-reference for each goalie's date of birth (code available [here](https://github.com/spazznolo/goalie-consistency/blob/main/import/scrape_goalie_data.R)). By combining the goalies' birth dates with the dates of each of their games, I determined their exact age for every game played.
 
@@ -190,7 +145,7 @@ The analysis population changes as follows (due to incomplete linkage):
 
 They barely differ.
 
-### Explore age
+### Exploring age
 
 Let's start by simply grouping shots into bins by goalie age (rounded to the first decimal, ex: 26.0, 26.1, etc.), and then calculating the group-wide save percentage. Here's what that looks like, with points becoming paler for smaller groups sizes:
 
@@ -222,7 +177,7 @@ Some thoughts:
 - This agrees with [some](https://hockeyviz.com/txt/age22) past research.
 - This disagrees with [other](https://hockey-graphs.com/2014/03/21/how-well-do-goalies-age-a-look-at-a-goalie-aging-curve/) past research.
 
-### Adjusting for Age
+### Applying the adjustment
 
 The cleanest way that I can think of adjusting for age is to bake it into the current framework which already adjusts shots by their probability of becoming a goal. This can easily by done by first setting the peak (age 25) as the standard and then adjusting for all other ages, so that, for example, an xFSV% of 0.940 at age 25 is equivalent to an xFSV% of 0.93976 at age 22 (0.94000 - 0.000237) and an xFSV% of 0.93586 at age 38 (0.94000 - 0.00414).
 
@@ -242,27 +197,9 @@ With this adjustment, Lundqvist's career save percentages work out like this:
 
 Code available here: [https://github.com/spazznolo/goalie-performance/blob/main/posts/post-3.R](https://github.com/spazznolo/goalie-performance/blob/main/posts/post-3.R)
 
-::: {.part-break}
-:::
+## Career length and the prior
 
-## Goalie Performance: Exploring the Distribution
-
-<span class="part-date">Originally published 2024-07-30.</span>
-
-In the first post, I outlined a framework for measuring goalie performance using their career Fenwick 5v5 save percentage. In the second post, the methodology was refined to consider shot quality. The outstanding assumptions of the refined strategy are included below.
-
-Assumptions:
-
-- **The prior distribution is assumed to be beta with hyperparameters 852 and 55.6.**
-- **Goalies facing less than 200 shots are ignored.**
-- **Goalie careers are equal.**
-- Age is assumed to be irrelevant.
-- Scoring rates are assumed to be constant.
-- Team systems are assumed to be identical.
-
-In this post, I'm going to address the first, second and third outstanding assumptions and then propose one sweeping adjustment to take care of them.
-
-### Goalie importance
+### The 200-shot cutoff
 
 The 200 shot cut-off surprisingly filters out 90 out of 314 goalies (or, 28.7%). To illustrate this, here's the cumulative distribution function of career shots faced for goalies:
 
@@ -305,12 +242,7 @@ where:
 
 Code available here: [https://github.com/spazznolo/goalie-performance/blob/main/posts/post-4.R](https://github.com/spazznolo/goalie-performance/blob/main/posts/post-4.R)
 
-::: {.part-break}
-:::
-
-## Goalie Performance: Sample Sizes
-
-<span class="part-date">Originally published 2024-07-30.</span>
+## Contextualizing experience
 
 ### Goalies in the analysis
 
@@ -321,9 +253,8 @@ The analysis population changes as follows:
 - Goalie population drops from 315 to 140.
 - Harmonic mean of shots against rises from 12,690 to 14,568 (mean drops, 4,198 to 3,225).
 - Harmonic mean of AdjSV% stays at .939 (mean drops, .932 to .927).
-- Mean of career shots faced drops from 4,198 to 3,225.
-- Mean of AdjSV% drops from .932 to .927.
-### Contextualizing Experience
+
+### Career length
 
 Let's start simple: How long is the average goalie career? How many goalies face over 30 shots? How many make it past 200?... All of these questions can be answered by plotting the cumulative distribution function (cdf) of career shots faced for goalies.
 
@@ -345,7 +276,7 @@ Some thoughts:
 
 It should now be obvious that most goalies don't really have a typical NHL career as we imagine them. Let's confirm the assumption that goalies with more experience perform better than those with less.
 
-It is difficult to understand a goalie's path by looking at their save percentage or shots faced in isolation. What's nice about the empirical Bayesian method introduced in the previous posts is that it considers these measures at the same time. Moreover, we can repeatedly re-evaluate a goalie's pAdjSV% after each shot they face. We can then plot this posterior over each shot of a goalie's career to get a sense of their path. In order to extract more insight from this, let's section goalies by their career shots faced, like this:
+It is difficult to understand a goalie's path by looking at their save percentage or shots faced in isolation. What's nice about the empirical Bayesian method is that it considers these measures at the same time. Moreover, we can repeatedly re-evaluate a goalie's pAdjSV% after each shot they face. We can then plot this posterior over each shot of a goalie's career to get a sense of their path. In order to extract more insight from this, let's section goalies by their career shots faced, like this:
 
 Goalies facing:
 
@@ -393,13 +324,3 @@ Some thoughts:
 - This difference obviously includes the span from age 23 to roughly 27.
 - This is precisely the age range in which goalies seem to be improving in AdjSV%.
 - We can adjust for this.
-
-To start, we can't keep every goalie in our population for this analysis. We just don't know how much experience a goalie had before the 2007-2008 season, so any goalie playing that season has to be removed. The same is true for the goalies playing the 2022-2023 season. As an example, we don't know how Jeremy Sayman's career will turn out - we only know what he's done in his first few seasons, so we can't properly categorize his career yet.
-
-Here's a short summary of the reduced population:
-
-- Goalie population drops from 315 to 140.
-- Harmonic mean of shots against rises from 12,690 to 14,568 (mean drops, 4,198 to 3,225).
-- Harmonic mean of AdjSV% stays at .939 (mean drops, .932 to .927).
-- Mean of career shots faced drops from 4,198 to 3,225.
-- Mean of AdjSV% drops from .932 to .927.

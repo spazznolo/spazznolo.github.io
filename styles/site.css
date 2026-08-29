@@ -134,21 +134,6 @@ body.quarto-light .home-about p {
   word-break: break-word;
 }
 
-.part-date {
-  color: var(--warm-accent);
-  display: block;
-  font-size: 0.82rem;
-  margin: -0.3rem 0 1.5rem;
-}
-
-.part-break {
-  background: var(--warm-accent);
-  height: 2px;
-  margin: 3rem 0;
-  opacity: 0.7;
-  width: 2.5rem;
-}
-
 .equation-note {
   background: color-mix(in srgb, var(--warm-accent) 8%, transparent);
   border-left: 2px solid var(--warm-accent);

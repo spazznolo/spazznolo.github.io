@@ -16,6 +16,13 @@ def source_contract(relative_path, headings, minimum_words, maximum_words):
         raise AssertionError(f"{relative_path}: {len(words)} words outside {minimum_words}-{maximum_words}")
     if text.count("This article consolidates") != 1:
         raise AssertionError(f"{relative_path}: consolidation note must be one sentence")
+    for multipart_marker in [
+        'class="part-date"',
+        "{.part-break}",
+        "Originally published",
+    ]:
+        if multipart_marker in text:
+            raise AssertionError(f"{relative_path}: contains multipart marker: {multipart_marker}")
     for editorial_phrase in [
         "retains the original analysis",
         "underlying data and models were not reconstructed",
@@ -31,14 +38,14 @@ class CanonicalArticleTest(unittest.TestCase):
         source_contract(
             "research/goalie-performance/index.qmd",
             [
-                "Goalie Performance: Empirical Bayes Save Percentage",
-                "Goalie Performance: Empirical Bayes Adjusted Save Percentage",
-                "Goalie Performance: Adjusting for Age",
-                "Goalie Performance: Exploring the Distribution",
-                "Goalie Performance: Sample Sizes",
+                "Starting with empirical Bayes",
+                "Accounting for shot quality",
+                "Adjusting for age",
+                "Career length and the prior",
+                "Contextualizing experience",
             ],
-            3400,
-            4200,
+            3000,
+            4000,
         )
 
     def test_goalie_performance_retains_source_facts_and_matching_figures(self):
@@ -72,15 +79,15 @@ class CanonicalArticleTest(unittest.TestCase):
         source_contract(
             "research/nhl-pick-probability/index.qmd",
             [
-                "NHL Draft: Assigning pick probabilities from user mock drafts",
-                "NHL Draft: Deriving pick probabilities from draft rankings",
-                "NHL Draft: An Application of Prospect Pick Probabilities [Part 1]",
-                "NHL Draft: An Application of Prospect Pick Probabilities [Part 2]",
-                "NHL Draft: Introducing a new NHL drafting strategy",
-                "NHL Draft: Post-Draft Analysis",
+                "From rankings to pick probabilities",
+                "A rank-ordered model",
+                "Turning probabilities into pick value",
+                "Adding uncertainty",
+                "A drafting strategy",
+                "After the draft",
             ],
-            4400,
-            5500,
+            4000,
+            5200,
         )
 
     def test_nhl_pick_probability_preserves_historical_presentation_notes(self):

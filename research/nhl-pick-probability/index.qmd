@@ -21,9 +21,7 @@ execute:
 This article consolidates six posts published between 2021 and 2024.
 :::
 
-## NHL Draft: Assigning pick probabilities from user mock drafts
-
-<span class="part-date">Originally published 2021-11-28.</span>
+## From rankings to pick probabilities
 
 If you’re picking first at the next NHL draft, you want Lafreniere. If you’re picking second or third, you want Byfield or Stutzle. If you’re picking fourth, or fifth, or sixth, or seventh, you’re picking Rossi or Perffeti, or Raymond, or Drysdale… Notice how the list lengthens as you make your way through the draft? That’s because the uncertainty of a player being better than all other available players increases the deeper you get into the draft. So maybe you really like Rossi, but you’re picking sixth, and you want to be reasonably certain he will still be available. Well, what are the odds Rossi is still available at six? It’s hard to say.
 
@@ -131,16 +129,11 @@ Player distributions are dampened by the variance observed in prior years. This 
 
 I wrote a similar article for the NBA Draft at [Nylon Calculus](https://fansided.com/2020/09/17/nba-draft-class-controversial-obi-toppin/).
 
-::: {.part-break}
-:::
-
-## NHL Draft: Deriving pick probabilities from draft rankings
-
-<span class="part-date">Originally published 2023-06-16.</span>
+## A rank-ordered model
 
 The prospect pick probabilities in the "Draft Pick Probabilities" tab of the [2023 Draft Stock tool](https://piyer97.shinyapps.io/NHLDraft2023/) are generated through a process which primarily involves the application of a rank-ordered logit model to draft rankings released throughout the year. The methodology is a simplified version of [Predicting the NHL Draft with Rank-Ordered Logit Models](https://ecp.ep.liu.se/index.php/linhac/article/view/480).
 
-There are three main components - first, partial draft rankings are made complete, then a rank-ordered logit model is fit, finally 100,000 drafts are simulated from model outputs. I will describe each component in this thread. Links are provided at the end.
+There are three main components - first, partial draft rankings are made complete, then a rank-ordered logit model is fit, finally 100,000 drafts are simulated from model outputs.
 
 ### Imputation of partial rankings
 
@@ -219,12 +212,7 @@ The method employed in this model assumes that prospect ranking publications rep
 
 The code used to generate these probabilities is available on GitHub [here](https://github.com/spazznolo/draft-rankings).
 
-::: {.part-break}
-:::
-
-## NHL Draft: An Application of Prospect Pick Probabilities [Part 1]
-
-<span class="part-date">Originally published 2023-06-20.</span>
+## Turning probabilities into pick value
 
 The prospect pick probabilities available on the "Draft Pick Probabilities" tab of the [2023 Draft Tool](https://piyer97.shinyapps.io/NHLDraft2023/), created by Pranshanth Iyer and myself, can be used by NHL organizations to inform their decision-making process. Let's take the Montreal Canadiens as an example.
 
@@ -287,24 +275,13 @@ Let's explore this with a hypothetical scenario. Imagine they have the opportuni
 
 By combining prospect pick probabilities with internal evaluations, the Canadiens can make more informed decisions about their draft strategies and potential trades.
 
-### Next Step: Adding Uncertainty
-
-Arriving at a single point estimate for prospect values can be challenging and may not fully account for the inherent uncertainty surrounding prospects. Different scouts and analysts may have varying evaluations and opinions on a player's potential. Additionally, prospects inherently come with different levels of risk.
-
-To address this, we can include uncertainty in this framework by assigning probability distributions to prospect values rather than relying solely on point estimates. By considering the range of potential outcomes and assigning probabilities to different scenarios, a more comprehensive assessment can be made. Perhaps in another post.
-
 For more information, visit the [2023 Draft Tool](https://piyer97.shinyapps.io/NHLDraft2023/). You can reach Prashanth and I on twitter ([@iyer_prashanth](https://twitter.com/iyer_prashanth), [@spazznolo](https://twitter.com/spazznolo)).
 
-::: {.part-break}
-:::
+## Adding uncertainty
 
-## NHL Draft: An Application of Prospect Pick Probabilities [Part 2]
+The framework can also include prospect value uncertainty.
 
-<span class="part-date">Originally published 2023-07-02.</span>
-
-In [An Application of Prospect Pick Probabilities](https://spazznolo.github.io/2023/06/20/draft-probabilities-3.html), I introduced a new perspective on draft pick value using Prashanth Iyer and I's [draft probability tool](https://piyer97.shinyapps.io/NHLDraft2023/). Here, I extend the methodology to include prospect value uncertainty.
-
-### Accounting for Uncertainty
+### The Michkov problem
 
 One of the main considerations for teams drafting in the 2-7 spot this year was whether they should risk their extremely valuable lottery pick on Matvei Michkov. He signed a 3-year contract in Russia. He only met with a few teams. He might be the most talented player in the draft. He may never come to North America... etc. Essentially, the question these teams were asking is this: is it worth drafting Michkov's uncertainty when more reliable, though perhaps less skilled, players are available? Once again, teams have to make a complex calculation. Once again, they're left with mostly instinct.
 
@@ -314,7 +291,7 @@ Unless, prospect value uncertainty is quantified and included in the decision pr
 
 ### Assigning Uncertainty
 
-Adapting the previous post to include uncertainty is actually easy. Instead of assigning prospect values through point estimates (Bedard was at 24 WAR, Michkov at 17.5), prospects are assigned [probability distributions](https://www.scribbr.com/statistics/probability-distributions/#:~:text=A%20probability%20distribution%20is%20a,using%20graphs%20or%20probability%20tables.) which reflect the uncertainty of their value.
+Adapting the framework to include uncertainty is actually easy. Instead of assigning prospect values through point estimates (Bedard was at 24 WAR, Michkov at 17.5), prospects are assigned [probability distributions](https://www.scribbr.com/statistics/probability-distributions/#:~:text=A%20probability%20distribution%20is%20a,using%20graphs%20or%20probability%20tables.) which reflect the uncertainty of their value.
 
 As an example: instead of Bedard's value being 24 WAR, it will be normally distributed with mean 24 and standard deviation 3. Here's what that looks like:
 
@@ -326,43 +303,38 @@ In this example:
 - Bedard has a 25% chance of providing 26+ WAR.
 - Bedard has a 25% chance of providing -22 WAR.
 
-Like the point estimates in the first post, the actual distribution doesn't matter, it's just an example to illustrate the framework I'm introducing.
+Like the point estimates above, the actual distribution doesn't matter, it's just an example to illustrate the framework I'm introducing.
 
 Let's assign these value distributions to each player, making sure Michkov's value has higher uncertainty by increasing the standard deviation of his distribution. Prospect values now look like this:
 
 ![](/figs/draft-probabilities-4-2.png){fig-alt="Prospect value distributions with varying uncertainty." width="60%"}
 
-Then, these probability distributions are multiplied by the probability a prospect is available at each pick, as in the previous post. Pick values now look like this:
+Then, these probability distributions are multiplied by the probability a prospect is available at each pick. Pick values now look like this:
 
 ![](/figs/draft-probabilities-4-3.png){fig-alt="Pick value distributions after accounting for prospect availability." width="60%"}
 
-With these pick value distributions you get the same comparisons as you did in the previous post, plus:
+With these pick value distributions you get the same comparisons as above, plus:
 
 - the probability that a given pick will be more valuable than another.
 - WAR for whichever "outcome" you're interested in (like top 10% scenario, bottom 10%, etc.)
 
-Let's re-visit the Montreal example where I suggested they should only trade up if the value of the fourth pick (15.87) exceeded that of their package (fifth pick (13.15) plus a piece). After including uncertainty, these point estimates become probability distributions and the difference between the two picks looks like this:
+Let's re-visit the Montreal example where they should only trade up if the value of the fourth pick (15.87) exceeded that of their package (fifth pick (13.15) plus a piece). After including uncertainty, these point estimates become probability distributions and the difference between the two picks looks like this:
 
 ![](/figs/draft-probabilities-4-4.png){fig-alt="Difference between the fourth and fifth pick value distributions." width="60%"}
 
 Code available here: [https://github.com/spazznolo/draft-rankings/blob/main/scripts/post_4.R](https://github.com/spazznolo/draft-rankings/blob/main/scripts/post_4.R)
 
-::: {.part-break}
-:::
+## A drafting strategy
 
-## NHL Draft: Introducing a new NHL drafting strategy
-
-<span class="part-date">Originally published 2023-07-07.</span>
-
-In [An Application of Prospect Pick Probabilities](https://spazznolo.github.io/2023/06/20/draft-probabilities-3.html), I used Prashanth Iyer and myself's [draft probability tool](https://piyer97.shinyapps.io/NHLDraft2023/) to create a new pick value framework which captured the unique dynamics of a given draft. Then, I [extended the methodology](https://spazznolo.github.io/2023/07/02/draft-probabilities-4.html) to include the uncertainty of prospect values. Here, I'll introduce a brand new drafting strategy for the NHL which aims to maximize draft value. But first, some background.
+The pick value framework captures the unique dynamics of a given draft and the uncertainty of prospect values. It also suggests a drafting strategy which aims to maximize draft value. But first, some background.
 
 ### Background on Optimization
 
 The optimization of draft value has been explored specifically for the NHL by now Kraken analyst [@nnstats](https://twitter.com/nnstats) in this 2017 [paper](https://www.statsportsconsulting.com/wp-content/uploads/Nandakumar_PerfectDraft-1.pdf). It was a counter to the prevalent discourse at the time, which assumed the optimal draft was achieved by simply picking the best players as they were available. Instead, she argued that a team should only draft the best player available (BPA) if he won't be available for their next pick. For instance, Jamie Benn, a sixth round pick, should have been drafted in the fifth round to maximize total draft value.
 
-The key outstanding question from this work was: "How can we determine if the risk of deferring on the BPA and potentially losing them is worth the reward of drafting another quality prospect before landing the BPA later?" In this post, I'll show that the prospect pick probabilities from our draft tool, when combined with prospect values, allow for a probablistic framework to make such a decision.
+The key outstanding question from this work was: "How can we determine if the risk of deferring on the BPA and potentially losing them is worth the reward of drafting another quality prospect before landing the BPA later?" The prospect pick probabilities from our draft tool, when combined with prospect values, allow for a probablistic framework to make such a decision.
 
-### Introducing a new NHL drafting strategy
+### The strategy
 
 The core objective of this strategy is to determine a team's maximum conditional draft value at each pick. The maximum value is selected from a list of conditional draft values associated with each available prospect. Using a team's first two picks as an example, the strategy can be written (somewhat) formally like this:
 
@@ -396,32 +368,6 @@ Let's determine who each analyst should draft at the 9th pick to maximize their 
 
 Here, McKenzie and Robinson should take the BPA to maximize conditional draft value, but Peters should defer and take his second BPA, Zach Benson.
 
-::: {.part-break}
-:::
-
-## NHL Draft: Post-Draft Analysis
-
-<span class="part-date">Originally published 2024-07-20.</span>
-
-### Enhancing the Draft Pick Value Framework
+## After the draft
 
 In general the probabilities were pretty well calibrated. However, the model was too certain in the top 10 picks. As a result, the sportsbooks cooked us.
-
-But first, a visual recap for those who don't want to read the [previous](https://spazznolo.github.io/2023/06/16/draft-probabilities-2.html) [three](https://spazznolo.github.io/2023/06/20/draft-probabilities-3.html) [posts](https://spazznolo.github.io/2023/07/02/draft-probabilities-4.html) (I get it).
-
-### Visual Recap
-
-1. A rank-ordered logit model was built using numerous publication rankings throughout the draft year to derive prospect pick probabilities, like this:
-
-   ![](/figs/draft-probabilities-4-4.png){fig-alt="Distribution of the difference in pick values, measured in 7-year predicted WAR, with an expected difference of 2.72 WAR." width="60%"}
-
-2. Prospect values were derived using a historical draft pick value chart (values are placeholders for teams' actual internal projections), along with uncertainty estimates, like this:
-
-3. The previous two points were combined to create new pick value charts, like this:
-
-As an example, the value of the third pick for a team who ranked the top 3 players in the draft as Bedard-Fantilli-Carlsson would be calculated as follows:
-
-- There's a 0% chance Bedard is available, so his value is multiplied by 0.
-- There's a 21.0% chance Fantilli is available, so his value is multiplied by 0.210.
-- There's a 79% that neither Bedard nor Fantilli is available, so Carlsson's value is multiplied by 0.790.
-- These three values are summed to get the third pick's value.
