@@ -180,6 +180,13 @@ test('article reading frame is wider on desktop', async ({ page }) => {
   expect(frame?.width ?? 0).toBeGreaterThanOrEqual(900);
 });
 
+test('long article URLs can wrap on narrow screens', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 800 });
+  await page.goto('/research/goalie-performance/');
+  const longUrl = page.locator('main a[href*="goalie-performance/blob/main/posts/post-1.R"]');
+  await expect(longUrl).toHaveCSS('overflow-wrap', 'anywhere');
+});
+
 test('equations use the informal working-note treatment', async ({ page }) => {
   await page.goto('/research/goalie-performance/');
   const equation = page.locator('.equation-note').first();

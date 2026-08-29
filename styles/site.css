@@ -114,6 +114,10 @@ main section.level2 > h2 {
   line-height: 1.35;
 }
 
+main a {
+  overflow-wrap: anywhere;
+}
+
 #toc-title {
   display: none;
 }
