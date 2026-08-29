@@ -14,6 +14,10 @@ execute:
   enabled: false
 ---
 
+::: {.archive-notice}
+This installment is preserved in its original context. Read [NHL Pick Probability](/research/nhl-pick-probability/) for the consolidated argument.
+:::
+
 The prospect pick probabilities available on the "Draft Pick Probabilities" tab of the [2023 Draft Tool](https://piyer97.shinyapps.io/NHLDraft2023/), created by Pranshanth Iyer and myself, can be used by NHL organizations to inform their decision-making process. Let's take the Montreal Canadiens as an example.
 
 The Canadiens pick fifth, which, according to consensus, is just outside the top tiers of prospects consisting of Connor Bedard, Adam Fantilli, Matvei Mitchkov, and Leo Carlsson. The next "tier", contains a handful of players which ranking publications seem to mostly disagree on. One common question is, if you're the Canadiens, do you trade up to guarantee the drafting of a potential superstar, or do you take the risk and hope one of them slides in the draft? However a more interesting question, in my opinion, is: "How are you making this decision?"

@@ -14,6 +14,10 @@ execute:
   enabled: false
 ---
 
+::: {.archive-notice}
+This installment is preserved in its original context. Read [NHL Pick Probability](/research/nhl-pick-probability/) for the consolidated argument.
+:::
+
 In [An Application of Prospect Pick Probabilities](https://spazznolo.github.io/2023/06/20/draft-probabilities-3.html), I used Prashanth Iyer and myself's [draft probability tool](https://piyer97.shinyapps.io/NHLDraft2023/) to create a new pick value framework which captured the unique dynamics of a given draft. Then, I [extended the methodology](https://spazznolo.github.io/2023/07/02/draft-probabilities-4.html) to include the uncertainty of prospect values. Here, I'll introduce a brand new drafting strategy for the NHL which aims to maximize draft value. But first, some background.
 
 ## Background on Optimization

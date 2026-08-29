@@ -15,6 +15,10 @@ execute:
   enabled: false
 ---
 
+::: {.archive-notice}
+This installment is preserved in its original context. Read [NHL Pick Probability](/research/nhl-pick-probability/) for the consolidated argument.
+:::
+
 The prospect pick probabilities in the "Draft Pick Probabilities" tab of the [2023 Draft Stock tool](https://piyer97.shinyapps.io/NHLDraft2023/) are generated through a process which primarily involves the application of a rank-ordered logit model to draft rankings released throughout the year. The methodology is a simplified version of [Predicting the NHL Draft with Rank-Ordered Logit Models](https://ecp.ep.liu.se/index.php/linhac/article/view/480).
 
 There are three main components - first, partial draft rankings are made complete, then a rank-ordered logit model is fit, finally 100,000 drafts are simulated from model outputs. I will describe each component in this thread. Links are provided at the end.
