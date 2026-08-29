@@ -208,9 +208,12 @@ Started thinking about tying together the modules to get the desired output for 
 ## [2022-10-09] Player Detect Demo
 It's been a while. I've been working on a court/player detection demo. I'm going to run a demo on an entire match and troubleshoot from there. So far one point has been processed and the results were encouraging. I'm trying to find a way to embed videos here, but the file size is just too big for github pages so far. Maybe I'll upload some demos to Youtube later.
 
-{{< video /figs/player-detect-demo.mp4 width="100%" title="Player detection demonstration" >}}
-
 The clip demonstrates the player-detection stage of the original tracking pipeline.
+
+<video controls preload="metadata" width="100%" title="Player detection demonstration">
+  <source src="/figs/player-detect-demo.mp4" type="video/mp4">
+  Your browser does not support this video. <a href="/figs/player-detect-demo.mp4">Download the MP4 video.</a>
+</video>
 
 ## [2022-10-12] General Update
 

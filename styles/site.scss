@@ -72,3 +72,74 @@ pre.text code {
   #quarto-content, .page-layout-full main { width: min(100% - 2rem, var(--reading-width)); }
   .navbar > .container-fluid { align-items: flex-start; }
 }
+
+@media (max-width: 480px) {
+  .quarto-listing-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  .quarto-listing-table,
+  .quarto-listing-table tbody,
+  .quarto-listing-table tr,
+  .quarto-listing-table td {
+    display: block;
+    width: 100%;
+  }
+  .quarto-listing-table tbody tr {
+    border: 1px solid var(--warm-divider);
+    margin-block: 0.75rem;
+    padding: 0.5rem 0.75rem;
+  }
+  .quarto-listing-table td {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.15rem;
+    align-items: start;
+    padding: 0.35rem 0;
+    border: 0;
+    overflow-wrap: break-word;
+    word-break: normal;
+  }
+  .quarto-listing-table td::before {
+    color: var(--warm-accent);
+    content: "";
+    display: block;
+    font-size: 0.76rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .quarto-listing-table td:nth-child(1)::before { content: "Date"; }
+  .quarto-listing-table td:nth-child(2)::before { content: "Title"; }
+  .quarto-listing-table td:nth-child(3)::before { content: "Reading time"; }
+  .quarto-listing-table td:nth-child(4)::before { content: "Subjects"; }
+  .quarto-listing-table td > * {
+    min-width: 0;
+    width: 100%;
+    overflow-wrap: break-word;
+    word-break: normal;
+  }
+}
+
+details.historical-code-disclosure {
+  border: 1px solid var(--warm-divider);
+  margin-block: 1rem;
+}
+details.historical-code-disclosure summary {
+  color: var(--warm-accent);
+  cursor: pointer;
+  padding: 0.55rem 0.75rem;
+}
+details.historical-code-disclosure[open] summary {
+  border-bottom: 1px solid var(--warm-divider);
+}
+details.historical-code-disclosure > div.sourceCode,
+details.historical-code-disclosure > pre.text {
+  margin: 0.75rem;
+}

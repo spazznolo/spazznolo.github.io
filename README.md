@@ -28,3 +28,7 @@ Copy `templates/post.qmd` to `posts/<slug>/index.qmd`, replace its example metad
 ## Publishing
 
 Pull requests run the full render and test contract. A passing push to `master` deploys the rendered `_site` artifact through GitHub Pages.
+
+## Updating GitHub Actions dependencies
+
+Third-party actions in `.github/workflows/site.yml` are pinned to immutable commit SHAs, with their human-readable release tags retained in comments. To update one, select the reviewed upstream release, resolve its commit from the action repository's official tag ref, review the action changelog and diff, replace the SHA and version comment together, and rerun the complete local verification sequence before committing.

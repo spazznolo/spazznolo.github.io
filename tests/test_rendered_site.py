@@ -38,6 +38,18 @@ class RenderedSiteSmokeTest(unittest.TestCase):
         html = (SITE / "index.html").read_text(encoding="utf-8")
         self.assertIn('property="og:title" content="Home – jeremie.spagnolo"', html)
 
+    def test_historical_code_and_video_fallback_contracts(self):
+        canonical = (SITE / "research" / "nhl-pick-probability" / "index.html").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn('class="historical-code-disclosure"', canonical)
+        self.assertIn("<summary>Show historical code", canonical)
+        video_page = (SITE / "2022" / "09" / "16" / "tennis-liveblog.html").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn("Your browser does not support this video", video_page)
+        self.assertIn('href="../../../figs/player-detect-demo.mp4"', video_page)
+
 
 if __name__ == "__main__":
     unittest.main()

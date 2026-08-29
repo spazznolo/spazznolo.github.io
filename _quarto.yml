@@ -62,3 +62,4 @@ execute:
 
 filters:
   - filters/reading-time.lua
+  - filters/historical-code.lua
