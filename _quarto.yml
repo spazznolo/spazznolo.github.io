@@ -13,6 +13,7 @@ project:
     - "background/**/*.qmd"
     - "goalies/**/*.qmd"
     - "tennis/**/*.qmd"
+    - "projects/**/*.qmd"
     - "draft/**/*.qmd"
     - "post-regulation/**/*.qmd"
     - "20*/**/*.qmd"

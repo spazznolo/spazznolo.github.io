@@ -1,5 +1,5 @@
 ---
-title: "/ wta rankings"
+title: "WTA Rankings"
 description: "Weekly market-implied WTA player ratings by surface, with uncertainty and historical trajectories."
 toc: false
 page-layout: full
@@ -8,6 +8,7 @@ page-layout: full
 <style>
   body:has(#ranking-body) #quarto-content { max-width: 1080px; }
   body:has(#ranking-body) main.content { max-width: none; width: 100%; }
+  body:has(#ranking-body) #title-block-header { margin-bottom: 2rem; }
   .ranking-note { color: #aaa; margin-bottom: 1.25rem; }
   .ranking-controls { display: flex; flex-wrap: wrap; gap: .75rem; margin: 1rem 0; }
   .ranking-controls input, .ranking-controls select { background: #111; color: #eee; border: 1px solid #555; padding: .45rem .6rem; }
@@ -34,7 +35,7 @@ page-layout: full
   #trajectory .axis { stroke: #555; stroke-width: 1; }
   #trajectory .band { fill: rgba(121, 192, 255, .18); }
   #trajectory .line { fill: none; stroke: #79c0ff; stroke-width: 2; }
-  .trajectory-legend { display: flex; flex-wrap: wrap; gap: .35rem 1rem; min-height: 1.5rem; color: #aaa; font-size: .85rem; }
+  .trajectory-legend { display: flex; flex-wrap: wrap; gap: .35rem 1rem; min-height: 1.5rem; margin-bottom: .35rem; color: #aaa; font-size: .85rem; }
   .trajectory-key::before { content: ""; display: inline-block; width: .75rem; height: .18rem; margin-right: .35rem; vertical-align: middle; background: var(--line-color); }
 </style>
 
@@ -48,8 +49,8 @@ These ratings are weekly market-implied WTA player states. Global parameters are
   <button class="surface-tab" id="top-five" type="button">Top 5</button>
   <button class="surface-tab" id="uncertainty" type="button" aria-pressed="false">Uncertainty</button>
 </div>
-<svg id="trajectory" viewBox="0 0 900 620" role="img" aria-label="Weekly player rating trajectory since last season"></svg>
 <div class="trajectory-legend" id="trajectory-legend"></div>
+<svg id="trajectory" viewBox="0 0 900 620" role="img" aria-label="Weekly player rating trajectory since last season"></svg>
 
 <h2>Latest leaderboard</h2>
 <p class="ranking-note" id="leaderboard-updated"></p>
@@ -147,7 +148,6 @@ These ratings are weekly market-implied WTA player states. Global parameters are
         if (playerId) { selectedPlayerIds = new Set([playerId]); selectionIsDefault = false; }
         const latestDate = latest[0].week_ending, startDate = `${Number(latestDate.slice(0,4)) - 1}-01-01`;
         const chartPrefix = activeRating.replace('_mean', '');
-        const chartLabel = chartPrefix === 'overall' ? 'Overall' : `${chartPrefix[0].toUpperCase()}${chartPrefix.slice(1)}`;
         const chartSdColumn = `conditional_${chartPrefix}_sd`;
         const series = [...selectedPlayerIds].map(id => {
           const latestRow = latest.find(row => row.player_id === id);
@@ -179,7 +179,7 @@ These ratings are weekly market-implied WTA player states. Global parameters are
           const band = showUncertainty && bandRows.length > 1 ? `<polygon fill="${color}" fill-opacity=".13" points="${upper} ${lower}"/>` : '';
           return `${band}<polyline fill="none" stroke="${color}" stroke-width="2.4" points="${line}"/>`;
         }).join('');
-        svg.innerHTML = `${ticks}${paths}<text x="${pad.l}" y="${H-8}">${startDate}</text><text text-anchor="end" x="${W-pad.r}" y="${H-8}">${latestDate}</text><text x="${pad.l}" y="16">${chartLabel} · ${selectionIsDefault ? 'current top 5' : `${series.length} selected player${series.length === 1 ? '' : 's'}`}</text>`;
+        svg.innerHTML = `${ticks}${paths}<text x="${pad.l}" y="${H-8}">${startDate}</text><text text-anchor="end" x="${W-pad.r}" y="${H-8}">${latestDate}</text>`;
         document.getElementById('trajectory-legend').innerHTML = series.map((item, index) => `<span class="trajectory-key" style="--line-color:${chartColors[index % chartColors.length]}">${item.name}</span>`).join('');
       }
 

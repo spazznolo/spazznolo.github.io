@@ -1,0 +1,19 @@
+---
+title: "Letterboxd Recs"
+description: "Personalized, weekly refreshed film recommendations built from taste similarity, social signals, and streaming availability."
+toc: false
+---
+
+I built a film recommender around my Letterboxd history and the people whose taste overlaps with mine. It combines what I have watched, rated, liked, and saved with a similarity-weighted social graph, then ranks unseen films and checks where they are available to stream.
+
+[Open the recommendations](https://spazznolo.github.io/letterboxd-recs/) · [View the code](https://github.com/spazznolo/letterboxd-recs)
+
+## How it works
+
+The model first measures taste similarity using shared viewing history and agreement on films we have both rated. Those estimates are shrunk toward a neutral prior when overlap is thin, so a handful of shared films cannot dominate the ranking.
+
+Each unseen film then accumulates evidence from similar people who watched, rated, liked, or saved it. The score also accounts for interaction strength, recency, and the tendency of extremely heavy viewers to overwhelm a social signal.
+
+## The live page
+
+The output is refreshed weekly and includes ranked recommendations, movement since the prior edition, and filters for streaming provider, genre, and release year. It is a working personal tool rather than a finished model write-up; I will document the design and validation in more detail as it evolves.
