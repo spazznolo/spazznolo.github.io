@@ -36,8 +36,6 @@ page-layout: full
   .recs-movement.down { color: #ff7b72; }
 </style>
 
-This is a weekly list of films I might want to watch. It compares my ratings and viewing history with people I follow, gives more weight to people with similar taste, then ranks films I haven’t seen and checks what’s available to stream.
-
 <div id="letterboxd-recs">
 <p class="recs-note" id="recs-updated">Loading the latest recommendations…</p>
 <div class="recs-grid">
