@@ -1,0 +1,285 @@
+---
+title: "/ wta rankings"
+description: "Weekly market-implied WTA player ratings by surface, with uncertainty and historical trajectories."
+toc: false
+page-layout: full
+---
+
+<style>
+  body:has(#ranking-body) #quarto-content { max-width: 1080px; }
+  .ranking-note { color: #aaa; margin-bottom: 1.25rem; }
+  .ranking-controls { display: flex; flex-wrap: wrap; gap: .75rem; margin: 1rem 0; }
+  .ranking-controls input, .ranking-controls select { background: #111; color: #eee; border: 1px solid #555; padding: .45rem .6rem; }
+  .surface-tabs { display: flex; flex-wrap: wrap; gap: .4rem; margin: 1rem 0; }
+  .surface-tab { background: #111; color: #aaa; border: 1px solid #555; padding: .45rem .8rem; cursor: pointer; font: inherit; }
+  .surface-tab:hover { color: #fff; border-color: #888; }
+  .surface-tab[aria-selected="true"], .surface-tab[aria-pressed="true"] { color: #111; background: #79c0ff; border-color: #79c0ff; }
+  .ranking-wrap { overflow-x: auto; }
+  .ranking-table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  .ranking-table th, .ranking-table td { border-bottom: 1px solid #333; padding: .42rem .5rem; text-align: right; white-space: nowrap; }
+  .ranking-table th:nth-child(4), .ranking-table td:nth-child(4) { text-align: left; }
+  .ranking-table th button { appearance: none; border: 0; background: none; color: inherit; font: inherit; font-weight: 700; cursor: pointer; padding: 0; }
+  .ranking-table th button:hover, .ranking-table th button:focus-visible { color: #79c0ff; }
+  .ranking-table th button[aria-sort="ascending"]::after { content: " ▲"; color: #79c0ff; }
+  .ranking-table th button[aria-sort="descending"]::after { content: " ▼"; color: #79c0ff; }
+  .ranking-up { color: #7bd88f; }
+  .ranking-down { color: #ff7b72; }
+  .ranking-table tbody tr { cursor: pointer; }
+  .ranking-table tbody tr:hover td { background: rgba(121, 192, 255, .06); }
+  .ranking-table tbody tr.is-selected td { background: rgba(121, 192, 255, .12); }
+  .ranking-table tbody tr.is-selected td:nth-child(4)::before { content: "● "; color: #79c0ff; }
+  #trajectory { width: 100%; min-height: 580px; margin: .75rem 0 1.5rem; }
+  #trajectory text { fill: #aaa; font-size: 11px; }
+  #trajectory .axis { stroke: #555; stroke-width: 1; }
+  #trajectory .band { fill: rgba(121, 192, 255, .18); }
+  #trajectory .line { fill: none; stroke: #79c0ff; stroke-width: 2; }
+  .trajectory-legend { display: flex; flex-wrap: wrap; gap: .35rem 1rem; min-height: 1.5rem; color: #aaa; font-size: .85rem; }
+  .trajectory-key::before { content: ""; display: inline-block; width: .75rem; height: .18rem; margin-right: .35rem; vertical-align: middle; background: var(--line-color); }
+</style>
+
+These are weekly market-implied WTA player states, not official WTA rankings. Historical
+bookmaker prices update a Gaussian player-strength model; match outcomes are used only
+for evaluation. Global parameters are frozen each off-season, while new prices update
+player states exactly online.
+
+<p class="ranking-note" id="ranking-note">Loading the latest completed Sunday…</p>
+<p class="ranking-note"><strong>How to read this:</strong> ratings are smoothed, draw-neutral player states inferred from match prices available by the cutoff. They are not tournament-title probabilities. Futures markets can disagree because they also price the current draw, path, health, and newer information; each player's last incorporated match is shown below.</p>
+
+<h2>Player trajectory</h2>
+
+<div class="ranking-controls">
+  <button class="surface-tab" id="top-five" type="button">Top 5</button>
+  <button class="surface-tab" id="uncertainty" type="button" aria-pressed="false">Uncertainty</button>
+</div>
+<svg id="trajectory" viewBox="0 0 900 620" role="img" aria-label="Weekly player rating trajectory since last season"></svg>
+<div class="trajectory-legend" id="trajectory-legend"></div>
+<p class="ranking-note" id="trajectory-note">Click a leaderboard row to add or remove that player from the chart.</p>
+
+<h2>Latest leaderboard</h2>
+<p class="ranking-note" id="leaderboard-updated"></p>
+
+<div class="ranking-controls">
+  <label>Find <input id="table-search" placeholder="player name"></label>
+</div>
+<div class="surface-tabs" role="tablist" aria-label="Ranking surface">
+  <button class="surface-tab" role="tab" aria-selected="true" data-rating="overall_mean">Overall</button>
+  <button class="surface-tab" role="tab" aria-selected="false" data-rating="hard_mean">Hard</button>
+  <button class="surface-tab" role="tab" aria-selected="false" data-rating="clay_mean">Clay</button>
+  <button class="surface-tab" role="tab" aria-selected="false" data-rating="grass_mean">Grass</button>
+</div>
+
+<div class="ranking-wrap">
+  <table class="ranking-table">
+    <thead><tr>
+      <th><button data-sort="displayRank" data-type="number">Rank</button></th>
+      <th><button data-sort="weekMove" data-type="number">7d</button></th>
+      <th><button data-sort="yearMove" data-type="number">1y</button></th>
+      <th><button data-sort="player_name" data-type="text">Player</button></th>
+      <th><button data-sort="age" data-type="number">Age</button></th>
+      <th><button id="rating-heading" data-sort="rating" data-type="number" aria-sort="descending">Rating</button></th>
+      <th><button id="win-prob-heading" data-sort="winProb" data-type="number">Win vs avg</button></th>
+      <th><button data-sort="ratingLow" data-type="number">Rating 50%</button></th>
+      <th id="effect-column" hidden><button id="effect-heading" data-sort="effect" data-type="number">Surface effect</button></th>
+      <th><button data-sort="last_state_date" data-type="text">Last match</button></th>
+    </tr></thead>
+    <tbody id="ranking-body"></tbody>
+  </table>
+</div>
+
+<p class="ranking-note">The leaderboard shows the top 500 players with at least one observed match in the prior year. “Win vs avg” is the model’s draw-neutral, one-match probability against the mean active-tour player on the selected surface. A positive surface effect is a boost relative to that player's own overall strength; the three effects sum to zero. Rating intervals are central 50% posterior intervals and include uncertainty in the overall state, surface contrast, and their covariance.</p>
+
+<script>
+(() => {
+  const latestUrl = '/assets/data/wta-rankings-latest.csv';
+  const historyUrl = '/assets/data/wta-rankings-history.csv';
+  const priorHistoryUrl = '/assets/data/wta-rankings-history-2025.csv';
+  const priorUncertaintyUrl = '/assets/data/wta-ranking-trajectory-uncertainty-2025.csv';
+  const uncertaintyUrl = '/assets/data/wta-ranking-trajectory-uncertainty-2026.csv';
+  const intervalZ = 0.6744897501960817;
+  const chartColors = ['#79c0ff','#f2cc60','#7bd88f','#ff7b72','#d2a8ff','#ffa657','#56d4dd','#ff9bce','#a5d6ff','#c9d1d9'];
+
+  function parseCSV(text) {
+    const rows = []; let row = [], field = '', quoted = false;
+    for (let i = 0; i < text.length; i++) {
+      const c = text[i], next = text[i + 1];
+      if (c === '"' && quoted && next === '"') { field += '"'; i++; }
+      else if (c === '"') quoted = !quoted;
+      else if (c === ',' && !quoted) { row.push(field); field = ''; }
+      else if ((c === '\n' || c === '\r') && !quoted) {
+        if (c === '\r' && next === '\n') i++;
+        row.push(field); field = ''; if (row.some(v => v !== '')) rows.push(row); row = [];
+      } else field += c;
+    }
+    if (field || row.length) { row.push(field); rows.push(row); }
+    const headers = rows.shift();
+    return rows.map(values => Object.fromEntries(headers.map((h, i) => [h, values[i] ?? ''])));
+  }
+
+  const number = value => Number.parseFloat(value);
+  const movement = value => {
+    if (value === '') return '—';
+    const n = Number(value); return n > 0 ? `+${n}` : `${n}`;
+  };
+  const signed = value => {
+    const n = number(value);
+    return `${n >= 0 ? '+' : ''}${n.toFixed(3)}`;
+  };
+
+  Promise.all([latestUrl, historyUrl, priorHistoryUrl, priorUncertaintyUrl, uncertaintyUrl].map(url => fetch(url).then(r => { if (!r.ok) throw new Error(`${url}: ${r.status}`); return r.text(); })))
+    .then(([latestText, historyText, priorHistoryText, priorUncertaintyText, uncertaintyText]) => {
+      const latest = parseCSV(latestText), history = [...parseCSV(priorHistoryText), ...parseCSV(historyText)];
+      const uncertaintyRows = [...parseCSV(priorUncertaintyText), ...parseCSV(uncertaintyText)];
+      const uncertaintyByPlayerWeek = new Map(uncertaintyRows.map(row => [`${row.player_id}|${row.week_ending}`, row]));
+      history.forEach(row => {
+        const uncertainty = uncertaintyByPlayerWeek.get(`${row.player_id}|${row.week_ending}`);
+        if (!uncertainty) return;
+        for (const surface of ['overall', 'hard', 'clay', 'grass']) {
+          row[`conditional_${surface}_sd`] = uncertainty[`${surface}_sd`];
+        }
+      });
+      const note = document.getElementById('ranking-note');
+      note.textContent = `Latest completed Sunday: ${latest[0].week_ending} · top 500 of ${latest.length} active players · global parameters frozen for 2026`;
+      document.getElementById('leaderboard-updated').textContent = `Last updated: ${new Date(`${latest[0].week_ending}T12:00:00Z`).toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC'})}`;
+
+      let activeRating = 'overall_mean', selectionIsDefault = true, showUncertainty = false;
+      const topPlayerIds = () => [...latest]
+        .sort((a, b) => number(b[activeRating]) - number(a[activeRating]))
+        .slice(0, 5)
+        .map(row => row.player_id);
+      let selectedPlayerIds = new Set(topPlayerIds());
+
+      function drawTrajectory(playerId = null) {
+        if (playerId) { selectedPlayerIds = new Set([playerId]); selectionIsDefault = false; }
+        const latestDate = latest[0].week_ending, startDate = `${Number(latestDate.slice(0,4)) - 1}-01-01`;
+        const chartPrefix = activeRating.replace('_mean', '');
+        const chartLabel = chartPrefix === 'overall' ? 'Overall' : `${chartPrefix[0].toUpperCase()}${chartPrefix.slice(1)}`;
+        const chartSdColumn = `conditional_${chartPrefix}_sd`;
+        const series = [...selectedPlayerIds].map(id => {
+          const latestRow = latest.find(row => row.player_id === id);
+          return {id, name: latestRow?.player_name || id, rows: history.filter(row => row.player_id === id && row.week_ending >= startDate && row.week_ending <= latestDate).sort((a, b) => a.week_ending.localeCompare(b.week_ending))};
+        }).filter(item => item.rows.length);
+        if (!series.length) return;
+        const uncertaintySeries = series.filter(item => item.rows.some(row => Number.isFinite(number(row[`conditional_${activeRating.replace('_mean', '')}_sd`]))));
+        document.getElementById('trajectory-note').textContent = showUncertainty
+          ? `Central 50% uncertainty shown for ${uncertaintySeries.length} of ${series.length} selected players. Click leaderboard rows to change the chart.`
+          : 'Click a leaderboard row to add or remove that player from the chart.';
+        const svg = document.getElementById('trajectory'), W = 900, H = 620, pad = {l: 54, r: 18, t: 26, b: 38};
+        const all = series.flatMap(item => item.rows);
+        const centers = all.map(r => number(r[activeRating]));
+        const withUncertainty = showUncertainty
+          ? all.filter(r => Number.isFinite(number(r[chartSdColumn])))
+          : [];
+        const lows = [...centers, ...withUncertainty.map(r => number(r[activeRating]) - intervalZ * number(r[chartSdColumn]))];
+        const highs = [...centers, ...withUncertainty.map(r => number(r[activeRating]) + intervalZ * number(r[chartSdColumn]))];
+        const lo = Math.min(...lows), hi = Math.max(...highs), span = Math.max(hi - lo, .1);
+        const start = new Date(startDate), end = new Date(latestDate), timeSpan = Math.max(end - start, 1);
+        const x = date => pad.l + (new Date(date) - start) * (W - pad.l - pad.r) / timeSpan;
+        const y = v => pad.t + (hi + .08 * span - v) * (H - pad.t - pad.b) / (1.16 * span);
+        const ticks = [0, .25, .5, .75, 1].map(frac => {
+          const value = lo + frac * span, yy = y(value);
+          return `<line class="axis" x1="${pad.l}" x2="${W-pad.r}" y1="${yy}" y2="${yy}"/><text x="8" y="${yy+4}">${value.toFixed(2)}</text>`;
+        }).join('');
+        const paths = series.map((item, index) => {
+          const color = chartColors[index % chartColors.length], rows = item.rows;
+          const line = rows.map(r => `${x(r.week_ending)},${y(number(r[activeRating]))}`).join(' ');
+          const bandRows = rows.filter(r => Number.isFinite(number(r[chartSdColumn])));
+          const upper = bandRows.map(r => `${x(r.week_ending)},${y(number(r[activeRating]) + intervalZ * number(r[chartSdColumn]))}`).join(' ');
+          const lower = [...bandRows].reverse().map(r => `${x(r.week_ending)},${y(number(r[activeRating]) - intervalZ * number(r[chartSdColumn]))}`).join(' ');
+          const band = showUncertainty && bandRows.length > 1 ? `<polygon fill="${color}" fill-opacity=".13" points="${upper} ${lower}"/>` : '';
+          return `${band}<polyline fill="none" stroke="${color}" stroke-width="2.4" points="${line}"/>`;
+        }).join('');
+        svg.innerHTML = `${ticks}${paths}<text x="${pad.l}" y="${H-8}">${startDate}</text><text text-anchor="end" x="${W-pad.r}" y="${H-8}">${latestDate}</text><text x="${pad.l}" y="16">${chartLabel} · ${selectionIsDefault ? 'current top 5' : `${series.length} selected player${series.length === 1 ? '' : 's'}`}</text>`;
+        document.getElementById('trajectory-legend').innerHTML = series.map((item, index) => `<span class="trajectory-key" style="--line-color:${chartColors[index % chartColors.length]}">${item.name}</span>`).join('');
+      }
+
+      const body = document.getElementById('ranking-body');
+      let sortKey = 'rating', sortDirection = -1;
+      const datedRows = date => history.filter(row => row.week_ending === date);
+      const latestDate = latest[0].week_ending;
+      const previousDate = new Date(`${latestDate}T00:00:00Z`); previousDate.setUTCDate(previousDate.getUTCDate() - 7);
+      const yearTarget = new Date(`${latestDate}T00:00:00Z`); yearTarget.setUTCFullYear(yearTarget.getUTCFullYear() - 1);
+      const allDates = [...new Set(history.map(row => row.week_ending))].sort();
+      const nearestYearDate = allDates.reduce((best, date) => Math.abs(new Date(`${date}T00:00:00Z`) - yearTarget) < Math.abs(new Date(`${best}T00:00:00Z`) - yearTarget) ? date : best, allDates[0]);
+
+      function rankMap(rows, column) {
+        return new Map([...rows].sort((a, b) => number(b[column]) - number(a[column])).map((row, index) => [row.player_id, index + 1]));
+      }
+      function drawTable() {
+        const query = document.getElementById('table-search').value.trim().toLowerCase();
+        const prefix = activeRating.replace('_mean', '');
+        const hasSurface = prefix !== 'overall';
+        const effectColumn = hasSurface ? `${prefix}_effect_mean` : activeRating;
+        const tourAverage = latest.reduce((sum, row) => sum + number(row[activeRating]), 0) / latest.length;
+        const priorWeekRanks = rankMap(datedRows(previousDate.toISOString().slice(0,10)), activeRating);
+        const priorYearRanks = rankMap(datedRows(nearestYearDate), activeRating);
+        const ranked = [...latest].sort((a, b) => number(b[activeRating]) - number(a[activeRating])).map((row, index) => {
+          const displayRank = index + 1, weekPrior = priorWeekRanks.get(row.player_id), yearPrior = priorYearRanks.get(row.player_id);
+          const rating = number(row[activeRating]), ratingSd = number(row[`conditional_${prefix}_sd`]);
+          const effect = hasSurface ? number(row[effectColumn]) : Number.NaN;
+          const winProb = 1 / (1 + Math.exp(-(rating - tourAverage)));
+          return {...row, displayRank, rating, winProb, age: number(row.age), ratingLow: rating - intervalZ * ratingSd, ratingHigh: rating + intervalZ * ratingSd, effect, weekMove: weekPrior ? weekPrior - displayRank : Number.NaN, yearMove: yearPrior ? yearPrior - displayRank : Number.NaN};
+        }).slice(0, 500);
+        const displayed = ranked.filter(row => row.player_name.toLowerCase().includes(query)).sort((a, b) => {
+          const av = a[sortKey], bv = b[sortKey];
+          if (typeof av === 'string') return sortDirection * av.localeCompare(bv);
+          if (!Number.isFinite(av)) return 1; if (!Number.isFinite(bv)) return -1;
+          return sortDirection * (av - bv);
+        });
+        body.innerHTML = displayed.map(row => {
+          const weekMove = movement(Number.isFinite(row.weekMove) ? row.weekMove : ''), yearMove = movement(Number.isFinite(row.yearMove) ? row.yearMove : '');
+          const weekCls = row.weekMove > 0 ? 'ranking-up' : row.weekMove < 0 ? 'ranking-down' : '';
+          const yearCls = row.yearMove > 0 ? 'ranking-up' : row.yearMove < 0 ? 'ranking-down' : '';
+          const interval = `[${row.ratingLow.toFixed(2)}, ${row.ratingHigh.toFixed(2)}]`;
+          const effect = hasSurface ? signed(row[`${prefix}_effect_mean`]) : '—';
+          const selected = selectedPlayerIds.has(row.player_id) ? ' class="is-selected"' : '';
+          const effectCell = hasSurface ? `<td>${effect}</td>` : '';
+          return `<tr${selected} data-player-id="${row.player_id}"><td>${row.displayRank}</td><td class="${weekCls}">${weekMove}</td><td class="${yearCls}">${yearMove}</td><td>${row.player_name}</td><td>${Number.isFinite(row.age) ? row.age.toFixed(1) : '—'}</td><td>${row.rating.toFixed(2)}</td><td>${(100 * row.winProb).toFixed(1)}%</td><td>${interval}</td>${effectCell}<td>${row.last_state_date}</td></tr>`;
+        }).join('');
+      }
+
+      document.getElementById('top-five').addEventListener('click', () => {
+        selectionIsDefault = true; selectedPlayerIds = new Set(topPlayerIds()); drawTrajectory(); drawTable();
+      });
+      document.getElementById('uncertainty').addEventListener('click', event => {
+        showUncertainty = !showUncertainty;
+        event.currentTarget.setAttribute('aria-pressed', String(showUncertainty));
+        drawTrajectory();
+      });
+      body.addEventListener('click', event => {
+        const row = event.target.closest('tr[data-player-id]'); if (!row) return;
+        const id = row.dataset.playerId;
+        selectionIsDefault = false;
+        if (selectedPlayerIds.has(id)) selectedPlayerIds.delete(id); else selectedPlayerIds.add(id);
+        if (!selectedPlayerIds.size) selectedPlayerIds.add(id);
+        drawTrajectory(); drawTable();
+      });
+      document.getElementById('table-search').addEventListener('input', drawTable);
+      document.querySelectorAll('.ranking-table th button').forEach(button => button.addEventListener('click', () => {
+        const nextKey = button.dataset.sort;
+        sortDirection = sortKey === nextKey ? -sortDirection : (nextKey === 'player_name' || nextKey === 'displayRank' ? 1 : -1);
+        sortKey = nextKey;
+        document.querySelectorAll('.ranking-table th button').forEach(item => item.removeAttribute('aria-sort'));
+        button.setAttribute('aria-sort', sortDirection === 1 ? 'ascending' : 'descending');
+        drawTable();
+      }));
+      document.querySelectorAll('.surface-tab').forEach(tab => tab.addEventListener('click', () => {
+        if (!tab.dataset.rating) return;
+        activeRating = tab.dataset.rating;
+        if (selectionIsDefault) selectedPlayerIds = new Set(topPlayerIds());
+        document.querySelectorAll('.surface-tab').forEach(item => item.setAttribute('aria-selected', String(item === tab)));
+        const prefix = activeRating.replace('_mean', '');
+        const hasSurface = prefix !== 'overall';
+        document.getElementById('rating-heading').textContent = hasSurface ? `${prefix[0].toUpperCase()}${prefix.slice(1)} rating` : 'Rating';
+        document.getElementById('win-prob-heading').textContent = hasSurface ? `Win vs avg ${prefix}` : 'Win vs avg';
+        document.getElementById('effect-heading').textContent = hasSurface ? `${prefix[0].toUpperCase()}${prefix.slice(1)} effect` : 'Surface effect';
+        document.getElementById('effect-column').hidden = !hasSurface;
+        sortKey = 'rating'; sortDirection = -1;
+        document.querySelectorAll('.ranking-table th button').forEach(item => item.removeAttribute('aria-sort'));
+        document.getElementById('rating-heading').setAttribute('aria-sort', 'descending');
+        drawTrajectory(); drawTable();
+      }));
+      drawTrajectory(); drawTable();
+    })
+    .catch(error => { document.getElementById('ranking-note').textContent = `Rankings failed to load: ${error}`; });
+})();
+</script>
