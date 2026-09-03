@@ -1,19 +1,140 @@
 ---
 title: "Letterboxd Recs"
-description: "Personalized, weekly refreshed film recommendations built from taste similarity, social signals, and streaming availability."
+description: "Personalized, weekly fresh film recommendations built from taste similarity and streaming availability."
 toc: false
+page-layout: full
 ---
 
-I built a film recommender around my Letterboxd history and the people whose taste overlaps with mine. It combines what I have watched, rated, liked, and saved with a similarity-weighted social graph, then ranks unseen films and checks where they are available to stream.
+<style>
+  body:has(#letterboxd-recs) #quarto-content { max-width: 1160px; }
+  body:has(#letterboxd-recs) main.content { max-width: none; width: 100%; }
+  .recs-note { color: #aaa; font-size: .85rem; margin: 1.5rem 0 .75rem; }
+  .recs-grid { border-top: 1px solid #333; font-variant-numeric: tabular-nums; }
+  .recs-row, .recs-controls {
+    display: grid;
+    grid-template-columns: 62px 90px 70px minmax(180px, 1.6fr) 86px minmax(150px, 1.4fr) 90px;
+    gap: 12px;
+    align-items: center;
+    padding: 10px 4px;
+    border-bottom: 1px solid #333;
+    font-size: .9rem;
+  }
+  .recs-controls { color: #aaa; font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; }
+  .recs-controls button { appearance: none; background: none; border: 0; color: inherit; cursor: pointer; font: inherit; letter-spacing: inherit; padding: 0; text-align: left; text-transform: inherit; }
+  .recs-controls button:hover, .recs-controls button.active { color: #fff; }
+  .recs-controls select, .recs-controls input { width: 100%; background: #111; border: 1px solid #555; color: #eee; font: inherit; padding: .4rem; }
+  .recs-controls .toggle { display: flex; align-items: center; gap: .35rem; font-size: .72rem; letter-spacing: 0; text-transform: none; }
+  .recs-controls .toggle input { width: auto; }
+  .recs-title { color: inherit; font-family: Georgia, "Times New Roman", serif; font-size: 1rem; font-weight: 600; text-decoration: none; }
+  .recs-title:hover { text-decoration: underline; }
+  .recs-genres, .recs-availability, .recs-empty { color: #aaa; }
+  .recs-availability { font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; }
+  .recs-movement { font-size: .78rem; }
+  .recs-movement.up { color: #7bd88f; }
+  .recs-movement.down { color: #ff7b72; }
+  @media (max-width: 760px) {
+    .recs-controls { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .65rem; }
+    .recs-row { grid-template-columns: 46px 58px 1fr; gap: .4rem .75rem; }
+    .recs-row [data-label="Score"], .recs-row [data-label="Genres"], .recs-row [data-label="Available"] { display: none; }
+    .recs-row [data-label="Title"] { grid-column: 3; grid-row: 1; }
+    .recs-row [data-label="Year"] { grid-column: 3; grid-row: 2; color: #aaa; font-size: .8rem; }
+  }
+</style>
 
-[Open the recommendations](https://spazznolo.github.io/letterboxd-recs/) · [View the code](https://github.com/spazznolo/letterboxd-recs)
+This is a weekly list of films I might want to watch. It compares my ratings and viewing history with people I follow, gives more weight to people with similar taste, then ranks films I haven’t seen and checks what’s available to stream.
 
-## How it works
+<div id="letterboxd-recs">
+  <p class="recs-note" id="recs-updated">Loading the latest recommendations…</p>
+  <div class="recs-grid">
+    <div class="recs-controls">
+      <span><button id="recs-sort-rank" type="button">Rank</button></span>
+      <span><button id="recs-sort-movement" type="button">Movement</button></span>
+      <span>Score</span>
+      <label>Provider <select id="recs-provider"></select></label>
+      <label>Min year <input id="recs-min-year" type="number" placeholder="min"></label>
+      <label>Genre <select id="recs-genre"></select></label>
+      <label class="toggle"><input id="recs-stream-only" type="checkbox"> Stream only</label>
+    </div>
+    <div id="recs-rows"></div>
+  </div>
+</div>
 
-The model first measures taste similarity using shared viewing history and agreement on films we have both rated. Those estimates are shrunk toward a neutral prior when overlap is thin, so a handful of shared films cannot dominate the ranking.
+<script>
+(() => {
+  const sourceUrl = 'https://spazznolo.github.io/letterboxd-recs/';
+  const updated = document.getElementById('recs-updated');
+  const providerSelect = document.getElementById('recs-provider');
+  const genreSelect = document.getElementById('recs-genre');
+  const minYearInput = document.getElementById('recs-min-year');
+  const streamOnlyInput = document.getElementById('recs-stream-only');
+  const sortRankButton = document.getElementById('recs-sort-rank');
+  const sortMovementButton = document.getElementById('recs-sort-movement');
+  const rows = document.getElementById('recs-rows');
+  let sortKey = 'rank', sortDirection = 'asc', data;
 
-Each unseen film then accumulates evidence from similar people who watched, rated, liked, or saved it. The score also accounts for interaction strength, recency, and the tendency of extremely heavy viewers to overwhelm a social signal.
+  const escapeHTML = value => String(value ?? '').replace(/[&<>'"]/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
+  const addOption = (select, value, label) => {
+    const option = document.createElement('option');
+    option.value = value; option.textContent = label; select.appendChild(option);
+  };
+  const movement = film => {
+    if (film.previous_rank === null || film.previous_rank === undefined) return '<span class="recs-movement">new</span>';
+    const change = Number(film.rank_change);
+    if (!Number.isFinite(change) || change === 0) return '<span class="recs-movement">—</span>';
+    return `<span class="recs-movement ${change > 0 ? 'up' : 'down'}">${change > 0 ? '↑' : '↓'}${Math.abs(change)}</span>`;
+  };
+  const updateSortButtons = () => {
+    sortRankButton.textContent = sortKey === 'rank' ? `Rank ${sortDirection === 'asc' ? '↑' : '↓'}` : 'Rank';
+    sortMovementButton.textContent = sortKey === 'movement' ? `Movement ${sortDirection === 'asc' ? '↑' : '↓'}` : 'Movement';
+    sortRankButton.classList.toggle('active', sortKey === 'rank');
+    sortMovementButton.classList.toggle('active', sortKey === 'movement');
+  };
+  const render = () => {
+    if (!data) return;
+    const provider = providerSelect.value, genre = genreSelect.value;
+    const minYear = Number.parseInt(minYearInput.value, 10), streamOnly = streamOnlyInput.checked;
+    const filtered = data.films.filter(film => {
+      if (provider && !film.providers?.[provider]) return false;
+      if (genre && !(film.genres || []).includes(genre)) return false;
+      if (Number.isFinite(minYear) && film.year && film.year < minYear) return false;
+      return !(streamOnly && !film.stream);
+    });
+    filtered.sort((left, right) => {
+      const leftValue = sortKey === 'movement' ? Number(left.rank_change ?? Number.NEGATIVE_INFINITY) : Number(left.current_rank);
+      const rightValue = sortKey === 'movement' ? Number(right.rank_change ?? Number.NEGATIVE_INFINITY) : Number(right.current_rank);
+      return (sortDirection === 'asc' ? 1 : -1) * (leftValue - rightValue) || Number(left.current_rank) - Number(right.current_rank);
+    });
+    updateSortButtons();
+    if (!filtered.length) { rows.innerHTML = '<div class="recs-row"><span class="recs-empty">No films match these filters.</span></div>'; return; }
+    rows.innerHTML = filtered.map(film => {
+      const title = escapeHTML(film.title), url = /^https:\/\//.test(film.letterboxd_url || '') ? escapeHTML(film.letterboxd_url) : '';
+      const titleHTML = url ? `<a class="recs-title" href="${url}" target="_blank" rel="noopener noreferrer">${title}</a>` : `<span class="recs-title">${title}</span>`;
+      const score = Number(film.score_scaled ?? film.score);
+      return `<div class="recs-row"><span data-label="Rank">${Number(film.current_rank)}</span><span data-label="Movement">${movement(film)}</span><span data-label="Score">${Number.isFinite(score) ? score.toFixed(2) : '—'}</span><span data-label="Title">${titleHTML}</span><span data-label="Year">${film.year || '—'}</span><span class="recs-genres" data-label="Genres">${escapeHTML((film.genres || []).join(', ') || 'Unknown')}</span><span class="recs-availability" data-label="Available">${film.stream ? 'stream' : 'rent'}</span></div>`;
+    }).join('');
+  };
 
-## The live page
+  fetch(sourceUrl)
+    .then(response => { if (!response.ok) throw new Error(`Recommendations: ${response.status}`); return response.text(); })
+    .then(html => {
+      const source = new DOMParser().parseFromString(html, 'text/html').getElementById('recs-data');
+      if (!source) throw new Error('Recommendation data was not found.');
+      data = JSON.parse(source.textContent || '{}');
+      const date = new Date(data.generated_at);
+      updated.textContent = `Last updated: ${date.toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric'})}`;
+      addOption(providerSelect, '', 'All');
+      (data.providers || []).forEach(provider => addOption(providerSelect, provider, provider.replaceAll('_', ' ')));
+      addOption(genreSelect, '', 'All');
+      [...new Set(data.films.flatMap(film => film.genres || []))].sort().forEach(genre => addOption(genreSelect, genre, genre));
+      render();
+    })
+    .catch(error => { updated.textContent = 'The latest recommendations could not be loaded.'; console.error(error); });
 
-The output is refreshed weekly and includes ranked recommendations, movement since the prior edition, and filters for streaming provider, genre, and release year. It is a working personal tool rather than a finished model write-up; I will document the design and validation in more detail as it evolves.
+  providerSelect.addEventListener('change', render);
+  genreSelect.addEventListener('change', render);
+  minYearInput.addEventListener('input', render);
+  streamOnlyInput.addEventListener('change', render);
+  sortRankButton.addEventListener('click', () => { sortDirection = sortKey === 'rank' && sortDirection === 'asc' ? 'desc' : 'asc'; sortKey = 'rank'; render(); });
+  sortMovementButton.addEventListener('click', () => { sortDirection = sortKey === 'movement' && sortDirection === 'desc' ? 'asc' : 'desc'; sortKey = 'movement'; render(); });
+})();
+</script>

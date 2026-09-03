@@ -40,7 +40,7 @@ This blog serves as an outlet to explore ideas which naturally interest me. I tr
 
 ## Projects
 
-- [Letterboxd Recs](/projects/letterboxd-recs/) — Personalized film recommendations built from taste similarity, social signals, and streaming availability.
+- [Letterboxd Recs](/projects/letterboxd-recs/) — Personalized, weekly fresh film recommendations built from taste similarity and streaming availability.
 
 ## Recent writing
 
