@@ -7,6 +7,7 @@ page-layout: full
 
 <style>
   body:has(#ranking-body) #quarto-content { max-width: 1080px; }
+  body:has(#ranking-body) main.content { max-width: none; width: 100%; }
   .ranking-note { color: #aaa; margin-bottom: 1.25rem; }
   .ranking-controls { display: flex; flex-wrap: wrap; gap: .75rem; margin: 1rem 0; }
   .ranking-controls input, .ranking-controls select { background: #111; color: #eee; border: 1px solid #555; padding: .45rem .6rem; }
@@ -16,7 +17,7 @@ page-layout: full
   .surface-tab[aria-selected="true"], .surface-tab[aria-pressed="true"] { color: #111; background: #79c0ff; border-color: #79c0ff; }
   .ranking-wrap { overflow-x: auto; }
   .ranking-table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
-  .ranking-table th, .ranking-table td { border-bottom: 1px solid #333; padding: .42rem .5rem; text-align: right; white-space: nowrap; }
+  .ranking-table th, .ranking-table td { border-bottom: 1px solid #333; padding: .4rem .35rem; text-align: right; white-space: nowrap; }
   .ranking-table th:nth-child(4), .ranking-table td:nth-child(4) { text-align: left; }
   .ranking-table th button { appearance: none; border: 0; background: none; color: inherit; font: inherit; font-weight: 700; cursor: pointer; padding: 0; }
   .ranking-table th button:hover, .ranking-table th button:focus-visible { color: #79c0ff; }

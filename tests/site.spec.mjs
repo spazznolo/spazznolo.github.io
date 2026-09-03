@@ -85,6 +85,23 @@ test('homepage starts with the approved image and About content', async ({ page 
   await expect(page.getByRole('heading', { name: 'About' })).toBeVisible();
 });
 
+test('homepage links to the WTA model rankings', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.getByRole('link', { name: 'WTA Model Rankings' })).toHaveAttribute('href', '/tennis/rankings/');
+});
+
+test('WTA rankings table fits without desktop side scrolling', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  const response = await page.goto('/tennis/rankings/');
+  expect(response?.ok()).toBe(true);
+  await expect(page.locator('#ranking-body tr').first()).toBeVisible();
+  const wrap = page.locator('.ranking-wrap');
+  const overflow = async () => wrap.evaluate((element) => element.scrollWidth - element.clientWidth);
+  expect(await overflow()).toBeLessThanOrEqual(1);
+  await page.getByRole('tab', { name: 'Clay' }).click();
+  expect(await overflow()).toBeLessThanOrEqual(1);
+});
+
 test('homepage featured reading times match the rendered listings', async ({ page }) => {
   await page.goto('/');
   for (const title of ['Goalie Performance', 'NHL Pick Probability']) {
