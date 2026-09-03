@@ -38,7 +38,7 @@ page-layout: full
   .trajectory-key::before { content: ""; display: inline-block; width: .75rem; height: .18rem; margin-right: .35rem; vertical-align: middle; background: var(--line-color); }
 </style>
 
-These are weekly market-implied WTA player states. Global parameters are learned and then frozen each off-season, while new prices update player states online. Estimated player states account for ~85% of the signal markets capture, while allowing for the simulation of any matchup on any surface and the tracing of player strength over time.
+These ratings are weekly market-implied WTA player states. Global parameters are learned and then frozen each off-season, while new prices update player states online. Estimated player states account for ~85% of the signal markets capture, while allowing for the simulation of any matchup on any surface and the tracing of player strength over time.
 
 <p class="ranking-note" id="ranking-note">Loading the latest completed Sunday…</p>
 
@@ -50,10 +50,10 @@ These are weekly market-implied WTA player states. Global parameters are learned
 </div>
 <svg id="trajectory" viewBox="0 0 900 620" role="img" aria-label="Weekly player rating trajectory since last season"></svg>
 <div class="trajectory-legend" id="trajectory-legend"></div>
-<p class="ranking-note" id="trajectory-note">Click a leaderboard row to add or remove that player from the chart.</p>
 
 <h2>Latest leaderboard</h2>
 <p class="ranking-note" id="leaderboard-updated"></p>
+<p class="ranking-note" id="leaderboard-updated">The leaderboard shows the top 500 players with at least one observed match in the prior year. “Win vs avg” is the model’s draw-neutral, one-match probability against the mean active-tour player on the selected surface. Rating intervals are 50% posterior intervals and include uncertainty in the overall state, surface contrast, and their covariance. <b>Click a leaderboard row to add or remove that player from the chart.</b></p>
 
 <div class="ranking-controls">
   <label>Find <input id="table-search" placeholder="player name"></label>
@@ -82,8 +82,6 @@ These are weekly market-implied WTA player states. Global parameters are learned
     <tbody id="ranking-body"></tbody>
   </table>
 </div>
-
-<p class="ranking-note">The leaderboard shows the top 500 players with at least one observed match in the prior year. “Win vs avg” is the model’s draw-neutral, one-match probability against the mean active-tour player on the selected surface. Rating intervals are 50% posterior intervals and include uncertainty in the overall state, surface contrast, and their covariance.</p>
 
 <script>
 (() => {
