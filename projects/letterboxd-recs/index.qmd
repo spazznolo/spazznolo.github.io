@@ -44,19 +44,19 @@ page-layout: full
 This is a weekly list of films I might want to watch. It compares my ratings and viewing history with people I follow, gives more weight to people with similar taste, then ranks films I haven’t seen and checks what’s available to stream.
 
 <div id="letterboxd-recs">
-  <p class="recs-note" id="recs-updated">Loading the latest recommendations…</p>
-  <div class="recs-grid">
-    <div class="recs-controls">
-      <span><button id="recs-sort-rank" type="button">Rank</button></span>
-      <span><button id="recs-sort-movement" type="button">Movement</button></span>
-      <span>Score</span>
-      <label>Provider <select id="recs-provider"></select></label>
-      <label>Min year <input id="recs-min-year" type="number" placeholder="min"></label>
-      <label>Genre <select id="recs-genre"></select></label>
-      <label class="toggle"><input id="recs-stream-only" type="checkbox"> Stream only</label>
-    </div>
-    <div id="recs-rows"></div>
-  </div>
+<p class="recs-note" id="recs-updated">Loading the latest recommendations…</p>
+<div class="recs-grid">
+<div class="recs-controls">
+<span><button id="recs-sort-rank" type="button">Rank</button></span>
+<span><button id="recs-sort-movement" type="button">Movement</button></span>
+<span>Score</span>
+<label>Provider <select id="recs-provider"></select></label>
+<label>Min year <input id="recs-min-year" type="number" placeholder="min"></label>
+<label>Genre <select id="recs-genre"></select></label>
+<label class="toggle"><input id="recs-stream-only" type="checkbox"> Stream only</label>
+</div>
+<div id="recs-rows"></div>
+</div>
 </div>
 
 <script>
