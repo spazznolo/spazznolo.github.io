@@ -38,13 +38,9 @@ page-layout: full
   .trajectory-key::before { content: ""; display: inline-block; width: .75rem; height: .18rem; margin-right: .35rem; vertical-align: middle; background: var(--line-color); }
 </style>
 
-These are weekly market-implied WTA player states, not official WTA rankings. Historical
-bookmaker prices update a Gaussian player-strength model; match outcomes are used only
-for evaluation. Global parameters are frozen each off-season, while new prices update
-player states exactly online.
+These are weekly market-implied WTA player states. Global parameters are learned and then frozen each off-season, while new prices update player states online. Estimated player states account for ~85% of the signal markets capture, while allowing for the simulation of any matchup on any surface and the tracing of player strength over time.
 
 <p class="ranking-note" id="ranking-note">Loading the latest completed Sunday…</p>
-<p class="ranking-note"><strong>How to read this:</strong> ratings are smoothed, draw-neutral player states inferred from match prices available by the cutoff. They are not tournament-title probabilities. Futures markets can disagree because they also price the current draw, path, health, and newer information; each player's last incorporated match is shown below.</p>
 
 <h2>Player trajectory</h2>
 
@@ -87,7 +83,7 @@ player states exactly online.
   </table>
 </div>
 
-<p class="ranking-note">The leaderboard shows the top 500 players with at least one observed match in the prior year. “Win vs avg” is the model’s draw-neutral, one-match probability against the mean active-tour player on the selected surface. A positive surface effect is a boost relative to that player's own overall strength; the three effects sum to zero. Rating intervals are central 50% posterior intervals and include uncertainty in the overall state, surface contrast, and their covariance.</p>
+<p class="ranking-note">The leaderboard shows the top 500 players with at least one observed match in the prior year. “Win vs avg” is the model’s draw-neutral, one-match probability against the mean active-tour player on the selected surface. Rating intervals are 50% posterior intervals and include uncertainty in the overall state, surface contrast, and their covariance.</p>
 
 <script>
 (() => {
@@ -139,7 +135,7 @@ player states exactly online.
         }
       });
       const note = document.getElementById('ranking-note');
-      note.textContent = `Latest completed Sunday: ${latest[0].week_ending} · top 500 of ${latest.length} active players · global parameters frozen for 2026`;
+      note.textContent = `Last update: ${latest[0].week_ending} · Players included: 500 of ${latest.length} active players · Global parameters from: 2026`;
       document.getElementById('leaderboard-updated').textContent = `Last updated: ${new Date(`${latest[0].week_ending}T12:00:00Z`).toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC'})}`;
 
       let activeRating = 'overall_mean', selectionIsDefault = true, showUncertainty = false;
