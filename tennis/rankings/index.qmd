@@ -53,7 +53,7 @@ These ratings are weekly market-implied WTA player states. Global parameters are
 
 <h2>Latest leaderboard</h2>
 <p class="ranking-note" id="leaderboard-updated"></p>
-<p class="ranking-note" id="leaderboard-updated">The leaderboard shows the top 500 players with at least one observed match in the prior year. “Win vs avg” is the model’s draw-neutral, one-match probability against the mean active-tour player on the selected surface. Rating intervals are 50% posterior intervals and include uncertainty in the overall state, surface contrast, and their covariance. <b>Click a leaderboard row to add or remove that player from the chart.</b></p>
+<p class="ranking-note">The leaderboard shows the top 500 players with at least one observed match in the prior year. “Win vs avg” is the model’s draw-neutral, one-match probability against the mean active-tour player on the selected surface. Rating intervals are 50% posterior intervals and include uncertainty in the overall state, surface contrast, and their covariance. <b>Click a leaderboard row to add or remove that player from the chart.</b></p>
 
 <div class="ranking-controls">
   <label>Find <input id="table-search" placeholder="player name"></label>
@@ -154,10 +154,6 @@ These ratings are weekly market-implied WTA player states. Global parameters are
           return {id, name: latestRow?.player_name || id, rows: history.filter(row => row.player_id === id && row.week_ending >= startDate && row.week_ending <= latestDate).sort((a, b) => a.week_ending.localeCompare(b.week_ending))};
         }).filter(item => item.rows.length);
         if (!series.length) return;
-        const uncertaintySeries = series.filter(item => item.rows.some(row => Number.isFinite(number(row[`conditional_${activeRating.replace('_mean', '')}_sd`]))));
-        document.getElementById('trajectory-note').textContent = showUncertainty
-          ? `Central 50% uncertainty shown for ${uncertaintySeries.length} of ${series.length} selected players. Click leaderboard rows to change the chart.`
-          : 'Click a leaderboard row to add or remove that player from the chart.';
         const svg = document.getElementById('trajectory'), W = 900, H = 620, pad = {l: 54, r: 18, t: 26, b: 38};
         const all = series.flatMap(item => item.rows);
         const centers = all.map(r => number(r[activeRating]));
