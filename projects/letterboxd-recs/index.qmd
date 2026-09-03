@@ -9,7 +9,7 @@ page-layout: full
   body:has(#letterboxd-recs) #quarto-content { max-width: 1160px; }
   body:has(#letterboxd-recs) main.content { max-width: none; width: 100%; }
   .recs-note { color: #aaa; font-size: .85rem; margin: 1.5rem 0 .75rem; }
-  .recs-grid { border-top: 1px solid #333; font-variant-numeric: tabular-nums; }
+  .recs-grid { overflow-x: auto; border-top: 1px solid #333; font-variant-numeric: tabular-nums; }
   .recs-row, .recs-controls {
     display: grid;
     grid-template-columns: 62px 90px 70px minmax(180px, 1.6fr) 86px minmax(150px, 1.4fr) 90px;
@@ -18,8 +18,10 @@ page-layout: full
     padding: 10px 4px;
     border-bottom: 1px solid #333;
     font-size: .9rem;
+    min-width: 860px;
   }
   .recs-controls { color: #aaa; font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; }
+  .recs-head-cell { display: flex; min-width: 0; flex-direction: column; align-items: flex-start; gap: .35rem; }
   .recs-controls button { appearance: none; background: none; border: 0; color: inherit; cursor: pointer; font: inherit; letter-spacing: inherit; padding: 0; text-align: left; text-transform: inherit; }
   .recs-controls button:hover, .recs-controls button.active { color: #fff; }
   .recs-controls select, .recs-controls input { width: 100%; background: #111; border: 1px solid #555; color: #eee; font: inherit; padding: .4rem; }
@@ -32,13 +34,6 @@ page-layout: full
   .recs-movement { font-size: .78rem; }
   .recs-movement.up { color: #7bd88f; }
   .recs-movement.down { color: #ff7b72; }
-  @media (max-width: 760px) {
-    .recs-controls { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .65rem; }
-    .recs-row { grid-template-columns: 46px 58px 1fr; gap: .4rem .75rem; }
-    .recs-row [data-label="Score"], .recs-row [data-label="Genres"], .recs-row [data-label="Available"] { display: none; }
-    .recs-row [data-label="Title"] { grid-column: 3; grid-row: 1; }
-    .recs-row [data-label="Year"] { grid-column: 3; grid-row: 2; color: #aaa; font-size: .8rem; }
-  }
 </style>
 
 This is a weekly list of films I might want to watch. It compares my ratings and viewing history with people I follow, gives more weight to people with similar taste, then ranks films I haven’t seen and checks what’s available to stream.
@@ -47,13 +42,13 @@ This is a weekly list of films I might want to watch. It compares my ratings and
 <p class="recs-note" id="recs-updated">Loading the latest recommendations…</p>
 <div class="recs-grid">
 <div class="recs-controls">
-<span><button id="recs-sort-rank" type="button">Rank</button></span>
-<span><button id="recs-sort-movement" type="button">Movement</button></span>
-<span>Score</span>
-<label>Provider <select id="recs-provider"></select></label>
-<label>Min year <input id="recs-min-year" type="number" placeholder="min"></label>
-<label>Genre <select id="recs-genre"></select></label>
-<label class="toggle"><input id="recs-stream-only" type="checkbox"> Stream only</label>
+<div class="recs-head-cell"><button class="recs-sort" data-sort="rank" data-direction="asc" type="button">Rank</button></div>
+<div class="recs-head-cell"><button class="recs-sort" data-sort="movement" data-direction="desc" type="button">Movement</button></div>
+<div class="recs-head-cell"><button class="recs-sort" data-sort="score" data-direction="desc" type="button">Score</button></div>
+<div class="recs-head-cell"><button class="recs-sort" data-sort="title" data-direction="asc" type="button">Title</button><select id="recs-provider" aria-label="Provider"><option value="">Provider: all</option></select></div>
+<div class="recs-head-cell"><button class="recs-sort" data-sort="year" data-direction="desc" type="button">Year</button><input id="recs-min-year" type="number" placeholder="Min" aria-label="Minimum year"></div>
+<div class="recs-head-cell"><button class="recs-sort" data-sort="genre" data-direction="asc" type="button">Genre</button><select id="recs-genre" aria-label="Genre"><option value="">All</option></select></div>
+<div class="recs-head-cell"><button class="recs-sort" data-sort="availability" data-direction="desc" type="button">Available</button><label class="toggle"><input id="recs-stream-only" type="checkbox"> Stream only</label></div>
 </div>
 <div id="recs-rows"></div>
 </div>
@@ -67,8 +62,7 @@ This is a weekly list of films I might want to watch. It compares my ratings and
   const genreSelect = document.getElementById('recs-genre');
   const minYearInput = document.getElementById('recs-min-year');
   const streamOnlyInput = document.getElementById('recs-stream-only');
-  const sortRankButton = document.getElementById('recs-sort-rank');
-  const sortMovementButton = document.getElementById('recs-sort-movement');
+  const sortButtons = [...document.querySelectorAll('.recs-sort')];
   const rows = document.getElementById('recs-rows');
   let sortKey = 'rank', sortDirection = 'asc', data;
 
@@ -84,10 +78,21 @@ This is a weekly list of films I might want to watch. It compares my ratings and
     return `<span class="recs-movement ${change > 0 ? 'up' : 'down'}">${change > 0 ? '↑' : '↓'}${Math.abs(change)}</span>`;
   };
   const updateSortButtons = () => {
-    sortRankButton.textContent = sortKey === 'rank' ? `Rank ${sortDirection === 'asc' ? '↑' : '↓'}` : 'Rank';
-    sortMovementButton.textContent = sortKey === 'movement' ? `Movement ${sortDirection === 'asc' ? '↑' : '↓'}` : 'Movement';
-    sortRankButton.classList.toggle('active', sortKey === 'rank');
-    sortMovementButton.classList.toggle('active', sortKey === 'movement');
+    sortButtons.forEach(button => {
+      const active = button.dataset.sort === sortKey;
+      button.textContent = `${button.dataset.sort[0].toUpperCase()}${button.dataset.sort.slice(1)}${active ? ` ${sortDirection === 'asc' ? '↑' : '↓'}` : ''}`;
+      button.classList.toggle('active', active);
+    });
+  };
+  const sortValue = (film, key) => {
+    if (key === 'rank') return Number(film.current_rank);
+    if (key === 'movement') return film.previous_rank == null ? null : Number(film.rank_change);
+    if (key === 'score') return Number(film.score_scaled ?? film.score);
+    if (key === 'title') return String(film.title || '').toLowerCase();
+    if (key === 'year') return Number(film.year);
+    if (key === 'genre') return (film.genres || []).join(', ').toLowerCase();
+    if (key === 'availability') return Number(Boolean(film.stream));
+    return Number(film.current_rank);
   };
   const render = () => {
     if (!data) return;
@@ -100,9 +105,12 @@ This is a weekly list of films I might want to watch. It compares my ratings and
       return !(streamOnly && !film.stream);
     });
     filtered.sort((left, right) => {
-      const leftValue = sortKey === 'movement' ? Number(left.rank_change ?? Number.NEGATIVE_INFINITY) : Number(left.current_rank);
-      const rightValue = sortKey === 'movement' ? Number(right.rank_change ?? Number.NEGATIVE_INFINITY) : Number(right.current_rank);
-      return (sortDirection === 'asc' ? 1 : -1) * (leftValue - rightValue) || Number(left.current_rank) - Number(right.current_rank);
+      const leftValue = sortValue(left, sortKey), rightValue = sortValue(right, sortKey);
+      if (leftValue == null && rightValue == null) return Number(left.current_rank) - Number(right.current_rank);
+      if (leftValue == null) return 1;
+      if (rightValue == null) return -1;
+      const comparison = typeof leftValue === 'string' ? leftValue.localeCompare(rightValue) : leftValue - rightValue;
+      return (sortDirection === 'asc' ? 1 : -1) * comparison || Number(left.current_rank) - Number(right.current_rank);
     });
     updateSortButtons();
     if (!filtered.length) { rows.innerHTML = '<div class="recs-row"><span class="recs-empty">No films match these filters.</span></div>'; return; }
@@ -122,9 +130,7 @@ This is a weekly list of films I might want to watch. It compares my ratings and
       data = JSON.parse(source.textContent || '{}');
       const date = new Date(data.generated_at);
       updated.textContent = `Last updated: ${date.toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric'})}`;
-      addOption(providerSelect, '', 'All');
       (data.providers || []).forEach(provider => addOption(providerSelect, provider, provider.replaceAll('_', ' ')));
-      addOption(genreSelect, '', 'All');
       [...new Set(data.films.flatMap(film => film.genres || []))].sort().forEach(genre => addOption(genreSelect, genre, genre));
       render();
     })
@@ -134,7 +140,11 @@ This is a weekly list of films I might want to watch. It compares my ratings and
   genreSelect.addEventListener('change', render);
   minYearInput.addEventListener('input', render);
   streamOnlyInput.addEventListener('change', render);
-  sortRankButton.addEventListener('click', () => { sortDirection = sortKey === 'rank' && sortDirection === 'asc' ? 'desc' : 'asc'; sortKey = 'rank'; render(); });
-  sortMovementButton.addEventListener('click', () => { sortDirection = sortKey === 'movement' && sortDirection === 'desc' ? 'asc' : 'desc'; sortKey = 'movement'; render(); });
+  sortButtons.forEach(button => button.addEventListener('click', () => {
+    const nextSort = button.dataset.sort;
+    sortDirection = sortKey === nextSort ? (sortDirection === 'asc' ? 'desc' : 'asc') : button.dataset.direction;
+    sortKey = nextSort;
+    render();
+  }));
 })();
 </script>
