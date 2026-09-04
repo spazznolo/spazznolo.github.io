@@ -28,15 +28,14 @@ website:
   open-graph: true
   search: false
   navbar:
-    title: "jeremie.spagnolo"
     collapse: true
     right:
+      - text: "Home"
+        href: /
       - text: "Research"
         href: /research/
       - text: "About"
         href: /about/
-      - text: "GitHub"
-        href: "https://github.com/spazznolo"
   page-footer:
     border: false
 

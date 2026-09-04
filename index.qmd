@@ -26,12 +26,6 @@ listing:
 ![](/figs/fifty-four.png){alt=""}
 :::
 
-::: {.home-about}
-# About
-
-This blog serves as an outlet to explore ideas which naturally interest me. I try to keep an informal, back-of-the-napkin style to these posts, hopefully a little like [Tom Tango](http://www.tangotiger.com/index.php). Posts are grouped by topic in the header, but can be accessed in chronological order below.
-:::
-
 ## Featured research
 
 - [WTA Model Rankings](/tennis/rankings/) — Weekly player strength, surface effects, uncertainty, and trajectories.
