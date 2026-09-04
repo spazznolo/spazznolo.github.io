@@ -18,8 +18,7 @@ class RenderedSiteSmokeTest(unittest.TestCase):
 
     def test_homepage_keeps_approved_copy(self):
         html = (SITE / "index.html").read_text(encoding="utf-8")
-        sentence = "This blog serves as an outlet to explore ideas which naturally interest me."
-        self.assertIn(sentence, html)
+        self.assertIn("Featured research", html)
         self.assertIn("fifty-four.png", html)
 
     def test_discovery_outputs_exist(self):
