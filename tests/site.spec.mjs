@@ -49,8 +49,7 @@ for (const path of responsivePages) {
 test('homepage presentation and navigation are retained', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('nav').getByRole('link', { name: 'Home', exact: true })).toHaveAttribute('href', '/');
-  await expect(page.locator('.navbar-brand')).toHaveCount(1);
-  await expect(page.locator('.navbar-brand')).toBeHidden();
+  await expect(page.locator('.navbar-brand')).toHaveCount(0);
   await expect(page.locator('body')).toHaveCSS('font-family', /Source Code Pro/);
 });
 

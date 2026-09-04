@@ -29,6 +29,7 @@ website:
   search: false
   navbar:
     collapse: true
+    title: false
     right:
       - text: "Home"
         href: /
