@@ -7,6 +7,7 @@ listing:
     contents:
       - "goalie-performance/index.qmd"
       - "nhl-pick-probability/index.qmd"
+      - "../post-regulation/index.qmd"
       - "../posts/**/index.qmd"
     sort: "date desc"
     type: table
@@ -30,7 +31,7 @@ listing:
 
 ## Archive
 
-Earlier work remains available in its original context.
+Earlier work remains available unless it has been folded into a consolidated article.
 
 ::: {#historical-research}
 :::

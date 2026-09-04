@@ -9,6 +9,9 @@ page-layout: full
   body:has(#letterboxd-recs) #quarto-content { max-width: 1160px; }
   body:has(#letterboxd-recs) main.content { max-width: none; width: 100%; }
   .recs-note { color: #aaa; font-size: .85rem; margin: 1.5rem 0 .75rem; }
+  .recs-toolbar { display: flex; flex-wrap: wrap; gap: .75rem; align-items: end; margin: 0 0 .8rem; }
+  .recs-toolbar label { color: #aaa; display: grid; gap: .3rem; font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; }
+  .recs-toolbar select { min-width: 160px; background: #111; border: 1px solid #555; color: #eee; font: inherit; padding: .4rem; }
   .recs-grid { overflow-x: auto; border-top: 1px solid #333; font-variant-numeric: tabular-nums; }
   .recs-row, .recs-controls {
     display: grid;
@@ -21,10 +24,10 @@ page-layout: full
     min-width: 860px;
   }
   .recs-controls { color: #aaa; font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; }
-  .recs-head-cell { display: flex; min-width: 0; flex-direction: column; align-items: flex-start; gap: .35rem; }
-  .recs-controls button { appearance: none; background: none; border: 0; color: inherit; cursor: pointer; font: inherit; letter-spacing: inherit; padding: 0; text-align: left; text-transform: inherit; }
+  .recs-head-cell { display: flex; min-width: 0; flex-direction: column; align-items: stretch; gap: .35rem; text-align: center; }
+  .recs-controls button { appearance: none; background: none; border: 0; color: inherit; cursor: pointer; font: inherit; letter-spacing: inherit; padding: 0; text-align: center; text-transform: inherit; }
   .recs-controls button:hover, .recs-controls button.active { color: #fff; }
-  .recs-controls select, .recs-controls input { width: 100%; background: #111; border: 1px solid #555; color: #eee; font: inherit; padding: .4rem; }
+  .recs-controls select, .recs-controls input { width: 100%; background: #111; border: 1px solid #555; color: #eee; font: inherit; padding: .4rem; text-align: center; }
   .recs-controls .toggle { display: flex; align-items: center; gap: .35rem; font-size: .72rem; letter-spacing: 0; text-transform: none; }
   .recs-controls .toggle input { width: auto; }
   .recs-title { color: inherit; font-family: Georgia, "Times New Roman", serif; font-size: 1rem; font-weight: 600; text-decoration: none; }
@@ -38,12 +41,13 @@ page-layout: full
 
 <div id="letterboxd-recs">
 <p class="recs-note" id="recs-updated">Loading the latest recommendations…</p>
+<div class="recs-toolbar"><label>Provider<select id="recs-provider" aria-label="Provider"><option value="">All providers</option></select></label></div>
 <div class="recs-grid">
 <div class="recs-controls">
-<div class="recs-head-cell"><button class="recs-sort" data-sort="rank" data-direction="asc" type="button">Rank</button></div>
+<div class="recs-head-cell"><button class="recs-sort" data-sort="rank" data-direction="asc" type="button">Rank</button><input id="recs-max-rank" type="number" min="1" placeholder="Max" aria-label="Maximum rank"></div>
 <div class="recs-head-cell"><button class="recs-sort" data-sort="movement" data-direction="desc" type="button">Movement</button></div>
 <div class="recs-head-cell"><button class="recs-sort" data-sort="score" data-direction="desc" type="button">Score</button></div>
-<div class="recs-head-cell"><button class="recs-sort" data-sort="title" data-direction="asc" type="button">Title</button><select id="recs-provider" aria-label="Provider"><option value="">Provider: all</option></select></div>
+<div class="recs-head-cell"><input id="recs-title-search" type="search" placeholder="Search title" aria-label="Search title"><button class="recs-sort" data-sort="title" data-direction="asc" type="button">Title</button></div>
 <div class="recs-head-cell"><button class="recs-sort" data-sort="year" data-direction="desc" type="button">Year</button><input id="recs-min-year" type="number" placeholder="Min" aria-label="Minimum year"></div>
 <div class="recs-head-cell"><button class="recs-sort" data-sort="genre" data-direction="asc" type="button">Genre</button><select id="recs-genre" aria-label="Genre"><option value="">All</option></select></div>
 <div class="recs-head-cell"><button class="recs-sort" data-sort="availability" data-direction="desc" type="button">Available</button><label class="toggle"><input id="recs-stream-only" type="checkbox"> Stream only</label></div>
@@ -58,6 +62,8 @@ page-layout: full
   const updated = document.getElementById('recs-updated');
   const providerSelect = document.getElementById('recs-provider');
   const genreSelect = document.getElementById('recs-genre');
+  const titleSearchInput = document.getElementById('recs-title-search');
+  const maxRankInput = document.getElementById('recs-max-rank');
   const minYearInput = document.getElementById('recs-min-year');
   const streamOnlyInput = document.getElementById('recs-stream-only');
   const sortButtons = [...document.querySelectorAll('.recs-sort')];
@@ -95,8 +101,12 @@ page-layout: full
   const render = () => {
     if (!data) return;
     const provider = providerSelect.value, genre = genreSelect.value;
+    const titleQuery = titleSearchInput.value.trim().toLowerCase();
+    const maxRank = Number.parseInt(maxRankInput.value, 10);
     const minYear = Number.parseInt(minYearInput.value, 10), streamOnly = streamOnlyInput.checked;
     const filtered = data.films.filter(film => {
+      if (titleQuery && !String(film.title || '').toLowerCase().includes(titleQuery)) return false;
+      if (Number.isFinite(maxRank) && Number(film.current_rank) > maxRank) return false;
       if (provider && !film.providers?.[provider]) return false;
       if (genre && !(film.genres || []).includes(genre)) return false;
       if (Number.isFinite(minYear) && film.year && film.year < minYear) return false;
@@ -135,6 +145,8 @@ page-layout: full
     .catch(error => { updated.textContent = 'The latest recommendations could not be loaded.'; console.error(error); });
 
   providerSelect.addEventListener('change', render);
+  titleSearchInput.addEventListener('input', render);
+  maxRankInput.addEventListener('input', render);
   genreSelect.addEventListener('change', render);
   minYearInput.addEventListener('input', render);
   streamOnlyInput.addEventListener('change', render);

@@ -11,6 +11,7 @@ listing:
   contents:
     - "research/goalie-performance/index.qmd"
     - "research/nhl-pick-probability/index.qmd"
+    - "post-regulation/index.qmd"
     - "posts/**/index.qmd"
   sort: "date desc"
   type: table
@@ -31,6 +32,7 @@ listing:
 - [WTA Model Rankings](/tennis/rankings/) — Weekly player strength, surface effects, uncertainty, and trajectories.
 - [Goalie Performance](/research/goalie-performance/) — Estimating talent while respecting small-sample uncertainty. · 15 min
 - [NHL Pick Probability](/research/nhl-pick-probability/) — Turning rankings into pick distributions and decisions. · 22 min
+- [Post-regulation](/post-regulation/) — What three-on-three overtime adds to NHL standings, and what predicts the next goal.
 
 ## Projects
 
