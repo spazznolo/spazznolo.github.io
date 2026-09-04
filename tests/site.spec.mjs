@@ -46,11 +46,10 @@ for (const path of responsivePages) {
   }
 }
 
-test('approved homepage presentation is retained', async ({ page }) => {
+test('homepage presentation and navigation are retained', async ({ page }) => {
   await page.goto('/');
-  await expect(page.locator('.navbar-brand')).toHaveCount(1);
-  await expect(page.getByRole('heading', { name: 'About' })).toBeVisible();
-  await expect(page.locator('.home-about p')).toHaveCSS('color', 'rgb(242, 240, 235)');
+  await expect(page.locator('nav').getByRole('link', { name: 'Home', exact: true })).toHaveAttribute('href', '/');
+  await expect(page.locator('.navbar-brand')).toHaveCount(0);
   await expect(page.locator('body')).toHaveCSS('font-family', /Source Code Pro/);
 });
 
@@ -71,18 +70,18 @@ for (const mode of ['dark', 'light']) {
   }
 }
 
-test('homepage starts with the approved image and About content', async ({ page }) => {
+test('homepage starts with the approved image', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('#title-block-header')).toBeHidden();
   const visibleChildren = await page.locator('.home-stream').evaluate((stream) =>
     [...stream.children]
       .filter((child) => getComputedStyle(child).display !== 'none' && getComputedStyle(child).visibility !== 'hidden')
-      .slice(0, 2)
+      .slice(0, 1)
       .map((child) => child.classList.contains('home-image') ? 'home-image' : child.classList.contains('home-about') ? 'home-about' : child.className || child.tagName.toLowerCase()),
   );
-  expect(visibleChildren).toEqual(['home-image', 'home-about']);
+  expect(visibleChildren).toEqual(['home-image']);
   await expect(page.locator('.home-image img')).toBeVisible();
-  await expect(page.getByRole('heading', { name: 'About' })).toBeVisible();
+  await expect(page.locator('.home-about')).toHaveCount(0);
 });
 
 test('homepage featured reading times match the rendered listings', async ({ page }) => {
@@ -98,9 +97,10 @@ test('top navigation exposes only approved destinations', async ({ page }) => {
   await page.goto('/');
   const nav = page.locator('nav');
   await expect(nav.getByRole('link', { name: 'Research' })).toBeVisible();
+  await expect(nav.getByRole('link', { name: 'Home', exact: true })).toBeVisible();
   await expect(nav.getByRole('link', { name: 'Subjects' })).toHaveCount(0);
   await expect(nav.getByRole('link', { name: 'About' })).toBeVisible();
-  await expect(nav.getByRole('link', { name: 'GitHub' })).toHaveAttribute('href', 'https://github.com/spazznolo');
+  await expect(nav.getByRole('link', { name: 'GitHub' })).toHaveCount(0);
   await expect(nav.getByRole('link', { name: /LinkedIn|Twitter/i })).toHaveCount(0);
 });
 
@@ -147,7 +147,7 @@ test('recent writing uses readable stacked rows at 320px', async ({ page }) => {
 test('homepage framing is restrained and the decorative image has no caption', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('.home-image')).toHaveCSS('border-bottom-style', 'none');
-  await expect(page.locator('.home-about')).toHaveCSS('border-bottom-style', 'none');
+  await expect(page.locator('.home-about')).toHaveCount(0);
   await expect(page.locator('.home-stream h2').first()).toHaveCSS('border-bottom-style', 'none');
   await expect(page.locator('.home-image figcaption')).toHaveCount(0);
 
