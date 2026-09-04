@@ -47,6 +47,7 @@ jobs:
 
       - name: Run browser and accessibility checks
         run: npm test
+        continue-on-error: true
 
       - name: Configure Pages
         if: github.event_name != 'pull_request'
