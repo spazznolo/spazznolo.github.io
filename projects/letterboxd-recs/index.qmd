@@ -54,7 +54,7 @@ page-layout: full
 
 <script>
 (() => {
-  const sourceUrl = '/assets/data/letterboxd-recs.html';
+  const sourceUrl = '/assets/data/letterboxd-recs-feed.txt';
   const updated = document.getElementById('recs-updated');
   const providerSelect = document.getElementById('recs-provider');
   const genreSelect = document.getElementById('recs-genre');
