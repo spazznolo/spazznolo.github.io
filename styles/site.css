@@ -191,7 +191,7 @@ main section.level3 > h3 {
   line-height: 1.6;
   margin-inline: auto;
   max-width: 640px;
-  padding-top: 5rem;
+  padding-top: 3rem;
 }
 
 #title-block-header .description::after,
