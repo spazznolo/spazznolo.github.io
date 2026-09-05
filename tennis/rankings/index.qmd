@@ -89,8 +89,10 @@ These ratings are weekly market-implied WTA player states. Global parameters are
   const latestUrl = '/assets/data/wta-rankings-latest.csv';
   const historyUrl = '/assets/data/wta-rankings-history.csv';
   const priorHistoryUrl = '/assets/data/wta-rankings-history-2025.csv';
-  const priorUncertaintyUrl = '/assets/data/wta-ranking-trajectory-uncertainty-2025.csv';
-  const uncertaintyUrl = '/assets/data/wta-ranking-trajectory-uncertainty-2026.csv';
+  const legacyUncertaintyUrls = [
+    '/assets/data/wta-ranking-trajectory-uncertainty-2025.csv',
+    '/assets/data/wta-ranking-trajectory-uncertainty-2026.csv'
+  ];
   const intervalZ = 0.6744897501960817;
   const chartColors = ['#79c0ff','#f2cc60','#7bd88f','#ff7b72','#d2a8ff','#ffa657','#56d4dd','#ff9bce','#a5d6ff','#c9d1d9'];
 
@@ -121,16 +123,28 @@ These ratings are weekly market-implied WTA player states. Global parameters are
     return `${n >= 0 ? '+' : ''}${n.toFixed(3)}`;
   };
 
-  Promise.all([latestUrl, historyUrl, priorHistoryUrl, priorUncertaintyUrl, uncertaintyUrl].map(url => fetch(url).then(r => { if (!r.ok) throw new Error(`${url}: ${r.status}`); return r.text(); })))
-    .then(([latestText, historyText, priorHistoryText, priorUncertaintyText, uncertaintyText]) => {
+  const requiredCSV = url => fetch(url).then(r => { if (!r.ok) throw new Error(`${url}: ${r.status}`); return r.text(); });
+  const optionalCSV = url => fetch(url).then(r => r.ok ? r.text() : '').catch(() => '');
+
+  Promise.all([
+    requiredCSV(latestUrl),
+    requiredCSV(historyUrl),
+    requiredCSV(priorHistoryUrl),
+    ...legacyUncertaintyUrls.map(optionalCSV)
+  ])
+    .then(([latestText, historyText, priorHistoryText, ...legacyTexts]) => {
       const latest = parseCSV(latestText), history = [...parseCSV(priorHistoryText), ...parseCSV(historyText)];
-      const uncertaintyRows = [...parseCSV(priorUncertaintyText), ...parseCSV(uncertaintyText)];
-      const uncertaintyByPlayerWeek = new Map(uncertaintyRows.map(row => [`${row.player_id}|${row.week_ending}`, row]));
+      // Weekly snapshots now carry their own exact marginal uncertainty. Keep
+      // the old narrow exports only as a temporary fallback for pre-migration
+      // weeks; they can disappear after the historical archive is backfilled.
+      const legacyRows = legacyTexts.filter(Boolean).flatMap(parseCSV);
+      const legacyByPlayerWeek = new Map(legacyRows.map(row => [`${row.player_id}|${row.week_ending}`, row]));
       history.forEach(row => {
-        const uncertainty = uncertaintyByPlayerWeek.get(`${row.player_id}|${row.week_ending}`);
-        if (!uncertainty) return;
+        const legacy = legacyByPlayerWeek.get(`${row.player_id}|${row.week_ending}`);
+        if (!legacy) return;
         for (const surface of ['overall', 'hard', 'clay', 'grass']) {
-          row[`conditional_${surface}_sd`] = uncertainty[`${surface}_sd`];
+          const column = `conditional_${surface}_sd`;
+          if (!row[column]) row[column] = legacy[`${surface}_sd`];
         }
       });
       const note = document.getElementById('ranking-note');
