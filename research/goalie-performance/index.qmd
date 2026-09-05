@@ -21,64 +21,69 @@ execute:
 This article consolidates five posts published between 2023 and 2024.
 :::
 
-## Starting with empirical Bayes
+## EMPIRICAL BAYES
 
-Recall from the [introductory paragraph](/2022/03/28/goalie-consistency-1.html) of the series on goalie consistency: "Goaltenders make up the least predictable position in hockey. Their behavior confounds analysts and casual fans alike. It isn’t uncommon for a good goalie to have a below replacement level year, or for an unknown goalie to come in and dominate the league for a stretch of time. This may partly explain the relative dearth of analysis on goalies - they're voodoo, it's often said."
+Goaltenders make up the least predictable position in hockey. Their behavior confounds analysts and casual fans alike. It isn’t uncommon for a good goalie to have a below replacement level year, or for an unknown goalie to come in and dominate the league for a stretch of time. This may partly explain the relative dearth of analysis on goalies - they're voodoo, it's often said.
 
-This analysis focuses on goalie performance. It aims to enhance the estimation of goalie performance using an empirical Bayes framework. Similar applications were outlined in [previous](https://hockey-graphs.com/2018/06/21/comparing-scoring-talent-with-empirical-bayes/) [papers](http://varianceexplained.org/r/empirical_bayes_baseball/). The strategy has several advantages over frequentist methods, chiefly the ability to measure uncertainty, which is crucial in describing goalie performance. The idea is first sketched using raw save percentage as the performance metric, then refined.
+This analysis estimates goalie performance using an empirical Bayes framework. Similar applications were outlined in [previous](https://hockey-graphs.com/2018/06/21/comparing-scoring-talent-with-empirical-bayes/) [papers](http://varianceexplained.org/r/empirical_bayes_baseball/). The Bayesian framing lets us partially pool noisy goalie results towards a population distribution, quantify what remains uncertain, and make direct probability statements about the players. The idea is first sketched using raw save percentage, then refined.
 
-The empirical Bayes approach involves two steps. The first step is to use observed data to fit a prior distribution, and the second step is to update this prior using observed data.
+Throughout this first pass, I will distinguish a goalie's observed Fenwick save percentage from their underlying Fenwick save probability, $\theta_i$. The observed percentage describes what happened in a particular sample. $\theta_i$ describes the rate we would expect over repeated, comparable attempts. We do not observe it exactly; we represent what we know about it with a distribution.
 
-### Step One
+The empirical Bayes approach involves two steps: learn a prior from the population, then update it with the individual goalie's results.
 
-Imagine a scenario where a new and unknown goalie emerges. What probability can we assign to their career Fenwick* save percentage being .930, .940, or .950?
+**Learn from the population.** Imagine that an unknown goalie emerges. What can we say about their underlying Fenwick save probability before they have faced a shot? Could it plausibly be .930, .940, or .950?
 
-*Fenwick save percentage refers to the total percentage of unblocked shots saved, including shots that miss the net. It has been established that goalie skill correlates with the ability to make players miss the net.*
-
-To represent the possible career Fenwick save percentage for a new goalie, we can utilize the provided histogram of career 5v5 Fenwick save percentages for goalies who have faced 200+ shots (including those facing less adds noise - don't worry, it'll be addressed in a future post).
+Fenwick save percentage is the proportion of unblocked shot attempts that do not become goals.^[Unlike conventional save percentage, it includes attempts which miss the net as non-goal outcomes. This may capture some goalie influence on whether an attempt reaches the net.] To build a first population estimate, we can look at the career 5v5 Fenwick save percentages of goalies who faced at least 200 attempts. The cutoff suppresses the noisiest short careers, but it also introduces selection; I return to that problem later.
 
 ![](/figs/goalie-performance-1-1.png){fig-alt="Distribution of career 5v5 Fenwick save percentages for goalies facing 200 or more shots." width="60%"}
 
-While the histogram provides a rough distribution, it contains random bumps throughout. To obtain a more structured representation, we fit a distribution to it.
+The histogram is a rough picture of the population, including sampling noise. Rather than treat every bump as meaningful, we fit a smooth distribution to it.
 
-The beta distribution is a commonly used prior when the variable of interest is a percentage, as in the case of the raw save percentage. Fitting a beta distribution to the career Fenwick save percentage distribution yields the following result.
+The beta distribution is a natural first prior for a probability: it is bounded between zero and one and is conjugate to the binomial likelihood. Fitting a beta distribution to the career Fenwick save percentage distribution yields the following result.
 
 ![](/figs/goalie-performance-1-2.png){fig-alt="Fitted beta distribution for career Fenwick save percentages." width="60%"}
 
-The fit is... not really good, and alternative distributions such as gamma or Weibull will be explored in future posts to find the best fit, but it serves its purpose as an introduction to the framework. The beta distribution has two hyperparameters, alpha and beta, which can be interpreted as successes (saves) and failures (goals). The fitted beta distribution in this case has hyperparameters 852 and 55.6, indicating that we attribute 852 saves and 55.6 goals to a goalie before knowing anything about them. This corresponds to a .9388 Fenwick save percentage, or, a little below the median save percentage for goalies facing 200+ shots (.9406).
+The fit is... not really good, but it serves its purpose as an introduction to the framework. More importantly, fitting a beta directly to career percentages treats rates based on different numbers of attempts as equally informative. A beta-binomial population model would handle those denominators more coherently. For now, the beta is a useful working approximation.
 
-### Step Two
+The beta distribution has two hyperparameters, $\alpha$ and $\beta$, which behave like prior non-goal and goal counts. Here, the fitted values are 852 and 55.6: before observing a particular goalie's results, the model begins with information equivalent to 852 non-goal attempts and 55.6 goals. The prior mean is .9388, a little below the .9406 median among goalies who faced at least 200 attempts.
 
-The second step involves updating the prior distribution with each goalie's career results. When a goalie has faced only a few shots, their estimated save percentage shrinks towards the mean of the prior distribution, while the uncertainty (represented by variance in the distribution) remains high. As a goalie faces more shots, the uncertainty of their estimated save percentage decreases.
+**Update with the goalie.** Let $Y_i$ be a goalie's non-goal outcomes across $N_i$ unblocked attempts. The model is:
 
-Updating the prior with observed goalie results is relatively straightforward. It requires adding the observed successes and failures (saves and shots) to the hyperparameters of the beta distribution.
+$$
+\theta_i \sim \operatorname{Beta}(\alpha,\beta)
+$$
+
+$$
+Y_i \mid \theta_i \sim \operatorname{Binomial}(N_i,\theta_i),
+$$
+
+which gives the posterior:
+
+$$
+\theta_i \mid Y_i \sim
+\operatorname{Beta}(\alpha + Y_i,\ \beta + N_i - Y_i).
+$$
+
+In plain language, we add the observed non-goals to $\alpha$ and the observed goals—not all shots—to $\beta$. When a goalie has faced only a few attempts, their estimate remains close to the population mean and their posterior remains wide. With more attempts, their own results carry more weight and the posterior narrows.
 
 As an example, let's plot the posterior distributions for two 24-year-old goalies: Jake Oettinger and Jeremy Swayman.
 
 ![](/figs/goalie-performance-1-3.png){fig-alt="Posterior save percentage distributions for Jake Oettinger and Jeremy Swayman." width="60%"}
 
-These posterior distributions offer interesting insights, like:
+The model gives Swayman a 60.28% probability of having the higher underlying Fenwick save probability. Oettinger, however, has a 94.12% probability of being above the prior mean, compared with 93.81% for Swayman. Oettinger has faced more attempts, so his posterior is narrower: the model is more certain about an estimate which is slightly closer to average.
 
-- There's a 60.28% chance that Swayman's save percentage is higher than Oettinger's.
-- There's a 94.12% chance that Oettinger's save percentage is higher than average.
-- There's a 93.81% chance that Swayman's save percentage is higher than average.
-- Oettinger's distribution is tighter than Swayman's because he's faced more shots.
+These probabilities are conditional on a deliberately simple model:
 
-It's important to list all the assumptions with this method:
+- Unblocked attempts are treated as comparable and conditionally independent.
+- Each goalie's underlying probability is treated as constant across their career.
+- Shot quality, age, team context, and scoring environment are ignored.
+- The population distribution is assumed to be beta.
+- The fitted hyperparameters are treated as fixed, so their estimation uncertainty is not propagated.
+- Goalies who faced fewer than 200 attempts are excluded, creating a selection problem.
 
-- All shots are assumed to be equal.
-- Age is assumed to be irrelevant.
-- The prior distribution is assumed to be beta with hyperparameters 852 and 55.6.
-- Goalies facing less than 200 shots are ignored.
-- Goalie careers are equal.
-- Scoring rates are assumed to be constant.
-- Team systems are assumed to be identical.
+These assumptions are intentionally strong. The rest of the analysis relaxes them one at a time.
 
-These will be challenged and addressed below.
-
-Code available here: [https://github.com/spazznolo/goalie-performance/blob/main/posts/post-1.R](https://github.com/spazznolo/goalie-performance/blob/main/posts/post-1.R)
-
-## Accounting for shot quality
+## ACCOUNTING FOR SHOT QUALITY
 
 All shots are not equal, in that they do not have the same probability of becoming a goal. This is established. Many Expected Goals (xG) models have been developed to account for this. Fortunately, Peter Tanner's website [MoneyPuck](https://moneypuck.com/index.html) provides detailed data on each unblocked shot in the NHL, including the probability of the shot being a goal according to his [logistic regression model](https://moneypuck.com/about.htm).
 

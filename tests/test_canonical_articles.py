@@ -38,8 +38,8 @@ class CanonicalArticleTest(unittest.TestCase):
         source_contract(
             "research/goalie-performance/index.qmd",
             [
-                "Starting with empirical Bayes",
-                "Accounting for shot quality",
+                "EMPIRICAL BAYES",
+                "ACCOUNTING FOR SHOT QUALITY",
                 "Adjusting for age",
                 "Career length and the prior",
                 "Contextualizing experience",
