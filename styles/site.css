@@ -7,6 +7,7 @@
   --warm-divider: #393228;
   --shell-width: 1120px;
   --reading-width: 790px;
+  --home-width: 750px;
   --page-gutter: 22px;
 }
 
@@ -88,6 +89,9 @@ body:not(:has(.home-stream)):not(:has(#ranking-body)):not(:has(#letterboxd-recs)
 .home-stream {
   display: block;
   font-size: 12.5px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: var(--home-width);
 }
 
 body:has(.home-stream) #title-block-header {
@@ -107,7 +111,7 @@ body:has(.home-stream) #title-block-header {
 .home-about {
   margin-left: auto;
   margin-right: auto;
-  max-width: var(--reading-width);
+  max-width: 650px;
   padding-bottom: 1rem;
   margin-bottom: 2.4rem;
 }
