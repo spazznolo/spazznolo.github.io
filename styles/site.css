@@ -109,6 +109,14 @@ body:has(.home-stream) #title-block-header {
   margin-bottom: 2.4rem;
 }
 
+.home-about,
+.home-stream > section.level2,
+.home-stream > p {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: var(--reading-width);
+}
+
 .home-about h1,
 .home-stream > section.level2 > h2 {
   color: var(--warm-accent);
@@ -179,7 +187,7 @@ main section.level3 > h3 {
   font-weight: 500;
   letter-spacing: 0;
   line-height: 1.25;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0;
   margin-inline: auto;
   max-width: var(--reading-width);
 }
@@ -191,6 +199,7 @@ main section.level3 > h3 {
   line-height: 1.6;
   margin-inline: auto;
   max-width: 640px;
+  padding-top: 1.65rem;
 }
 
 #title-block-header .description::after,
