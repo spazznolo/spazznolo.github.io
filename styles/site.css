@@ -1,6 +1,6 @@
 /*-- scss:defaults --*/
 /*-- scss:rules --*/
-@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap");
 :root {
   font-size: 14px;
   --warm-accent: #ddb85c;
@@ -12,7 +12,7 @@
 }
 
 body {
-  font-family: "Source Code Pro", monospace;
+  font-family: "IBM Plex Mono", monospace;
   line-height: 1.65;
 }
 
@@ -189,9 +189,10 @@ main section.level3 > h3::before {
 }
 
 #title-block-header .title {
+  font-family: "IBM Plex Sans", sans-serif;
   font-size: 2rem;
   font-weight: 500;
-  letter-spacing: 0;
+  letter-spacing: -0.01em;
   line-height: 1.25;
   margin-bottom: 0;
   margin-inline: auto;
