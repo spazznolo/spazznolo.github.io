@@ -109,10 +109,11 @@ body:has(.home-stream) #title-block-header {
 .home-about h1,
 .home-stream > section.level2 > h2 {
   color: var(--warm-accent);
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
+  font-size: 0.92rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
   margin-bottom: 1.25rem;
-  text-transform: uppercase;
+  text-transform: none;
 }
 
 .home-about h1::after,
@@ -147,15 +148,27 @@ body:has(.home-stream) #title-block-header {
 
 main section.level2 > h2 {
   color: var(--warm-accent);
-  font-size: 0.84rem;
+  font-size: 1.12rem;
   font-weight: 500;
-  letter-spacing: 0.06em;
-  line-height: 1.35;
-  text-transform: uppercase;
+  letter-spacing: 0;
+  line-height: 1.4;
+  margin-bottom: 1.15rem;
+  margin-top: 3.4rem;
+  text-transform: none;
+}
+
+main section.level3 > h3 {
+  color: inherit;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.45;
+  margin-bottom: 0.9rem;
+  margin-top: 2.5rem;
 }
 
 #title-block-header {
-  margin-bottom: 2.2rem;
+  margin-bottom: 3rem;
+  text-align: center;
 }
 
 #title-block-header .title {
@@ -163,6 +176,8 @@ main section.level2 > h2 {
   font-weight: 500;
   letter-spacing: 0;
   line-height: 1.25;
+  margin-inline: auto;
+  max-width: var(--reading-width);
 }
 
 #title-block-header .subtitle,
@@ -170,6 +185,18 @@ main section.level2 > h2 {
   color: var(--bs-secondary-color);
   font-size: 1rem;
   line-height: 1.6;
+  margin-inline: auto;
+  max-width: 640px;
+}
+
+#title-block-header .description::after,
+#title-block-header .subtitle:last-child::after {
+  background: var(--warm-divider);
+  content: "";
+  display: block;
+  height: 1px;
+  margin: 1.65rem auto 0;
+  width: 8rem;
 }
 
 #title-block-header .quarto-title-meta {
@@ -183,6 +210,44 @@ main a {
 
 #toc-title {
   display: none;
+}
+
+nav#TOC {
+  border: 0;
+  margin: 0 0 3.2rem;
+  max-width: var(--reading-width);
+  padding: 0;
+}
+
+nav#TOC::before {
+  color: var(--warm-accent);
+  content: "In this article";
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 500;
+  margin-bottom: 0.7rem;
+}
+
+nav#TOC > ul {
+  column-gap: 2.2rem;
+  columns: 2;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav#TOC li {
+  break-inside: avoid;
+  margin-bottom: 0.35rem;
+}
+
+nav#TOC a {
+  color: var(--bs-secondary-color);
+  text-decoration: none;
+}
+
+nav#TOC a:hover {
+  color: var(--warm-accent);
 }
 
 .home-about p {
@@ -281,6 +346,9 @@ pre.text code {
   }
   .navbar > .container-fluid {
     align-items: flex-start;
+  }
+  nav#TOC > ul {
+    columns: 1;
   }
 }
 @media (max-width: 480px) {
