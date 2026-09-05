@@ -72,6 +72,7 @@ body .navbar a.quarto-color-scheme-toggle:focus-visible {
 
 #quarto-content main.content,
 .page-layout-full main.content {
+  grid-column: screen-start / screen-end;
   max-width: none;
   width: 100%;
 }
@@ -178,7 +179,7 @@ main section.level3 > h3 {
   font-weight: 500;
   letter-spacing: 0;
   line-height: 1.25;
-  margin-bottom: 0.85rem;
+  margin-bottom: 1.5rem;
   margin-inline: auto;
   max-width: var(--reading-width);
 }
@@ -205,6 +206,12 @@ main section.level3 > h3 {
 #title-block-header .quarto-title-meta {
   color: var(--bs-secondary-color);
   font-size: 0.78rem;
+  grid-template-columns: 1fr !important;
+  justify-items: center;
+}
+
+#title-block-header .quarto-title-meta > div:has(.date-modified) {
+  display: none;
 }
 
 main a {
@@ -281,6 +288,10 @@ body.quarto-light .home-about p {
 .quarto-listing-table {
   table-layout: fixed;
   width: 100%;
+}
+
+.home-stream .quarto-listing-table {
+  font-size: 0.9rem;
 }
 
 .quarto-listing-table th,
