@@ -33,13 +33,13 @@ This blog serves as an outlet to explore ideas which naturally interest me. I tr
 
 ## Featured research
 
-- [WTA Model Rankings](/tennis/rankings/) — Weekly player strength, surface effects, uncertainty, and trajectories.
 - [Goalie Performance](/research/goalie-performance/) — Estimating talent while respecting small-sample uncertainty. · 15 min
 - [NHL Pick Probability](/research/nhl-pick-probability/) — Turning rankings into pick distributions and decisions. · 22 min
 - [Post-regulation](/post-regulation/) — What three-on-three overtime adds to NHL standings, and what predicts the next goal.
 
 ## Projects
 
+- [WTA Rankings](/tennis/rankings/) — Weekly player strength, surface effects, uncertainty, and trajectories.
 - [Letterboxd Recs](/projects/letterboxd-recs/) — Personalized, weekly fresh film recommendations built from taste similarity and streaming availability.
 
 ## Recent writing
