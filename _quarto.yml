@@ -35,7 +35,7 @@ website:
         href: /
       - text: "Research"
         href: /research/
-      - text: "About"
+      - text: "GitHub"
         href: /about/
   page-footer:
     border: false

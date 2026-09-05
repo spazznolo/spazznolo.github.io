@@ -99,8 +99,8 @@ test('top navigation exposes only approved destinations', async ({ page }) => {
   await expect(nav.getByRole('link', { name: 'Research' })).toBeVisible();
   await expect(nav.getByRole('link', { name: 'Home', exact: true })).toBeVisible();
   await expect(nav.getByRole('link', { name: 'Subjects' })).toHaveCount(0);
-  await expect(nav.getByRole('link', { name: 'About' })).toBeVisible();
-  await expect(nav.getByRole('link', { name: 'GitHub' })).toHaveCount(0);
+  await expect(nav.getByRole('link', { name: 'About' })).toHaveCount(0);
+  await expect(nav.getByRole('link', { name: 'GitHub' })).toBeVisible();
   await expect(nav.getByRole('link', { name: /LinkedIn|Twitter/i })).toHaveCount(0);
 });
 
