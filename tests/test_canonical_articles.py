@@ -40,9 +40,9 @@ class CanonicalArticleTest(unittest.TestCase):
             [
                 "EMPIRICAL BAYES",
                 "ACCOUNTING FOR SHOT QUALITY",
-                "Adjusting for age",
-                "Career length and the prior",
-                "Contextualizing experience",
+                "ADJUSTING FOR AGE",
+                "CAREER LENGTH AND THE PRIOR",
+                "CONTEXTUALIZING EXPERIENCE",
             ],
             3000,
             4000,
@@ -56,10 +56,9 @@ class CanonicalArticleTest(unittest.TestCase):
             "Age SQ AdjSV%: 0.948619",
             "posterior SQ AdjSV%: 0.947082",
             "posterior Age SQ AdjSV%: 0.948338",
-            "mean rises, 4,198 to 4,286",
-            "mean rises, .932 to .933",
+            "Mean career attempts rise slightly, from 4,198 to 4,286",
+            "the unweighted goalie mean rises from .932 to .933",
             "The fit is... not really good",
-            "surprise, surprise",
         ]:
             self.assertIn(fact, text)
         self.assertNotIn(
@@ -74,6 +73,9 @@ class CanonicalArticleTest(unittest.TestCase):
             "(/figs/goalie-six-six.png)",
             text,
         )
+        self.assertIn("fig-align: center", text)
+        self.assertNotIn("Code available here", text)
+        self.assertEqual(text.count("::: {.equation-note}"), 5)
 
     def test_nhl_pick_probability_contract(self):
         source_contract(

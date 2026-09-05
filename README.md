@@ -25,6 +25,10 @@ npm test
 
 Copy `templates/post.qmd` to `posts/<slug>/index.qmd`, replace its example metadata and instructional prose, and leave `draft: true` until publication. New computational posts may use frozen R, Python, Julia, Observable, or Shinylive output; historical archive posts are intentionally non-executable.
 
+## Plotting
+
+New and regenerated figures use the shared Python theme in `scripts/spazz_plot.py`. Install its isolated dependencies with `python3 -m pip install -r requirements-plotting.txt`, then use `spazz_theme()` and `finish_axes()` around ordinary matplotlib code. Keep titles and interpretation in the article, use gold as the only primary series colour, and avoid grids and tick marks.
+
 ## Publishing
 
 Pull requests run the full render and test contract. A passing push to `master` deploys the rendered `_site` artifact through GitHub Pages.

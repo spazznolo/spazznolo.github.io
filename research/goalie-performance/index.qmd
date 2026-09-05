@@ -2,7 +2,7 @@
 title: "Goalie Performance"
 description: "Estimating NHL goalie performance with empirical Bayes, shot-quality adjustment, age context, and honest sample-size limits."
 date: 2023-05-17
-date-modified: 2026-08-29
+date-modified: 2026-09-05
 categories:
   - Bayesian statistics
   - Distributions and sampling
@@ -13,6 +13,7 @@ sports:
 status: canonical
 reading-time: true
 toc: true
+fig-align: center
 execute:
   enabled: false
 ---
@@ -49,20 +50,16 @@ The beta distribution has two hyperparameters, $\alpha$ and $\beta$, which behav
 
 **Update with the goalie.** Let $Y_i$ be a goalie's non-goal outcomes across $N_i$ unblocked attempts. The model is:
 
+::: {.equation-note}
 $$
-\theta_i \sim \operatorname{Beta}(\alpha,\beta)
+\begin{aligned}
+\theta_i &\sim \operatorname{Beta}(\alpha,\beta), \\
+Y_i \mid \theta_i &\sim \operatorname{Binomial}(N_i,\theta_i), \\
+\boxed{\theta_i \mid Y_i}
+&\sim \operatorname{Beta}(\alpha + Y_i,\ \beta + N_i-Y_i).
+\end{aligned}
 $$
-
-$$
-Y_i \mid \theta_i \sim \operatorname{Binomial}(N_i,\theta_i),
-$$
-
-which gives the posterior:
-
-$$
-\theta_i \mid Y_i \sim
-\operatorname{Beta}(\alpha + Y_i,\ \beta + N_i - Y_i).
-$$
+:::
 
 In plain language, we add the observed non-goals to $\alpha$ and the observed goals—not all shots—to $\beta$. When a goalie has faced only a few attempts, their estimate remains close to the population mean and their posterior remains wide. With more attempts, their own results carry more weight and the posterior narrows.
 
@@ -70,7 +67,7 @@ As an example, let's plot the posterior distributions for two 24-year-old goalie
 
 ![](/figs/goalie-performance-1-3.png){fig-alt="Posterior save percentage distributions for Jake Oettinger and Jeremy Swayman." width="60%"}
 
-The model gives Swayman a 60.28% probability of having the higher underlying Fenwick save probability. Oettinger, however, has a 94.12% probability of being above the prior mean, compared with 93.81% for Swayman. Oettinger has faced more attempts, so his posterior is narrower: the model is more certain about an estimate which is slightly closer to average.
+The model gives Swayman a 60.28% probability of having the higher underlying Fenwick save probability. Oettinger, however, has a 94.12% probability of being above the .9406 population median, compared with 93.81% for Swayman. Oettinger has faced more attempts, so his posterior is narrower: the model is more certain about an estimate which is slightly closer to the benchmark.
 
 These probabilities are conditional on a deliberately simple model:
 
@@ -85,52 +82,55 @@ These assumptions are intentionally strong. The rest of the analysis relaxes the
 
 ## ACCOUNTING FOR SHOT QUALITY
 
-All shots are not equal, in that they do not have the same probability of becoming a goal. This is established. Many Expected Goals (xG) models have been developed to account for this. Fortunately, Peter Tanner's website [MoneyPuck](https://moneypuck.com/index.html) provides detailed data on each unblocked shot in the NHL, including the probability of the shot being a goal according to his [logistic regression model](https://moneypuck.com/about.htm).
+Not all attempts are equally difficult. Expected-goals models estimate that difficulty from the location and context of each attempt. [MoneyPuck](https://moneypuck.com/index.html) publishes one such estimate for every unblocked NHL attempt using a [logistic regression model](https://moneypuck.com/about.htm).
 
-To adjust a goalie's save percentage for shot quality, we can incorporate these expected goal probabilities from MoneyPuck. Usually, after accounting for shot quality, goalie performance is measured by the number of goals saved above expected (GSAx). This changes the metric from a rate (percentage of shots saved) which is bounded by 0 and 1 to one that can include any real number. Unfortunately, the beta distribution only works with rates. One approach to retain the metric as a rate, and thus the beta distribution as a prior, is as follows:
+Shot-quality-adjusted performance is usually expressed as goals saved above expected. That is an intuitive counting statistic, but it is not a probability and can take any real value. To preserve the rate-scale framework above, I instead recenter the difference between observed and expected Fenwick save percentage around a common league benchmark.
 
-- Fenwick Save Percentage (FSV%) = 1 - (Goals Against / Fenwick Shots Against)
-- Expected Fenwick Save Percentage (xFSV%) = 1 - (Expected Goals Against / Fenwick Shots Against)
-- Median Save Percentage (MSV%) = Median of Goalie (20+ xG faced) Career Save Percentage
-- **Adjusted Save Percentage (AdjSV%) = MSV% + (FSV% - xFSV%)**
+Let $G_i$ be observed goals, $X_i$ expected goals, and $N_i$ unblocked attempts for goalie $i$. Let $\mu_x$ be the mean season-level expected Fenwick save percentage in the sample; it serves only as a common reference point.
 
-Let's plot the distribution of career AdjSV% for goalies who have faced 200+ shots. We will also include a fitted beta distribution in white, and a weibull in red.
+::: {.equation-note}
+$$
+\begin{aligned}
+\mathrm{FSV}_i &= 1 - \frac{G_i}{N_i}, \\
+\mathrm{xFSV}_i &= 1 - \frac{X_i}{N_i}, \\
+\boxed{\mathrm{AdjSV}_i} &= \mu_x + \left(\mathrm{FSV}_i-\mathrm{xFSV}_i\right).
+\end{aligned}
+$$
+:::
+
+The quantity in parentheses is performance relative to the difficulty of the attempts faced. Adding $\mu_x$ puts that difference back on a familiar save-percentage scale. A goalie who performs exactly as expected receives $\mathrm{AdjSV}_i=\mu_x$.
+
+There is an important approximation here. $N_i\mathrm{AdjSV}_i$ is a fractional adjusted non-goal count, not a count of observed binary outcomes. Feeding it into the beta update preserves the useful shrinkage calculation, but the resulting model is no longer a literal beta-binomial data-generating process.
+
+The distribution below shows career AdjSV% for goalies who faced at least 200 attempts, with fitted beta and Weibull curves.
 
 ![](/figs/goalie-performance-2-1.png){fig-alt="Career adjusted save percentage distribution with fitted beta and Weibull distributions." width="60%"}
 
-At first glance, goalies' career AdjSV% seems to follow a weibull distribution! Cool, but we're going to sidestep this finding for now, because (hint, hint) *there maybe be more than one distribution here*. So we're fitting another beta, which means the remaining steps stay the same. The prior is similar, except this time we add 933 saves and 60 goals (up from 852 and 55.6).
+The Weibull follows this particular histogram more closely, but visual fit is not enough, and its support extends beyond one. I retain the beta as a bounded working prior. Its fitted parameters behave like 933 prior non-goal attempts and 60 prior goals, slightly more information than the raw-rate prior.
 
 Let's revisit the Jake Oettinger and Jeremy Swayman comparison.
 
 ![](/figs/goalie-performance-2-2.png){fig-alt="Posterior adjusted save percentage distributions for Jake Oettinger and Jeremy Swayman." width="60%"}
 
-The posteriors change as follows:
-
-- There's a 78.77% (previously 60.28%) chance that Swayman's AdjSV% is better than Oettinger's.
-- There's a 88.28% (previously 94.12%) chance that Oettinger's AdjSV% is better than the MSV%.
-- There's a 97.30% (previously 93.81%) chance that Swayman's AdjSV% is better than the MSV%.
-
-These changes occur because Swayman faces more difficult shots on average, with an xFSV% of 94.07 compared to Oettinger's 94.39.
+After accounting for attempt difficulty, the model gives Swayman a 78.77% probability of having the higher underlying adjusted rate, up from 60.28%. His probability of exceeding the median benchmark rises to 97.30%, while Oettinger's falls to 88.28%. The mechanism is intuitive: Swayman's xFSV% is 94.07%, compared with Oettinger's 94.39%, meaning the model considers Swayman's average workload more difficult.
 
 ### Comparing the estimates
 
-Below is a collection of plots which compare the save percentage metrics discussed above.
+The four panels below separate the two operations being performed: adjusting for attempt difficulty and shrinking noisy estimates towards the population.
 
-A couple of key points:
+- Raw and adjusted save percentage remain strongly related ($r=.900$). Shot quality changes the estimate without discarding most of the signal in the observed rate.
+- The adjusted and posterior-adjusted rates also correlate at $r=.900$, but the relationship bends around the prior mean. Small-workload estimates are pulled inward; large-workload estimates remain closer to the diagonal.
+- Combining both operations lowers the correlation between raw and posterior-adjusted save percentage to $r=.794$. Some goalies therefore move meaningfully once both context and uncertainty are included.
+- The association between workload and posterior performance is partly a selection process: goalies who perform well tend to earn more opportunities. These plots cannot tell us that playing more causes improvement.
+- The changing spread is expected when goalies have unequal sample sizes and receive different amounts of shrinkage. Calling it heteroskedasticity describes the shape, but not its cause.
 
-- Goalies who have a poor start to their career tend to play fewer games (surprise, surprise).
-- The relationship between a goalie's SV% and their AdjSV% seems to strengthen as they face more shots.
-- A goalie's AdjSV% converges with their posterior AdjSV% as they face more shots (indicated by the yellow diagonal line).
-- Due to the previous points, there is heteroskedasticity in the relationship between a goalie's SV% and their posterior AdjSV%.
-- There is likely survivorship bias present.
+The main result is modest but useful: shot quality changes whom we prefer, while partial pooling changes how certain we should be. The same figure also warns against interpreting career length as an independent measure of ability.
 
 ![](/figs/goalie-performance-2-3.png){fig-alt="Comparison of save percentage metrics and posterior adjusted save percentage." width="100%"}
 
-Code available here: [https://github.com/spazznolo/goalie-performance/blob/main/posts/post-2.R](https://github.com/spazznolo/goalie-performance/blob/main/posts/post-2.R)
+## ADJUSTING FOR AGE
 
-## Adjusting for age
-
-Like shot quality, the effect of age on performance is a well-researched concept. It has been shown that goalies tend to improve as they age, peak, and then recede for, well, forever. This concept is typically called an *age curve*. Though goalie age curves are already available elsewhere, they differ slightly, so I'm going to define a custom age curve based on the Moneypuck dataset.
+Goalie performance changes with age: players generally improve, reach a peak, and then decline. The timing and shape of that curve vary across published estimates, so I estimate one directly from the MoneyPuck sample.
 
 - Obtain goalie birth dates.
 - Derive goalie age for each game.
@@ -140,57 +140,56 @@ Like shot quality, the effect of age on performance is a well-researched concept
 
 ### Finding goalie birth dates
 
-I scraped hockey-reference for each goalie's date of birth (code available [here](https://github.com/spazznolo/goalie-consistency/blob/main/import/scrape_goalie_data.R)). By combining the goalies' birth dates with the dates of each of their games, I determined their exact age for every game played.
+I matched each goalie's date of birth from Hockey-Reference to the date of every game they played. Birth dates could not be recovered for seven of the 315 goalies.
 
 The analysis population changes as follows (due to incomplete linkage):
 
-- Goalie population drops from 315 to 308.
-- Harmonic mean of shots against rises from 12,690 to 12,721 (mean rises, 4,198 to 4,286).
-- Harmonic mean of AdjSV% stays at .939 (mean rises, .932 to .933).
+- The goalie population drops from 315 to 308.
+- Mean career attempts rise slightly, from 4,198 to 4,286.
+- Shot-weighted AdjSV% remains .939; the unweighted goalie mean rises from .932 to .933.
 
 They barely differ.
 
 ### Exploring age
 
-Let's start by simply grouping shots into bins by goalie age (rounded to the first decimal, ex: 26.0, 26.1, etc.), and then calculating the group-wide save percentage. Here's what that looks like, with points becoming paler for smaller groups sizes:
+I first group attempts by goalie age, rounded to one decimal place, and calculate the pooled save percentage within each age. Points are paler where fewer attempts were observed.
 
 ![](/figs/goalie-performance-3-1.png){fig-alt="Save percentage by goalie age, with lighter points for smaller groups." width="60%"}
 
-Some thoughts:
+Most of the information lies between ages 23 and 35. There is a faint age pattern, but the cross-sectional curve mixes aging with selection: the goalies still playing at older ages are not comparable to everyone who entered the league.
 
-- Most shots are taken on goalies aged 23-35.
-- If you squint, you can see a little bit of an age curve here.
-- This plot is riddled with bias (particularly for goalies with short or long careers).
-
-Let's fix some of the bias above with a few changes. We'll follow a well-worn strategy [seemingly](https://hockey-graphs.com/2017/03/23/a-new-look-at-aging-curves-for-nhl-skaters-part-1) developed by Tango Tiger [here](http://www.tangotiger.net/aging.html) called the delta method.
+To reduce that bias, I use the delta method described by [Tango Tiger](http://www.tangotiger.net/aging.html) and applied in later [hockey aging research](https://hockey-graphs.com/2017/03/23/a-new-look-at-aging-curves-for-nhl-skaters-part-1). Rather than comparing different goalies at different ages, it compares each goalie's performance with their own performance one year earlier.
 
 Here are the steps:
 
-- Take change in save percentage (dSV%) from each goalie's age to the next.
-- Take the harmonic mean of dSV% for each age as the the observed change in SV%.
-- Clip off underrepresented ages (-21, 39+).
-- Clip off the final year of each goalie's career.
-- Take the cumulative sum of dSV% throughout the retained age range.
+- Calculate each goalie's change in adjusted save percentage from one age to the next.
+- Take the attempt-weighted arithmetic mean of those changes at each age.
+- Remove sparsely represented ages below 22 and above 38.
+- Remove each goalie's final season to reduce retirement-selection bias.
+- Accumulate the annual changes and normalize the curve to zero at its peak.
 
 Altogether, this gives us the curve below:
 
 ![](/figs/goalie-performance-3-2.png){fig-alt="Smoothed goalie age curve based on cumulative changes in save percentage." width="60%"}
 
-Some thoughts:
-
-- With this method, goalies peak around the age of 25.
-- This agrees with [some](https://hockeyviz.com/txt/age22) past research.
-- This disagrees with [other](https://hockey-graphs.com/2014/03/21/how-well-do-goalies-age-a-look-at-a-goalie-aging-curve/) past research.
+In this sample, the fitted curve peaks around age 25. That agrees with [some](https://hockeyviz.com/txt/age22) previous work and disagrees with [other estimates](https://hockey-graphs.com/2014/03/21/how-well-do-goalies-age-a-look-at-a-goalie-aging-curve/). It should be read as a descriptive adjustment, not a universal biological curve: weighting, survivor selection, and the final-season rule all influence its shape.
 
 ### Applying the adjustment
 
-The cleanest way that I can think of adjusting for age is to bake it into the current framework which already adjusts shots by their probability of becoming a goal. This can easily by done by first setting the peak (age 25) as the standard and then adjusting for all other ages, so that, for example, an xFSV% of 0.940 at age 25 is equivalent to an xFSV% of 0.93976 at age 22 (0.94000 - 0.000237) and an xFSV% of 0.93586 at age 38 (0.94000 - 0.00414).
+I incorporate age through the same expected-rate term used for attempt difficulty. Let $a(t)\geq0$ be the estimated performance gap between age $t$ and the age-25 peak, with $a(25)=0$. The age-adjusted expected rate is therefore $\mathrm{xFSV}_i-a(t_i)$.
 
 ::: {.equation-note}
-- Adjusted (xG) Save Percentage (AdjSV%) = MSV% + (FSV% - xFSV%)
-- Age Curve Adjustement (acAdj) = f(age), where f is the smoothed curve in the plot above.
-- **Adjusted (Age + xG) Save Percentage (AdjSV%) = MSV% + (FSV% - xFSV% + acAdj)**
+$$
+\begin{aligned}
+\mathrm{xFSV}^{\mathrm{age}}_i &= \mathrm{xFSV}_i-a(t_i), \\
+\boxed{\mathrm{AdjSV}^{\mathrm{age}}_i}
+&= \mu_x+\left(\mathrm{FSV}_i-\mathrm{xFSV}^{\mathrm{age}}_i\right) \\
+&= \mu_x+\left(\mathrm{FSV}_i-\mathrm{xFSV}_i+a(t_i)\right).
+\end{aligned}
+$$
 :::
+
+For example, an xFSV% of .94000 at age 25 corresponds to .93976 at age 22 and .93586 at age 38 after subtracting the estimated age gaps of .00024 and .00414.
 
 With this adjustment, Lundqvist's career save percentages work out like this:
 
@@ -200,95 +199,94 @@ With this adjustment, Lundqvist's career save percentages work out like this:
 - posterior SQ AdjSV%: 0.947082
 - posterior Age SQ AdjSV%: 0.948338
 
-Code available here: [https://github.com/spazznolo/goalie-performance/blob/main/posts/post-3.R](https://github.com/spazznolo/goalie-performance/blob/main/posts/post-3.R)
-
-## Career length and the prior
+## CAREER LENGTH AND THE PRIOR
 
 ### The 200-shot cutoff
 
-The 200 shot cut-off surprisingly filters out 90 out of 314 goalies (or, 28.7%). To illustrate this, here's the cumulative distribution function of career shots faced for goalies:
+The 200-attempt cutoff removes 90 of 314 goalies, or 28.7%. The career-attempt distribution shows how severe that filter is:
 
 ![](/figs/goalie-six-one.png){fig-alt="Cumulative distribution of career shots faced for goalies." width="60%"}
 
-This is a problem. One possible solution to this was proposed by [David Robinson](http://varianceexplained.org/r/empirical_bayes_baseball/) in his Baysian series on baseball. Instead of fitting a beta distribution to batting averages, he fit a negative binomial distribution using 1) at bats and 2) hits. This can easily be applied to goalies using 1) shots faced and 2) adjusted saves. It has *its* problems, though (which, of course, David addresses in a string of fantastic blog posts, eventually turning into a [book](https://drob.gumroad.com/l/empirical-bayes)). The main problem is that it introduces bias - goalies who perform well are likely to get more opportunities to play compared to those who perform poorly. As proof, here's a plot showing the average AdjSV% by career seasons played:
+This matters because the excluded careers contain information, but not information of equal precision. Related empirical Bayes work by [David Robinson](http://varianceexplained.org/r/empirical_bayes_baseball/) models the observed rate and number of opportunities together. Hockey adds a complication: opportunity is endogenous. Goalies who perform well tend to receive more starts, so career length is partly an outcome of performance rather than an independent exposure.
+
+The association is visible when average AdjSV% is plotted against career seasons played:
 
 ![](/figs/goalie-six-two.png){fig-alt="Average adjusted save percentage by career seasons played." width="60%"}
 
-Because of this bias, we're faced with a compromise: Do we weigh the observations by shots faced, which will lean the analysis towards better performing goalies, or do we treat all goalie careers equally, losing nearly 30% of our population (albeit less than 1% of shots faced) at the same time? Or... is there an alternative?
+Weighting careers by attempts gives the most established goalies the greatest influence. Weighting careers equally lets very short, noisy careers shape the population distribution. Dropping those careers avoids the noise but discards nearly 30% of the players, despite losing less than 1% of attempts. None of those choices is neutral.
 
-David's alternative was to fit a beta-binomial regression of batting averages on at-bats. Essentially, each at-bat total has its own prior. Though this is a good idea for his use case, it isn't great for mine. The problem is that I want to build a decision making tool for goalies *who are still playing*, and we don't know how many shots they will face in the future! This is the point of departure.
+For a decision tool applied to active goalies, final career workload cannot be used as an ordinary predictor because it is not yet known. This is the point of departure.
 
-### Combining Priors
+### Combining priors
 
-To address these issues, the Bayesian framework can be expanded to include two priors, glued together by a probability. The goalie career AdjSV% density plots are revisited, this time splitting goalies into two groups: those facing -1,500 shots and those facing 1,500+. From these group distributions, two separate priors can be built, and they can be merged by including a probability of a goalie belonging to each group, which can change as they face more shots.
+One pragmatic solution is a mixture of two population priors: one estimated from careers below 1,500 attempts and one from careers at or above 1,500. The weight assigned to the long-career prior changes as the goalie accumulates attempts and performance information.
 
 ![](/figs/goalie-six-three.png){fig-alt="Career adjusted save percentage distributions split by career shots faced." width="60%"}
 
-Here's a simple idea for the class probability described above: run a logistic regression using cumulative shots faced and AdjSV% onto the outcome of whether a goalie ended up facing 1,500+ shots. This model would be easy to train and interpret.
+I estimate that weight with a logistic regression of eventual long-career status on current cumulative attempts and AdjSV%. The fitted probability answers a practical question: given what we know now, how likely is this goalie to finish with at least 1,500 attempts?
 
-And, it turns out, such a model is well-calibrated:
+The model appears reasonably calibrated within this historical sample:
 
 ![](/figs/goalie-six-four.png){fig-alt="Calibration of the logistic regression predicting a long goalie career." width="60%"}
 
-The new equation to derive the posterior save percentage then becomes:
+Let $\pi_i$ be the predicted probability of a long career, $A_i=N_i\mathrm{AdjSV}_i$ the fractional adjusted non-goal count, and $(\alpha_L,\beta_L)$ and $(\alpha_S,\beta_S)$ the long- and short-career beta parameters. The posterior estimate becomes:
 
 ::: {.equation-note}
-`P(1500+)*(alphaO + AdjSV%)/(alphaO + betaO + S) + P(-1500)*(alphaU + AdjSV%)/(alphaU + betaU + S)`
+$$
+\boxed{
+\widehat{\theta}_i
+=
+\pi_i
+\frac{\alpha_L+A_i}{\alpha_L+\beta_L+N_i}
++
+(1-\pi_i)
+\frac{\alpha_S+A_i}{\alpha_S+\beta_S+N_i}
+}
+$$
 :::
 
-where:
+This is a useful adaptive estimator, but not yet a fully generative model of ability and career survival. Because current performance helps determine $\pi_i$ and also enters the posterior update, a future version should estimate opportunity and performance jointly.
 
-- P(1500+) = Predicted probability that goalie faces 1500+ shots in career.
-- alphaO = alpha from fitted beta distribution on goalies facing 1500+ shots.
-- betaO = beta from fitted beta distribution on goalies facing 1500+ shots.
-- P(-1500) = Predicted probability that goalie faces -1500 shots in career.
-- alphaU = alpha from fitted beta distribution on goalies facing -1500 shots.
-- betaU = beta from fitted beta distribution on goalies facing -1500 shots.
-
-Code available here: [https://github.com/spazznolo/goalie-performance/blob/main/posts/post-4.R](https://github.com/spazznolo/goalie-performance/blob/main/posts/post-4.R)
-
-## Contextualizing experience
+## CONTEXTUALIZING EXPERIENCE
 
 ### Goalies in the analysis
 
-Whenever we decide on a range of years for an analysis (in this case, 2007-2022), we are cutting of goalies mid-career. Some, like Carter Hart, are beginning their careers. Others, like Lundqvist, ended them during in the middle of the analysis period. Since we are not yet adjusting for age, we can't include these goalies in the analysis. Therefore, only goalies who started their careers post-2007 and ended their careers pre-2022 can be included. This is a 15 year range.
+Any fixed observation window cuts through some careers. In the 2007–2022 sample, some goalies enter near the end of the window while others began long before it. To compare complete career paths, I restrict this section to goalies whose observed careers both begin after 2007 and end before 2022. That leaves a narrower and selected population, but avoids mistaking the edge of the dataset for the beginning or end of a career.
 
 The analysis population changes as follows:
 
-- Goalie population drops from 315 to 140.
-- Harmonic mean of shots against rises from 12,690 to 14,568 (mean drops, 4,198 to 3,225).
-- Harmonic mean of AdjSV% stays at .939 (mean drops, .932 to .927).
+- The goalie population drops from 315 to 140.
+- Mean career attempts drop from 4,198 to 3,225.
+- Shot-weighted AdjSV% remains .939; the unweighted goalie mean falls from .932 to .927.
 
 ### Career length
 
-Let's start simple: How long is the average goalie career? How many goalies face over 30 shots? How many make it past 200?... All of these questions can be answered by plotting the cumulative distribution function (cdf) of career shots faced for goalies.
-
-Some thoughts:
+The complete-career sample remains dominated by short NHL careers:
 
 - 25% of goalies faced 33 shots or less (!).
 - 50% of goalies faced 202 shots or less (that's about 7 games).
 - 75% of goalies faced 2,606 shots or less.
 
-We can gain another perspective on goalie experience by repeating the plot above for goalie career seasons played.
-
-![](/figs/goalie-six-two.png){fig-alt="Average goalie career seasons and experience distribution." width="60%"}
-
-Some thoughts:
-
 - 42% of goalies played only one season.
 - 74% of goalies played five seasons or less.
 - 90% of goalies played twelve seasons or less.
 
-It should now be obvious that most goalies don't really have a typical NHL career as we imagine them. Let's confirm the assumption that goalies with more experience perform better than those with less.
+The familiar long NHL career is therefore not the typical outcome. More importantly, experience and ability cannot be interpreted separately: performance affects whether a goalie receives the opportunity to become experienced.
 
-It is difficult to understand a goalie's path by looking at their save percentage or shots faced in isolation. What's nice about the empirical Bayesian method is that it considers these measures at the same time. Moreover, we can repeatedly re-evaluate a goalie's pAdjSV% after each shot they face. We can then plot this posterior over each shot of a goalie's career to get a sense of their path. In order to extract more insight from this, let's section goalies by their career shots faced, like this:
+The empirical Bayes estimate combines performance and sample size at each point in a career. I call the posterior mean pAdjSV% and recalculate it after every attempt. To compare paths, I group goalies by their eventual career workload:
 
-Goalies facing:
+- fewer than 300 attempts;
+- 300–1,499 attempts;
+- 1,500–5,999 attempts;
+- 6,000 or more attempts.
 
-- less than 300 shots -> -0300.
-- more than 300 shots, but less than 1,500 -> -1500.
-- more than 1,500 shots, but less than 6,000 -> -6000.
-- more than 6000 -> 6000+.
+::: {.equation-note}
+$$
+\mathrm{pAdjSV}_{i,n}
+=
+\mathbb{E}\!\left[\theta_i\mid D_{i,1:n}\right]
+$$
+:::
 
 As an example, Braden Holtby's pAdjSV% after facing various shot totals:
 
@@ -299,33 +297,16 @@ As an example, Braden Holtby's pAdjSV% after facing various shot totals:
 - 15,000 shots: 0.9450
 - 19,555 shots: 0.9433
 
-Some thoughts:
-
-- Nearly every goalie (77.1%) who faces -6000 shots ends his career with a pAdjSV% below expected.
-- Goalies facing 1500+ but -6000 seem to fade as their career progresses.
-- These goalies tend to be backups, facing ~600-1000 shots a season.
-- This fade could partly be due to aging effects.
+Among goalies who finish between 1,500 and 5,999 attempts, 77.1% end below the population benchmark. Their group trajectory also declines later in the observed career. These are commonly backup-sized workloads—roughly 600–1,000 attempts per season—but the pattern is descriptive. It combines aging, role, selection, and regression after a strong enough start to earn continued work.
 
 To get a clearer sense of the dynamics described above, let's take the group average pAdjSV% through each shot faced.
 
 ![](/figs/goalie-six-seven.png){fig-alt="Average posterior adjusted save percentage through shots faced by career-size group." width="60%"}
 
-Some thoughts:
+The grouped trajectories make the selection process clearer, but they do not identify its cause. The sub-300 group is too small and noisy to support much interpretation. The 300–1,499 group declines quickly, consistent with teams reducing opportunities after poor results. The 1,500–5,999 group begins above the others through roughly the first 1,000 attempts and then fades. That shape could reflect early randomness, aging, changing roles, or the conditioning on eventual career length itself.
 
-- The effects are much clearer here.
-- There isn't much to glean from goalies facing -300 shots.
-- These short NHL careers are almost certainly due to reasons outside their play in the NHL.
-- Goalies facing -1500 shots fade quickly. They are given a decent look and fail acutely.
-- Goalies facing -6000 shots start as the best group through the first 1,000 shots, then fade.
-- This seemingly unintuitive result is likely due to randomness, and, more interestingly, age.
-
-Let's revisit the unintuive plot comparing pAdjSV% over goalie careers, grouped by career length. This time, we'll plot the average age of goalies in each group as they face shots over their career.
+Age provides one piece of that explanation. The final plot replaces pAdjSV% with average age for the same workload groups.
 
 ![](/figs/goalie-six-six.png){fig-alt="Average goalie age through shots faced by career-size group." width="60%"}
 
-Some thoughts:
-
-- Goalies facing -6000 shots are ~1.5 years older than 6000+ goalies throughout their career.
-- This difference obviously includes the span from age 23 to roughly 27.
-- This is precisely the age range in which goalies seem to be improving in AdjSV%.
-- We can adjust for this.
+Goalies in the 1,500–5,999 group are roughly 1.5 years older than the 6,000-plus group at comparable career workloads. Much of that difference lies between ages 23 and 27, where the estimated age curve is still moving. Age can therefore explain part of the divergence, but not all of it; role and selection remain entangled with the trajectories.
