@@ -1,6 +1,6 @@
 /*-- scss:defaults --*/
 /*-- scss:rules --*/
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=Zilla+Slab:wght@500&display=swap");
 :root {
   font-size: 14px;
   --warm-accent: #ddb85c;
@@ -169,8 +169,9 @@ main section.level2 > h2 {
 
 main section.level3 > h3 {
   color: inherit;
-  font-size: 1.04rem;
-  font-weight: 700;
+  font-family: "Zilla Slab", serif;
+  font-size: 1.2rem;
+  font-weight: 500;
   letter-spacing: 0.01em;
   line-height: 1.45;
   margin-bottom: 0.9rem;
