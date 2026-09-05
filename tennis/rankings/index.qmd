@@ -30,10 +30,10 @@ page-layout: full
   .ranking-table tbody tr:hover td { background: color-mix(in srgb, var(--warm-accent) 4%, transparent); }
   .ranking-table tbody tr.is-selected td { background: color-mix(in srgb, var(--warm-accent) 8%, transparent); }
   .ranking-table tbody tr.is-selected td:nth-child(4)::before { content: "● "; color: var(--warm-accent); }
-  .trajectory-title { color: var(--warm-accent); font-size: .84rem; letter-spacing: .02em; margin-top: 2.5rem; }
-  #trajectory { width: 100%; min-height: 580px; margin: .75rem 0 1.5rem; }
+  .trajectory-title { color: var(--warm-accent); font-size: 1.08rem; font-weight: 700; letter-spacing: .055em; margin: 2.5rem 0 .2rem; text-transform: uppercase; }
+  #trajectory { width: 100%; min-height: 390px; margin: .2rem 0 .45rem; }
   #trajectory text { fill: var(--bs-secondary-color); font-size: 11px; }
-  .trajectory-legend { display: flex; flex-wrap: wrap; gap: .35rem 1rem; min-height: 1.5rem; margin-bottom: .35rem; color: var(--bs-secondary-color); font-size: .85rem; }
+  .trajectory-legend { display: flex; flex-wrap: wrap; justify-content: center; gap: .35rem 1rem; min-height: 1.5rem; margin: 0 0 1.5rem; color: var(--bs-secondary-color); font-size: .78rem; text-align: center; }
   .trajectory-key { align-items: center; display: inline-flex; gap: .35rem; }
   .trajectory-key svg { height: 8px; overflow: visible; width: 20px; }
 </style>
@@ -42,14 +42,9 @@ These ratings are weekly market-implied WTA player states. Global parameters are
 
 <p class="ranking-note" id="ranking-note">Loading the latest completed Sunday…</p>
 
-<div class="trajectory-title" id="trajectory-title">player strength</div>
-
-<div class="ranking-controls">
-  <button class="surface-tab" id="top-five" type="button">Top 5</button>
-  <button class="surface-tab" id="uncertainty" type="button" aria-pressed="false">Uncertainty</button>
-</div>
+<div class="trajectory-title" id="trajectory-title">Player strength</div>
+<svg id="trajectory" viewBox="0 0 900 420" role="img" aria-label="Weekly player rating trajectory since last season"></svg>
 <div class="trajectory-legend" id="trajectory-legend"></div>
-<svg id="trajectory" viewBox="0 0 900 620" role="img" aria-label="Weekly player rating trajectory since last season"></svg>
 
 <h2>Latest leaderboard</h2>
 <p class="ranking-note" id="leaderboard-updated"></p>
@@ -155,10 +150,10 @@ These ratings are weekly market-implied WTA player states. Global parameters are
       const note = document.getElementById('ranking-note');
       note.textContent = `Last update: ${latest[0].week_ending} · Players included: 500 of ${latest.length} active players · Global parameters from: 2026`;
       const latestYear = Number(latest[0].week_ending.slice(0, 4));
-      document.getElementById('trajectory-title').textContent = `player strength, ${latestYear - 1}–${String(latestYear).slice(-2)}`;
+      document.getElementById('trajectory-title').textContent = `Player strength, ${latestYear - 1}–${String(latestYear).slice(-2)}`;
       document.getElementById('leaderboard-updated').textContent = `Last updated: ${new Date(`${latest[0].week_ending}T12:00:00Z`).toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC'})}`;
 
-      let activeRating = 'overall_mean', selectionIsDefault = true, showUncertainty = false;
+      let activeRating = 'overall_mean', selectionIsDefault = true;
       const topPlayerIds = () => [...latest]
         .sort((a, b) => number(b[activeRating]) - number(a[activeRating]))
         .slice(0, 5)
@@ -175,12 +170,10 @@ These ratings are weekly market-implied WTA player states. Global parameters are
           return {id, name: latestRow?.player_name || id, rows: history.filter(row => row.player_id === id && row.week_ending >= startDate && row.week_ending <= latestDate).sort((a, b) => a.week_ending.localeCompare(b.week_ending))};
         }).filter(item => item.rows.length);
         if (!series.length) return;
-        const svg = document.getElementById('trajectory'), W = 900, H = 620, pad = {l: 54, r: 18, t: 26, b: 38};
+        const svg = document.getElementById('trajectory'), W = 900, H = 420, pad = {l: 54, r: 18, t: 20, b: 38};
         const all = series.flatMap(item => item.rows);
         const centers = all.map(r => number(r[activeRating]));
-        const withUncertainty = showUncertainty
-          ? all.filter(r => Number.isFinite(number(r[chartSdColumn])))
-          : [];
+        const withUncertainty = all.filter(r => Number.isFinite(number(r[chartSdColumn])));
         const lows = [...centers, ...withUncertainty.map(r => number(r[activeRating]) - intervalZ * number(r[chartSdColumn]))];
         const highs = [...centers, ...withUncertainty.map(r => number(r[activeRating]) + intervalZ * number(r[chartSdColumn]))];
         const lo = Math.min(...lows), hi = Math.max(...highs), span = Math.max(hi - lo, .1);
@@ -193,7 +186,7 @@ These ratings are weekly market-implied WTA player states. Global parameters are
           const bandRows = rows.filter(r => Number.isFinite(number(r[chartSdColumn])));
           const upper = bandRows.map(r => `${x(r.week_ending)},${y(number(r[activeRating]) + intervalZ * number(r[chartSdColumn]))}`).join(' ');
           const lower = [...bandRows].reverse().map(r => `${x(r.week_ending)},${y(number(r[activeRating]) - intervalZ * number(r[chartSdColumn]))}`).join(' ');
-          const band = showUncertainty && bandRows.length > 1 ? `<polygon fill="var(--warm-accent)" fill-opacity=".08" points="${upper} ${lower}"/>` : '';
+          const band = bandRows.length > 1 ? `<polygon fill="var(--warm-accent)" fill-opacity=".08" points="${upper} ${lower}"/>` : '';
           return `${band}<polyline fill="none" stroke="var(--warm-accent)" stroke-opacity="${style.opacity}" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="${style.dash}" points="${line}"/>`;
         }).join('');
         svg.innerHTML = `${paths}<text x="${pad.l}" y="${H-8}">${startDate}</text><text text-anchor="end" x="${W-pad.r}" y="${H-8}">${latestDate}</text>`;
@@ -248,14 +241,6 @@ These ratings are weekly market-implied WTA player states. Global parameters are
         }).join('');
       }
 
-      document.getElementById('top-five').addEventListener('click', () => {
-        selectionIsDefault = true; selectedPlayerIds = new Set(topPlayerIds()); drawTrajectory(); drawTable();
-      });
-      document.getElementById('uncertainty').addEventListener('click', event => {
-        showUncertainty = !showUncertainty;
-        event.currentTarget.setAttribute('aria-pressed', String(showUncertainty));
-        drawTrajectory();
-      });
       body.addEventListener('click', event => {
         const row = event.target.closest('tr[data-player-id]'); if (!row) return;
         const id = row.dataset.playerId;

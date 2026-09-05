@@ -15,5 +15,19 @@ function Pandoc(doc)
   local minutes = math.max(1, math.ceil(words / 200))
   local line = pandoc.Para({pandoc.Str(tostring(minutes) .. " min read")})
   table.insert(doc.blocks, 1, pandoc.Div({line}, pandoc.Attr("", {"article-reading-time"})))
+  table.insert(doc.blocks, 2, pandoc.RawBlock("html", [[
+<script>
+(() => {
+  const reading = document.querySelector('.article-reading-time');
+  const published = document.querySelector('#title-block-header .quarto-title-meta-contents .date');
+  if (!reading || !published) return;
+  const inline = document.createElement('span');
+  inline.className = 'article-reading-time-inline';
+  inline.textContent = ` · ${reading.textContent.trim()}`;
+  published.append(inline);
+  reading.remove();
+})();
+</script>
+]]))
   return doc
 end
