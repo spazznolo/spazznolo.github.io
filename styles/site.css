@@ -2,7 +2,7 @@
 /*-- scss:rules --*/
 @import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500;700&display=swap");
 :root {
-  font-size: 13px;
+  font-size: 14px;
   --warm-accent: #ddb85c;
   --warm-divider: #393228;
   --shell-width: 1120px;
@@ -79,6 +79,8 @@ body .navbar a.quarto-color-scheme-toggle:focus-visible {
 body:not(:has(.home-stream)):not(:has(#ranking-body)):not(:has(#letterboxd-recs)) #title-block-header,
 body:not(:has(.home-stream)):not(:has(#ranking-body)):not(:has(#letterboxd-recs)) main.content > :is(p, ul, ol, blockquote, pre, .sourceCode, .equation-note, details),
 body:not(:has(.home-stream)):not(:has(#ranking-body)):not(:has(#letterboxd-recs)) main.content section > :is(p, ul, ol, blockquote, pre, .sourceCode, .equation-note, details, h2, h3, h4) {
+  margin-left: auto;
+  margin-right: auto;
   max-width: var(--reading-width);
 }
 
@@ -176,6 +178,7 @@ main section.level3 > h3 {
   font-weight: 500;
   letter-spacing: 0;
   line-height: 1.25;
+  margin-bottom: 0.85rem;
   margin-inline: auto;
   max-width: var(--reading-width);
 }
@@ -214,7 +217,7 @@ main a {
 
 nav#TOC {
   border: 0;
-  margin: 0 0 3.2rem;
+  margin: 0 auto 3.2rem;
   max-width: var(--reading-width);
   padding: 0;
 }
@@ -241,6 +244,10 @@ nav#TOC li {
   margin-bottom: 0.35rem;
 }
 
+nav#TOC ul ul {
+  display: none;
+}
+
 nav#TOC a {
   color: var(--bs-secondary-color);
   text-decoration: none;
@@ -262,6 +269,9 @@ body.quarto-light .home-about p {
 .article-reading-time, .archive-notice, .article-context {
   color: var(--warm-accent);
   font-size: 0.84rem;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: var(--reading-width);
 }
 
 .listing-table, .quarto-listing {
