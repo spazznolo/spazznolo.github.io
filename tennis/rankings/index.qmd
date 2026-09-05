@@ -6,44 +6,43 @@ page-layout: full
 ---
 
 <style>
-  body:has(#ranking-body) #quarto-content { max-width: 1080px; }
+  body:has(#ranking-body) #quarto-content { max-width: 1120px; }
   body:has(#ranking-body) main.content { max-width: none; width: 100%; }
   body:has(#ranking-body) #title-block-header { margin-bottom: 2rem; }
-  .ranking-note { color: #aaa; margin-bottom: 1.25rem; }
+  .ranking-note { color: var(--bs-secondary-color); margin-bottom: 1.25rem; }
   .ranking-controls { display: flex; flex-wrap: wrap; gap: .75rem; margin: 1rem 0; }
-  .ranking-controls input, .ranking-controls select { background: #111; color: #eee; border: 1px solid #555; padding: .45rem .6rem; }
+  .ranking-controls input, .ranking-controls select { background: transparent; color: inherit; border: 1px solid var(--warm-divider); padding: .45rem .6rem; }
   .surface-tabs { display: flex; flex-wrap: wrap; gap: .4rem; margin: 1rem 0; }
-  .surface-tab { background: #111; color: #aaa; border: 1px solid #555; padding: .45rem .8rem; cursor: pointer; font: inherit; }
-  .surface-tab:hover { color: #fff; border-color: #888; }
-  .surface-tab[aria-selected="true"], .surface-tab[aria-pressed="true"] { color: #111; background: #79c0ff; border-color: #79c0ff; }
+  .surface-tab { background: transparent; color: var(--bs-secondary-color); border: 0; border-bottom: 1px solid transparent; padding: .35rem .2rem; cursor: pointer; font: inherit; }
+  .surface-tab:hover { color: var(--warm-accent); }
+  .surface-tab[aria-selected="true"], .surface-tab[aria-pressed="true"] { color: var(--warm-accent); border-bottom-color: var(--warm-accent); }
   .ranking-wrap { overflow-x: auto; }
   .ranking-table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
-  .ranking-table th, .ranking-table td { border-bottom: 1px solid #333; padding: .4rem .35rem; text-align: right; white-space: nowrap; }
+  .ranking-table th, .ranking-table td { border-bottom: 1px solid var(--warm-divider); padding: .4rem .35rem; text-align: right; white-space: nowrap; }
   .ranking-table th:nth-child(4), .ranking-table td:nth-child(4) { text-align: left; }
   .ranking-table th button { appearance: none; border: 0; background: none; color: inherit; font: inherit; font-weight: 700; cursor: pointer; padding: 0; }
-  .ranking-table th button:hover, .ranking-table th button:focus-visible { color: #79c0ff; }
-  .ranking-table th button[aria-sort="ascending"]::after { content: " ▲"; color: #79c0ff; }
-  .ranking-table th button[aria-sort="descending"]::after { content: " ▼"; color: #79c0ff; }
+  .ranking-table th button:hover, .ranking-table th button:focus-visible { color: var(--warm-accent); }
+  .ranking-table th button[aria-sort="ascending"]::after { content: " ▲"; color: var(--warm-accent); }
+  .ranking-table th button[aria-sort="descending"]::after { content: " ▼"; color: var(--warm-accent); }
   .ranking-up { color: #7bd88f; }
   .ranking-down { color: #ff7b72; }
   .ranking-table tbody tr { cursor: pointer; }
-  .ranking-table tbody tr:hover td { background: rgba(121, 192, 255, .06); }
-  .ranking-table tbody tr.is-selected td { background: rgba(121, 192, 255, .12); }
-  .ranking-table tbody tr.is-selected td:nth-child(4)::before { content: "● "; color: #79c0ff; }
+  .ranking-table tbody tr:hover td { background: color-mix(in srgb, var(--warm-accent) 4%, transparent); }
+  .ranking-table tbody tr.is-selected td { background: color-mix(in srgb, var(--warm-accent) 8%, transparent); }
+  .ranking-table tbody tr.is-selected td:nth-child(4)::before { content: "● "; color: var(--warm-accent); }
+  .trajectory-title { color: var(--warm-accent); font-size: .84rem; letter-spacing: .02em; margin-top: 2.5rem; }
   #trajectory { width: 100%; min-height: 580px; margin: .75rem 0 1.5rem; }
-  #trajectory text { fill: #aaa; font-size: 11px; }
-  #trajectory .axis { stroke: #555; stroke-width: 1; }
-  #trajectory .band { fill: rgba(121, 192, 255, .18); }
-  #trajectory .line { fill: none; stroke: #79c0ff; stroke-width: 2; }
-  .trajectory-legend { display: flex; flex-wrap: wrap; gap: .35rem 1rem; min-height: 1.5rem; margin-bottom: .35rem; color: #aaa; font-size: .85rem; }
-  .trajectory-key::before { content: ""; display: inline-block; width: .75rem; height: .18rem; margin-right: .35rem; vertical-align: middle; background: var(--line-color); }
+  #trajectory text { fill: var(--bs-secondary-color); font-size: 11px; }
+  .trajectory-legend { display: flex; flex-wrap: wrap; gap: .35rem 1rem; min-height: 1.5rem; margin-bottom: .35rem; color: var(--bs-secondary-color); font-size: .85rem; }
+  .trajectory-key { align-items: center; display: inline-flex; gap: .35rem; }
+  .trajectory-key svg { height: 8px; overflow: visible; width: 20px; }
 </style>
 
 These ratings are weekly market-implied WTA player states. Global parameters are learned and then frozen each off-season, while new prices update player states online. Estimated player states account for ~85% of the signal markets capture, while allowing for the simulation of any matchup on any surface and the tracing of player strength over time.
 
 <p class="ranking-note" id="ranking-note">Loading the latest completed Sunday…</p>
 
-<h2>Player trajectory</h2>
+<div class="trajectory-title" id="trajectory-title">player strength</div>
 
 <div class="ranking-controls">
   <button class="surface-tab" id="top-five" type="button">Top 5</button>
@@ -94,7 +93,13 @@ These ratings are weekly market-implied WTA player states. Global parameters are
     '/assets/data/wta-ranking-trajectory-uncertainty-2026.csv'
   ];
   const intervalZ = 0.6744897501960817;
-  const chartColors = ['#79c0ff','#f2cc60','#7bd88f','#ff7b72','#d2a8ff','#ffa657','#56d4dd','#ff9bce','#a5d6ff','#c9d1d9'];
+  const chartStyles = [
+    {dash: '', opacity: 1},
+    {dash: '8 5', opacity: .82},
+    {dash: '2 4', opacity: .72},
+    {dash: '12 4 2 4', opacity: .68},
+    {dash: '5 3', opacity: .58}
+  ];
 
   function parseCSV(text) {
     const rows = []; let row = [], field = '', quoted = false;
@@ -149,6 +154,8 @@ These ratings are weekly market-implied WTA player states. Global parameters are
       });
       const note = document.getElementById('ranking-note');
       note.textContent = `Last update: ${latest[0].week_ending} · Players included: 500 of ${latest.length} active players · Global parameters from: 2026`;
+      const latestYear = Number(latest[0].week_ending.slice(0, 4));
+      document.getElementById('trajectory-title').textContent = `player strength, ${latestYear - 1}–${String(latestYear).slice(-2)}`;
       document.getElementById('leaderboard-updated').textContent = `Last updated: ${new Date(`${latest[0].week_ending}T12:00:00Z`).toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC'})}`;
 
       let activeRating = 'overall_mean', selectionIsDefault = true, showUncertainty = false;
@@ -180,21 +187,20 @@ These ratings are weekly market-implied WTA player states. Global parameters are
         const start = new Date(startDate), end = new Date(latestDate), timeSpan = Math.max(end - start, 1);
         const x = date => pad.l + (new Date(date) - start) * (W - pad.l - pad.r) / timeSpan;
         const y = v => pad.t + (hi + .08 * span - v) * (H - pad.t - pad.b) / (1.16 * span);
-        const ticks = [0, .25, .5, .75, 1].map(frac => {
-          const value = lo + frac * span, yy = y(value);
-          return `<line class="axis" x1="${pad.l}" x2="${W-pad.r}" y1="${yy}" y2="${yy}"/><text x="8" y="${yy+4}">${value.toFixed(2)}</text>`;
-        }).join('');
         const paths = series.map((item, index) => {
-          const color = chartColors[index % chartColors.length], rows = item.rows;
+          const style = chartStyles[index % chartStyles.length], rows = item.rows;
           const line = rows.map(r => `${x(r.week_ending)},${y(number(r[activeRating]))}`).join(' ');
           const bandRows = rows.filter(r => Number.isFinite(number(r[chartSdColumn])));
           const upper = bandRows.map(r => `${x(r.week_ending)},${y(number(r[activeRating]) + intervalZ * number(r[chartSdColumn]))}`).join(' ');
           const lower = [...bandRows].reverse().map(r => `${x(r.week_ending)},${y(number(r[activeRating]) - intervalZ * number(r[chartSdColumn]))}`).join(' ');
-          const band = showUncertainty && bandRows.length > 1 ? `<polygon fill="${color}" fill-opacity=".13" points="${upper} ${lower}"/>` : '';
-          return `${band}<polyline fill="none" stroke="${color}" stroke-width="2.4" points="${line}"/>`;
+          const band = showUncertainty && bandRows.length > 1 ? `<polygon fill="var(--warm-accent)" fill-opacity=".08" points="${upper} ${lower}"/>` : '';
+          return `${band}<polyline fill="none" stroke="var(--warm-accent)" stroke-opacity="${style.opacity}" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="${style.dash}" points="${line}"/>`;
         }).join('');
-        svg.innerHTML = `${ticks}${paths}<text x="${pad.l}" y="${H-8}">${startDate}</text><text text-anchor="end" x="${W-pad.r}" y="${H-8}">${latestDate}</text>`;
-        document.getElementById('trajectory-legend').innerHTML = series.map((item, index) => `<span class="trajectory-key" style="--line-color:${chartColors[index % chartColors.length]}">${item.name}</span>`).join('');
+        svg.innerHTML = `${paths}<text x="${pad.l}" y="${H-8}">${startDate}</text><text text-anchor="end" x="${W-pad.r}" y="${H-8}">${latestDate}</text>`;
+        document.getElementById('trajectory-legend').innerHTML = series.map((item, index) => {
+          const style = chartStyles[index % chartStyles.length];
+          return `<span class="trajectory-key"><svg viewBox="0 0 20 8" aria-hidden="true"><line x1="0" x2="20" y1="4" y2="4" stroke="var(--warm-accent)" stroke-width="2" stroke-opacity="${style.opacity}" stroke-dasharray="${style.dash}"/></svg>${item.name}</span>`;
+        }).join('');
       }
 
       const body = document.getElementById('ranking-body');

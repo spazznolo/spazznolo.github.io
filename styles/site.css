@@ -5,8 +5,9 @@
   font-size: 13px;
   --warm-accent: #ddb85c;
   --warm-divider: #393228;
-  --article-width: 920px;
-  --reading-width: 800px;
+  --shell-width: 1120px;
+  --reading-width: 790px;
+  --page-gutter: 22px;
 }
 
 body {
@@ -26,6 +27,11 @@ body a:focus-visible, body button:focus-visible, body summary:focus-visible {
 
 .navbar {
   border-bottom: 0;
+}
+
+.navbar > .container-fluid {
+  max-width: var(--shell-width);
+  padding-inline: var(--page-gutter);
 }
 
 .navbar-brand {
@@ -59,11 +65,20 @@ body .navbar a.quarto-color-scheme-toggle:focus-visible {
 }
 
 #quarto-content {
-  max-width: var(--article-width);
+  max-width: var(--shell-width);
+  width: min(calc(100% - 44px), var(--shell-width));
   margin-inline: auto;
 }
 
-#quarto-content:has(.home-stream), .page-layout-full main {
+#quarto-content main.content,
+.page-layout-full main.content {
+  max-width: none;
+  width: 100%;
+}
+
+body:not(:has(.home-stream)):not(:has(#ranking-body)):not(:has(#letterboxd-recs)) #title-block-header,
+body:not(:has(.home-stream)):not(:has(#ranking-body)):not(:has(#letterboxd-recs)) main.content > :is(p, ul, ol, blockquote, pre, .sourceCode, .equation-note, details),
+body:not(:has(.home-stream)):not(:has(#ranking-body)):not(:has(#letterboxd-recs)) main.content section > :is(p, ul, ol, blockquote, pre, .sourceCode, .equation-note, details, h2, h3, h4) {
   max-width: var(--reading-width);
 }
 
@@ -76,13 +91,13 @@ body:has(.home-stream) #title-block-header {
 }
 
 .home-image {
-  margin-bottom: 2rem;
+  margin-bottom: 3.2rem;
 }
 
 .home-image img {
   display: block;
   width: 100%;
-  max-height: 420px;
+  height: min(390px, 42vw);
   object-fit: cover;
 }
 
@@ -96,6 +111,7 @@ body:has(.home-stream) #title-block-header {
   color: var(--warm-accent);
   font-size: 0.75rem;
   letter-spacing: 0.08em;
+  margin-bottom: 1.25rem;
   text-transform: uppercase;
 }
 
@@ -104,14 +120,61 @@ body:has(.home-stream) #title-block-header {
   background: var(--warm-accent);
   content: "";
   display: block;
-  height: 2px;
+  height: 1px;
   margin-top: 0.65rem;
-  width: 2.5rem;
+  width: 2.3rem;
+}
+
+.home-stream > section.level2 {
+  margin-bottom: 3.2rem;
+}
+
+.home-stream > section.level2 > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.home-stream > section.level2 > ul > li {
+  line-height: 1.65;
+  margin: 0;
+  padding: 0 0 0.9rem;
+}
+
+.home-stream > section.level2 > ul > li:last-child {
+  padding-bottom: 0;
 }
 
 main section.level2 > h2 {
-  font-size: 1.25rem;
+  color: var(--warm-accent);
+  font-size: 0.84rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
   line-height: 1.35;
+  text-transform: uppercase;
+}
+
+#title-block-header {
+  margin-bottom: 2.2rem;
+}
+
+#title-block-header .title {
+  font-size: 2rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1.25;
+}
+
+#title-block-header .subtitle,
+#title-block-header .description {
+  color: var(--bs-secondary-color);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+#title-block-header .quarto-title-meta {
+  color: var(--bs-secondary-color);
+  font-size: 0.78rem;
 }
 
 main a {
@@ -154,14 +217,19 @@ body.quarto-light .home-about p {
 }
 
 .equation-note {
-  background: color-mix(in srgb, var(--warm-accent) 8%, transparent);
+  background: transparent;
   border-left: 2px solid var(--warm-accent);
   border-top: 0;
   border-right: 0;
   border-bottom: 0;
-  margin: 1.4rem 0;
+  margin: 1.75rem 0;
   overflow-wrap: anywhere;
-  padding: 0.8rem 1rem;
+  padding: 0.65rem 0 0.65rem 1.45rem;
+}
+
+.equation-note .math.display,
+main .math.display {
+  font-size: 1rem;
 }
 
 .equation-note > :last-child {
@@ -209,7 +277,7 @@ pre.text code {
 
 @media (max-width: 680px) {
   #quarto-content, .page-layout-full main {
-    width: min(100% - 2rem, var(--reading-width));
+    width: calc(100% - 2rem);
   }
   .navbar > .container-fluid {
     align-items: flex-start;
