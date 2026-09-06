@@ -42,7 +42,7 @@ These ratings are weekly market-implied WTA player states. Global parameters are
 
 <p class="ranking-note" id="ranking-note">Loading the latest completed Sunday…</p>
 
-<div class="trajectory-title" id="trajectory-title">Player strength</div>
+<div class="trajectory-title" id="trajectory-title">PLAYER_STRENGTH OVER PAST YEAR</div>
 <svg id="trajectory" viewBox="0 0 900 420" role="img" aria-label="Weekly player rating trajectory since last season"></svg>
 <div class="trajectory-legend" id="trajectory-legend"></div>
 
@@ -149,8 +149,7 @@ These ratings are weekly market-implied WTA player states. Global parameters are
       });
       const note = document.getElementById('ranking-note');
       note.textContent = `Last update: ${latest[0].week_ending} · Players included: 500 of ${latest.length} active players · Global parameters from: 2026`;
-      const latestYear = Number(latest[0].week_ending.slice(0, 4));
-      document.getElementById('trajectory-title').textContent = `Player strength, ${latestYear - 1}–${String(latestYear).slice(-2)}`;
+      document.getElementById('trajectory-title').textContent = 'PLAYER_STRENGTH OVER PAST YEAR';
       document.getElementById('leaderboard-updated').textContent = `Last updated: ${new Date(`${latest[0].week_ending}T12:00:00Z`).toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC'})}`;
 
       let activeRating = 'overall_mean', selectionIsDefault = true;
@@ -162,7 +161,10 @@ These ratings are weekly market-implied WTA player states. Global parameters are
 
       function drawTrajectory(playerId = null) {
         if (playerId) { selectedPlayerIds = new Set([playerId]); selectionIsDefault = false; }
-        const latestDate = latest[0].week_ending, startDate = `${Number(latestDate.slice(0,4)) - 1}-01-01`;
+        const latestDate = latest[0].week_ending;
+        const windowStart = new Date(`${latestDate}T00:00:00Z`);
+        windowStart.setUTCFullYear(windowStart.getUTCFullYear() - 1);
+        const startDate = windowStart.toISOString().slice(0, 10);
         const chartPrefix = activeRating.replace('_mean', '');
         const chartSdColumn = `conditional_${chartPrefix}_sd`;
         const series = [...selectedPlayerIds].map(id => {
