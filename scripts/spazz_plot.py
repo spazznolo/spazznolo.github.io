@@ -19,6 +19,7 @@ INK = "#211D17"
 CHALK = "#EEEAE2"
 MUTED_DARK = "#938D84"
 MUTED_LIGHT = "#665F54"
+FONT_PATH = Path(__file__).resolve().parents[1] / "assets/fonts/IBMPlexSans.ttf"
 
 
 def _matplotlib() -> tuple[Any, Any]:
@@ -29,6 +30,8 @@ def _matplotlib() -> tuple[Any, Any]:
         raise RuntimeError(
             "Plotting requires matplotlib; install the plotting environment first."
         ) from exc
+    if FONT_PATH.exists():
+        mpl.font_manager.fontManager.addfont(FONT_PATH)
     return mpl, plt
 
 
@@ -57,9 +60,9 @@ def _rc(dark: bool) -> dict[str, object]:
             color=[GOLD, GOLD, GOLD, GOLD],
             alpha=[1.0, 0.78, 0.56, 0.36],
         ),
-        "font.family": "monospace",
-        "font.monospace": ["IBM Plex Mono", "DejaVu Sans Mono"],
-        "font.size": 10,
+        "font.family": "sans-serif",
+        "font.sans-serif": ["IBM Plex Sans", "DejaVu Sans"],
+        "font.size": 11,
         "xtick.color": muted,
         "ytick.color": muted,
         "xtick.major.size": 0,

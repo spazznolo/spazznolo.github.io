@@ -30,10 +30,10 @@ page-layout: full
   .ranking-table tbody tr:hover td { background: color-mix(in srgb, var(--warm-accent) 4%, transparent); }
   .ranking-table tbody tr.is-selected td { background: color-mix(in srgb, var(--warm-accent) 8%, transparent); }
   .ranking-table tbody tr.is-selected td:nth-child(4)::before { content: "● "; color: var(--warm-accent); }
-  .trajectory-title { color: var(--warm-accent); font-size: 1.08rem; font-weight: 700; letter-spacing: .055em; margin: 2.5rem 0 .2rem; text-transform: uppercase; }
+  .trajectory-title { color: var(--warm-accent); font-family: "IBM Plex Sans", sans-serif; font-size: 1rem; font-weight: 600; letter-spacing: .045em; margin: 2.5rem 0 .5rem; text-transform: uppercase; }
   #trajectory { border: 0; display: block; width: 100%; min-height: 390px; margin: .2rem auto .65rem; }
-  #trajectory text { fill: var(--bs-secondary-color); font-size: 11px; }
-  .trajectory-legend { display: flex; flex-wrap: wrap; justify-content: center; gap: .35rem 1rem; min-height: 1.5rem; margin: 0 0 1.5rem; color: var(--bs-secondary-color); font-size: .78rem; text-align: center; }
+  #trajectory text { fill: var(--bs-secondary-color); font-family: "IBM Plex Sans", sans-serif; font-size: 12px; }
+  .trajectory-legend { display: flex; flex-wrap: wrap; justify-content: center; gap: .35rem 1rem; min-height: 1.5rem; margin: 0 0 1.5rem; color: var(--bs-secondary-color); font-family: "IBM Plex Sans", sans-serif; font-size: .86rem; text-align: center; }
   .trajectory-key { align-items: center; display: inline-flex; gap: .35rem; }
   .trajectory-key svg { height: 8px; overflow: visible; width: 20px; }
 </style>
