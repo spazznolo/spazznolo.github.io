@@ -28,6 +28,8 @@ Goaltenders make up the least predictable position in hockey. Their behavior con
 
 This analysis estimates goalie performance using an empirical Bayes framework. Similar applications were outlined in [previous](https://hockey-graphs.com/2018/06/21/comparing-scoring-talent-with-empirical-bayes/) [papers](http://varianceexplained.org/r/empirical_bayes_baseball/). The Bayesian framing lets us partially pool noisy goalie results towards a population distribution, quantify what remains uncertain, and make direct probability statements about the players. The idea is first sketched using raw save percentage, then refined.
 
+The figures were rebuilt in Python from MoneyPuck's current historical files for the original 2007–2022 window. Because historical expected-goal estimates can be revised, a few reconstructed values differ modestly from the figures published in 2023.
+
 Throughout this first pass, I will distinguish a goalie's observed Fenwick save percentage from their underlying Fenwick save probability, $\theta_i$. The observed percentage describes what happened in a particular sample. $\theta_i$ describes the rate we would expect over repeated, comparable attempts. We do not observe it exactly; we represent what we know about it with a distribution.
 
 The empirical Bayes approach involves two steps: learn a prior from the population, then update it with the individual goalie's results.
@@ -67,7 +69,7 @@ As an example, let's plot the posterior distributions for two 24-year-old goalie
 
 ![](/figs/goalie-performance-1-3.png){fig-alt="Posterior save percentage distributions for Jake Oettinger and Jeremy Swayman." width="60%"}
 
-The model gives Swayman a 60.28% probability of having the higher underlying Fenwick save probability. Oettinger, however, has a 94.12% probability of being above the .9406 population median, compared with 93.81% for Swayman. Oettinger has faced more attempts, so his posterior is narrower: the model is more certain about an estimate which is slightly closer to the benchmark.
+The reconstructed model gives Swayman a 66.2% probability of having the higher underlying Fenwick save probability. His probability of exceeding the .9406 population median is 93.8%, compared with 90.8% for Oettinger. Oettinger has faced more attempts, so his posterior is narrower even though its centre is slightly lower.
 
 These probabilities are conditional on a deliberately simple model:
 
@@ -106,21 +108,21 @@ The distribution below shows career AdjSV% for goalies who faced at least 200 at
 
 ![](/figs/goalie-performance-2-1.png){fig-alt="Career adjusted save percentage distribution with fitted beta and Weibull distributions." width="60%"}
 
-The Weibull follows this particular histogram more closely, but visual fit is not enough, and its support extends beyond one. I retain the beta as a bounded working prior. Its fitted parameters behave like 933 prior non-goal attempts and 60 prior goals, slightly more information than the raw-rate prior.
+The Weibull follows this particular histogram more closely, but visual fit is not enough, and its support extends beyond one. I retain the beta as a bounded working prior. Its fitted parameters behave like 980 prior non-goal attempts and 63 prior goals, slightly more information than the raw-rate prior.
 
 Let's revisit the Jake Oettinger and Jeremy Swayman comparison.
 
 ![](/figs/goalie-performance-2-2.png){fig-alt="Posterior adjusted save percentage distributions for Jake Oettinger and Jeremy Swayman." width="60%"}
 
-After accounting for attempt difficulty, the model gives Swayman a 78.77% probability of having the higher underlying adjusted rate, up from 60.28%. His probability of exceeding the median benchmark rises to 97.30%, while Oettinger's falls to 88.28%. The mechanism is intuitive: Swayman's xFSV% is 94.07%, compared with Oettinger's 94.39%, meaning the model considers Swayman's average workload more difficult.
+After accounting for attempt difficulty, the model gives Swayman an 83.4% probability of having the higher underlying adjusted rate, up from 66.2%. His probability of exceeding the median benchmark is 94.9%, compared with 70.7% for Oettinger. The mechanism is intuitive: Swayman's xFSV% is 94.07%, compared with Oettinger's 94.39%, meaning the model considers Swayman's average workload more difficult.
 
 ### Comparing the estimates
 
 The four panels below separate the two operations being performed: adjusting for attempt difficulty and shrinking noisy estimates towards the population.
 
-- Raw and adjusted save percentage remain strongly related ($r=.900$). Shot quality changes the estimate without discarding most of the signal in the observed rate.
-- The adjusted and posterior-adjusted rates also correlate at $r=.900$, but the relationship bends around the prior mean. Small-workload estimates are pulled inward; large-workload estimates remain closer to the diagonal.
-- Combining both operations lowers the correlation between raw and posterior-adjusted save percentage to $r=.794$. Some goalies therefore move meaningfully once both context and uncertainty are included.
+- Raw and adjusted save percentage remain strongly related ($r=.921$). Shot quality changes the estimate without discarding most of the signal in the observed rate.
+- The adjusted and posterior-adjusted rates correlate at $r=.899$, but the relationship bends around the prior mean. Small-workload estimates are pulled inward; large-workload estimates remain closer to the diagonal.
+- Combining both operations lowers the correlation between raw and posterior-adjusted save percentage to $r=.814$. Some goalies therefore move meaningfully once both context and uncertainty are included.
 - The association between workload and posterior performance is partly a selection process: goalies who perform well tend to earn more opportunities. These plots cannot tell us that playing more causes improvement.
 - The changing spread is expected when goalies have unequal sample sizes and receive different amounts of shrinkage. Calling it heteroskedasticity describes the shape, but not its cause.
 
@@ -140,15 +142,7 @@ Goalie performance changes with age: players generally improve, reach a peak, an
 
 ### Finding goalie birth dates
 
-I matched each goalie's date of birth from Hockey-Reference to the date of every game they played. Birth dates could not be recovered for seven of the 315 goalies.
-
-The analysis population changes as follows (due to incomplete linkage):
-
-- The goalie population drops from 315 to 308.
-- Mean career attempts rise slightly, from 4,198 to 4,286.
-- Shot-weighted AdjSV% remains .939; the unweighted goalie mean rises from .932 to .933.
-
-They barely differ.
+I matched each goalie's date of birth from MoneyPuck's player lookup, supplementing gaps for retired players from the NHL player API. All 314 goalies in the reconstructed sample were linked.
 
 ### Exploring age
 
@@ -165,18 +159,17 @@ Here are the steps:
 - Calculate each goalie's change in adjusted save percentage from one age to the next.
 - Take the attempt-weighted arithmetic mean of those changes at each age.
 - Remove sparsely represented ages below 22 and above 38.
-- Remove each goalie's final season to reduce retirement-selection bias.
 - Accumulate the annual changes and normalize the curve to zero at its peak.
 
 Altogether, this gives us the curve below:
 
 ![](/figs/goalie-performance-3-2.png){fig-alt="Smoothed goalie age curve based on cumulative changes in save percentage." width="60%"}
 
-In this sample, the fitted curve peaks around age 25. That agrees with [some](https://hockeyviz.com/txt/age22) previous work and disagrees with [other estimates](https://hockey-graphs.com/2014/03/21/how-well-do-goalies-age-a-look-at-a-goalie-aging-curve/). It should be read as a descriptive adjustment, not a universal biological curve: weighting, survivor selection, and the final-season rule all influence its shape.
+In the reconstructed sample, the fitted curve peaks around age 27. That lies between [some](https://hockeyviz.com/txt/age22) previous work and [later-peak estimates](https://hockey-graphs.com/2014/03/21/how-well-do-goalies-age-a-look-at-a-goalie-aging-curve/). It should be read as a descriptive adjustment, not a universal biological curve: weighting, survivor selection, and revisions to historical expected-goal values all influence its shape.
 
 ### Applying the adjustment
 
-I incorporate age through the same expected-rate term used for attempt difficulty. Let $a(t)\geq0$ be the estimated performance gap between age $t$ and the age-25 peak, with $a(25)=0$. The age-adjusted expected rate is therefore $\mathrm{xFSV}_i-a(t_i)$.
+I incorporate age through the same expected-rate term used for attempt difficulty. Let $a(t)\geq0$ be the estimated performance gap between age $t$ and the age-27 peak, with $a(27)=0$. The age-adjusted expected rate is therefore $\mathrm{xFSV}_i-a(t_i)$.
 
 ::: {.equation-note}
 $$
@@ -189,21 +182,13 @@ $$
 $$
 :::
 
-For example, an xFSV% of .94000 at age 25 corresponds to .93976 at age 22 and .93586 at age 38 after subtracting the estimated age gaps of .00024 and .00414.
-
-With this adjustment, Lundqvist's career save percentages work out like this:
-
-- SV%: 0.948638
-- SQ AdjSV%: 0.947320
-- Age SQ AdjSV%: 0.948619
-- posterior SQ AdjSV%: 0.947082
-- posterior Age SQ AdjSV%: 0.948338
+The adjustment therefore asks a narrower question than a raw age comparison: how far was this performance above or below expectation after accounting for both attempt difficulty and where the goalie sat on the estimated age curve? The answer remains conditional on the curve rather than a timeless property of the player.
 
 ## CAREER LENGTH AND THE PRIOR
 
 ### The 200-shot cutoff
 
-The 200-attempt cutoff removes 90 of 314 goalies, or 28.7%. The career-attempt distribution shows how severe that filter is:
+The 200-attempt cutoff removes 91 of 314 goalies, or 29.0%. The career-attempt distribution shows how severe that filter is:
 
 ![](/figs/goalie-six-one.png){fig-alt="Cumulative distribution of career shots faced for goalies." width="60%"}
 
@@ -255,21 +240,21 @@ Any fixed observation window cuts through some careers. In the 2007–2022 sampl
 
 The analysis population changes as follows:
 
-- The goalie population drops from 315 to 140.
-- Mean career attempts drop from 4,198 to 3,225.
-- Shot-weighted AdjSV% remains .939; the unweighted goalie mean falls from .932 to .927.
+- The goalie population drops from 314 to 155.
+- Mean career attempts drop from 4,207 to 3,133.
+- Shot-weighted AdjSV% remains .943; the unweighted goalie mean falls from .936 to .930.
 
 ### Career length
 
 The complete-career sample remains dominated by short NHL careers:
 
-- 25% of goalies faced 33 shots or less (!).
+- 25% of goalies faced about 33 shots or less (!).
 - 50% of goalies faced 202 shots or less (that's about 7 games).
-- 75% of goalies faced 2,606 shots or less.
+- 75% of goalies faced 3,531 shots or less.
 
-- 42% of goalies played only one season.
+- 40% of goalies played only one season.
 - 74% of goalies played five seasons or less.
-- 90% of goalies played twelve seasons or less.
+- 91% of goalies played twelve seasons or less.
 
 The familiar long NHL career is therefore not the typical outcome. More importantly, experience and ability cannot be interpreted separately: performance affects whether a goalie receives the opportunity to become experienced.
 
@@ -288,16 +273,16 @@ $$
 $$
 :::
 
-As an example, Braden Holtby's pAdjSV% after facing various shot totals:
+As an example, Braden Holtby's pAdjSV% after facing various attempt totals in the reconstructed mixture model:
 
-- 0 shots: 0.9417 (as is every goalie's)
-- 1,000 shots: 0.9421
-- 5,000 shots: 0.9425
-- 10,000 shots: 0.9452
-- 15,000 shots: 0.9450
-- 19,555 shots: 0.9433
+- 1 attempt: 0.9363
+- 1,000 attempts: 0.9436
+- 5,000 attempts: 0.9452
+- 10,000 attempts: 0.9486
+- 15,000 attempts: 0.9484
+- 19,555 attempts: 0.9457
 
-Among goalies who finish between 1,500 and 5,999 attempts, 77.1% end below the population benchmark. Their group trajectory also declines later in the observed career. These are commonly backup-sized workloads—roughly 600–1,000 attempts per season—but the pattern is descriptive. It combines aging, role, selection, and regression after a strong enough start to earn continued work.
+Among goalies who finish between 1,500 and 5,999 attempts, half end below the population benchmark. Their group trajectory also declines later in the observed career. These are commonly backup-sized workloads—roughly 600–1,000 attempts per season—but the pattern is descriptive. It combines aging, role, selection, and regression after a strong enough start to earn continued work.
 
 To get a clearer sense of the dynamics described above, let's take the group average pAdjSV% through each shot faced.
 

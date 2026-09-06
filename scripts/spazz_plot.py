@@ -97,7 +97,9 @@ def finish_axes(
 
     ax.grid(False)
     for spine in ax.spines.values():
-        spine.set_visible(False)
+        spine.set_visible(True)
+        spine.set_linewidth(0.6)
+        spine.set_alpha(0.28)
     ax.tick_params(which="both", length=0)
     if xlabel is not None:
         ax.set_xlabel(xlabel, labelpad=12)

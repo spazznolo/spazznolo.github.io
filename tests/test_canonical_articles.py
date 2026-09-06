@@ -51,13 +51,13 @@ class CanonicalArticleTest(unittest.TestCase):
     def test_goalie_performance_retains_source_facts_and_matching_figures(self):
         text = (ROOT / "research/goalie-performance/index.qmd").read_text(encoding="utf-8")
         for fact in [
-            "SV%: 0.948638",
-            "SQ AdjSV%: 0.947320",
-            "Age SQ AdjSV%: 0.948619",
-            "posterior SQ AdjSV%: 0.947082",
-            "posterior Age SQ AdjSV%: 0.948338",
-            "Mean career attempts rise slightly, from 4,198 to 4,286",
-            "the unweighted goalie mean rises from .932 to .933",
+            "The figures were rebuilt in Python",
+            "66.2% probability",
+            "980 prior non-goal attempts",
+            "$r=.921$",
+            "$r=.899$",
+            "$r=.814$",
+            "All 314 goalies",
             "The fit is... not really good",
         ]:
             self.assertIn(fact, text)

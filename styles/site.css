@@ -354,6 +354,22 @@ img, video, iframe {
   max-width: 100%;
 }
 
+/* Quarto renders many historical figures as standalone paragraph images rather
+   than figure blocks. Center both forms consistently across the site. */
+main.content .quarto-figure,
+main.content figure,
+main.content p:has(> img.img-fluid) {
+  text-align: center;
+}
+
+main.content .quarto-figure img,
+main.content figure img,
+main.content p > img.img-fluid {
+  display: block;
+  height: auto;
+  margin-inline: auto;
+}
+
 div.sourceCode {
   color: var(--bs-code-color);
   background-color: var(--bs-body-bg);
