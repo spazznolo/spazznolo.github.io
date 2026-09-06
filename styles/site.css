@@ -356,18 +356,26 @@ img, video, iframe {
 
 /* Quarto renders many historical figures as standalone paragraph images rather
    than figure blocks. Center both forms consistently across the site. */
-main.content .quarto-figure,
-main.content figure,
-main.content p:has(> img.img-fluid) {
-  text-align: center;
+#quarto-document-content .quarto-figure {
+  display: flex;
+  justify-content: center;
 }
 
-main.content .quarto-figure img,
-main.content figure img,
-main.content p > img.img-fluid {
+#quarto-document-content .quarto-figure > figure {
+  margin-inline: auto !important;
+}
+
+#quarto-document-content p:has(> img),
+#quarto-document-content figure {
+  text-align: center !important;
+}
+
+#quarto-document-content .quarto-figure img,
+#quarto-document-content figure img,
+#quarto-document-content p > img {
   display: block;
   height: auto;
-  margin-inline: auto;
+  margin-inline: auto !important;
 }
 
 div.sourceCode {
