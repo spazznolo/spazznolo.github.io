@@ -38,7 +38,7 @@ page-layout: full
   .trajectory-key svg { height: 8px; overflow: visible; width: 20px; }
 </style>
 
-These ratings are weekly market-implied WTA player states. Global parameters are learned and then frozen each off-season, while new prices update player states online. Estimated player states account for ~85% of the signal markets capture, while allowing for the simulation of any matchup on any surface and the tracing of player strength over time.
+These ratings are weekly market-implied WTA player states. Global parameters are learned and then frozen each off-season, while new prices update player states online. Estimated player states account for ~85% of the signal markets capture, while allowing for the simulation of any matchup on any surface and the tracing of player strength over time. The [model notes](/tennis/model/) describe the specification and fitting process.
 
 <p class="ranking-note" id="ranking-note">Loading the latest completed Sunday…</p>
 

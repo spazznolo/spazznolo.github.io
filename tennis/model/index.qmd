@@ -1,0 +1,119 @@
+---
+title: "WTA Rankings"
+description: "Field notes for a market-trained tennis rating model."
+toc: false
+page-layout: full
+---
+
+::: {.model-field-sheet}
+
+## Purpose
+
+This model estimates WTA player strength over time and across surfaces, with uncertainty, by treating historical market probabilities as noisy observations of latent player strength. It can derive a probability for any matchup on any surface. Current estimates are published on the [WTA Rankings](/tennis/rankings/) page.
+
+The system has two inference stages which share the same generative model. Each off-season, the global model learns the shared parameters while integrating over the player states. During the season, those parameters remain fixed while the online player model estimates latent strengths before each day's matches.
+
+## Data
+
+One row per match: players $i$ and $j$, date $t$, surface $s$, player age $A_{i,t}$, prior tour experience $E_i$, bookmaker margin $V_m$, and de-vigged market log-odds $y_m$. When forecasting a match, its own price is not used: all matches on a date are predicted before prices from that date update the player states. Match outcomes are used only for evaluation.
+
+## States
+
+- $x_{i,t}$ = player $i$'s overall strength at time $t$
+- $u_{i,s}$ = player $i$'s effect on surface $s$
+- $z$ = all player states and surface effects
+
+## Parameters
+
+- $\theta$ = all shared system parameters
+- $\tau_0$ = population SD at panel entry; $\tau_0\sim\operatorname{LogNormal}(\text{median}=1.5,\text{log-SD}=0.75)$
+- $q$ = yearly process variance; $\sqrt q\sim\operatorname{LogNormal}(\text{median}=0.5,\text{log-SD}=1)$
+- $r$ = base observation variance; $\sqrt r\sim\operatorname{LogNormal}(\text{median}=0.25,\text{log-SD}=0.75)$
+- $\tau_s$ = population SD of surface effects; $\tau_s\sim\operatorname{LogNormal}(\text{median}=0.35,\text{log-SD}=0.75)$
+- $\beta_g$ = pre-peak growth; $\beta_g\sim\operatorname{LogNormal}(\text{median}=0.4,\text{log-SD}=0.75)$
+- $\beta_d$ = post-peak decline; $\beta_d\sim\operatorname{LogNormal}(\text{median}=0.15,\text{log-SD}=1)$
+- $\gamma_e$ = effect of prior experience on entry dispersion; $\gamma_e\sim\operatorname{Normal}(0,0.5)$
+- $\gamma_v$ = effect of bookmaker margin on observation noise; $\gamma_v\sim\operatorname{Normal}(0,0.5)$
+
+## State model
+
+Player strength at panel entry is drawn from the tour population:
+
+$$
+\log \tau_i=\log\tau_0+\gamma_e E_i,
+\qquad
+x_{i,1} \sim \operatorname{Normal}(0,\tau_i^2).
+$$
+
+$E_i$ is standardized prior tour experience.
+
+The function $a(A;\beta)$ gives expected strength at age $A$ under $\beta=(\beta_g,\beta_d)$, with peak age fixed at 24:
+
+$$
+x_{i,t} \mid x_{i,t-1}
+\sim
+\operatorname{Normal}\!\left(
+x_{i,t-1}+a(A_{i,t};\beta)-a(A_{i,t-1};\beta),
+q\Delta t
+\right).
+$$
+
+The mean follows the age curve; uncertainty grows with the time between observations.
+
+Surface effects are drawn from a shared population distribution and centered within player:
+
+$$
+u_{i,s}\sim\operatorname{Normal}(0,\tau_s^2),
+\qquad
+\sum_s u_{i,s}=0.
+$$
+
+## Observation model
+
+For match $m$, the expected market log-odds are the difference between the two players' overall strengths and surface effects:
+
+$$
+\eta_m
+=
+x_{i,t}-x_{j,t}+u_{i,s}-u_{j,s},
+$$
+
+Observation variance changes with bookmaker margin:
+
+$$
+\log\sqrt{r_m}=\log\sqrt r+\gamma_v V_m,
+\qquad
+y_m \mid z,\theta
+\sim
+\operatorname{Normal}(\eta_m,r_m).
+$$
+
+$r_m$ determines how strongly the observed price updates the player states.
+
+## Fit
+
+**Off-season global fit**
+
+Let $y_{\mathrm{train}}$ contain the prior-season market log-odds. Learn $\theta=(\tau_0,q,r,\tau_s,\beta_g,\beta_d,\gamma_e,\gamma_v)$ while integrating over the corresponding player states:
+
+$$
+p(y_{\mathrm{train}}\mid\theta)
+=
+\int p(y_{\mathrm{train}}\mid z,\theta)p(z\mid\theta)\,dz.
+$$
+
+**In-season online fit**
+
+Given fitted parameters $\hat\theta$, estimate the player states from prices observed before date $t$:
+
+$$
+p(z_t\mid y_{<t},\hat\theta).
+$$
+
+Carry the state distributions forward, predict a given set of matches, then condition on the new prices. This is implemented as an information-form Kalman update.
+
+## Output
+
+The model supplies player-level strengths, surface effects, historical trajectories, matchup probabilities, and uncertainty. These are available as [weekly rankings](/tennis/rankings/). The model is available [here](https://github.com/spazznolo/tennis/tree/main/apps/predict).
+
+:::

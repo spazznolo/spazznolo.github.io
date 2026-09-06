@@ -39,7 +39,7 @@ This blog serves as an outlet to explore ideas which naturally interest me. I tr
 
 ## Projects
 
-- [WTA Rankings](/tennis/rankings/) — Weekly player strength, surface effects, uncertainty, and trajectories.
+- [WTA Rankings](/tennis/rankings/) — Weekly player strength, surface effects, uncertainty, and trajectories. · [Model notes](/tennis/model/)
 - [Letterboxd Recs](/projects/letterboxd-recs/) — Personalized, weekly fresh film recommendations built from taste similarity and streaming availability.
 
 ## Recent writing

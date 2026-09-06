@@ -4,6 +4,6 @@ description: "Computer-vision notes from a tennis-tracking project."
 toc: false
 ---
 
-The [WTA model rankings](/tennis/rankings/) publish weekly market-implied player strength, surface effects, uncertainty, and historical trajectories.
+The [WTA model rankings](/tennis/rankings/) publish weekly market-implied player strength, surface effects, uncertainty, and historical trajectories. The [model notes](/tennis/model/) describe the specification and fitting process.
 
 The tennis-tracking project is **paused with intent to return**. Its framework, object-detection, pipeline, data, and liveblog posts remain in the [Archive](/archive/).
