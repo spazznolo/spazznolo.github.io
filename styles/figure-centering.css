@@ -1,0 +1,23 @@
+/* Kept separate so figure-alignment changes are not hidden by a cached site.css. */
+#quarto-document-content .quarto-figure {
+  display: flex !important;
+  justify-content: center !important;
+}
+
+#quarto-document-content .quarto-figure > figure {
+  margin-inline: auto !important;
+}
+
+#quarto-document-content p:has(> img),
+#quarto-document-content figure {
+  text-align: center !important;
+}
+
+#quarto-document-content .quarto-figure img,
+#quarto-document-content figure img,
+#quarto-document-content p > img {
+  display: block !important;
+  height: auto;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}

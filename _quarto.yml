@@ -46,7 +46,9 @@ format:
     theme:
       dark: [cosmo, styles/dark.scss]
       light: [cosmo, styles/light.scss]
-    css: styles/site.css
+    css:
+      - styles/site.css
+      - styles/figure-centering.css
     respect-user-color-scheme: false
     toc: true
     toc-location: body
