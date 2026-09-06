@@ -34,18 +34,18 @@ def _matplotlib() -> tuple[Any, Any]:
 
 def _rc(dark: bool) -> dict[str, object]:
     mpl, _ = _matplotlib()
-    background = NIGHT if dark else PAPER
     foreground = CHALK if dark else INK
     muted = MUTED_DARK if dark else MUTED_LIGHT
     return {
-        "figure.facecolor": background,
+        "figure.facecolor": "none",
         "figure.dpi": 140,
         "figure.figsize": (7.5, 4.5),
-        "savefig.facecolor": background,
-        "savefig.edgecolor": background,
+        "savefig.facecolor": "none",
+        "savefig.edgecolor": "none",
+        "savefig.transparent": True,
         "savefig.bbox": "tight",
         "savefig.pad_inches": 0.08,
-        "axes.facecolor": background,
+        "axes.facecolor": "none",
         "axes.edgecolor": muted,
         "axes.labelcolor": foreground,
         "axes.titlecolor": GOLD,
@@ -66,13 +66,13 @@ def _rc(dark: bool) -> dict[str, object]:
         "ytick.major.size": 0,
         "xtick.minor.size": 0,
         "ytick.minor.size": 0,
-        "legend.facecolor": background,
+        "legend.facecolor": "none",
         "legend.edgecolor": "none",
         "legend.frameon": False,
         "legend.labelcolor": foreground,
         "lines.color": GOLD,
         "lines.linewidth": 1.8,
-        "patch.edgecolor": background,
+        "patch.edgecolor": "none",
         "patch.facecolor": GOLD,
         "text.color": foreground,
     }
@@ -97,9 +97,7 @@ def finish_axes(
 
     ax.grid(False)
     for spine in ax.spines.values():
-        spine.set_visible(True)
-        spine.set_linewidth(0.6)
-        spine.set_alpha(0.28)
+        spine.set_visible(False)
     ax.tick_params(which="both", length=0)
     if xlabel is not None:
         ax.set_xlabel(xlabel, labelpad=12)

@@ -326,13 +326,10 @@ body.quarto-light .home-about p {
 
 .equation-note {
   background: transparent;
-  border-left: 2px solid var(--warm-accent);
-  border-top: 0;
-  border-right: 0;
-  border-bottom: 0;
+  border: 0;
   margin: 1.75rem 0;
   overflow-wrap: anywhere;
-  padding: 0.65rem 0 0.65rem 1.45rem;
+  padding: 0.65rem 0;
 }
 
 .equation-note .math.display,
