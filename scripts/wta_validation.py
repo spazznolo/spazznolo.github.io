@@ -12,7 +12,10 @@ import pandas as pd
 
 
 YEARS = (2024, 2025)
-MODEL_DIRECTORY = "collapsed_wta_market_fixed_peak24_exponential_v1"
+# Historical artifact name: "exponential" describes strength after exponentiating
+# the rating. On the modeled log-odds scale, curve_power=1 is piecewise linear.
+EVALUATION_ARTIFACT_DIRECTORY = "collapsed_wta_market_fixed_peak24_exponential_v1"
+EXPECTED_AGE_CURVE = {"peak_age": 24.0, "power": 1.0}
 
 
 def logistic(values: np.ndarray) -> np.ndarray:
@@ -127,11 +130,15 @@ def player_clustered_correlation_interval(
 
 
 def load_predictions(tennis_root: Path) -> pd.DataFrame:
-    model_root = tennis_root / "apps/predict/output/models" / MODEL_DIRECTORY
+    model_root = tennis_root / "apps/predict/output/models" / EVALUATION_ARTIFACT_DIRECTORY
     frames = []
     for year in YEARS:
         frame = pd.read_csv(model_root / str(year) / "predictions.csv")
         fit = json.loads((model_root / str(year) / "fit.json").read_text(encoding="utf-8"))
+        if fit.get("age_curve") != EXPECTED_AGE_CURVE:
+            raise ValueError(
+                f"{year} evaluation uses {fit.get('age_curve')}, expected {EXPECTED_AGE_CURVE}"
+            )
         parameters = fit["system_parameters"]
         interpretation = fit["interpretation"]
         vig_z = (
