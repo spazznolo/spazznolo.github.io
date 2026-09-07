@@ -251,7 +251,7 @@ Successive signed market innovations for the same player remain correlated at sh
 | 8–30 days | 3,145 | 0.096 |
 | More than 30 days | 1,156 | 0.005 |
 
-The one-to-seven-day estimate is 0.130 [0.104, 0.156], compared with 0.005 [−0.084, 0.090] after more than 30 days. Dependence is not concentrated within tournaments, so a missing tournament intercept cannot explain the pattern by itself. Prices contain slowly varying information—potentially form, health or market memory—that the observation model does not represent.
+The one-to-seven-day estimate is 0.130 [0.104, 0.156], compared with 0.005 [−0.084, 0.090] after more than 30 days. These intervals cluster by player; because each match enters both players' appearance sequences, they do not capture that cross-player linkage. Dependence is not concentrated within tournaments, so a missing tournament intercept cannot explain the pattern by itself. Prices contain slowly varying information—potentially form, health or market memory—that the observation model does not represent.
 
 Peak age was tested by refitting the complete system at four fixed values. Differences are relative to peak 24 and use the same day-clustered bootstrap as the benchmark comparison.
 
