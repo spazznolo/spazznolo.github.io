@@ -185,6 +185,36 @@ $$
 
 The model recovers 65.6% of the log-loss gap between standard Elo and the current-match market. Performance is weakest on grass, where the evaluation sample is smallest.
 
+## Validation
+
+Paired log-loss differences were resampled by calendar day, preserving the dependence among matches played on the same day.
+
+| Comparison | Difference | Day-clustered 95% interval |
+|:--|--:|--:|
+| Model − Elo | −0.0312 | [−0.0376, −0.0245] |
+| Model − market | +0.0163 | [+0.0117, +0.0207] |
+
+Outcome calibration is estimated by regressing the observed result on the model log-odds. An intercept of zero and slope of one indicate calibration. Pooled across both seasons, the intercept is −0.008 [−0.065, 0.045] and the slope is 1.045 [0.982, 1.116]. The slopes are 1.087 in 2024 and 1.007 in 2025.
+
+| Surface | Matches | Calibration intercept | Calibration slope |
+|:--|--:|--:|--:|
+| Hard | 3,951 | −0.016 | 1.019 |
+| Clay | 1,663 | +0.021 | 1.182 |
+| Grass | 767 | −0.019 | 0.909 |
+
+The predictive distribution for a market price combines uncertainty in the latent matchup with fitted observation noise. If that distribution is calibrated, its standardized innovations have SD one and its central intervals attain their nominal coverage.
+
+| Surface | Innovation SD | 50% interval | 80% interval | 95% interval |
+|:--|--:|--:|--:|--:|
+| Hard | 0.953 | 53.0% | 83.4% | 96.3% |
+| Clay | 0.976 | 52.1% | 81.5% | 95.6% |
+| Grass | 1.121 | 48.1% | 77.4% | 91.9% |
+| **Overall** | **0.981** | **52.2%** | **82.2%** | **95.6%** |
+
+The overall predictive intervals are slightly conservative, while the smaller grass sample is under-dispersed. The independence assumption does not hold perfectly: successive signed market innovations for the same player have correlation 0.130 [0.105, 0.157] when appearances are one to seven days apart, compared with 0.005 [−0.085, 0.091] after more than 30 days. The market carries short-run information forward that the observation model does not represent.
+
+These checks validate the full one-step predictive distribution, not its decomposition into observation noise and latent player uncertainty. Calibration of the published player-state intervals therefore remains an open question.
+
 ## Output
 
 The model supplies player-level strengths, surface effects, historical trajectories, matchup probabilities, and uncertainty. These are available as [weekly rankings](/tennis/rankings/).
