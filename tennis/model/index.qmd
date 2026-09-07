@@ -157,6 +157,34 @@ $$
 
 Carry the state distributions forward, predict a given set of matches, then condition on the new prices. This is implemented as an information-form Kalman update.
 
+## Results
+
+The evaluation contains 6,381 matches from the 2024 and 2025 seasons. For each target season, the global parameters are fitted on earlier seasons and frozen; each calendar day's matches are predicted before that day's prices update the player states. The market benchmark uses the de-vigged price for the match being predicted. Standard Elo uses only outcomes observed before that day. Lower scores are better.
+
+| Model | Information at prediction | Log loss | Brier |
+|:--|:--|--:|--:|
+| De-vigged market | Current match price | 0.5809 | 0.1993 |
+| Player-state model | Prices before match day | 0.5973 | 0.2060 |
+| Standard Elo | Results before match day | 0.6285 | 0.2198 |
+
+The fraction of market signal retained is defined against an uninformative 50/50 forecast:
+
+$$
+S
+=
+\frac{\operatorname{LL}(0.5)-\operatorname{LL}(\text{model})}
+{\operatorname{LL}(0.5)-\operatorname{LL}(\text{market})}.
+$$
+
+| Surface | Matches | Model log loss | Market | Elo | Signal retained |
+|:--|--:|--:|--:|--:|--:|
+| Hard | 3,951 | 0.6005 | 0.5864 | 0.6330 | 86.8% |
+| Clay | 1,663 | 0.5794 | 0.5608 | 0.6167 | 86.0% |
+| Grass | 767 | 0.6196 | 0.5964 | 0.6304 | 76.1% |
+| **Overall** | **6,381** | **0.5973** | **0.5809** | **0.6285** | **85.4%** |
+
+The model recovers 65.6% of the log-loss gap between standard Elo and the current-match market. Performance is weakest on grass, where the evaluation sample is smallest.
+
 ## Output
 
 The model supplies player-level strengths, surface effects, historical trajectories, matchup probabilities, and uncertainty. These are available as [weekly rankings](/tennis/rankings/).
