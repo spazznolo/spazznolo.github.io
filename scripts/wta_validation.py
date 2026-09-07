@@ -287,14 +287,25 @@ def main() -> None:
     for column in ("season", "surface"):
         calibration_by_subset[column] = {}
         for value, subset in frame.groupby(column, sort=True):
+            subset_outcome = subset["player_1_won"].to_numpy(dtype=float)
+            subset_probability = subset["model_probability_player_1"].to_numpy(dtype=float)
+            subset_date_codes, subset_dates = pd.factorize(subset["match_date"], sort=True)
             intercept, slope = calibration_fit(
-                subset["player_1_won"].to_numpy(dtype=float),
-                subset["model_probability_player_1"].to_numpy(dtype=float),
+                subset_outcome,
+                subset_probability,
             )
             calibration_by_subset[column][str(value)] = {
                 "matches": len(subset),
                 "intercept": intercept,
                 "slope": slope,
+                **calibration_interval(
+                    subset_outcome,
+                    subset_probability,
+                    subset_date_codes,
+                    len(subset_dates),
+                    rng,
+                    min(args.bootstrap_draws, 2000),
+                ),
             }
 
     innovation = (

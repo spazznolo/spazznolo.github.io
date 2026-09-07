@@ -196,13 +196,13 @@ Paired log-loss differences were resampled by calendar day, preserving the depen
 | Model − Elo | −0.0312 | [−0.0376, −0.0245] |
 | Model − market | +0.0163 | [+0.0117, +0.0207] |
 
-Outcome calibration is estimated by regressing the observed result on the model log-odds. An intercept of zero and slope of one indicate calibration. Pooled across both seasons, the intercept is −0.008 [−0.065, 0.045] and the slope is 1.045 [0.982, 1.116]. The slopes are 1.087 in 2024 and 1.007 in 2025.
+Outcome calibration is estimated by regressing the observed result on the model log-odds. An intercept of zero and slope of one indicate calibration. Pooled across both seasons, the intercept is −0.008 [−0.065, 0.045] and the slope is 1.045 [0.982, 1.116]. The slopes are 1.087 [0.996, 1.178] in 2024 and 1.007 [0.912, 1.110] in 2025.
 
-| Surface | Matches | Calibration intercept | Calibration slope |
+| Surface | Matches | Intercept [95% interval] | Slope [95% interval] |
 |:--|--:|--:|--:|
-| Hard | 3,951 | −0.016 | 1.019 |
-| Clay | 1,663 | +0.021 | 1.182 |
-| Grass | 767 | −0.019 | 0.909 |
+| Hard | 3,951 | −0.016 [−0.083, 0.054] | 1.019 [0.929, 1.109] |
+| Clay | 1,663 | +0.021 [−0.079, 0.122] | 1.182 [1.048, 1.340] |
+| Grass | 767 | −0.019 [−0.178, 0.144] | 0.909 [0.748, 1.069] |
 
 The predictive distribution for a market price combines uncertainty in the latent matchup with fitted observation noise. If that distribution is calibrated, its standardized innovations have SD one and its central intervals attain their nominal coverage.
 
@@ -222,7 +222,7 @@ The overall predictive intervals are slightly conservative, while the smaller gr
 | 8–30 days | 3,145 | 0.096 |
 | More than 30 days | 1,156 | 0.005 |
 
-The one-to-seven-day estimate is 0.130 [0.105, 0.157], compared with 0.005 [−0.085, 0.087] after more than 30 days. Dependence is not concentrated within tournaments, so a missing tournament intercept cannot explain the pattern by itself. Prices contain slowly varying information—potentially form, health or market memory—that the observation model does not represent.
+The one-to-seven-day estimate is 0.130 [0.104, 0.156], compared with 0.005 [−0.084, 0.090] after more than 30 days. Dependence is not concentrated within tournaments, so a missing tournament intercept cannot explain the pattern by itself. Prices contain slowly varying information—potentially form, health or market memory—that the observation model does not represent.
 
 These checks validate the full one-step predictive distribution, not its decomposition into observation noise and latent player uncertainty. Calibration of the published player-state intervals therefore remains an open question.
 
