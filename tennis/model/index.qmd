@@ -219,7 +219,26 @@ The predictive distribution for a market price combines uncertainty in the laten
 | Grass | 1.121 | 48.1% | 77.4% | 91.9% |
 | **Overall** | **0.981** | **52.2%** | **82.2%** | **95.6%** |
 
-The overall predictive intervals are slightly conservative, while the smaller grass sample is under-dispersed. Successive signed market innovations for the same player remain correlated at short intervals:
+The overall predictive intervals are slightly conservative, while the smaller grass sample is under-dispersed.
+
+Latent-state uncertainty was checked against later revisions. For each audit point, let $(m_f,P_f)$ be the pre-match filtered mean and variance, and $(m_s,P_s)$ the estimate of the same state after prices through 2025 are allowed to smooth it. Under the fitted state model,
+
+$$
+z=\frac{m_s-m_f}{\sqrt{P_f-P_s}}
+\sim \operatorname{Normal}(0,1).
+$$
+
+The player-state sample takes one appearance per player-month in 2024. Intervals for those rows are clustered by player; matchup-contrast intervals are clustered by match date.
+
+| Quantity | Observations | Mean revision [95% interval] | Revision SD [95% interval] | 95% coverage |
+|:--|--:|--:|--:|--:|
+| Overall player state | 1,990 | −0.207 [−0.256, −0.158] | 0.963 [0.921, 1.005] | 95.3% |
+| Played-surface player state | 1,990 | −0.186 [−0.233, −0.139] | 0.991 [0.950, 1.035] | 94.4% |
+| Matchup contrast | 3,167 | +0.003 [−0.034, 0.041] | 1.035 [1.007, 1.064] | 94.5% |
+
+The player-state interval widths are approximately calibrated to later market information. Their absolute levels revise downward together, but this shift disappears from the identifiable player-versus-player contrast. Matchup uncertainty is slightly narrow overall and most clearly so on grass, where its revision SD is 1.09. These are statements about later market beliefs, not independently observed true skill. The [player-state revisions](/assets/data/wta-state-revision-audit.csv), [matchup revisions](/assets/data/wta-matchup-revision-audit.csv) and [audit script](https://github.com/spazznolo/spazznolo.github.io/blob/master/scripts/wta_state_revision_audit.py) reproduce the check.
+
+Successive signed market innovations for the same player remain correlated at short intervals:
 
 | Consecutive appearances | Pairs | Correlation |
 |:--|--:|--:|
@@ -240,8 +259,6 @@ Peak age was tested by refitting the complete system at four fixed values. Diffe
 | 28 | 0.59710 | −0.00017 [−0.00077, +0.00039] |
 
 Next-match performance does not distinguish peaks from 24 through 28. That is expected: most appearances are close together, age drift is small over the forecast interval, and each new price updates the state again. The stable log loss is not evidence that the aging curve is correct. Age 24 remains an external interpretive constraint rather than a data-identified biological peak. A proper test must freeze player states and score one- to three-year projections without intermediate market updates. The [sensitivity data](/assets/data/wta-peak-sensitivity.csv) and [script](https://github.com/spazznolo/spazznolo.github.io/blob/master/scripts/wta_peak_sensitivity.py) reproduce the short-horizon comparison.
-
-These checks validate the full one-step predictive distribution, not its decomposition into observation noise and latent player uncertainty. Calibration of the published player-state intervals therefore remains an open question.
 
 The [evaluation data](/assets/data/wta-model-validation.csv) and [validation script](https://github.com/spazznolo/spazznolo.github.io/blob/master/scripts/wta_validation.py) reproduce these diagnostics.
 
