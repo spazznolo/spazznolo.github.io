@@ -16,6 +16,24 @@ YEARS = (2024, 2025)
 # the rating. On the modeled log-odds scale, curve_power=1 is piecewise linear.
 EVALUATION_ARTIFACT_DIRECTORY = "collapsed_wta_market_fixed_peak24_exponential_v1"
 EXPECTED_AGE_CURVE = {"peak_age": 24.0, "power": 1.0}
+PUBLIC_COLUMNS = [
+    "match_id",
+    "tournament_id",
+    "match_timestamp",
+    "match_date",
+    "season",
+    "surface",
+    "player_1_id",
+    "player_2_id",
+    "player_1_won",
+    "market_probability_player_1",
+    "market_logit_player_1",
+    "model_probability_player_1",
+    "model_logit_mean",
+    "model_logit_sd",
+    "elo_probability_player_1",
+    "predictive_market_sd",
+]
 
 
 def logistic(values: np.ndarray) -> np.ndarray:
@@ -129,7 +147,7 @@ def player_clustered_correlation_interval(
     return percentile_interval(estimates)
 
 
-def load_predictions(tennis_root: Path) -> pd.DataFrame:
+def build_public_predictions(tennis_root: Path) -> pd.DataFrame:
     model_root = tennis_root / "apps/predict/output/models" / EVALUATION_ARTIFACT_DIRECTORY
     frames = []
     for year in YEARS:
@@ -159,19 +177,38 @@ def load_predictions(tennis_root: Path) -> pd.DataFrame:
     merged = model.merge(elo, on="match_id", how="inner", validate="one_to_one")
     if len(merged) != len(model):
         raise ValueError("Elo and player-state evaluations do not contain the same matches")
-    merged["match_date"] = pd.to_datetime(merged["match_date"])
-    merged["match_timestamp"] = pd.to_datetime(merged["match_timestamp"], format="mixed")
-    return merged.sort_values(["match_timestamp", "match_id"], kind="stable").reset_index(drop=True)
+    merged = merged.rename(
+        columns={
+            "player_id_home": "player_1_id",
+            "player_id_away": "player_2_id",
+            "winner_is_home": "player_1_won",
+            "market_prob_home": "market_probability_player_1",
+            "market_logit_home": "market_logit_player_1",
+            "model_prob_home": "model_probability_player_1",
+            "elo_prob_home": "elo_probability_player_1",
+        }
+    )
+    return merged[PUBLIC_COLUMNS]
+
+
+def load_predictions(path: Path) -> pd.DataFrame:
+    frame = pd.read_csv(path)
+    missing = sorted(set(PUBLIC_COLUMNS) - set(frame.columns))
+    if missing:
+        raise ValueError(f"Published evaluation data is missing columns: {missing}")
+    frame["match_date"] = pd.to_datetime(frame["match_date"])
+    frame["match_timestamp"] = pd.to_datetime(frame["match_timestamp"], format="mixed")
+    return frame.sort_values(["match_timestamp", "match_id"], kind="stable").reset_index(drop=True)
 
 
 def serial_pairs(frame: pd.DataFrame) -> pd.DataFrame:
     shared = ["match_id", "tournament_id", "match_timestamp", "match_date"]
-    home = frame[shared + ["player_id_home", "standardized_innovation"]].copy()
-    home.columns = shared + ["player_id", "innovation"]
-    away = frame[shared + ["player_id_away", "standardized_innovation"]].copy()
-    away.columns = shared + ["player_id", "innovation"]
-    away["innovation"] *= -1.0
-    appearances = pd.concat([home, away], ignore_index=True).sort_values(
+    player_1 = frame[shared + ["player_1_id", "standardized_innovation"]].copy()
+    player_1.columns = shared + ["player_id", "innovation"]
+    player_2 = frame[shared + ["player_2_id", "standardized_innovation"]].copy()
+    player_2.columns = shared + ["player_id", "innovation"]
+    player_2["innovation"] *= -1.0
+    appearances = pd.concat([player_1, player_2], ignore_index=True).sort_values(
         ["player_id", "match_timestamp"], kind="stable"
     )
     appearances["previous_innovation"] = appearances.groupby("player_id")["innovation"].shift()
@@ -186,18 +223,29 @@ def serial_pairs(frame: pd.DataFrame) -> pd.DataFrame:
 
 
 def main() -> None:
-    default_tennis_root = Path(__file__).resolve().parents[2] / "tennis"
+    repository_root = Path(__file__).resolve().parents[1]
+    default_data = repository_root / "assets/data/wta-model-validation.csv"
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--tennis-root", type=Path, default=default_tennis_root)
+    parser.add_argument("--data", type=Path, default=default_data)
+    parser.add_argument(
+        "--rebuild-from-tennis-root",
+        type=Path,
+        help="Maintainer option: rebuild the published evaluation data from the tennis project.",
+    )
     parser.add_argument("--seed", type=int, default=20260907)
     parser.add_argument("--bootstrap-draws", type=int, default=5000)
     args = parser.parse_args()
 
-    frame = load_predictions(args.tennis_root)
-    outcome = frame["winner_is_home"].to_numpy(dtype=float)
-    model_probability = frame["model_prob_home"].to_numpy(dtype=float)
-    market_probability = frame["market_prob_home"].to_numpy(dtype=float)
-    elo_probability = frame["elo_prob_home"].to_numpy(dtype=float)
+    if args.rebuild_from_tennis_root is not None:
+        frame = build_public_predictions(args.rebuild_from_tennis_root)
+        args.data.parent.mkdir(parents=True, exist_ok=True)
+        frame.to_csv(args.data, index=False, float_format="%.10g")
+    frame = load_predictions(args.data)
+
+    outcome = frame["player_1_won"].to_numpy(dtype=float)
+    model_probability = frame["model_probability_player_1"].to_numpy(dtype=float)
+    market_probability = frame["market_probability_player_1"].to_numpy(dtype=float)
+    elo_probability = frame["elo_probability_player_1"].to_numpy(dtype=float)
     date_codes, dates = pd.factorize(frame["match_date"], sort=True)
     cluster_count = len(dates)
     rng = np.random.default_rng(args.seed)
@@ -240,8 +288,8 @@ def main() -> None:
         calibration_by_subset[column] = {}
         for value, subset in frame.groupby(column, sort=True):
             intercept, slope = calibration_fit(
-                subset["winner_is_home"].to_numpy(dtype=float),
-                subset["model_prob_home"].to_numpy(dtype=float),
+                subset["player_1_won"].to_numpy(dtype=float),
+                subset["model_probability_player_1"].to_numpy(dtype=float),
             )
             calibration_by_subset[column][str(value)] = {
                 "matches": len(subset),
@@ -250,7 +298,7 @@ def main() -> None:
             }
 
     innovation = (
-        frame["market_logit_home"].to_numpy(dtype=float)
+        frame["market_logit_player_1"].to_numpy(dtype=float)
         - frame["model_logit_mean"].to_numpy(dtype=float)
     )
     frame["standardized_innovation"] = innovation / frame["predictive_market_sd"].to_numpy(dtype=float)

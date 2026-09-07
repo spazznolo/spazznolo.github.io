@@ -226,6 +226,8 @@ The one-to-seven-day estimate is 0.130 [0.105, 0.157], compared with 0.005 [−0
 
 These checks validate the full one-step predictive distribution, not its decomposition into observation noise and latent player uncertainty. Calibration of the published player-state intervals therefore remains an open question.
 
+The [evaluation data](/assets/data/wta-model-validation.csv) and [validation script](https://github.com/spazznolo/spazznolo.github.io/blob/master/scripts/wta_validation.py) reproduce these diagnostics.
+
 ## Output
 
 The model supplies player-level strengths, surface effects, historical trajectories, matchup probabilities, and uncertainty. These are available as [weekly rankings](/tennis/rankings/).
