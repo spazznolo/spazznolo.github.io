@@ -195,6 +195,8 @@ $$
 
 The model recovers 65.6% of the log-loss gap between standard Elo and the current-match market. Performance is weakest on grass, where the evaluation sample is smallest.
 
+Surface effects are small beside overall player strength. Among the top 500 players in the August 30, 2026 ranking snapshot, the cross-player SD of overall posterior means is 1.028 log-odds. The corresponding SDs of hard, clay and grass effects are 0.097, 0.131 and 0.095: between 9% and 13% of the overall spread. These are spreads of the published posterior means, not estimates of total latent population variance. The [ranking states](/assets/data/wta-rankings-latest.csv) and [summary script](https://github.com/spazznolo/spazznolo.github.io/blob/master/scripts/wta_surface_dispersion.py) reproduce the calculation.
+
 ## Validation
 
 Paired log-loss differences were resampled by calendar day, preserving the dependence among matches played on the same day.
