@@ -9,7 +9,7 @@ page-layout: full
 
 ## Purpose
 
-This model estimates WTA player strength over time and across surfaces, with uncertainty, by treating historical market probabilities as noisy observations of latent player strength. It can derive a probability for any matchup on any surface. Current estimates are published on the [WTA Rankings](/tennis/rankings/) page.
+This model estimates WTA player strength over time and across surfaces, with uncertainty, by treating historical market probabilities as noisy observations of latent player strength. The aim is not to beat today's market using today's price. It is to turn the history of earlier prices into a coherent account of player strength that can be carried into the next match. Current estimates are published on the [WTA Rankings](/tennis/rankings/) page.
 
 The system has two inference stages which share the same generative model. Each off-season, the global model learns the shared parameters while integrating over the player states. During the season, those parameters remain fixed while the online player model estimates latent strengths before each day's matches.
 
