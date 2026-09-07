@@ -1,6 +1,9 @@
 ---
 title: "WTA Rankings"
 description: "Field notes for a market-trained tennis rating model."
+date: 2026-09-06
+date-modified: 2026-09-06
+status: current
 toc: false
 page-layout: full
 ---
@@ -77,7 +80,7 @@ a(A;\beta)=
 \end{cases}
 $$
 
-The peak is an assumption rather than an estimated parameter. Player strength then evolves as
+The peak is an assumption rather than an estimated parameter. It was fixed before the 2024–25 evaluation and retained to avoid tuning against that window. Player strength then evolves as
 
 $$
 x_{i,t} \mid x_{i,t-1}
@@ -121,7 +124,7 @@ $$
 x_{i,t}-x_{j,t}+u_{i,s}-u_{j,s},
 $$
 
-Observation variance changes with bookmaker margin:
+Observation SD changes with bookmaker margin:
 
 $$
 \log\sqrt{r_m}=\log\sqrt r+\gamma_v V_m,
@@ -223,7 +226,7 @@ The predictive distribution for a market price combines uncertainty in the laten
 | Grass | 1.121 | 48.1% | 77.4% | 91.9% |
 | **Overall** | **0.981** | **52.2%** | **82.2%** | **95.6%** |
 
-The overall predictive intervals are slightly conservative, while the smaller grass sample is under-dispersed.
+The pooled standardized innovations have mean +0.018. The overall predictive intervals are slightly conservative, while the smaller grass sample is under-dispersed.
 
 Latent-state uncertainty was checked against later revisions. For each audit point, let $(m_f,P_f)$ be the pre-match filtered mean and variance, and $(m_s,P_s)$ the estimate of the same state after prices through 2025 are allowed to smooth it. Under the fitted state model,
 
