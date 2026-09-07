@@ -15,7 +15,9 @@ The system has two inference stages which share the same generative model. Each 
 
 ## Data
 
-One row per match: players $i$ and $j$, date $t$, surface $s$, player ages, prior WTA appearances, and decimal odds $o_{i,m}$ and $o_{j,m}$. The odds are converted to raw implied probabilities and multiplicatively de-vigged:
+One row per match: players $i$ and $j$, date $t$, surface $s$, player ages, prior WTA appearances, and decimal odds $o_{i,m}$ and $o_{j,m}$. The panel contains stored WTA matches from 2019 through 2025 with distinct player IDs, an unequal recorded set score, a resolved hard, clay or grass surface, both decimal prices greater than one, and a two-price overround between 0.98 and 1.20. The source distinguishes Grand Slams from other stored WTA events but does not reliably preserve lower tournament tiers.
+
+The odds are converted to raw implied probabilities and multiplicatively de-vigged:
 
 $$
 \pi_{i,m}=\frac{1}{o_{i,m}},
@@ -31,7 +33,7 @@ $$
 V_m=\frac{v_m-\bar v_{\mathrm{train}}}{s_{v,\mathrm{train}}}.
 $$
 
-The stored odds are the source's first available bookmaker; bookmaker identity is not preserved. When forecasting a match, its own price is not used: all matches on a date are predicted before prices from that date update the player states. Match outcomes are used only for evaluation.
+The stored odds are the source's first available bookmaker; bookmaker identity is not preserved. The margin coefficient therefore describes a blend of bookmaker conventions, not a bookmaker-specific relationship between margin and noise. All standardization moments are estimated within the training panel. When forecasting a match, its own price is not used: all matches on a date are predicted before prices from that date update the player states. Match outcomes are used only for evaluation.
 
 ## States
 
