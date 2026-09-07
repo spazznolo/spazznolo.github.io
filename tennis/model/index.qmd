@@ -161,6 +161,8 @@ Carry the state distributions forward, predict a given set of matches, then cond
 
 The evaluation contains 6,381 matches from the 2024 and 2025 seasons. For each target season, the global parameters are fitted on earlier seasons and frozen; each calendar day's matches are predicted before that day's prices update the player states. The market benchmark uses the de-vigged price for the match being predicted. Standard Elo uses only outcomes observed before that day. Lower scores are better.
 
+The Elo baseline initializes every player at 1500, uses the conventional 400-point logistic scale with a fixed $K=32$, and warms up on matches from 2021 through 2023. It maintains one rating across surfaces and is not a surface-blended Elo.
+
 | Model | Information at prediction | Log loss | Brier |
 |:--|:--|--:|--:|
 | De-vigged market | Current match price | 0.5809 | 0.1993 |
