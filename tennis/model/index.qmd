@@ -15,25 +15,41 @@ The system has two inference stages which share the same generative model. Each 
 
 ## Data
 
-One row per match: players $i$ and $j$, date $t$, surface $s$, player age $A_{i,t}$, prior tour experience $E_i$, bookmaker margin $V_m$, and de-vigged market log-odds $y_m$. When forecasting a match, its own price is not used: all matches on a date are predicted before prices from that date update the player states. Match outcomes are used only for evaluation.
+One row per match: players $i$ and $j$, date $t$, surface $s$, player ages, prior WTA appearances, and decimal odds $o_{i,m}$ and $o_{j,m}$. The odds are converted to raw implied probabilities and multiplicatively de-vigged:
+
+$$
+\pi_{i,m}=\frac{1}{o_{i,m}},
+\qquad
+p_{i,m}=\frac{\pi_{i,m}}{\pi_{i,m}+\pi_{j,m}},
+\qquad
+y_m=\log\frac{p_{i,m}}{1-p_{i,m}}.
+$$
+
+The raw bookmaker margin is $v_m=\pi_{i,m}+\pi_{j,m}-1$. The model uses its training-standardized value,
+
+$$
+V_m=\frac{v_m-\bar v_{\mathrm{train}}}{s_{v,\mathrm{train}}}.
+$$
+
+The stored odds are the source's first available bookmaker; bookmaker identity is not preserved. When forecasting a match, its own price is not used: all matches on a date are predicted before prices from that date update the player states. Match outcomes are used only for evaluation.
 
 ## States
 
 - $x_{i,t}$ = player $i$'s overall strength at time $t$
-- $u_{i,s}$ = player $i$'s effect on surface $s$
+- $\mathbf u_i=(u_{i,\mathrm{hard}},u_{i,\mathrm{clay}},u_{i,\mathrm{grass}})$ = player $i$'s surface effects
 - $z$ = all player states and surface effects
 
 ## Parameters
 
 - $\theta$ = all shared system parameters
-- $\tau_0$ = population SD at panel entry; $\tau_0\sim\operatorname{LogNormal}(\text{median}=1.5,\text{log-SD}=0.75)$
-- $q$ = yearly process variance; $\sqrt q\sim\operatorname{LogNormal}(\text{median}=0.5,\text{log-SD}=1)$
-- $r$ = base observation variance; $\sqrt r\sim\operatorname{LogNormal}(\text{median}=0.25,\text{log-SD}=0.75)$
-- $\tau_s$ = population SD of surface effects; $\tau_s\sim\operatorname{LogNormal}(\text{median}=0.35,\text{log-SD}=0.75)$
-- $\beta_g$ = pre-peak growth; $\beta_g\sim\operatorname{LogNormal}(\text{median}=0.4,\text{log-SD}=0.75)$
-- $\beta_d$ = post-peak decline; $\beta_d\sim\operatorname{LogNormal}(\text{median}=0.15,\text{log-SD}=1)$
-- $\gamma_e$ = effect of prior experience on entry dispersion; $\gamma_e\sim\operatorname{Normal}(0,0.5)$
-- $\gamma_v$ = effect of bookmaker margin on observation noise; $\gamma_v\sim\operatorname{Normal}(0,0.5)$
+- $\tau_0$ = population entry SD, in log-odds; $\tau_0\sim\operatorname{LogNormal}(\text{median}=1.5,\text{log-SD}=0.75)$
+- $\sqrt q$ = process SD, in log-odds per square-root year; $\sqrt q\sim\operatorname{LogNormal}(\text{median}=0.5,\text{log-SD}=1)$
+- $\sqrt r$ = base observation SD, in log-odds; $\sqrt r\sim\operatorname{LogNormal}(\text{median}=0.25,\text{log-SD}=0.75)$
+- $\tau_s$ = SD of the orthonormal surface contrasts, in log-odds; $\tau_s\sim\operatorname{LogNormal}(\text{median}=0.35,\text{log-SD}=0.75)$
+- $\beta_g$ = annual pre-peak growth, in log-odds; $\beta_g\sim\operatorname{LogNormal}(\text{median}=0.4,\text{log-SD}=0.75)$
+- $\beta_d$ = annual post-peak decline, in log-odds; $\beta_d\sim\operatorname{LogNormal}(\text{median}=0.15,\text{log-SD}=1)$
+- $\gamma_e$ = change in log entry SD per standardized unit of prior experience; $\gamma_e\sim\operatorname{Normal}(0,0.5)$
+- $\gamma_v$ = change in log observation SD per standardized unit of bookmaker margin; $\gamma_v\sim\operatorname{Normal}(0,0.5)$
 
 ## State model
 
@@ -45,9 +61,19 @@ $$
 x_{i,1} \sim \operatorname{Normal}(0,\tau_i^2).
 $$
 
-$E_i$ is standardized prior tour experience.
+$E_i$ is the training-standardized value of $\log(1+n_i)$, where $n_i$ is player $i$'s number of stored WTA appearances before entering the panel.
 
-The function $a(A;\beta)$ gives expected strength at age $A$ under $\beta=(\beta_g,\beta_d)$, with peak age fixed at 24:
+The live model fixes peak age at 24 and uses the piecewise-linear age path
+
+$$
+a(A;\beta)=
+\begin{cases}
+\beta_g(A-24), & A<24,\\
+-\beta_d(A-24), & A\geq24.
+\end{cases}
+$$
+
+The peak is an assumption rather than an estimated parameter. Player strength then evolves as
 
 $$
 x_{i,t} \mid x_{i,t-1}
@@ -58,14 +84,25 @@ q\Delta t
 \right).
 $$
 
-The mean follows the age curve; uncertainty grows with the time between observations.
+$\Delta t$ is elapsed calendar time in years, calculated as elapsed days divided by 365.25. The mean follows the age path; variance grows linearly with elapsed time.
 
-Surface effects are drawn from a shared population distribution and centered within player:
+Each player has two independent coordinates in an orthonormal surface-contrast basis:
 
 $$
-u_{i,s}\sim\operatorname{Normal}(0,\tau_s^2),
+\mathbf c_i\sim\operatorname{Normal}_2(\mathbf 0,\tau_s^2\mathbf I_2),
 \qquad
-\sum_s u_{i,s}=0.
+\mathbf u_i=\mathbf C\mathbf c_i,
+$$
+
+$$
+\mathbf C=
+\begin{pmatrix}
+1/\sqrt 2 & 1/\sqrt 6\\
+-1/\sqrt 2 & 1/\sqrt 6\\
+0 & -2/\sqrt 6
+\end{pmatrix},
+\qquad
+\mathbf 1^\mathsf T\mathbf u_i=0.
 $$
 
 ## Observation model
@@ -94,13 +131,21 @@ $r_m$ determines how strongly the observed price updates the player states.
 
 **Off-season global fit**
 
-Let $y_{\mathrm{train}}$ contain the prior-season market log-odds. Learn $\theta=(\tau_0,q,r,\tau_s,\beta_g,\beta_d,\gamma_e,\gamma_v)$ while integrating over the corresponding player states:
+Let $y_{\mathrm{train}}$ contain the eligible market log-odds from the preceding seasons in a ten-season window. The 2026 fit uses every available season from 2019 through 2025. The shared parameters are estimated by maximum a posteriori probability while the player states are integrated out:
 
 $$
-p(y_{\mathrm{train}}\mid\theta)
+\hat\theta
 =
-\int p(y_{\mathrm{train}}\mid z,\theta)p(z\mid\theta)\,dz.
+\underset{\theta}{\arg\max}
+\left\{
+\log\int
+p(y_{\mathrm{train}}\mid z,\theta)
+p(z\mid\theta)\,dz
++\log p(\theta)
+\right\}.
 $$
+
+The Gaussian integral is evaluated exactly in sparse precision form; player states are not optimizer coordinates.
 
 **In-season online fit**
 
@@ -114,6 +159,6 @@ Carry the state distributions forward, predict a given set of matches, then cond
 
 ## Output
 
-The model supplies player-level strengths, surface effects, historical trajectories, matchup probabilities, and uncertainty. These are available as [weekly rankings](/tennis/rankings/). The model is available [here](https://github.com/spazznolo/tennis/tree/main/apps/predict).
+The model supplies player-level strengths, surface effects, historical trajectories, matchup probabilities, and uncertainty. These are available as [weekly rankings](/tennis/rankings/).
 
 :::
