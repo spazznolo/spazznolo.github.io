@@ -211,7 +211,16 @@ The predictive distribution for a market price combines uncertainty in the laten
 | Grass | 1.121 | 48.1% | 77.4% | 91.9% |
 | **Overall** | **0.981** | **52.2%** | **82.2%** | **95.6%** |
 
-The overall predictive intervals are slightly conservative, while the smaller grass sample is under-dispersed. The independence assumption does not hold perfectly: successive signed market innovations for the same player have correlation 0.130 [0.105, 0.157] when appearances are one to seven days apart, compared with 0.005 [−0.085, 0.091] after more than 30 days. The market carries short-run information forward that the observation model does not represent.
+The overall predictive intervals are slightly conservative, while the smaller grass sample is under-dispersed. Successive signed market innovations for the same player remain correlated at short intervals:
+
+| Consecutive appearances | Pairs | Correlation |
+|:--|--:|--:|
+| 1–7 days, same tournament | 6,165 | 0.116 |
+| 1–7 days, different tournament | 1,477 | 0.199 |
+| 8–30 days | 3,145 | 0.096 |
+| More than 30 days | 1,156 | 0.005 |
+
+The one-to-seven-day estimate is 0.130 [0.105, 0.157], compared with 0.005 [−0.085, 0.087] after more than 30 days. Dependence is not concentrated within tournaments, so a missing tournament intercept cannot explain the pattern by itself. Prices contain slowly varying information—potentially form, health or market memory—that the observation model does not represent.
 
 These checks validate the full one-step predictive distribution, not its decomposition into observation noise and latent player uncertainty. Calibration of the published player-state intervals therefore remains an open question.
 

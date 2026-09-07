@@ -158,17 +158,23 @@ def load_predictions(tennis_root: Path) -> pd.DataFrame:
 
 
 def serial_pairs(frame: pd.DataFrame) -> pd.DataFrame:
-    home = frame[["match_timestamp", "match_date", "player_id_home", "standardized_innovation"]].copy()
-    home.columns = ["match_timestamp", "match_date", "player_id", "innovation"]
-    away = frame[["match_timestamp", "match_date", "player_id_away", "standardized_innovation"]].copy()
-    away.columns = ["match_timestamp", "match_date", "player_id", "innovation"]
+    shared = ["match_id", "tournament_id", "match_timestamp", "match_date"]
+    home = frame[shared + ["player_id_home", "standardized_innovation"]].copy()
+    home.columns = shared + ["player_id", "innovation"]
+    away = frame[shared + ["player_id_away", "standardized_innovation"]].copy()
+    away.columns = shared + ["player_id", "innovation"]
     away["innovation"] *= -1.0
     appearances = pd.concat([home, away], ignore_index=True).sort_values(
         ["player_id", "match_timestamp"], kind="stable"
     )
     appearances["previous_innovation"] = appearances.groupby("player_id")["innovation"].shift()
     appearances["previous_date"] = appearances.groupby("player_id")["match_date"].shift()
+    appearances["previous_match_id"] = appearances.groupby("player_id")["match_id"].shift()
+    appearances["previous_tournament_id"] = appearances.groupby("player_id")["tournament_id"].shift()
     appearances["gap_days"] = (appearances["match_date"] - appearances["previous_date"]).dt.days
+    appearances["same_tournament"] = (
+        appearances["tournament_id"] == appearances["previous_tournament_id"]
+    )
     return appearances.loc[appearances["gap_days"].gt(0)].dropna().reset_index(drop=True)
 
 
@@ -268,6 +274,12 @@ def main() -> None:
     windows = {
         "all_positive_gaps": pairs,
         "one_to_seven_days": pairs.loc[pairs["gap_days"].le(7)],
+        "one_to_seven_days_same_tournament": pairs.loc[
+            pairs["gap_days"].le(7) & pairs["same_tournament"]
+        ],
+        "one_to_seven_days_different_tournament": pairs.loc[
+            pairs["gap_days"].le(7) & ~pairs["same_tournament"]
+        ],
         "eight_to_thirty_days": pairs.loc[pairs["gap_days"].between(8, 30)],
         "over_thirty_days": pairs.loc[pairs["gap_days"].gt(30)],
     }
