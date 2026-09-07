@@ -239,7 +239,7 @@ Peak age was tested by refitting the complete system at four fixed values. Diffe
 | 26 | 0.59718 | −0.00009 [−0.00049, +0.00030] |
 | 28 | 0.59710 | −0.00017 [−0.00077, +0.00039] |
 
-Forecast performance does not distinguish peaks from 24 through 28. The process, observation and surface scales are stable across these fits; the age slopes and entry-experience term absorb the changed peak. Age 24 is therefore an external interpretive constraint rather than a data-identified biological peak. The [sensitivity data](/assets/data/wta-peak-sensitivity.csv) and [script](https://github.com/spazznolo/spazznolo.github.io/blob/master/scripts/wta_peak_sensitivity.py) reproduce the comparison.
+Next-match performance does not distinguish peaks from 24 through 28. That is expected: most appearances are close together, age drift is small over the forecast interval, and each new price updates the state again. The stable log loss is not evidence that the aging curve is correct. Age 24 remains an external interpretive constraint rather than a data-identified biological peak. A proper test must freeze player states and score one- to three-year projections without intermediate market updates. The [sensitivity data](/assets/data/wta-peak-sensitivity.csv) and [script](https://github.com/spazznolo/spazznolo.github.io/blob/master/scripts/wta_peak_sensitivity.py) reproduce the short-horizon comparison.
 
 These checks validate the full one-step predictive distribution, not its decomposition into observation noise and latent player uncertainty. Calibration of the published player-state intervals therefore remains an open question.
 
