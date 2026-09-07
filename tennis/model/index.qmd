@@ -163,6 +163,8 @@ $$
 
 Carry the state distributions forward, predict a given set of matches, then condition on the new prices. This is implemented as an information-form Kalman update.
 
+Dynamic player states, filtering and offline parameter estimation are established parts of skill-rating models; [Duffield, Power and Rimella](https://academic.oup.com/jrsssc/article/73/5/1262/7734616) demonstrate that workflow on WTA results. Surface-specific tennis states also appear in [Gorgi, Koopman and Lit](https://doi.org/10.1111/rssa.12464), while [Ingram](https://doi.org/10.1515/jqas-2018-0008) separates serve and return skill using point outcomes. [Leitner, Zeileis and Hornik](https://doi.org/10.1016/j.ijforecast.2009.10.001) recover latent ability from bookmaker consensus. Here, de-vigged match prices are the observations, and the linear-Gaussian form allows the player states to be integrated exactly during the global fit.
+
 ## Results
 
 The evaluation contains 6,381 matches from the 2024 and 2025 seasons. For each target season, the global parameters are fitted on earlier seasons and frozen; each calendar day's matches are predicted before that day's prices update the player states. The market benchmark uses the de-vigged price for the match being predicted. Standard Elo uses only outcomes observed before that day. Lower scores are better.
