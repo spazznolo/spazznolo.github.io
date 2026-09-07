@@ -262,8 +262,10 @@ Next-match performance does not distinguish peaks from 24 through 28. That is ex
 
 The [evaluation data](/assets/data/wta-model-validation.csv) and [validation script](https://github.com/spazznolo/spazznolo.github.io/blob/master/scripts/wta_validation.py) reproduce these diagnostics.
 
-## Output
+## Takeaway
 
-The model supplies player-level strengths, surface effects, historical trajectories, matchup probabilities, and uncertainty. These are available as [weekly rankings](/tennis/rankings/).
+The model retains 85.4% of the current market's improvement over a 50/50 forecast using only prices available before each match. It produces player strengths, surface effects, historical trajectories, matchup probabilities and uncertainty; these are published as [weekly rankings](/tennis/rankings/).
+
+The remaining error is structured. Clay forecasts are too moderate, grass uncertainty is too narrow, and market innovations persist across tournaments at short intervals. The next model should explain that persistence rather than merely allow player strength to drift faster. Point-level serve and return states are the natural next decomposition. The aging curve requires a separate long-horizon test.
 
 :::
