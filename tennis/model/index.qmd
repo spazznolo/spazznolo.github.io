@@ -43,6 +43,8 @@ The stored odds are the source's first available bookmaker; bookmaker identity i
 
 ## Parameters
 
+$\operatorname{Normal}(\mu,\sigma)$ denotes a distribution with mean $\mu$ and standard deviation $\sigma$; $\operatorname{Normal}_2(\boldsymbol\mu,\boldsymbol\Sigma)$ uses covariance matrix $\boldsymbol\Sigma$.
+
 - $\theta$ = all shared system parameters
 - $\tau_0$ = population entry SD, in log-odds; $\tau_0\sim\operatorname{LogNormal}(\text{median}=1.5,\text{log-SD}=0.75)$
 - $\sqrt q$ = process SD, in log-odds per square-root year; $\sqrt q\sim\operatorname{LogNormal}(\text{median}=0.5,\text{log-SD}=1)$
@@ -60,7 +62,7 @@ Player strength at panel entry is drawn from the tour population:
 $$
 \log \tau_i=\log\tau_0+\gamma_e E_i,
 \qquad
-x_{i,1} \sim \operatorname{Normal}(0,\tau_i^2).
+x_{i,1} \sim \operatorname{Normal}(0,\tau_i).
 $$
 
 $E_i$ is the training-standardized value of $\log(1+n_i)$, where $n_i$ is player $i$'s number of stored WTA appearances before entering the panel.
@@ -82,7 +84,7 @@ x_{i,t} \mid x_{i,t-1}
 \sim
 \operatorname{Normal}\!\left(
 x_{i,t-1}+a(A_{i,t};\beta)-a(A_{i,t-1};\beta),
-q\Delta t
+\sqrt{q\Delta t}
 \right).
 $$
 
@@ -107,6 +109,8 @@ $$
 \mathbf 1^\mathsf T\mathbf u_i=0.
 $$
 
+Each named surface effect therefore has population SD $\sqrt{2/3}\,\tau_s$; effects for two different surfaces have correlation $-1/2$.
+
 ## Observation model
 
 For match $m$, the expected market log-odds are the difference between the two players' overall strengths and surface effects:
@@ -124,7 +128,7 @@ $$
 \qquad
 y_m \mid z,\theta
 \sim
-\operatorname{Normal}(\eta_m,r_m).
+\operatorname{Normal}(\eta_m,\sqrt{r_m}).
 $$
 
 $r_m$ determines how strongly the observed price updates the player states.
