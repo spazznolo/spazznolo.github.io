@@ -173,8 +173,8 @@ Dynamic player states, filtering and offline parameter estimation are establishe
 
 The evaluation contains 6,381 matches from the 2024 and 2025 seasons. There are two benchmarks.
 
-1. The market benchmark uses the de-vigged price for the match being predicted.
-2. The Elo benchmark initializes every player at 1500, uses the conventional 400-point logistic scale with a fixed $K=32$, and warms up on matches from 2021 through 2023. It maintains one rating across surfaces and uses only outcomes observed before that day.
+1.  The market benchmark uses the de-vigged price for the match being predicted.
+2.  The Elo benchmark initializes every player at 1500, uses the conventional 400-point logistic scale with a fixed $K=32$, and warms up on matches from 2021 through 2023. It maintains one rating across surfaces and uses only outcomes observed before that day.
 
 ::: model-field-sheet
 The fraction of market signal retained is defined against a coin flip forecast:
@@ -221,7 +221,7 @@ $$
 
 ## Validation
 
-### Prediction means
+**Prediction means**
 
 Before each match, the model produces a mean for the market log-odds. Mean calibration is checked by regressing the observed market log-odds on that prediction:
 
@@ -232,7 +232,7 @@ $$
 The intercept $\alpha$ tests whether predictions are systematically high or low. The slope $\lambda$ tests whether their spread is right: one is calibrated, above one means the model is too conservative, and below one means it is too extreme.
 
 | Subset | Matches | Intercept \[95% interval\] | Slope \[95% interval\] |
-|:--------------|--------------:|----------------------:|-------------------:|
+|:----------------|----------------:|--------------------:|-----------------:|
 | **Overall** | **6,381** | **−0.008 \[−0.065, 0.045\]** | **1.045 \[0.982, 1.116\]** |
 | 2024 | 3,167 | −0.020 \[−0.096, 0.052\] | 1.087 \[0.996, 1.178\] |
 | 2025 | 3,214 | +0.004 \[−0.074, 0.082\] | 1.007 \[0.912, 1.110\] |
@@ -240,8 +240,7 @@ The intercept $\alpha$ tests whether predictions are systematically high or low.
 | Clay | 1,663 | +0.021 \[−0.079, 0.122\] | 1.182 \[1.048, 1.340\] |
 | Grass | 767 | −0.019 \[−0.178, 0.144\] | 0.909 \[0.748, 1.069\] |
 
-
-### Prediction standard deviations
+**Prediction standard deviations**
 
 Before each match, the model produces a distribution for the market log-odds rather than a point estimate. Its predictive variance is the sum of uncertainty in the latent matchup and fitted observation variance:
 
@@ -263,7 +262,6 @@ have SD one and the prediction intervals attain their stated coverage.
 | Clay        |         0.976 |        52.1% |        81.5% |        95.6% |
 | Grass       |         1.121 |        48.1% |        77.4% |        91.9% |
 | **Overall** |     **0.981** |    **52.2%** |    **82.2%** |    **95.6%** |
-
 
 Overall, the predictive SD is close to calibrated. Hard and clay intervals are slightly too wide; grass intervals are too narrow.
 
