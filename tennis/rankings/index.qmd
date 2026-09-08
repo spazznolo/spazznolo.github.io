@@ -1,6 +1,6 @@
 ---
 title: "WTA Rankings"
-description: "Weekly market-implied WTA player ratings by surface, with uncertainty and historical trajectories."
+description: "WTA player ratings derived from betting markets, updated weekly."
 toc: false
 page-layout: full
 ---

@@ -1,6 +1,6 @@
 ---
 title: "WTA Rankings"
-description: "Field notes for a market-trained tennis rating model."
+description: "Notes on the model."
 date: 2026-09-06
 date-modified: 2026-09-08
 status: current

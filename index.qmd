@@ -35,12 +35,11 @@ This blog is an outlet for ideas which naturally interest me. I keep the posts i
 
 - [Goalie Performance](/research/goalie-performance/) — Estimating talent while respecting small-sample uncertainty. · 15 min
 - [NHL Pick Probability](/research/nhl-pick-probability/) — Turning rankings into pick distributions and decisions. · 22 min
-- [Post-regulation](/post-regulation/) — What three-on-three overtime adds to NHL standings, and what predicts the next goal.
 
 ## Projects
 
-- [WTA Rankings](/tennis/rankings/) — Weekly market-implied WTA player ratings by surface, with uncertainty and historical trajectories. · [Notes on the model](/tennis/model/)
-- [Letterboxd Recs](/projects/letterboxd-recs/) — Personalized film recommendations built from taste similarity to a curated user group, updated weekly.
+- [WTA Rankings](/tennis/rankings/) — WTA player ratings derived from betting markets, updated weekly. · [Notes on the model](/tennis/model/)
+- [Letterboxd Recs](/projects/letterboxd-recs/) — Film recommendations using taste similarity to a curated user group, updated weekly.
 
 ## Recent writing
 

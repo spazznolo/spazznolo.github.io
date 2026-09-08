@@ -1,6 +1,6 @@
 ---
 title: "Letterboxd Recs"
-description: "Personalized film recommendations built from taste similarity to a curated user group, updated weekly."
+description: "Film recommendations using taste similarity to a curated user group, updated weekly."
 toc: false
 page-layout: full
 ---
