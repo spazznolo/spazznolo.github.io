@@ -39,8 +39,8 @@ This blog is an outlet for ideas which naturally interest me. I keep the posts i
 
 ## Projects
 
-- [WTA Rankings](/tennis/rankings/) — Weekly player strength, surface effects, uncertainty, and trajectories. · [Model notes](/tennis/model/)
-- [Letterboxd Recs](/projects/letterboxd-recs/) — Personalized, weekly fresh film recommendations built from taste similarity and streaming availability.
+- [WTA Rankings](/tennis/rankings/) — Weekly market-implied WTA player ratings by surface, with uncertainty and historical trajectories. · [Notes on the model](/tennis/model/)
+- [Letterboxd Recs](/projects/letterboxd-recs/) — Personalized film recommendations built from taste similarity to a curated user group, updated weekly.
 
 ## Recent writing
 
