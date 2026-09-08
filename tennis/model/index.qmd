@@ -187,24 +187,42 @@ S
 $$
 :::
 
-| Metric | Surface | Matches | Market | Player-state | Elo |
-|:---|:---|---:|---:|---:|---:|
-| Log loss | **Overall** | **6,381** | **0.581** | **0.597** | **0.628** |
-| Log loss | Hard | 3,951 | 0.586 | 0.600 | 0.633 |
-| Log loss | Clay | 1,663 | 0.561 | 0.579 | 0.617 |
-| Log loss | Grass | 767 | 0.596 | 0.620 | 0.630 |
-| Brier score | **Overall** | **6,381** | **0.199** | **0.206** | **0.220** |
-| Brier score | Hard | 3,951 | 0.202 | 0.207 | 0.222 |
-| Brier score | Clay | 1,663 | 0.191 | 0.199 | 0.215 |
-| Brier score | Grass | 767 | 0.206 | 0.216 | 0.220 |
-| Signal retained | **Overall** | **6,381** | **100.0%** | **85.4%** | **57.7%** |
-| Signal retained | Hard | 3,951 | 100.0% | 86.8% | 56.3% |
-| Signal retained | Clay | 1,663 | 100.0% | 85.9% | 57.8% |
-| Signal retained | Grass | 767 | 100.0% | 76.1% | 64.9% |
+```{=html}
+<table class="model-results-table">
+  <colgroup>
+    <col class="surface-column">
+    <col class="matches-column">
+    <col class="model-column">
+    <col class="model-column">
+    <col class="model-column">
+  </colgroup>
+  <thead>
+    <tr><th scope="col">Surface</th><th scope="col">N</th><th scope="col">Market</th><th scope="col">Player-state</th><th scope="col">Elo</th></tr>
+  </thead>
+  <tbody>
+    <tr class="metric-row"><th colspan="5" scope="rowgroup">Log loss</th></tr>
+    <tr class="overall-row"><th scope="row">Overall</th><td>6,381</td><td>0.581</td><td>0.597</td><td>0.628</td></tr>
+    <tr><th scope="row">Hard</th><td>3,951</td><td>0.586</td><td>0.600</td><td>0.633</td></tr>
+    <tr><th scope="row">Clay</th><td>1,663</td><td>0.561</td><td>0.579</td><td>0.617</td></tr>
+    <tr><th scope="row">Grass</th><td>767</td><td>0.596</td><td>0.620</td><td>0.630</td></tr>
+    <tr class="metric-row"><th colspan="5" scope="rowgroup">Brier score</th></tr>
+    <tr class="overall-row"><th scope="row">Overall</th><td>6,381</td><td>0.199</td><td>0.206</td><td>0.220</td></tr>
+    <tr><th scope="row">Hard</th><td>3,951</td><td>0.202</td><td>0.207</td><td>0.222</td></tr>
+    <tr><th scope="row">Clay</th><td>1,663</td><td>0.191</td><td>0.199</td><td>0.215</td></tr>
+    <tr><th scope="row">Grass</th><td>767</td><td>0.206</td><td>0.216</td><td>0.220</td></tr>
+    <tr class="metric-row"><th colspan="5" scope="rowgroup">Signal retained</th></tr>
+    <tr class="overall-row"><th scope="row">Overall</th><td>6,381</td><td>100.0%</td><td>85.4%</td><td>57.7%</td></tr>
+    <tr><th scope="row">Hard</th><td>3,951</td><td>100.0%</td><td>86.8%</td><td>56.3%</td></tr>
+    <tr><th scope="row">Clay</th><td>1,663</td><td>100.0%</td><td>85.9%</td><td>57.8%</td></tr>
+    <tr><th scope="row">Grass</th><td>767</td><td>100.0%</td><td>76.1%</td><td>64.9%</td></tr>
+  </tbody>
+</table>
+```
 
 ## Validation
 
-**Prediction means**
+### Prediction means
+
 Regressing match log-odds on the model's log-odds provides an intercept of zero (unbiased) and slope of one (calibrated).
 
 | Subset | Matches | Intercept \[95% interval\] | Slope \[95% interval\] |
@@ -216,12 +234,13 @@ Regressing match log-odds on the model's log-odds provides an intercept of zero 
 | Clay | 1,663 | +0.021 \[−0.079, 0.122\] | 1.182 \[1.048, 1.340\] |
 | Grass | 767 | −0.019 \[−0.178, 0.144\] | 0.909 \[0.748, 1.069\] |
 
-**Prediction standard deviations**
+
+### Prediction standard deviations
 
 Before each match, the model produces a distribution for the market log-odds rather than a point estimate. Its predictive variance is the sum of uncertainty in the latent matchup and fitted observation variance:
 
 $$
-s_m^2=mathbf h_m^{\mathsf T}\mathbf P_t\mathbf h_m+r_m.
+s_m^2=\mathbf h_m^{\mathsf T}\mathbf P_t\mathbf h_m+r_m.
 $$
 
 $\mathbf P_t$ is the covariance of the current player states, while $\mathbf h_m$ selects the two players and the surface for match $m$. If the predictive SD $s_m$ is calibrated, the standardized innovations
@@ -239,9 +258,8 @@ have SD one and the prediction intervals attain their stated coverage.
 | Grass       |         1.121 |        48.1% |        77.4% |        91.9% |
 | **Overall** |     **0.981** |    **52.2%** |    **82.2%** |    **95.6%** |
 
-Overall, the predictive SD is close to calibrated. Hard and clay intervals are slightly too wide; grass intervals are too narrow.
 
-As a separate check on player-level uncertainty, 95% intervals for pre-match matchup strength contained 94.5% of subsequent market revisions.
+Overall, the predictive SD is close to calibrated. Hard and clay intervals are slightly too wide; grass intervals are too narrow.
 
 These diagnostics are reproducible using the [evaluation data](/assets/data/wta-model-validation.csv) and [validation script](https://github.com/spazznolo/spazznolo.github.io/blob/master/scripts/wta_validation.py).
 

@@ -577,6 +577,64 @@ body:has(.model-field-sheet) #title-block-header {
   text-transform: uppercase;
 }
 
+.model-field-sheet > section.level2 > h3 {
+  color: var(--warm-accent);
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.055em;
+  margin-bottom: 0.8rem !important;
+  margin-top: 2.4rem !important;
+  text-transform: uppercase;
+}
+
+.model-field-sheet > section.level2 > h3:first-of-type {
+  margin-top: 0 !important;
+}
+
+.model-results-table {
+  font-variant-numeric: tabular-nums;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.model-results-table .surface-column { width: 17%; }
+.model-results-table .matches-column { width: 12%; }
+.model-results-table .model-column { width: 23.666%; }
+
+.model-results-table th,
+.model-results-table td {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.model-results-table th:first-child {
+  text-align: left;
+}
+
+.model-results-table .metric-row th {
+  border-top: 1px solid var(--warm-divider);
+  color: var(--warm-accent);
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  padding-bottom: 0.35rem;
+  padding-top: 1.1rem;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.model-results-table tbody .metric-row:first-child th {
+  padding-top: 0.8rem;
+}
+
+.model-results-table .overall-row th,
+.model-results-table .overall-row td {
+  color: var(--bs-body-color);
+  font-weight: 600;
+}
+
 .model-field-sheet .math.display {
   font-family: "Zilla Slab", serif;
   font-size: 1.08em;
@@ -611,7 +669,7 @@ body:has(.model-field-sheet) #title-block-header {
 
 .model-dag-ledger .ledger-headings text {
   fill: var(--warm-accent);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.06em;
 }
@@ -628,12 +686,12 @@ body:has(.model-field-sheet) #title-block-header {
 }
 
 .model-dag-ledger .ledger-node text:nth-of-type(odd) {
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .model-dag-ledger .ledger-node text:nth-of-type(even) {
   fill: var(--bs-secondary-color);
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .model-dag-ledger .ledger-node.parameter text:nth-of-type(odd) {
@@ -650,7 +708,7 @@ body:has(.model-field-sheet) #title-block-header {
 }
 
 .model-dag-ledger .ledger-key text {
-  font-size: 9px;
+  font-size: 10px;
   letter-spacing: 0.05em;
 }
 
