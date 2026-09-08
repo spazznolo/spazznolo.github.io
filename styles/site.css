@@ -583,6 +583,41 @@ body:has(.model-field-sheet) #title-block-header {
   margin-block: 1.5rem;
 }
 
+.model-field-sheet .mermaid-js {
+  background: transparent;
+  margin-top: 1.75rem;
+}
+
+.model-field-sheet #model-map > .cell {
+  grid-column: 1 / -1;
+  margin-top: 1.25rem !important;
+}
+
+.model-field-sheet .mermaid-js .node rect,
+.model-field-sheet .mermaid-js .node polygon,
+.model-field-sheet .mermaid-js .node path {
+  fill: transparent !important;
+  stroke: none !important;
+}
+
+.model-field-sheet .mermaid-js .nodeLabel,
+.model-field-sheet .mermaid-js .nodeLabel p {
+  color: var(--bs-body-color) !important;
+  font-family: "IBM Plex Mono", monospace !important;
+  font-size: 17px !important;
+  line-height: 1.35 !important;
+}
+
+.model-field-sheet .mermaid-js .flowchart-link {
+  stroke: var(--warm-accent) !important;
+  stroke-width: 1.15px !important;
+}
+
+.model-field-sheet .mermaid-js marker path {
+  fill: var(--warm-accent) !important;
+  stroke: var(--warm-accent) !important;
+}
+
 @media (max-width: 720px) {
   .model-field-sheet > section.level2 {
     display: block;

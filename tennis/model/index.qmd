@@ -204,7 +204,8 @@ $$
 
 ## Validation
 
-The first check asks whether the mean predictions are calibrated. Regressing the observed result on the model log-odds gives an intercept for systematic bias and a slope for whether the predictions vary by the right amount. An intercept of zero and slope of one indicate calibration.
+**Prediction means**
+Regressing match log-odds on the model's log-odds provides an intercept of zero (unbiased) and slope of one (calibrated).
 
 | Subset | Matches | Intercept \[95% interval\] | Slope \[95% interval\] |
 |:--------------|--------------:|----------------------:|-------------------:|
@@ -215,7 +216,21 @@ The first check asks whether the mean predictions are calibrated. Regressing the
 | Clay | 1,663 | +0.021 \[−0.079, 0.122\] | 1.182 \[1.048, 1.340\] |
 | Grass | 767 | −0.019 \[−0.178, 0.144\] | 0.909 \[0.748, 1.069\] |
 
-The second check asks whether the predictive standard deviations are calibrated. The predictive distribution for a market price combines uncertainty in the latent matchup with fitted observation noise. Its standardized innovations should have SD one, and its central intervals should attain their nominal coverage.
+**Prediction standard deviations**
+
+Before each match, the model produces a distribution for the market log-odds rather than a point estimate. Its predictive variance is the sum of uncertainty in the latent matchup and fitted observation variance:
+
+$$
+s_m^2=mathbf h_m^{\mathsf T}\mathbf P_t\mathbf h_m+r_m.
+$$
+
+$\mathbf P_t$ is the covariance of the current player states, while $\mathbf h_m$ selects the two players and the surface for match $m$. If the predictive SD $s_m$ is calibrated, the standardized innovations
+
+$$
+e_m=\frac{y_m-\eta_m}{s_m}
+$$
+
+have SD one and the prediction intervals attain their stated coverage.
 
 | Surface     | Innovation SD | 50% interval | 80% interval | 95% interval |
 |:------------|--------------:|-------------:|-------------:|-------------:|
@@ -224,7 +239,7 @@ The second check asks whether the predictive standard deviations are calibrated.
 | Grass       |         1.121 |        48.1% |        77.4% |        91.9% |
 | **Overall** |     **0.981** |    **52.2%** |    **82.2%** |    **95.6%** |
 
-The pooled standardized innovations have mean +0.018. The overall predictive intervals are slightly conservative, while the smaller grass sample is under-dispersed.
+Overall, the predictive SD is close to calibrated. Hard and clay intervals are slightly too wide; grass intervals are too narrow.
 
 As a separate check on player-level uncertainty, 95% intervals for pre-match matchup strength contained 94.5% of subsequent market revisions.
 
@@ -242,7 +257,34 @@ The [ranking states](/assets/data/wta-rankings-latest.csv), [surface summary](ht
 
 ## Next steps
 
-1.  Separate chronic player strength from an acute form signal to absorb short-term correlation in market innovations.
-2.  Evaluate the aging curve with multi-year projections made without intermediate market updates.
-3.  Decompose player strength into point-level serve and return states, and revisit calibration on clay and uncertainty on grass.
+1.  Add a short-term form state beside long-term player strength, then test whether it absorbs the residual correlation between successive matches.
+2.  Evaluate the aging curve using multi-year forecasts without intermediate market updates. Match-to-match prediction is not enough to identify peak age.
+3.  Split player strength into serve and return states using point-level data, then measure what they add to match prediction.
+4.  Revisit clay calibration and grass uncertainty as more seasons accumulate.
+
+## Model map
+
+Arrows show the direct dependencies in the generative model. During the global fit, the player states are integrated out; during the season, observed prices condition those states. The model itself is the same in both stages.
+
+```{mermaid}
+flowchart TB
+  experience["entry experience<br/>Eᵢ"] --> initial["entry strength<br/>xᵢ,1"]
+  entry["entry parameters<br/>τ₀, γₑ"] --> initial
+
+  initial --> history["previous strengths<br/>xᵢ,t−1, xⱼ,t−1"]
+  history --> strength["current strengths<br/>xᵢ,t, xⱼ,t"]
+  age["age and elapsed time<br/>Aᵢ,t, Δt"] --> strength
+  drift["age and drift parameters<br/>β, q"] --> strength
+
+  surface["surface parameter<br/>τₛ"] --> effects["surface effects<br/>uᵢ,s, uⱼ,s"]
+
+  strength --> matchup["matchup mean<br/>ηₘ"]
+  effects --> matchup
+
+  margin["bookmaker margin<br/>Vₘ"] --> noise["observation SD<br/>√rₘ"]
+  observation["observation parameters<br/>√r, γᵥ"] --> noise
+
+  matchup --> price["market log-odds<br/>yₘ"]
+  noise --> price
+```
 ::::
