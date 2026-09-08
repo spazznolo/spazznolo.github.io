@@ -71,11 +71,8 @@ page-layout: full
   const rows = document.getElementById('recs-rows');
   let sortKey = 'rank', sortDirection = 'asc', data;
 
-  const streamingProviderKeys = new Set([
-    'netflix', 'disney_plus', 'prime_video', 'apple_tv_plus', 'crave', 'mubi',
-    'criterion_channel', 'max', 'hulu', 'paramount_plus', 'peacock', 'tubi',
-    'youtube', 'plex'
-  ]);
+  const streamingProviderKeys = new Set(['crave', 'prime_video', 'netflix', 'mubi']);
+  const rentalProviderKeys = new Set(['amazon', 'apple_itunes', 'google_play_movies', 'cineplex', 'cosmogo']);
   const providerNames = {
     apple_tv_plus: 'Apple TV+', criterion_channel: 'Criterion Channel',
     disney_plus: 'Disney+', hulu: 'Hulu', max: 'Max', mubi: 'MUBI',
@@ -96,6 +93,11 @@ page-layout: full
     return Object.entries(film.providers || {})
       .filter(([provider, available]) => available && streamingProviderKeys.has(provider))
       .map(([provider]) => provider);
+  };
+  const availabilityType = film => {
+    if (streamingProviders(film).length) return 'stream';
+    if (Object.entries(film.providers || {}).some(([provider, available]) => available && rentalProviderKeys.has(provider))) return 'rent';
+    return '';
   };
   const movement = film => {
     if (film.previous_rank === null || film.previous_rank === undefined) return '<span class="recs-movement">new</span>';
@@ -118,7 +120,7 @@ page-layout: full
     if (key === 'year') return Number(film.year);
     if (key === 'genre') return (film.genres || []).join(', ').toLowerCase();
     if (key === 'provider') return streamingProviders(film).map(providerLabel).join(', ').toLowerCase();
-    if (key === 'availability') return Number(Boolean(film.stream));
+    if (key === 'availability') return availabilityType(film);
     return Number(film.current_rank);
   };
   const render = () => {
@@ -133,8 +135,8 @@ page-layout: full
       if (provider && !streamingProviders(film).includes(provider)) return false;
       if (genre && !(film.genres || []).includes(genre)) return false;
       if (Number.isFinite(minYear) && film.year && film.year < minYear) return false;
-      if (availability === 'stream' && !film.stream) return false;
-      return !(availability === 'rent' && film.stream);
+      if (availability && availabilityType(film) !== availability) return false;
+      return true;
     });
     filtered.sort((left, right) => {
       const leftValue = sortValue(left, sortKey), rightValue = sortValue(right, sortKey);
@@ -152,7 +154,8 @@ page-layout: full
       const score = Number(film.score_scaled ?? film.score);
       const mainGenre = (film.genres || [])[0] || '';
       const providers = streamingProviders(film).map(providerLabel).join(', ');
-      return `<div class="recs-row"><span data-label="Rank">${Number(film.current_rank)}</span><span data-label="Movement">${movement(film)}</span><span data-label="Score">${Number.isFinite(score) ? score.toFixed(2) : '—'}</span><span data-label="Title">${titleHTML}</span><span data-label="Year">${film.year || '—'}</span><span class="recs-genres" data-label="Genre" data-genres="${escapeHTML((film.genres || []).join(', '))}">${escapeHTML(mainGenre)}</span><span class="recs-provider-list" data-label="Provider">${escapeHTML(providers)}</span><span class="recs-availability" data-label="Availability">${film.stream ? 'stream' : 'rent'}</span></div>`;
+      const availability = availabilityType(film);
+      return `<div class="recs-row"><span data-label="Rank">${Number(film.current_rank)}</span><span data-label="Movement">${movement(film)}</span><span data-label="Score">${Number.isFinite(score) ? score.toFixed(2) : '—'}</span><span data-label="Title">${titleHTML}</span><span data-label="Year">${film.year || '—'}</span><span class="recs-genres" data-label="Genre" data-genres="${escapeHTML((film.genres || []).join(', '))}">${escapeHTML(mainGenre)}</span><span class="recs-provider-list" data-label="Provider">${escapeHTML(providers)}</span><span class="recs-availability" data-label="Availability">${availability}</span></div>`;
     }).join('');
   };
 
