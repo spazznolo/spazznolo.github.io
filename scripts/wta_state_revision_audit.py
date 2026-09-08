@@ -162,6 +162,8 @@ def build_revision_data(
 
     model_root = (
         tennis_root
+        # Historical artifact name: "exponential" describes strength after
+        # exponentiating the rating; the modeled log-odds age path is linear.
         / "apps/predict/output/models/collapsed_wta_market_fixed_peak24_exponential_v1"
     )
     dataset_path = (

@@ -2,7 +2,7 @@
 title: "WTA Rankings"
 description: "Field notes for a market-trained tennis rating model."
 date: 2026-09-06
-date-modified: 2026-09-06
+date-modified: 2026-09-08
 status: current
 toc: false
 page-layout: full
@@ -45,7 +45,7 @@ The stored odds are the source's first available bookmaker; though bookmaker ide
 
 ## Parameters
 
-$\operatorname{Normal}(\mu,\sigma)$ denotes a distribution with mean $\mu$ and standard deviation $\sigma$; $\operatorname{Normal}_2(\boldsymbol\mu,\boldsymbol\Sigma)$ uses covariance matrix $\boldsymbol\Sigma$.
+$\operatorname{Normal}(\mu,\sigma)$ denotes a distribution with mean $\mu$ and standard deviation $\sigma$; $\operatorname{Normal}_2(\boldsymbol\mu,\boldsymbol\Sigma)$ uses covariance matrix $\boldsymbol\Sigma$. $\operatorname{LogNormal}(m,s)$ has median $m$ and log-scale standard deviation $s$.
 
 - $\theta$ = all shared system parameters
 - $\tau_0$ = population entry SD, in log-odds; $\tau_0\sim\operatorname{LogNormal}(1.5,0.75)$
@@ -79,7 +79,7 @@ a(A;\beta)=
 \end{cases}
 $$
 
-The peak is an assumption rather than an estimated parameter. Though this isn't rigorous, aging is a minor concern from match-to-match. More work would be needed to create longer-term projections.
+Peak age was fixed at 24 before evaluation. [Short-horizon refits](/assets/data/wta-peak-sensitivity.csv) could not distinguish peaks from 24 through 28: identifying the aging curve requires forecasts over years rather than matches.
 
 Player strength then evolves as:
 
@@ -213,20 +213,28 @@ $$
     <tr class="metric-row"><th colspan="5" scope="rowgroup">Signal retained</th></tr>
     <tr class="overall-row"><th scope="row">Overall</th><td>6,381</td><td>100.0%</td><td>85.4%</td><td>57.7%</td></tr>
     <tr><th scope="row">Hard</th><td>3,951</td><td>100.0%</td><td>86.8%</td><td>56.3%</td></tr>
-    <tr><th scope="row">Clay</th><td>1,663</td><td>100.0%</td><td>85.9%</td><td>57.8%</td></tr>
+    <tr><th scope="row">Clay</th><td>1,663</td><td>100.0%</td><td>86.0%</td><td>57.8%</td></tr>
     <tr><th scope="row">Grass</th><td>767</td><td>100.0%</td><td>76.1%</td><td>64.9%</td></tr>
   </tbody>
 </table>
 ```
 
+In a day-clustered bootstrap, the model's mean log loss was 0.0163 above the market [95% interval: 0.0117, 0.0207] and 0.0312 below Elo [0.0245, 0.0376].
+
 ## Validation
 
 **Prediction means**
 
-Before each match, the model produces a mean for the market log-odds. Mean calibration is checked by regressing the observed market log-odds on that prediction:
+Before each match, the model produces a win probability $\hat p_m$. Outcome calibration is checked by regressing the observed result $W_m$ on the model log-odds:
 
 $$
-y_m=\alpha+\lambda\hat\eta_m+\varepsilon_m.
+W_m
+\sim
+\operatorname{Bernoulli}\!\left(
+\operatorname{logit}^{-1}\!\left[
+\alpha+\lambda\operatorname{logit}(\hat p_m)
+\right]
+\right).
 $$
 
 The intercept $\alpha$ tests whether predictions are systematically high or low. The slope $\lambda$ tests whether their spread is right: one is calibrated, above one means the model is too conservative, and below one means it is too extreme.
@@ -263,7 +271,9 @@ have SD one and the prediction intervals attain their stated coverage.
 | Grass       |         1.121 |        48.1% |        77.4% |        91.9% |
 | **Overall** |     **0.981** |    **52.2%** |    **82.2%** |    **95.6%** |
 
-Overall, the predictive SD is close to calibrated. Hard and clay intervals are slightly too wide; grass intervals are too narrow.
+The pooled standardized innovations have mean +0.018. Overall, the predictive SD is close to calibrated. Hard and clay intervals are slightly too wide; grass intervals are too narrow.
+
+Against later market information, standardized revisions had SD 0.991 for played-surface player states and 1.035 for matchup contrasts, with 95% coverage of 94.4% and 94.5%. The [state revisions](/assets/data/wta-state-revision-audit.csv), [matchup revisions](/assets/data/wta-matchup-revision-audit.csv) and [audit script](https://github.com/spazznolo/spazznolo.github.io/blob/master/scripts/wta_state_revision_audit.py) reproduce the check.
 
 These diagnostics are reproducible using the [evaluation data](/assets/data/wta-model-validation.csv) and [validation script](https://github.com/spazznolo/spazznolo.github.io/blob/master/scripts/wta_validation.py).
 
@@ -271,7 +281,7 @@ These diagnostics are reproducible using the [evaluation data](/assets/data/wta-
 
 1.  The player-state model retains 85.4% of the market's signal, compared with 57.7% for standard Elo, despite using no information from the match being predicted.
 2.  Performance is consistent on hard and clay courts, where the model retains about 86% of market signal. Grass is weaker at 76%, based on a smaller sample of 767 matches.
-3.  The mean predictions are well calibrated overall and in both seasons. Clay predictions may be slightly too conservative, while the smaller grass sample remains consistent with either good calibration or modest overconfidence.
+3.  Win probabilities are well calibrated overall and in both seasons. Clay predictions may be slightly too conservative, while the smaller grass sample remains consistent with either good calibration or modest overconfidence.
 4.  Predictive uncertainty is also well calibrated overall. The intervals are slightly conservative on hard and clay courts and too narrow on grass.
 5.  Surface effects account for roughly 10% of the spread in player strength. They are useful adjustments to a player's overall level, not separate ratings of comparable size.
 
@@ -279,7 +289,7 @@ The [ranking states](/assets/data/wta-rankings-latest.csv), [surface summary](ht
 
 ## Next steps
 
-1.  Add a short-term form state beside long-term player strength, then test whether it absorbs the residual correlation between successive matches.
+1.  Successive standardized market innovations have correlation 0.130 across appearances one to seven days apart. Add chronic and acute drift states, then test whether they absorb that persistence.
 2.  Evaluate the aging curve using multi-year forecasts without intermediate market updates. Match-to-match prediction is not enough to identify peak age.
 3.  Split player strength into serve and return states using point-level data, then measure what they add to match prediction.
 4.  Revisit clay calibration and grass uncertainty as more seasons accumulate.

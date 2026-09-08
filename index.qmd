@@ -28,7 +28,7 @@ listing:
 :::
 
 ::: {.home-about}
-This blog serves as an outlet to explore ideas which naturally interest me. I try to keep an informal, back-of-the-napkin style to these posts, hopefully a little like [Tom Tango](http://www.tangotiger.com/index.php). Posts are grouped by topic in the header, but can be accessed in chronological order below.
+This blog is an outlet for ideas which naturally interest me. I keep the posts informal and back-of-the-napkin, in the spirit of [Tom Tango](http://www.tangotiger.com/index.php). They are grouped by topic in the header and appear chronologically below.
 :::
 
 ## Featured research
