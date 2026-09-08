@@ -171,7 +171,10 @@ Dynamic player states, filtering and offline parameter estimation are establishe
 
 ## Results
 
-The evaluation contains 6,381 matches from the 2024 and 2025 seasons. The market benchmark uses the de-vigged price for the match being predicted. The Elo baseline initializes every player at 1500, uses the conventional 400-point logistic scale with a fixed $K=32$, and warms up on matches from 2021 through 2023. It maintains one rating across surfaces and uses only outcomes observed before that day.
+The evaluation contains 6,381 matches from the 2024 and 2025 seasons. There are two benchmarks.
+
+1. The market benchmark uses the de-vigged price for the match being predicted.
+2. The Elo benchmark initializes every player at 1500, uses the conventional 400-point logistic scale with a fixed $K=32$, and warms up on matches from 2021 through 2023. It maintains one rating across surfaces and uses only outcomes observed before that day.
 
 ::: model-field-sheet
 The fraction of market signal retained is defined against a coin flip forecast:
@@ -184,26 +187,24 @@ S
 $$
 :::
 
-|       Model        | Information at prediction | Log loss | Brier | Signal retained |
-|:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|
-|  De-vigged market  |    Current match price    |  0.581   | 0.199 |     100.0%      |
-| Player-state model |  Prices before match day  |  0.597   | 0.206 |      85.4%      |
-|    Standard Elo    | Results before match day  |  0.628   | 0.220 |      57.7%      |
-
-| Surface     |   Matches |     Model |    Market |       Elo |
-|:------------|----------:|----------:|----------:|----------:|
-| Hard        |     3,951 |     0.601 |     0.586 |     0.633 |
-| Clay        |     1,663 |     0.579 |     0.561 |     0.617 |
-| Grass       |       767 |     0.620 |     0.596 |     0.630 |
-| **Overall** | **6,381** | **0.597** | **0.581** | **0.628** |
-
-## Interpretation
-
-Surface effects modify overall player strength rather than replacing it. Among the top 500 players in the August 30, 2026 ranking snapshot, the cross-player SD of overall posterior means is 1.028 log-odds. The corresponding SDs of hard, clay and grass effects are 0.097, 0.131 and 0.095: between 9% and 13% of the overall spread. Clay therefore separates players somewhat more than hard or grass, but overall strength remains the larger part of a matchup. For scale, a difference of 0.131 log-odds moves an otherwise even matchup from 50% to 53.3%. These are spreads of the published posterior means, not estimates of total latent population variance. The [ranking states](/assets/data/wta-rankings-latest.csv) and [summary script](https://github.com/spazznolo/spazznolo.github.io/blob/master/scripts/wta_surface_dispersion.py) reproduce the calculation.
+| Metric | Surface | Matches | Market | Player-state | Elo |
+|:---|:---|---:|---:|---:|---:|
+| Log loss | **Overall** | **6,381** | **0.581** | **0.597** | **0.628** |
+| Log loss | Hard | 3,951 | 0.586 | 0.600 | 0.633 |
+| Log loss | Clay | 1,663 | 0.561 | 0.579 | 0.617 |
+| Log loss | Grass | 767 | 0.596 | 0.620 | 0.630 |
+| Brier score | **Overall** | **6,381** | **0.199** | **0.206** | **0.220** |
+| Brier score | Hard | 3,951 | 0.202 | 0.207 | 0.222 |
+| Brier score | Clay | 1,663 | 0.191 | 0.199 | 0.215 |
+| Brier score | Grass | 767 | 0.206 | 0.216 | 0.220 |
+| Signal retained | **Overall** | **6,381** | **100.0%** | **85.4%** | **57.7%** |
+| Signal retained | Hard | 3,951 | 100.0% | 86.8% | 56.3% |
+| Signal retained | Clay | 1,663 | 100.0% | 85.9% | 57.8% |
+| Signal retained | Grass | 767 | 100.0% | 76.1% | 64.9% |
 
 ## Validation
 
-Outcome calibration is estimated by regressing the observed result on the model log-odds. An intercept of zero and slope of one indicate calibration.
+The first check asks whether the mean predictions are calibrated. Regressing the observed result on the model log-odds gives an intercept for systematic bias and a slope for whether the predictions vary by the right amount. An intercept of zero and slope of one indicate calibration.
 
 | Subset | Matches | Intercept \[95% interval\] | Slope \[95% interval\] |
 |:--------------|--------------:|----------------------:|-------------------:|
@@ -214,7 +215,7 @@ Outcome calibration is estimated by regressing the observed result on the model 
 | Clay | 1,663 | +0.021 \[−0.079, 0.122\] | 1.182 \[1.048, 1.340\] |
 | Grass | 767 | −0.019 \[−0.178, 0.144\] | 0.909 \[0.748, 1.069\] |
 
-The predictive distribution for a market price combines uncertainty in the latent matchup with fitted observation noise. If that distribution is calibrated, its standardized innovations have SD one and its central intervals attain their nominal coverage.
+The second check asks whether the predictive standard deviations are calibrated. The predictive distribution for a market price combines uncertainty in the latent matchup with fitted observation noise. Its standardized innovations should have SD one, and its central intervals should attain their nominal coverage.
 
 | Surface     | Innovation SD | 50% interval | 80% interval | 95% interval |
 |:------------|--------------:|-------------:|-------------:|-------------:|
@@ -228,6 +229,16 @@ The pooled standardized innovations have mean +0.018. The overall predictive int
 As a separate check on player-level uncertainty, 95% intervals for pre-match matchup strength contained 94.5% of subsequent market revisions.
 
 These diagnostics are reproducible using the [evaluation data](/assets/data/wta-model-validation.csv) and [validation script](https://github.com/spazznolo/spazznolo.github.io/blob/master/scripts/wta_validation.py).
+
+## Interpretation
+
+1.  The player-state model retains 85.4% of the market's signal, compared with 57.7% for standard Elo, despite using no information from the match being predicted.
+2.  Performance is consistent on hard and clay courts, where the model retains about 86% of market signal. Grass is weaker at 76%, based on a smaller sample of 767 matches.
+3.  The mean predictions are well calibrated overall and in both seasons. Clay predictions may be slightly too conservative, while the smaller grass sample remains consistent with either good calibration or modest overconfidence.
+4.  Predictive uncertainty is also well calibrated overall. The intervals are slightly conservative on hard and clay courts and too narrow on grass.
+5.  Surface effects account for roughly 10% of the spread in player strength. They are useful adjustments to a player's overall level, not separate ratings of comparable size.
+
+The [ranking states](/assets/data/wta-rankings-latest.csv), [surface summary](https://github.com/spazznolo/spazznolo.github.io/blob/master/scripts/wta_surface_dispersion.py), and validation materials reproduce these results.
 
 ## Next steps
 
