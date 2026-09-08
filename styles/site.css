@@ -631,7 +631,7 @@ body:has(.model-field-sheet) #title-block-header {
 
 .model-results-table .overall-row th,
 .model-results-table .overall-row td {
-  color: var(--bs-body-color);
+  color: var(--warm-accent);
   font-weight: 600;
 }
 
@@ -641,88 +641,39 @@ body:has(.model-field-sheet) #title-block-header {
   margin-block: 1.5rem;
 }
 
-.model-field-sheet #model-map > .model-dag-ledger {
+.model-field-sheet .mermaid-js {
+  background: transparent;
+  margin-top: 1.75rem;
+}
+
+.model-field-sheet #model-map > .cell {
   grid-column: 1 / -1;
-  margin-top: 1.5rem !important;
+  margin-top: 1.25rem !important;
 }
 
-.model-dag-ledger {
-  overflow-x: auto;
+.model-field-sheet .mermaid-js .node rect,
+.model-field-sheet .mermaid-js .node polygon,
+.model-field-sheet .mermaid-js .node path {
+  fill: transparent !important;
+  stroke: none !important;
 }
 
-.model-dag-ledger svg {
-  display: block;
-  min-width: 760px;
-  width: 100%;
+.model-field-sheet .mermaid-js .nodeLabel,
+.model-field-sheet .mermaid-js .nodeLabel p {
+  color: var(--bs-body-color) !important;
+  font-family: "IBM Plex Mono", monospace !important;
+  font-size: 18px !important;
+  line-height: 1.35 !important;
 }
 
-.model-dag-ledger text {
-  fill: var(--bs-body-color);
-  font-family: "IBM Plex Mono", monospace;
+.model-field-sheet .mermaid-js .flowchart-link {
+  stroke: var(--warm-accent) !important;
+  stroke-width: 1.15px !important;
 }
 
-.model-dag-ledger .ledger-rules line {
-  stroke: var(--warm-divider);
-  stroke-width: 1;
-  vector-effect: non-scaling-stroke;
-}
-
-.model-dag-ledger .ledger-headings text {
-  fill: var(--warm-accent);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-}
-
-.model-dag-ledger .ledger-arrows path {
-  fill: none;
-  stroke: var(--warm-accent);
-  stroke-width: 1.15;
-  vector-effect: non-scaling-stroke;
-}
-
-.model-dag-ledger marker path {
-  fill: var(--warm-accent);
-}
-
-.model-dag-ledger .ledger-node text:nth-of-type(odd) {
-  font-size: 16px;
-}
-
-.model-dag-ledger .ledger-node text:nth-of-type(even) {
-  fill: var(--bs-secondary-color);
-  font-size: 12px;
-}
-
-.model-dag-ledger .ledger-node.parameter text:nth-of-type(odd) {
-  fill: var(--warm-accent);
-}
-
-.model-dag-ledger .ledger-node.covariate text:nth-of-type(odd) {
-  fill: var(--bs-secondary-color);
-}
-
-.model-dag-ledger .ledger-node.observed text:nth-of-type(odd) {
-  fill: var(--warm-accent);
-  font-weight: 600;
-}
-
-.model-dag-ledger .ledger-key text {
-  font-size: 10px;
-  letter-spacing: 0.05em;
-}
-
-.model-dag-ledger .ledger-key .key-parameter,
-.model-dag-ledger .ledger-key .key-observed {
-  fill: var(--warm-accent);
-}
-
-.model-dag-ledger .ledger-key .key-covariate {
-  fill: var(--bs-secondary-color);
-}
-
-.model-dag-ledger .ledger-key .key-state {
-  fill: var(--bs-body-color);
+.model-field-sheet .mermaid-js marker path {
+  fill: var(--warm-accent) !important;
+  stroke: var(--warm-accent) !important;
 }
 
 @media (max-width: 720px) {

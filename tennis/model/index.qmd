@@ -223,7 +223,13 @@ $$
 
 ### Prediction means
 
-Regressing match log-odds on the model's log-odds provides an intercept of zero (unbiased) and slope of one (calibrated).
+Before each match, the model produces a mean for the market log-odds. Mean calibration is checked by regressing the observed market log-odds on that prediction:
+
+$$
+y_m=\alpha+\lambda\hat\eta_m+\varepsilon_m.
+$$
+
+The intercept $\alpha$ tests whether predictions are systematically high or low. The slope $\lambda$ tests whether their spread is right: one is calibrated, above one means the model is too conservative, and below one means it is too extreme.
 
 | Subset | Matches | Intercept \[95% interval\] | Slope \[95% interval\] |
 |:--------------|--------------:|----------------------:|-------------------:|
@@ -284,82 +290,25 @@ The [ranking states](/assets/data/wta-rankings-latest.csv), [surface summary](ht
 
 Arrows show the direct dependencies in the generative model. During the global fit, the player states are integrated out; during the season, observed prices condition those states. The model itself is the same in both stages.
 
-```{=html}
-<div class="model-dag-ledger">
-<svg viewBox="0 0 940 520" role="img" aria-labelledby="model-dag-title model-dag-description">
-  <title id="model-dag-title">Directed acyclic graph of the WTA player-state model</title>
-  <desc id="model-dag-description">Parameters and covariates determine player states, which determine the matchup mean. The matchup mean and observation standard deviation determine the observed market log-odds.</desc>
-  <defs>
-    <marker id="model-ledger-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto">
-      <path d="M0 0L8 4L0 8Z"></path>
-    </marker>
-  </defs>
+```{mermaid}
+flowchart TB
+  experience["entry experience<br/>Eᵢ"] --> initial["entry strength<br/>xᵢ,1"]
+  entry["entry parameters<br/>τ₀, γₑ"] --> initial
 
-  <g class="ledger-rules">
-    <line x1="255" y1="24" x2="255" y2="486"></line>
-    <line x1="555" y1="24" x2="555" y2="486"></line>
-    <line x1="735" y1="24" x2="735" y2="486"></line>
-  </g>
+  initial --> history["previous strengths<br/>xᵢ,t−1, xⱼ,t−1"]
+  history --> strength["current strengths<br/>xᵢ,t, xⱼ,t"]
+  age["age and elapsed time<br/>Aᵢ,t, Δt"] --> strength
+  drift["age and drift parameters<br/>β, q"] --> strength
 
-  <g class="ledger-headings">
-    <text x="18" y="27">PARAMETERS + COVARIATES</text>
-    <text x="278" y="27">PLAYER STATES</text>
-    <text x="578" y="27">MATCHUP</text>
-    <text x="758" y="27">OBSERVATION</text>
-  </g>
+  surface["surface parameter<br/>τₛ"] --> effects["surface effects<br/>uᵢ,s, uⱼ,s"]
 
-  <g class="ledger-arrows" marker-end="url(#model-ledger-arrow)">
-    <path d="M165 78 C220 78 242 100 292 106"></path>
-    <path d="M165 133 C220 133 242 116 292 110"></path>
-    <path d="M370 130 L370 174"></path>
-    <path d="M370 207 L370 250"></path>
-    <path d="M165 226 C235 226 270 262 330 267"></path>
-    <path d="M165 281 C235 281 270 274 330 270"></path>
-    <path d="M165 354 C235 354 270 354 330 354"></path>
-    <path d="M445 270 C500 270 530 293 590 304"></path>
-    <path d="M445 354 C505 354 535 326 590 310"></path>
-    <path d="M165 423 C365 423 575 430 770 430"></path>
-    <path d="M165 474 C390 474 590 450 770 435"></path>
-    <path d="M664 307 L782 307"></path>
-    <path d="M827 414 C842 381 842 350 823 324"></path>
-  </g>
+  strength --> matchup["matchup mean<br/>ηₘ"]
+  effects --> matchup
 
-  <g class="ledger-node covariate">
-    <text x="18" y="76">Eᵢ</text><text x="18" y="94">entry experience</text>
-    <text x="18" y="224">Aᵢ,ₜ · Δt</text><text x="18" y="242">age · elapsed time</text>
-    <text x="18" y="421">Vₘ</text><text x="18" y="439">bookmaker margin</text>
-  </g>
+  margin["bookmaker margin<br/>Vₘ"] --> noise["observation SD<br/>√rₘ"]
+  observation["observation parameters<br/>√r, γᵥ"] --> noise
 
-  <g class="ledger-node parameter">
-    <text x="18" y="131">τ₀ · γₑ</text><text x="18" y="149">entry parameters</text>
-    <text x="18" y="279">β · q</text><text x="18" y="297">age · drift parameters</text>
-    <text x="18" y="352">τₛ</text><text x="18" y="370">surface parameter</text>
-    <text x="18" y="472">√r · γᵥ</text><text x="18" y="490">observation parameters</text>
-  </g>
-
-  <g class="ledger-node state">
-    <text x="292" y="108">xᵢ,₁</text><text x="292" y="126">entry strength</text>
-    <text x="292" y="185">xᵢ,ₜ₋₁ · xⱼ,ₜ₋₁</text><text x="292" y="203">previous strengths</text>
-    <text x="330" y="268">xᵢ,ₜ · xⱼ,ₜ</text><text x="330" y="286">current strengths</text>
-    <text x="330" y="352">uᵢ,ₛ · uⱼ,ₛ</text><text x="330" y="370">surface effects</text>
-  </g>
-
-  <g class="ledger-node derived">
-    <text x="590" y="305">ηₘ</text><text x="590" y="323">matchup mean</text>
-    <text x="770" y="429">√rₘ</text><text x="770" y="447">observation SD</text>
-  </g>
-
-  <g class="ledger-node observed">
-    <text x="782" y="305">yₘ</text><text x="782" y="323">market log-odds</text>
-  </g>
-
-  <g class="ledger-key">
-    <text x="18" y="516" class="key-parameter">PARAMETER</text>
-    <text x="116" y="516" class="key-covariate">COVARIATE</text>
-    <text x="214" y="516" class="key-state">LATENT STATE</text>
-    <text x="336" y="516" class="key-observed">OBSERVED</text>
-  </g>
-</svg>
-</div>
+  matchup --> price["market log-odds<br/>yₘ"]
+  noise --> price
 ```
 ::::
