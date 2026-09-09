@@ -668,7 +668,7 @@ body:has(.model-field-sheet) #title-block-header {
 
 .model-field-sheet .mermaid-js .flowchart-link {
   stroke: var(--warm-accent) !important;
-  stroke-width: 1.15px !important;
+  stroke-width: 1.5px !important;
 }
 
 .model-field-sheet .mermaid-js marker path {
