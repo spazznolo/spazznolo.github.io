@@ -279,12 +279,12 @@ These diagnostics are reproducible using the [evaluation data](/assets/data/wta-
 
 ## Interpretation
 
-1.  The model retains much of the market's signal (85.4%), particularly when compared to the standard Elo model (57.7%).
-2.  The model's primary advantage is that any matchup on any surface can be simulated.
+1.  The model retains much of the market’s signal (85.4%), particularly compared with standard Elo (57.7%), without using the predicted match’s price or outcome.
+2.  The model’s primary advantage is that any matchup on any surface can be simulated.
 3.  The model struggles on grass surfaces at predicting both match means and standard deviations. Interestingly, the model is more aggressive here, where it has the smallest sample and the lowest performance, than anywhere else.
-4.  The spread in surface agnostic player latent strength makes up about 90% of the total spread; the other 10% is the surface effect.
-5.  The model's player-specific residuals are correlated on short (< 1 week) time scales, which motivate the first two next d steps.
-6.  Match-to-match prediction is not enough to identify peak age.
+4.  Surface effects have roughly 10% as much cross-player spread as surface-agnostic latent strength.
+5.  Player-specific residuals are correlated over short timescales, motivating the first two items in the next section.
+6.  Match-to-match predictions are generally not separated enough in time to identify peak age.
 
 The [ranking states](/assets/data/wta-rankings-latest.csv), [surface summary](https://github.com/spazznolo/spazznolo.github.io/blob/master/scripts/wta_surface_dispersion.py), and validation materials reproduce these results.
 
