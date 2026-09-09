@@ -662,7 +662,7 @@ body:has(.model-field-sheet) #title-block-header {
 .model-field-sheet .mermaid-js .nodeLabel p {
   color: var(--bs-body-color) !important;
   font-family: "IBM Plex Mono", monospace !important;
-  font-size: 18px !important;
+  font-size: 20px !important;
   line-height: 1.35 !important;
 }
 
