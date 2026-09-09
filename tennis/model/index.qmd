@@ -11,9 +11,9 @@ page-layout: full
 :::: model-field-sheet
 ## Purpose
 
-This model estimates WTA player strength over time and across surfaces, with uncertainty, by treating historical market probabilities as noisy observations of latent player strength. The aim of this model is not to beat today's market, but to use public pricing history to create the most accurate, holistic ranking of tour players available anytime. Current estimates are published on the [WTA Rankings](/tennis/rankings/) page.
+This model estimates WTA player strength over time and across surfaces, with uncertainty, by treating historical market probabilities as noisy observations of latent player strength. The aim of this model is not to beat today's market, but to use public pricing history to create an accurate, holistic ranking of tour players available anytime. Current estimates are published on the [WTA Rankings](/tennis/rankings/) page.
 
-The system has two stages which share the same generative model. Each off-season, the global model learns the shared parameters while integrating over the player states. During the season, those parameters are fixed while the online player model estimates latent strengths before each day's matches.
+The system has two stages which share the same generative model. Each off-season, the global model learns the shared parameters while integrating over the player states. During the season, the global parameters are fixed while the online model estimates latent player strengths before each day's matches.
 
 ## Data
 
@@ -35,7 +35,7 @@ $$
 V_m=\frac{v_m-\bar v_{\mathrm{train}}}{s_{v,\mathrm{train}}}.
 $$
 
-The stored odds are the source's first available bookmaker; though bookmaker identity is not preserved, this is almost completely *bet365*. When forecasting a match, its own price is not used: all matches on a date are predicted before prices from that date update the player states. Match outcomes are used only for evaluation.
+The stored odds are the source's first available bookmaker; though bookmaker identity is not preserved, nearly the entirety of these data are sourced from *bet365*. When forecasting a match, its own price is not used: all matches on a date are predicted before prices from that date update the player states. Match outcomes are used only for evaluation.
 
 ## States
 
@@ -241,12 +241,12 @@ The intercept $\alpha$ tests whether predictions are systematically high or low.
 
 | Subset | Matches | Intercept \[95% interval\] | Slope \[95% interval\] |
 |:----------------|----------------:|--------------------:|-----------------:|
-| **Overall** | **6,381** | **−0.008 \[−0.065, 0.045\]** | **1.045 \[0.982, 1.116\]** |
-| 2024 | 3,167 | −0.020 \[−0.096, 0.052\] | 1.087 \[0.996, 1.178\] |
-| 2025 | 3,214 | +0.004 \[−0.074, 0.082\] | 1.007 \[0.912, 1.110\] |
-| Hard | 3,951 | −0.016 \[−0.083, 0.054\] | 1.019 \[0.929, 1.109\] |
-| Clay | 1,663 | +0.021 \[−0.079, 0.122\] | 1.182 \[1.048, 1.340\] |
-| Grass | 767 | −0.019 \[−0.178, 0.144\] | 0.909 \[0.748, 1.069\] |
+| **Overall** | **6,381** | **−0.01 \[−0.07, 0.05\]** | **1.05 \[0.98, 1.12\]** |
+| 2024 | 3,167 | −0.02 \[−0.10, 0.05\] | 1.08 \[0.99, 1.18\] |
+| 2025 | 3,214 | +0.01 \[−0.07, 0.08\] | 1.01 \[0.91, 1.11\] |
+| Hard | 3,951 | −0.02 \[−0.08, 0.05\] | 1.02 \[0.93, 1.11\] |
+| Clay | 1,663 | +0.02 \[−0.08, 0.12\] | 1.18 \[1.05, 1.34\] |
+| Grass | 767 | −0.02 \[−0.18, 0.14\] | 0.91 \[0.75, 1.07\] |
 
 **Prediction standard deviations**
 
@@ -279,24 +279,24 @@ These diagnostics are reproducible using the [evaluation data](/assets/data/wta-
 
 ## Interpretation
 
-1.  The player-state model retains 85.4% of the market's signal, compared with 57.7% for standard Elo, despite using no information from the match being predicted.
-2.  Performance is consistent on hard and clay courts, where the model retains about 86% of market signal. Grass is weaker at 76%, based on a smaller sample of 767 matches.
-3.  Win probabilities are well calibrated overall and in both seasons. Clay predictions may be slightly too conservative, while the smaller grass sample remains consistent with either good calibration or modest overconfidence.
-4.  Predictive uncertainty is also well calibrated overall. The intervals are slightly conservative on hard and clay courts and too narrow on grass.
-5.  Surface effects account for roughly 10% of the spread in player strength. They are useful adjustments to a player's overall level, not separate ratings of comparable size.
+1.  The model retains much of the market's signal (85.4%), particularly when compared to the standard Elo model (57.7%).
+2.  The model's primary advantage is that any matchup on any surface can be simulated.
+3.  The model struggles on grass surfaces at predicting both match means and standard deviations. Interestingly, the model is more aggressive here, where it has the smallest sample and the lowest performance, than anywhere else.
+4.  The spread in surface agnostic player latent strength makes up about 90% of the total spread; the other 10% is the surface effect.
+5.  The model's player-specific residuals are correlated on short (< 1 week) time scales, which motivate the first two next d steps.
+6.  Match-to-match prediction is not enough to identify peak age.
 
 The [ranking states](/assets/data/wta-rankings-latest.csv), [surface summary](https://github.com/spazznolo/spazznolo.github.io/blob/master/scripts/wta_surface_dispersion.py), and validation materials reproduce these results.
 
 ## Next steps
 
-1.  Successive standardized market innovations have correlation 0.130 across appearances one to seven days apart. Add chronic and acute drift states, then test whether they absorb that persistence.
-2.  Evaluate the aging curve using multi-year forecasts without intermediate market updates. Match-to-match prediction is not enough to identify peak age.
-3.  Split player strength into serve and return states using point-level data, then measure what they add to match prediction.
-4.  Revisit clay calibration and grass uncertainty as more seasons accumulate.
+1.  Split drift states into chronic and acute, to capture correlated residual on short-term windows.
+2.  Add latest match result as a feature in model.
+3.  Evaluate the aging curve using multi-year forecasts without intermediate market updates.
+4.  Revisit clay and grass calibration as more seasons accumulate.
+5.  Split player strength into serve and return states using point-level data, then measure what they add to match prediction.
 
 ## Model map
-
-Arrows show the direct dependencies in the generative model. During the global fit, the player states are integrated out; during the season, observed prices condition those states. The model itself is the same in both stages.
 
 ```{mermaid}
 flowchart TB
