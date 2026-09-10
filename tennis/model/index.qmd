@@ -2,7 +2,7 @@
 title: "WTA Rankings"
 description: "Notes on the model."
 date: 2026-09-06
-date-modified: 2026-09-08
+date-modified: 2026-09-09
 status: current
 toc: false
 page-layout: full
@@ -37,13 +37,15 @@ $$
 
 The stored odds are the source's first available bookmaker; though bookmaker identity is not preserved, nearly the entirety of these data are sourced from *bet365*. When forecasting a match, its own price is not used: all matches on a date are predicted before prices from that date update the player states. Match outcomes are used only for evaluation.
 
-## States
+## Parameters
+
+**Player states**
 
 - $x_{i,t}$ = player $i$'s overall strength at time $t$
 - $\mathbf u_i=(u_{i,\mathrm{hard}},u_{i,\mathrm{clay}},u_{i,\mathrm{grass}})$ = player $i$'s surface effects
 - $z$ = all player states and surface effects
 
-## Parameters
+**Shared parameters**
 
 $\operatorname{Normal}(\mu,\sigma)$ denotes a distribution with mean $\mu$ and standard deviation $\sigma$; $\operatorname{Normal}_2(\boldsymbol\mu,\boldsymbol\Sigma)$ uses covariance matrix $\boldsymbol\Sigma$. $\operatorname{LogNormal}(m,s)$ has median $m$ and log-scale standard deviation $s$.
 
@@ -57,9 +59,35 @@ $\operatorname{Normal}(\mu,\sigma)$ denotes a distribution with mean $\mu$ and s
 - $\gamma_e$ = change in log entry SD per standardized unit of prior experience; $\gamma_e\sim\operatorname{Normal}(0,0.5)$
 - $\gamma_v$ = change in log observation SD per standardized unit of bookmaker margin; $\gamma_v\sim\operatorname{Normal}(0,0.5)$
 
-## State model
+## Model map
 
-Player strength at entry is drawn from the tour population:
+```{mermaid}
+flowchart TB
+  experience["entry experience<br/>Eᵢ"] --> initial["entry strength<br/>xᵢ,1"]
+  entry["entry parameters<br/>τ₀, γₑ"] --> initial
+
+  initial --> history["previous strengths<br/>xᵢ,t−1, xⱼ,t−1"]
+  history --> strength["current strengths<br/>xᵢ,t, xⱼ,t"]
+  age["age and elapsed time<br/>Aᵢ,t, Δt"] --> strength
+  drift["age and drift parameters<br/>β, q"] --> strength
+
+  surface["surface parameter<br/>τₛ"] --> effects["surface effects<br/>uᵢ,s, uⱼ,s"]
+
+  strength --> matchup["matchup mean<br/>ηₘ"]
+  effects --> matchup
+
+  margin["bookmaker margin<br/>Vₘ"] --> noise["observation SD<br/>√rₘ"]
+  observation["observation parameters<br/>√r, γᵥ"] --> noise
+
+  matchup --> price["market log-odds<br/>yₘ"]
+  noise --> price
+```
+
+## Model
+
+**Player evolution**
+
+A player enters the model as a draw from the tour population:
 
 $$
 \log \tau_i=\log\tau_0+\gamma_e E_i,
@@ -115,9 +143,9 @@ $$
 
 This is a convenient way to impose $u_{i,\mathrm{hard}}+u_{i,\mathrm{clay}}+u_{i,\mathrm{grass}}=0$ while giving every surface the same prior treatment. Each named surface effect has population SD $\sqrt{2/3}\,\tau_s$; effects for two different surfaces have correlation $-1/2$ because increasing one must be offset by the others.
 
-## Observation model
+**Match observations**
 
-For match $m$, the expected market log-odds are the difference between the two players' overall strengths and surface effects:
+A match brings the two player states together. For match $m$, the expected market log-odds are the difference between their overall strengths and surface effects:
 
 $$
 \eta_m
@@ -136,8 +164,6 @@ y_m \mid z,\theta
 $$
 
 $r_m$ determines how strongly the observed price updates the player states.
-
-## Fit
 
 **Off-season global fit**
 
@@ -221,6 +247,17 @@ $$
 
 In a day-clustered bootstrap, the model's mean log loss was 0.0163 above the market [95% interval: 0.0117, 0.0207] and 0.0312 below Elo [0.0245, 0.0376].
 
+## Interpretation
+
+1.  The model retains much of the market’s signal (85.4%), particularly compared with standard Elo (57.7%), without using the predicted match’s price or outcome.
+2.  The model’s primary advantage is that any matchup on any surface can be simulated.
+3.  The model struggles on grass surfaces at predicting both match means and standard deviations. Interestingly, the model is more aggressive here, where it has the smallest sample and the lowest performance, than anywhere else.
+4.  Surface effects have roughly 10% as much cross-player spread as surface-agnostic latent strength.
+5.  Player-specific residuals are correlated over short timescales, motivating the first two items under Next steps.
+6.  Match-to-match predictions are generally not separated enough in time to identify peak age.
+
+The [ranking states](/assets/data/wta-rankings-latest.csv), [surface summary](https://github.com/spazznolo/spazznolo.github.io/blob/master/scripts/wta_surface_dispersion.py), and validation materials reproduce these results.
+
 ## Validation
 
 **Prediction means**
@@ -277,17 +314,6 @@ Against later market information, standardized revisions had SD 0.991 for played
 
 These diagnostics are reproducible using the [evaluation data](/assets/data/wta-model-validation.csv) and [validation script](https://github.com/spazznolo/spazznolo.github.io/blob/master/scripts/wta_validation.py).
 
-## Interpretation
-
-1.  The model retains much of the market’s signal (85.4%), particularly compared with standard Elo (57.7%), without using the predicted match’s price or outcome.
-2.  The model’s primary advantage is that any matchup on any surface can be simulated.
-3.  The model struggles on grass surfaces at predicting both match means and standard deviations. Interestingly, the model is more aggressive here, where it has the smallest sample and the lowest performance, than anywhere else.
-4.  Surface effects have roughly 10% as much cross-player spread as surface-agnostic latent strength.
-5.  Player-specific residuals are correlated over short timescales, motivating the first two items in the next section.
-6.  Match-to-match predictions are generally not separated enough in time to identify peak age.
-
-The [ranking states](/assets/data/wta-rankings-latest.csv), [surface summary](https://github.com/spazznolo/spazznolo.github.io/blob/master/scripts/wta_surface_dispersion.py), and validation materials reproduce these results.
-
 ## Next steps
 
 1.  Split drift states into chronic and acute, to capture correlated residual on short-term windows.
@@ -296,27 +322,4 @@ The [ranking states](/assets/data/wta-rankings-latest.csv), [surface summary](ht
 4.  Revisit clay and grass calibration as more seasons accumulate.
 5.  Split player strength into serve and return states using point-level data, then measure what they add to match prediction.
 
-## Model map
-
-```{mermaid}
-flowchart TB
-  experience["entry experience<br/>Eᵢ"] --> initial["entry strength<br/>xᵢ,1"]
-  entry["entry parameters<br/>τ₀, γₑ"] --> initial
-
-  initial --> history["previous strengths<br/>xᵢ,t−1, xⱼ,t−1"]
-  history --> strength["current strengths<br/>xᵢ,t, xⱼ,t"]
-  age["age and elapsed time<br/>Aᵢ,t, Δt"] --> strength
-  drift["age and drift parameters<br/>β, q"] --> strength
-
-  surface["surface parameter<br/>τₛ"] --> effects["surface effects<br/>uᵢ,s, uⱼ,s"]
-
-  strength --> matchup["matchup mean<br/>ηₘ"]
-  effects --> matchup
-
-  margin["bookmaker margin<br/>Vₘ"] --> noise["observation SD<br/>√rₘ"]
-  observation["observation parameters<br/>√r, γᵥ"] --> noise
-
-  matchup --> price["market log-odds<br/>yₘ"]
-  noise --> price
-```
 ::::
