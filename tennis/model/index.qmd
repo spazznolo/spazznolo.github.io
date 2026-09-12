@@ -250,9 +250,10 @@ $$
 </table>
 ```
 
+
 In a day-clustered bootstrap, the model's mean log loss was 0.0163 above the market [95% interval: 0.0117, 0.0207] and 0.0312 below Elo [0.0245, 0.0376].
 
-Surface effects are small next to overall player strength. Among the current top 500, their posterior means vary between players by roughly one-tenth as much as overall strength. The [ranking states](/assets/data/wta-rankings-latest.csv) and [surface summary](https://github.com/spazznolo/spazznolo.github.io/blob/master/scripts/wta_surface_dispersion.py) reproduce the calculation.
+Surface effects are small next to overall player strength. Among the current top 500, their posterior means vary between players by roughly one-tenth as much as overall strength.
 
 ## Validation
 
@@ -310,19 +311,15 @@ The pooled standardized innovations have mean +0.018. Overall, the predictive SD
 
 **Player-state uncertainty**
 
-Latent-state uncertainty was checked against later market information. Standardized revisions should have SD one, and their intervals should attain their stated coverage.
+Uncertainty in the live ratings was checked against the states obtained after seeing the rest of the season. The later revisions should fall within their expected 95% range about 95% of the time.
 
-| Quantity | Observations | Mean revision \[95% interval\] | Revision SD \[95% interval\] | 95% coverage |
-|:--------------|--------------:|--------------:|--------------:|--------------:|
-| Overall player state | 1,990 | −0.207 \[−0.256, −0.158\] | 0.963 \[0.921, 1.005\] | 95.3% |
-| Played-surface player state | 1,990 | −0.186 \[−0.233, −0.139\] | 0.991 \[0.950, 1.035\] | 94.4% |
-| Matchup contrast | 3,167 | +0.003 \[−0.034, 0.041\] | 1.035 \[1.007, 1.064\] | 94.5% |
+| Quantity                    | Observations | 95% coverage |
+|:----------------------------|-------------:|-------------:|
+| Overall player state        |        1,990 |        95.3% |
+| Played-surface player state |        1,990 |        94.4% |
+| Matchup contrast            |        3,167 |        94.5% |
 
-The interval widths are approximately calibrated to later market information. Absolute player levels revise downward together, but the shift disappears from the identifiable player-versus-player contrast. Ratings should therefore be compared within the same fitted snapshot: an absolute level from 2024 should not be read directly against one from 2026.
-
-The [state revisions](/assets/data/wta-state-revision-audit.csv), [matchup revisions](/assets/data/wta-matchup-revision-audit.csv) and [audit script](https://github.com/spazznolo/spazznolo.github.io/blob/master/scripts/wta_state_revision_audit.py) reproduce the uncertainty check.
-
-These diagnostics are reproducible using the [evaluation data](/assets/data/wta-model-validation.csv) and [validation script](https://github.com/spazznolo/spazznolo.github.io/blob/master/scripts/wta_validation.py).
+All three coverage rates are close to 95%.
 
 ## Next steps
 
