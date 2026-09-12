@@ -11,15 +11,28 @@ page-layout: full
 :::: model-field-sheet
 ## Purpose
 
-This model estimates WTA player strength over time and across surfaces, with uncertainty, by treating historical market probabilities as noisy observations of latent player strength. The aim of this model is not to beat today's market, but to use public pricing history to create an accurate, holistic ranking of tour players available anytime. Current estimates are published on the [WTA Rankings](/tennis/rankings/) page.
+This model estimates WTA player strength over time and across surfaces, with uncertainty, by treating historical market probabilities as noisy observations of latent player strength. The aim of this model is not to beat today's market, but to use public pricing history to create an accurate, holistic ranking of tour players available anytime. Within a single fitted snapshot, any two players can be compared on any surface. Current estimates are published on the [WTA Rankings](/tennis/rankings/) page.
 
-The system has two stages which share the same generative model. Each off-season, the global model learns the shared parameters while integrating over the player states. During the season, the global parameters are fixed while the online model estimates latent player strengths before each day's matches.
+## System
+
+The system consists of a single generative model, run in two stages.
+
+1.  In the off-season, the model learns the shared parameters while integrating over the player states.
+2.  During the season, the model fixes the learned global parameters and estimates latent player strengths before each day's matches.
+
+The player-state model retains 85.4% of the market's signal, compared with 57.7% for standard Elo, without using the predicted match's de-vigged probability or outcome.
+
+<nav class="model-contents" aria-label="Contents">
+
+Contents <a href="#data">Data</a> <a href="#parameters">Parameters</a> <a href="#model">Model</a> <a href="#estimation">Estimation</a> <a href="#results">Results</a> <a href="#validation">Validation</a> <a href="#next-steps">Next steps</a>
+
+</nav>
 
 ## Data
 
-One row per match: players $i$ and $j$, date $t$, surface $s$, player ages, prior WTA appearances, surface type, and decimal odds $o_{i,m}$ and $o_{j,m}$. These data were acquired for nearly every WTA match from 2019 to 2026.
+One observation per match: date $t$, surface $s$, players $i$ and $j$, their ages and prior experience, and decimal odds $o_{i,m}$ and $o_{j,m}$. These data were acquired for nearly every WTA match from 2019 to 2026. The database stores the source's first listed bookmaker but not its identity; in practice, this was usually *bet365*.
 
-The odds are converted to raw implied probabilities and de-vigged:
+The market odds are converted into implied log-odds using proportional de-vigging:
 
 $$
 \pi_{i,m}=\frac{1}{o_{i,m}},
@@ -29,13 +42,13 @@ p_{i,m}=\frac{\pi_{i,m}}{\pi_{i,m}+\pi_{j,m}},
 y_m=\log\frac{p_{i,m}}{1-p_{i,m}}.
 $$
 
-The raw bookmaker margin is $v_m=\pi_{i,m}+\pi_{j,m}-1$. The model uses its training-standardized value,
+The raw bookmaker margin is $v_m=\pi_{i,m}+\pi_{j,m}-1$. The model standardizes the margin using the mean and SD from its training seasons:
 
 $$
 V_m=\frac{v_m-\bar v_{\mathrm{train}}}{s_{v,\mathrm{train}}}.
 $$
 
-The stored odds are the source's first available bookmaker; though bookmaker identity is not preserved, nearly the entirety of these data are sourced from *bet365*. When forecasting a match, its own price is not used: all matches on a date are predicted before prices from that date update the player states. Match outcomes are used only for evaluation.
+All matches on a date are predicted before that date's prices update the player states. Match outcomes are used only for evaluation.
 
 ## Parameters
 
@@ -45,7 +58,7 @@ The stored odds are the source's first available bookmaker; though bookmaker ide
 - $\mathbf u_i=(u_{i,\mathrm{hard}},u_{i,\mathrm{clay}},u_{i,\mathrm{grass}})$ = player $i$'s surface effects
 - $z$ = all player states and surface effects
 
-**Shared parameters**
+**Global parameters**
 
 $\operatorname{Normal}(\mu,\sigma)$ denotes a distribution with mean $\mu$ and standard deviation $\sigma$; $\operatorname{Normal}_2(\boldsymbol\mu,\boldsymbol\Sigma)$ uses covariance matrix $\boldsymbol\Sigma$. $\operatorname{LogNormal}(m,s)$ has median $m$ and log-scale standard deviation $s$.
 
@@ -53,13 +66,13 @@ $\operatorname{Normal}(\mu,\sigma)$ denotes a distribution with mean $\mu$ and s
 - $\tau_0$ = population entry SD, in log-odds; $\tau_0\sim\operatorname{LogNormal}(1.5,0.75)$
 - $\sqrt q$ = process SD, in log-odds per square-root year; $\sqrt q\sim\operatorname{LogNormal}(0.5,1)$
 - $\sqrt r$ = base observation SD, in log-odds; $\sqrt r\sim\operatorname{LogNormal}(0.25,0.75)$
-- $\tau_s$ = SD of the orthonormal surface contrasts, in log-odds; $\tau_s\sim\operatorname{LogNormal}(0.35,0.75)$
+- $\tau_s$ = scale of between-player surface variation, in log-odds; $\tau_s\sim\operatorname{LogNormal}(0.35,0.75)$
 - $\beta_g$ = annual pre-peak growth, in log-odds; $\beta_g\sim\operatorname{LogNormal}(0.4,0.75)$
 - $\beta_d$ = annual post-peak decline, in log-odds; $\beta_d\sim\operatorname{LogNormal}(0.15,1)$
 - $\gamma_e$ = change in log entry SD per standardized unit of prior experience; $\gamma_e\sim\operatorname{Normal}(0,0.5)$
 - $\gamma_v$ = change in log observation SD per standardized unit of bookmaker margin; $\gamma_v\sim\operatorname{Normal}(0,0.5)$
 
-## Model map
+## Model
 
 ```{mermaid}
 flowchart TB
@@ -83,11 +96,9 @@ flowchart TB
   noise --> price
 ```
 
-## Model
-
 **Player evolution**
 
-A player enters the model as a draw from the tour population:
+A player enters the model as a draw from the tour population, where $E_i$ is the training-standardized value of $\log(1+n_i)$, and $n_i$ is player $i$'s number of WTA appearances before entering the modeled panel:
 
 $$
 \log \tau_i=\log\tau_0+\gamma_e E_i,
@@ -95,9 +106,7 @@ $$
 x_{i,1} \sim \operatorname{Normal}(0,\tau_i).
 $$
 
-$E_i$ is the training-standardized value of $\log(1+n_i)$, where $n_i$ is player $i$'s number of stored WTA appearances before entering the panel.
-
-The live model fixes peak age at 24 and uses the piecewise-linear age path:
+Because predictions are made one match ahead, [fixed peak ages from 24 through 28](/assets/data/wta-peak-sensitivity.csv) produced functionally identical out-of-sample loss. The live model fixes peak age at 24 and uses the piecewise-linear age path:
 
 $$
 a(A;\beta)=
@@ -106,8 +115,6 @@ a(A;\beta)=
 -\beta_d(A-24), & A\geq24.
 \end{cases}
 $$
-
-Peak age was fixed at 24 before evaluation. [Short-horizon refits](/assets/data/wta-peak-sensitivity.csv) could not distinguish peaks from 24 through 28: identifying the aging curve requires forecasts over years rather than matches.
 
 Player strength then evolves as:
 
@@ -120,9 +127,9 @@ x_{i,t-1}+a(A_{i,t};\beta)-a(A_{i,t-1};\beta),
 \right).
 $$
 
-$\Delta t$ is elapsed calendar time in years. The mean follows the age path; variance grows linearly with elapsed time.
+Here, $\Delta t$ is elapsed calendar time in years.
 
-Each player has zero-sum random effects for hard, clay and grass. They are represented using two orthonormal Helmert contrasts.
+Each player has zero-sum random effects for hard, clay and grass, represented using two orthonormal Helmert contrasts.
 
 $$
 \mathbf c_i\sim\operatorname{Normal}_2(\mathbf 0,\tau_s^2\mathbf I_2),
@@ -141,11 +148,9 @@ $$
 \mathbf 1^\mathsf T\mathbf u_i=0.
 $$
 
-This is a convenient way to impose $u_{i,\mathrm{hard}}+u_{i,\mathrm{clay}}+u_{i,\mathrm{grass}}=0$ while giving every surface the same prior treatment. Each named surface effect has population SD $\sqrt{2/3}\,\tau_s$; effects for two different surfaces have correlation $-1/2$ because increasing one must be offset by the others.
-
 **Match observations**
 
-A match brings the two player states together. For match $m$, the expected market log-odds are the difference between their overall strengths and surface effects:
+For match $m$, the expected market log-odds are the difference between the players' overall strengths plus the difference between their surface effects:
 
 $$
 \eta_m
@@ -165,6 +170,8 @@ $$
 
 $r_m$ determines how strongly the observed price updates the player states.
 
+## Estimation
+
 **Off-season global fit**
 
 Let $y_{\mathrm{train}}$ contain the eligible market log-odds from the preceding seasons in a ten-season window. The 2026 fit uses every available season from 2019 through 2025. The shared parameters are estimated by maximum a posteriori probability while the player states are integrated out:
@@ -181,7 +188,7 @@ p(z\mid\theta)\,dz
 \right\}.
 $$
 
-The Gaussian integral is evaluated exactly in sparse precision form; player states are not optimizer coordinates.
+During the global fit, the likelihood averages over the player states; only the shared parameters are optimized.
 
 **In-season online fit**
 
@@ -193,14 +200,12 @@ $$
 
 Carry the state distributions forward, predict a given set of matches, then condition on the new prices. This is implemented as an information-form Kalman update.
 
-Dynamic player states, filtering and offline parameter estimation are established parts of skill-rating models; [Duffield, Power and Rimella](https://academic.oup.com/jrsssc/article/73/5/1262/7734616) demonstrate that workflow on WTA results. Surface-specific tennis states also appear in [Gorgi, Koopman and Lit](https://doi.org/10.1111/rssa.12464), while [Ingram](https://doi.org/10.1515/jqas-2018-0008) separates serve and return skill using point outcomes. [Leitner, Zeileis and Hornik](https://doi.org/10.1016/j.ijforecast.2009.10.001) recover latent ability from bookmaker consensus. Here, de-vigged match prices are the observations, and the linear-Gaussian form allows the player states to be integrated exactly during the global fit.
-
 ## Results
 
 The evaluation contains 6,381 matches from the 2024 and 2025 seasons. There are two benchmarks.
 
-1.  The market benchmark uses the de-vigged price for the match being predicted.
-2.  The Elo benchmark initializes every player at 1500, uses the conventional 400-point logistic scale with a fixed $K=32$, and warms up on matches from 2021 through 2023. It maintains one rating across surfaces and uses only outcomes observed before that day.
+1.  Market: de-vigged price for the match being predicted.
+2.  Elo: initializes every player at 1500, uses the conventional 400-point logistic scale with a fixed $K=32$, and warms up on matches from 2021 through 2023. It maintains one rating across surfaces and uses only outcomes observed before that day.
 
 ::: model-field-sheet
 The fraction of market signal retained is defined against a coin flip forecast:
@@ -247,20 +252,11 @@ $$
 
 In a day-clustered bootstrap, the model's mean log loss was 0.0163 above the market [95% interval: 0.0117, 0.0207] and 0.0312 below Elo [0.0245, 0.0376].
 
-## Interpretation
-
-1.  The model retains much of the market’s signal (85.4%), particularly compared with standard Elo (57.7%), without using the predicted match’s price or outcome.
-2.  The model’s primary advantage is that any matchup on any surface can be simulated.
-3.  The model struggles on grass surfaces at predicting both match means and standard deviations. Interestingly, the model is more aggressive here, where it has the smallest sample and the lowest performance, than anywhere else.
-4.  Surface effects have roughly 10% as much cross-player spread as surface-agnostic latent strength.
-5.  Player-specific residuals are correlated over short timescales, motivating the first two items under Next steps.
-6.  Match-to-match predictions are generally not separated enough in time to identify peak age.
-
-The [ranking states](/assets/data/wta-rankings-latest.csv), [surface summary](https://github.com/spazznolo/spazznolo.github.io/blob/master/scripts/wta_surface_dispersion.py), and validation materials reproduce these results.
+Surface effects are small next to overall player strength. Among the current top 500, their posterior means vary between players by roughly one-tenth as much as overall strength. The [ranking states](/assets/data/wta-rankings-latest.csv) and [surface summary](https://github.com/spazznolo/spazznolo.github.io/blob/master/scripts/wta_surface_dispersion.py) reproduce the calculation.
 
 ## Validation
 
-**Prediction means**
+**Win probabilities**
 
 Before each match, the model produces a win probability $\hat p_m$. Outcome calibration is checked by regressing the observed result $W_m$ on the model log-odds:
 
@@ -276,14 +272,16 @@ $$
 
 The intercept $\alpha$ tests whether predictions are systematically high or low. The slope $\lambda$ tests whether their spread is right: one is calibrated, above one means the model is too conservative, and below one means it is too extreme.
 
-| Subset | Matches | Intercept \[95% interval\] | Slope \[95% interval\] |
-|:----------------|----------------:|--------------------:|-----------------:|
-| **Overall** | **6,381** | **−0.01 \[−0.07, 0.05\]** | **1.05 \[0.98, 1.12\]** |
-| 2024 | 3,167 | −0.02 \[−0.10, 0.05\] | 1.08 \[0.99, 1.18\] |
-| 2025 | 3,214 | +0.01 \[−0.07, 0.08\] | 1.01 \[0.91, 1.11\] |
-| Hard | 3,951 | −0.02 \[−0.08, 0.05\] | 1.02 \[0.93, 1.11\] |
-| Clay | 1,663 | +0.02 \[−0.08, 0.12\] | 1.18 \[1.05, 1.34\] |
-| Grass | 767 | −0.02 \[−0.18, 0.14\] | 0.91 \[0.75, 1.07\] |
+| Subset      |   Matches | Intercept \[95% interval\] |  Slope \[95% interval\] |
+|:-----------------|-----------------:|-------------------:|-----------------:|
+| **Overall** | **6,381** |  **−0.01 \[−0.07, 0.05\]** | **1.05 \[0.98, 1.12\]** |
+| 2024        |     3,167 |      −0.02 \[−0.10, 0.05\] |     1.08 \[0.99, 1.18\] |
+| 2025        |     3,214 |      +0.01 \[−0.07, 0.08\] |     1.01 \[0.91, 1.11\] |
+| Hard        |     3,951 |      −0.02 \[−0.08, 0.05\] |     1.02 \[0.93, 1.11\] |
+| Clay        |     1,663 |      +0.02 \[−0.08, 0.12\] |     1.18 \[1.05, 1.34\] |
+| Grass       |       767 |      −0.02 \[−0.18, 0.14\] |     0.91 \[0.75, 1.07\] |
+
+The model's win probabilities are well calibrated overall and within both seasons. Clay is the clearest departure: its slope above one means those predictions are somewhat too conservative. The grass interval is wider and still includes one.
 
 **Prediction standard deviations**
 
@@ -308,18 +306,28 @@ have SD one and the prediction intervals attain their stated coverage.
 | Grass       |         1.121 |        48.1% |        77.4% |        91.9% |
 | **Overall** |     **0.981** |    **52.2%** |    **82.2%** |    **95.6%** |
 
-The pooled standardized innovations have mean +0.018. Overall, the predictive SD is close to calibrated. Hard and clay intervals are slightly too wide; grass intervals are too narrow.
+The pooled standardized innovations have mean +0.018. Overall, the predictive SD is close to calibrated. Hard and clay intervals are slightly too wide. Grass is the clearest failure: an innovation SD of 1.121 means prices moved farther than the model allowed, even though this is the surface with the smallest sample and weakest predictive performance.
 
-Against later market information, standardized revisions had SD 0.991 for played-surface player states and 1.035 for matchup contrasts, with 95% coverage of 94.4% and 94.5%. The [state revisions](/assets/data/wta-state-revision-audit.csv), [matchup revisions](/assets/data/wta-matchup-revision-audit.csv) and [audit script](https://github.com/spazznolo/spazznolo.github.io/blob/master/scripts/wta_state_revision_audit.py) reproduce the check.
+**Player-state uncertainty**
+
+Latent-state uncertainty was checked against later market information. Standardized revisions should have SD one, and their intervals should attain their stated coverage.
+
+| Quantity | Observations | Mean revision \[95% interval\] | Revision SD \[95% interval\] | 95% coverage |
+|:--------------|--------------:|--------------:|--------------:|--------------:|
+| Overall player state | 1,990 | −0.207 \[−0.256, −0.158\] | 0.963 \[0.921, 1.005\] | 95.3% |
+| Played-surface player state | 1,990 | −0.186 \[−0.233, −0.139\] | 0.991 \[0.950, 1.035\] | 94.4% |
+| Matchup contrast | 3,167 | +0.003 \[−0.034, 0.041\] | 1.035 \[1.007, 1.064\] | 94.5% |
+
+The interval widths are approximately calibrated to later market information. Absolute player levels revise downward together, but the shift disappears from the identifiable player-versus-player contrast. Ratings should therefore be compared within the same fitted snapshot: an absolute level from 2024 should not be read directly against one from 2026.
+
+The [state revisions](/assets/data/wta-state-revision-audit.csv), [matchup revisions](/assets/data/wta-matchup-revision-audit.csv) and [audit script](https://github.com/spazznolo/spazznolo.github.io/blob/master/scripts/wta_state_revision_audit.py) reproduce the uncertainty check.
 
 These diagnostics are reproducible using the [evaluation data](/assets/data/wta-model-validation.csv) and [validation script](https://github.com/spazznolo/spazznolo.github.io/blob/master/scripts/wta_validation.py).
 
 ## Next steps
 
-1.  Split drift states into chronic and acute, to capture correlated residual on short-term windows.
-2.  Add latest match result as a feature in model.
-3.  Evaluate the aging curve using multi-year forecasts without intermediate market updates.
-4.  Revisit clay and grass calibration as more seasons accumulate.
-5.  Split player strength into serve and return states using point-level data, then measure what they add to match prediction.
-
+1.  Split drift states into chronic and acute, to capture correlated residuals on short-term windows.
+2.  Evaluate the aging curve using multi-year forecasts without intermediate market updates.
+3.  Revisit clay and grass calibration as more seasons accumulate.
+4.  Split player strength into serve and return states using point-level data, then measure what they add to match prediction.
 ::::
