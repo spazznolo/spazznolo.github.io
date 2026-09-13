@@ -8,6 +8,7 @@ listing:
       - "goalie-performance/index.qmd"
       - "nhl-pick-probability/index.qmd"
       - "../post-regulation/index.qmd"
+      - "../goalies/consistency/index.qmd"
       - "../posts/**/index.qmd"
     sort: "date desc"
     type: table

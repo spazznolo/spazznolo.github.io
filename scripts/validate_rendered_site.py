@@ -17,6 +17,7 @@ CANONICAL_LISTING_INPUTS = (
     "research/goalie-performance/index.qmd",
     "research/nhl-pick-probability/index.qmd",
     "post-regulation/index.qmd",
+    "goalies/consistency/index.qmd",
 )
 
 
@@ -223,7 +224,7 @@ def _invalid_iso_date(value: str) -> bool:
 def validate_listing_inputs(root: Path) -> list[str]:
     errors = []
     sources = listing_input_paths(root)
-    expected_sources = len(CANONICAL_LISTING_INPUTS) + 9 + len(
+    expected_sources = len(CANONICAL_LISTING_INPUTS) + 5 + len(
         list(root.glob("posts/**/index.qmd"))
     )
     if len(sources) != expected_sources:

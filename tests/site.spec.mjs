@@ -3,7 +3,7 @@ import AxeBuilder from '@axe-core/playwright';
 
 const pages = ['/', '/research/', '/about/', '/archive/', '/404.html', '/research/goalie-performance/', '/research/nhl-pick-probability/'];
 const widths = [320, 768, 1440];
-const responsivePages = ['/research/goalie-performance/', '/research/nhl-pick-probability/', '/2022/03/28/goalie-consistency-1.html', '/2022/09/16/tennis-liveblog.html'];
+const responsivePages = ['/research/goalie-performance/', '/research/nhl-pick-probability/', '/goalies/consistency/', '/2022/09/16/tennis-liveblog.html'];
 
 for (const path of pages) {
   test(`${path} has no serious accessibility violations`, async ({ page }) => {
@@ -114,7 +114,7 @@ test('keyboard focus reaches navigation and activates Research', async ({ page }
   await expect(page).toHaveURL(/\/research\/$/);
 });
 
-for (const path of ['/research/goalie-performance/', '/2022/03/28/goalie-consistency-1.html']) {
+for (const path of ['/research/goalie-performance/', '/goalies/consistency/']) {
   test(`${path} does not show subjects beneath the post title`, async ({ page }) => {
     await page.goto(path);
     await expect(page.locator('header.quarto-title-block .quarto-categories')).toHaveCount(0);

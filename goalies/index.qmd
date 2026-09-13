@@ -1,7 +1,8 @@
 ---
 title: "Goalies"
-description: "Archived and consolidated research about goalie performance and consistency."
+description: "Notes and research on goalie performance and consistency."
 toc: false
 ---
 
-Start with [Goalie Performance](/research/goalie-performance/) or browse the complete [Archive](/archive/).
+- [Goalie Performance](/research/goalie-performance/) — estimating talent while respecting small-sample uncertainty.
+- [Goalie Consistency](/goalies/consistency/) — whether a steadier goalie helps a team win more games.

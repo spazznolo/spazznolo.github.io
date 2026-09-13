@@ -3,15 +3,12 @@
     {"route": "/", "source": "index.qmd", "series": "page"},
     {"route": "/background/", "source": "background/index.qmd", "series": "page"},
     {"route": "/goalies/", "source": "goalies/index.qmd", "series": "page"},
+    {"route": "/goalies/consistency/", "source": "goalies/consistency/index.qmd", "series": "page"},
     {"route": "/tennis/", "source": "tennis/index.qmd", "series": "page"},
     {"route": "/draft/", "source": "draft/index.qmd", "series": "page"},
     {"route": "/post-regulation/", "source": "post-regulation/index.qmd", "series": "page"}
   ],
   "posts": [
-    {"route": "/2022/03/28/goalie-consistency-1.html", "source": "2022/03/28/goalie-consistency-1.qmd", "series": "goalie"},
-    {"route": "/2022/03/29/goalie-consistency-2.html", "source": "2022/03/29/goalie-consistency-2.qmd", "series": "goalie"},
-    {"route": "/2022/04/02/goalie-consistency-3.html", "source": "2022/04/02/goalie-consistency-3.qmd", "series": "goalie"},
-    {"route": "/2022/04/07/goalie-consistency-4.html", "source": "2022/04/07/goalie-consistency-4.qmd", "series": "goalie"},
     {"route": "/2022/09/16/tennis-liveblog.html", "source": "2022/09/16/tennis-liveblog.qmd", "series": "tennis"},
     {"route": "/2023/01/15/tennis-framework.html", "source": "2023/01/15/tennis-framework.qmd", "series": "tennis"},
     {"route": "/2023/07/30/tennis-data.html", "source": "2023/07/30/tennis-data.qmd", "series": "tennis"},
