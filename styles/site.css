@@ -854,16 +854,6 @@ body:has(.model-field-sheet) #title-block-header {
   stroke: var(--warm-accent) !important;
 }
 
-/* The pick-probability map is a process sketch, not the denser WTA DAG. */
-.pick-probability-map .mermaid-js .nodeLabel,
-.pick-probability-map .mermaid-js .nodeLabel p {
-  font-size: 13px !important;
-}
-
-.pick-probability-map .mermaid-js svg {
-  max-width: 580px !important;
-}
-
 @media (max-width: 720px) {
   .model-contents {
     display: block;
