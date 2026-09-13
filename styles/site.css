@@ -303,6 +303,56 @@ body.quarto-light .home-about p {
   white-space: nowrap;
 }
 
+.plot-title {
+  color: var(--warm-accent);
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.055em;
+  margin: 2.4rem auto 0.45rem;
+  max-width: var(--reading-width);
+  text-transform: uppercase;
+}
+
+.article-table {
+  margin: 1.5rem auto 2rem;
+  max-width: var(--reading-width);
+  overflow-x: auto;
+}
+
+.article-table table {
+  background: transparent;
+  border: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.article-table th,
+.article-table td {
+  background: transparent !important;
+  border: 0;
+  border-bottom: 1px solid var(--warm-divider);
+  padding: 0.48rem 0.6rem;
+  vertical-align: top;
+}
+
+.article-table th {
+  color: var(--warm-accent);
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+}
+
+.article-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.article-table strong {
+  color: var(--warm-accent);
+}
+
 .listing-table, .quarto-listing {
   width: 100%;
 }
@@ -553,6 +603,15 @@ body:has(.model-field-sheet) #title-block-header {
   display: block;
 }
 
+.model-contents-section {
+  display: block;
+  margin: 0;
+}
+
+.model-contents-section .model-contents-links > p {
+  grid-template-columns: 1fr;
+}
+
 .model-field-sheet > section.level2 {
   border-top: 1px solid var(--warm-divider);
   counter-increment: field-sheet-section;
@@ -793,6 +852,12 @@ body:has(.model-field-sheet) #title-block-header {
 .model-field-sheet .mermaid-js marker path {
   fill: var(--warm-accent) !important;
   stroke: var(--warm-accent) !important;
+}
+
+/* The pick-probability map is a process sketch, not the denser WTA DAG. */
+.pick-probability-map .mermaid-js .nodeLabel,
+.pick-probability-map .mermaid-js .nodeLabel p {
+  font-size: 16px !important;
 }
 
 @media (max-width: 720px) {

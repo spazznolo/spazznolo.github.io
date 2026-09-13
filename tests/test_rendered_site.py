@@ -46,12 +46,15 @@ class RenderedSiteSmokeTest(unittest.TestCase):
         html = (SITE / "index.html").read_text(encoding="utf-8")
         self.assertIn('property="og:title" content="Home – jeremie.spagnolo"', html)
 
-    def test_historical_code_and_video_fallback_contracts(self):
+    def test_pick_probability_and_video_fallback_contracts(self):
         canonical = (SITE / "research" / "nhl-pick-probability" / "index.html").read_text(
             encoding="utf-8"
         )
-        self.assertIn('class="historical-code-disclosure"', canonical)
-        self.assertIn("<summary>Show historical code", canonical)
+        self.assertIn('class="article-table"', canonical)
+        self.assertIn('class="model-field-sheet"', canonical)
+        self.assertIn('href="#applications"', canonical)
+        self.assertIn("Montreal: prospect uncertainty", canonical)
+        self.assertNotIn("Show historical code", canonical)
         video_page = (SITE / "2022" / "09" / "16" / "tennis-liveblog.html").read_text(
             encoding="utf-8"
         )

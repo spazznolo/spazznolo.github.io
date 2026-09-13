@@ -6,7 +6,13 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def source_contract(relative_path, headings, minimum_words, maximum_words):
+def source_contract(
+    relative_path,
+    headings,
+    minimum_words,
+    maximum_words,
+    requires_consolidation_note=True,
+):
     text = (ROOT / relative_path).read_text(encoding="utf-8")
     for heading in headings:
         if f"## {heading}" not in text:
@@ -14,7 +20,7 @@ def source_contract(relative_path, headings, minimum_words, maximum_words):
     words = re.findall(r"\b[\w’'-]+\b", text)
     if not minimum_words <= len(words) <= maximum_words:
         raise AssertionError(f"{relative_path}: {len(words)} words outside {minimum_words}-{maximum_words}")
-    if text.count("This article consolidates") != 1:
+    if requires_consolidation_note and text.count("This article consolidates") != 1:
         raise AssertionError(f"{relative_path}: consolidation note must be one sentence")
     for multipart_marker in [
         'class="part-date"',
@@ -81,27 +87,31 @@ class CanonicalArticleTest(unittest.TestCase):
         source_contract(
             "research/nhl-pick-probability/index.qmd",
             [
-                "From rankings to pick probabilities",
-                "A rank-ordered model",
-                "Turning probabilities into pick value",
-                "Adding uncertainty",
-                "A drafting strategy",
-                "After the draft",
+                "Purpose",
+                "System",
+                "Contents",
+                "Data",
+                "Parameters",
+                "Model",
+                "Estimation",
+                "Applications",
+                "Validation",
             ],
-            4000,
-            5200,
+            1200,
+            2600,
+            requires_consolidation_note=False,
         )
 
-    def test_nhl_pick_probability_preserves_historical_presentation_notes(self):
+    def test_nhl_pick_probability_uses_rank_ordered_model_only(self):
         text = (ROOT / "research/nhl-pick-probability/index.qmd").read_text(encoding="utf-8")
-        self.assertIn(
-            "draft_simulations <- replicate(100000, sample(1:skaters, skaters, replace = FALSE, prob = mle_estimates))",
-            text,
-        )
-        self.assertIn("probability Mikko Rantanen would be selected in the first five picks was 16.3%", text)
-        self.assertIn("adjusted user data (score ~ 0.0604)", text)
-        self.assertIn("Unless!", text)
-        self.assertIn("the sportsbooks cooked us", text)
+        self.assertIn("A Plackett–Luce model", text)
+        self.assertIn("One hundred thousand drafts", text)
+        self.assertIn("pick four is worth more than pick five in 67.3%", text)
+        self.assertIn("model-field-sheet", text)
+        self.assertIn('href="#applications">Applications</a>', text)
+        self.assertNotIn("Mikko Rantanen", text)
+        self.assertNotIn("Show historical code", text)
+        self.assertEqual(text.count("equation-note"), 5)
 
 
 if __name__ == "__main__":
