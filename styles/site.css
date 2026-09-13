@@ -511,13 +511,13 @@ body:has(.model-field-sheet) #title-block-header {
 
 .model-contents {
   align-items: baseline;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
   font-family: "IBM Plex Sans", sans-serif;
   font-size: 0.74rem;
-  gap: 0.45rem 1rem;
+  gap: 2.5rem;
+  grid-template-columns: 10.5rem minmax(0, 1fr);
   letter-spacing: 0.055em;
-  margin: -0.4rem 0 1.7rem 13rem;
+  margin: -0.4rem 0 1.7rem;
   text-transform: uppercase;
 }
 
@@ -536,6 +536,17 @@ body:has(.model-field-sheet) #title-block-header {
 .model-contents a:focus {
   text-decoration: underline;
   text-underline-offset: 0.2em;
+}
+
+.model-contents-links {
+  min-width: 0;
+}
+
+.model-contents-links > p {
+  display: grid;
+  gap: 0.45rem 1rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 0;
 }
 
 .model-field-sheet > section.level2 {
@@ -597,6 +608,52 @@ body:has(.model-field-sheet) #title-block-header {
   margin-bottom: 0.3rem;
 }
 
+.model-parameter-table {
+  margin: 0.6rem 0 1.45rem;
+}
+
+.model-parameter-table table {
+  background: transparent;
+  border: 0;
+  margin: 0;
+  table-layout: auto;
+  width: 100%;
+}
+
+.model-parameter-table thead {
+  display: none;
+}
+
+.model-parameter-table colgroup {
+  display: none;
+}
+
+.model-parameter-table th,
+.model-parameter-table td {
+  border: 0;
+  padding: 0.12rem 0;
+  vertical-align: baseline;
+}
+
+.model-parameter-table .table > :not(caption) > * > * {
+  background: transparent;
+  border-bottom-width: 0;
+  box-shadow: none;
+}
+
+.model-parameter-table td:first-child {
+  padding-right: 0.45rem;
+  text-align: right;
+  white-space: nowrap;
+  width: 4.25rem;
+}
+
+.model-parameter-table td:nth-child(2) {
+  padding-inline: 0.2rem 0.45rem;
+  text-align: center;
+  width: 0.8rem;
+}
+
 .model-field-sheet strong {
   color: var(--warm-accent);
   font-family: "IBM Plex Sans", sans-serif;
@@ -644,14 +701,14 @@ body:has(.model-field-sheet) #title-block-header {
 .model-results-table .metric-row th {
   border-top: 1px solid var(--warm-divider);
   color: var(--warm-accent);
-  font-family: "IBM Plex Sans", sans-serif;
-  font-size: 0.78rem;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: inherit;
   font-weight: 600;
-  letter-spacing: 0.06em;
+  letter-spacing: 0;
   padding-bottom: 0.35rem;
   padding-top: 1.1rem;
   text-align: left;
-  text-transform: uppercase;
+  text-transform: none;
 }
 
 .model-results-table tbody .metric-row:first-child th {
@@ -662,6 +719,17 @@ body:has(.model-field-sheet) #title-block-header {
 .model-results-table .overall-row td {
   color: var(--warm-accent);
   font-weight: 600;
+}
+
+.model-field-sheet table {
+  margin-bottom: 1.5rem;
+}
+
+.model-field-sheet table strong {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: inherit;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 .model-field-sheet .math.display {
@@ -707,7 +775,17 @@ body:has(.model-field-sheet) #title-block-header {
 
 @media (max-width: 720px) {
   .model-contents {
+    display: block;
     margin: 0 0 1.5rem;
+  }
+
+  .model-contents > span {
+    display: block;
+    margin-bottom: 0.55rem;
+  }
+
+  .model-contents-links > p {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .model-field-sheet > section.level2 {

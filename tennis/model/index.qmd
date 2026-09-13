@@ -11,7 +11,7 @@ page-layout: full
 :::: model-field-sheet
 ## Purpose
 
-This model estimates WTA player strength over time and across surfaces, with uncertainty, by treating historical market probabilities as noisy observations of latent player strength. The aim of this model is not to beat today's market, but to use public pricing history to create an accurate, holistic ranking of tour players available anytime. Within a single fitted snapshot, any two players can be compared on any surface. Current estimates are published on the [WTA Rankings](/tennis/rankings/) page.
+This model estimates WTA player strength over time and across surfaces, with uncertainty, by treating historical market probabilities as noisy observations of latent player strength. The aim of this model is not to beat the market, but to use public pricing history to create an accurate, holistic ranking of tour players available at any time. Current estimates are published on the [WTA Rankings](/tennis/rankings/) page.
 
 ## System
 
@@ -22,9 +22,14 @@ The system consists of a single generative model, run in two stages.
 
 The player-state model retains 85.4% of the market's signal, compared with 57.7% for standard Elo, without using the predicted match's de-vigged probability or outcome.
 
+The model does not separately represent injuries, rest, player-specific matchups or variation in court speed within a surface. Because it observes only the resulting price, it cannot distinguish these effects cleanly from strength: some may bleed into the latent player states, while the rest appears as observation noise.
+
 <nav class="model-contents" aria-label="Contents">
 
-Contents <a href="#data">Data</a> <a href="#parameters">Parameters</a> <a href="#model">Model</a> <a href="#estimation">Estimation</a> <a href="#results">Results</a> <a href="#validation">Validation</a> <a href="#next-steps">Next steps</a>
+<span>Contents</span>
+<div class="model-contents-links">
+<a href="#data">Data</a> <a href="#parameters">Parameters</a> <a href="#model">Model</a> <a href="#estimation">Estimation</a> <a href="#results">Results</a> <a href="#validation">Validation</a> <a href="#next-steps">Next steps</a>
+</div>
 
 </nav>
 
@@ -54,23 +59,31 @@ All matches on a date are predicted before that date's prices update the player 
 
 **Player states**
 
-- $x_{i,t}$ = player $i$'s overall strength at time $t$
-- $\mathbf u_i=(u_{i,\mathrm{hard}},u_{i,\mathrm{clay}},u_{i,\mathrm{grass}})$ = player $i$'s surface effects
-- $z$ = all player states and surface effects
+::: {.model-parameter-table}
+|  |  |  |
+|---:|:---:|:---|
+| $x_{i,t}$ | = | player $i$'s overall strength at time $t$ |
+| $\mathbf u_i$ | = | player $i$'s hard, clay and grass effects |
+| $z$ | = | all player states and surface effects |
+:::
 
 **Global parameters**
 
-$\operatorname{Normal}(\mu,\sigma)$ denotes a distribution with mean $\mu$ and standard deviation $\sigma$; $\operatorname{Normal}_2(\boldsymbol\mu,\boldsymbol\Sigma)$ uses covariance matrix $\boldsymbol\Sigma$. $\operatorname{LogNormal}(m,s)$ has median $m$ and log-scale standard deviation $s$.
+Normal distributions are written as $\operatorname{Normal}(\text{mean},\text{SD})$; $\operatorname{Normal}_2$ uses a covariance matrix, and LogNormal priors use median and log-scale SD.
 
-- $\theta$ = all shared system parameters
-- $\tau_0$ = population entry SD, in log-odds; $\tau_0\sim\operatorname{LogNormal}(1.5,0.75)$
-- $\sqrt q$ = process SD, in log-odds per square-root year; $\sqrt q\sim\operatorname{LogNormal}(0.5,1)$
-- $\sqrt r$ = base observation SD, in log-odds; $\sqrt r\sim\operatorname{LogNormal}(0.25,0.75)$
-- $\tau_s$ = scale of between-player surface variation, in log-odds; $\tau_s\sim\operatorname{LogNormal}(0.35,0.75)$
-- $\beta_g$ = annual pre-peak growth, in log-odds; $\beta_g\sim\operatorname{LogNormal}(0.4,0.75)$
-- $\beta_d$ = annual post-peak decline, in log-odds; $\beta_d\sim\operatorname{LogNormal}(0.15,1)$
-- $\gamma_e$ = change in log entry SD per standardized unit of prior experience; $\gamma_e\sim\operatorname{Normal}(0,0.5)$
-- $\gamma_v$ = change in log observation SD per standardized unit of bookmaker margin; $\gamma_v\sim\operatorname{Normal}(0,0.5)$
+::: {.model-parameter-table}
+|  |  |  |
+|---:|:---:|:---|
+| $\theta$ | = | all shared system parameters |
+| $\tau_0$ | = | population entry SD, in log-odds; $\tau_0\sim\operatorname{LogNormal}(1.5,0.75)$ |
+| $\sqrt q$ | = | process SD, in log-odds per square-root year; $\sqrt q\sim\operatorname{LogNormal}(0.5,1)$ |
+| $\sqrt r$ | = | base observation SD, in log-odds; $\sqrt r\sim\operatorname{LogNormal}(0.25,0.75)$ |
+| $\tau_s$ | = | scale of between-player surface variation, in log-odds; $\tau_s\sim\operatorname{LogNormal}(0.35,0.75)$ |
+| $\beta_g$ | = | annual pre-peak growth, in log-odds; $\beta_g\sim\operatorname{LogNormal}(0.4,0.75)$ |
+| $\beta_d$ | = | annual post-peak decline, in log-odds; $\beta_d\sim\operatorname{LogNormal}(0.15,1)$ |
+| $\gamma_e$ | = | change in log entry SD per standardized unit of prior experience; $\gamma_e\sim\operatorname{Normal}(0,0.5)$ |
+| $\gamma_v$ | = | change in log observation SD per standardized unit of bookmaker margin; $\gamma_v\sim\operatorname{Normal}(0,0.5)$ |
+:::
 
 ## Model
 
@@ -251,7 +264,7 @@ $$
 ```
 
 
-In a day-clustered bootstrap, the model's mean log loss was 0.0163 above the market [95% interval: 0.0117, 0.0207] and 0.0312 below Elo [0.0245, 0.0376].
+In a day-clustered bootstrap, the model's mean log loss was 0.016 above the market [95% interval: 0.012, 0.021] and 0.031 below Elo [0.025, 0.038].
 
 Surface effects are small next to overall player strength. Among the current top 500, their posterior means vary between players by roughly one-tenth as much as overall strength.
 
