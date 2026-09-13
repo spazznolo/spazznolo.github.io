@@ -23,6 +23,8 @@ Is the chaos an equalizer? Does a team's regular-season success translate to ove
 
 There isn't much of a relationship between a team's regulation performance and the number of times it makes it to overtime. You might expect average teams to have more overtime appearances because they are more closely matched with the rest of the league than exceedingly strong or weak teams, but there isn't much there.
 
+<p class="plot-title">OVERTIME FREQUENCY VS. REGULATION PERFORMANCE</p>
+
 ![](/figs/post-regulation-zero-one.png){fig-alt="Pre-overtime standing points per game compared with the percentage of games going to overtime." width="70%"}
 
 Dropping a few historically bad teams as outliers produces a slight decline in overtime appearances as team strength rises. It amounts to roughly two games over a full season between the weakest and strongest teams—not enough to change the spirit of the result. Going forward, the number of overtime appearances can be treated as random and centred around 23% of a team's games.
@@ -33,7 +35,20 @@ The conventional wisdom is that the outcome of three-on-three overtime is random
 
 To measure the effect, create a conference of synthetic teams using the average regulation points percentage at each conference rank from 2015–20:
 
-![](/figs/post-regulation-one-onee.png){fig-alt="Average regulation points percentage by conference rank used to create synthetic teams." width="60%"}
+<p class="plot-title">SYNTHETIC CONFERENCE</p>
+
+::: {.article-table .note-table}
+| Rank | 2015 | 2016 | 2017 | 2018 | 2019 | 2020 | Mean |
+|---:|---:|---:|---:|---:|---:|---:|---:|
+| 1 | .628 | .665 | .659 | .628 | .701 | .671 | **.659** |
+| 2 | .616 | .579 | .616 | .616 | .585 | .600 | **.602** |
+| 3 | .591 | .573 | .591 | .573 | .579 | .580 | **.581** |
+| 4 | .555 | .573 | .573 | .567 | .573 | .572 | **.569** |
+| 5 | .543 | .543 | .543 | .549 | .567 | .543 | **.548** |
+| 6 | .537 | .530 | .543 | .530 | .561 | .529 | **.538** |
+| 7 | .537 | .512 | .537 | .524 | .561 | .521 | **.532** |
+| 8 | .524 | .506 | .537 | .524 | .543 | .521 | **.526** |
+:::
 
 Assign each team the average number of overtime games—about 19—and flip coins by way of the binomial distribution to determine the number of overtime points it wins.
 
@@ -45,13 +60,24 @@ This doesn't mean overtime is bad. It means the format adds a measurable layer o
 
 At the season level, regulation points percentage does not predict overtime points percentage:
 
+<p class="plot-title">REGULATION VS. OVERTIME PERFORMANCE</p>
+
 ![](/figs/post-regulation-two-one.png){fig-alt="Regulation points percentage compared with overtime points percentage." width="60%"}
 
 There's nothing there. You don't need a regression to see that.
 
 Another way to look at this is to regress season-long expected-goal share and regulation expected-goal share on the outcome of individual games which reach overtime. But it is the same result—there's nothing there.
 
-![](/figs/post-regulation-two-twoo.png){fig-alt="Regression of regulation point percentage and regulation-time expected-goal share on overtime outcomes." width="30%"}
+<p class="plot-title">PRE-OVERTIME MODEL</p>
+
+::: {.article-table .note-table .note-table-compact}
+| Term | Estimate | *p* value |
+|:---|---:|---:|
+| Intercept | .075 | .240 |
+| Home ice | −.150 | .102 |
+| Regulation xG%, game | .004 | .344 |
+| Regulation xG%, season | .020 | .207 |
+:::
 
 The insignificance is useful. What happens before overtime tells us surprisingly little about who will win it.
 
@@ -59,11 +85,32 @@ The insignificance is useful. What happens before overtime tells us surprisingly
 
 The next question is whether overtime remains random *during the overtime*. Using every game ending in overtime from the format's introduction through the study period, regress the outcome on a team's season-long expected-goal share, its regulation and overtime expected-goal shares in that game, and whether it took the final shot before the winning goal. Think of the first three predictors as controls. A few examples of what an observation looks like:
 
-![](/figs/post-regulation-three-one.png){fig-alt="Example observations used in the overtime shot analysis." width="60%"}
+<p class="plot-title">EXAMPLE OBSERVATIONS</p>
+
+::: {.article-table .note-table .note-table-wide}
+| Season | Game | Team | Won | Last shot | OT xG± | Reg. xG± | Season xG± |
+|---:|---:|:---|---:|---:|---:|---:|---:|
+| 2020 | 20003 | TOR | 1 | −1 | 13.1 | −2.0 | 6.2 |
+| 2020 | 20003 | MTL | 0 | 1 | −13.1 | 2.0 | −0.7 |
+| 2020 | 20012 | WPG | 1 | 1 | 50.0 | 7.8 | −3.0 |
+| 2020 | 20012 | CGY | 0 | −1 | −50.0 | −7.8 | 1.9 |
+| 2020 | 20016 | L.A | 0 | 1 | −1.3 | 17.6 | −5.0 |
+| 2020 | 20016 | MIN | 1 | −1 | 1.3 | −17.6 | 1.7 |
+:::
 
 The model can be summarized like this:
 
-![](/figs/post-regulation-three-two.png){fig-alt="Regression results for overtime outcomes using team, game, and last-shot characteristics." width="30%"}
+<p class="plot-title">OVERTIME MODEL</p>
+
+::: {.article-table .note-table .note-table-compact}
+| Term | Estimate | *p* value |
+|:---|---:|---:|
+| Intercept | .000 | .998 |
+| Overtime xG%, game | .004 | .029 |
+| Regulation xG%, game | .001 | .904 |
+| Regulation xG%, season | .021 | .176 |
+| Last shot | .244 | <.001 |
+:::
 
 Having taken the previous shot matters. It adds about 13.8 percentage points to a team's win probability, bringing it to 63.8%.
 
