@@ -89,24 +89,31 @@ Normal distributions are written as $\operatorname{Normal}(\text{mean},\text{SD}
 
 ```{mermaid}
 flowchart TB
-  experience["entry experience<br/>Eᵢ"] --> initial["entry strength<br/>xᵢ,1"]
-  entry["entry parameters<br/>τ₀, γₑ"] --> initial
+  entry_stage["ENTRY"] ~~~ experience["prior experience<br/>Eᵢ · Eⱼ"]
+  experience --> initial["entry strengths<br/>xᵢ,1 · xⱼ,1"]
+  entry_parameters["τ₀ · γₑ"] -.-> initial
 
-  initial --> history["previous strengths<br/>xᵢ,t−1, xⱼ,t−1"]
-  history --> strength["current strengths<br/>xᵢ,t, xⱼ,t"]
-  age["age and elapsed time<br/>Aᵢ,t, Δt"] --> strength
-  drift["age and drift parameters<br/>β, q"] --> strength
+  initial ~~~ evolution_stage["EVOLUTION"]
+  evolution_stage ~~~ history["previous strengths<br/>xᵢ,t−1 · xⱼ,t−1"]
+  initial --> history
+  history --> strength["current strengths<br/>xᵢ,t · xⱼ,t"]
+  age["age · elapsed time<br/>Aᵢ,t · Aⱼ,t · Δt"] --> strength
+  drift_parameters["β<sub>g</sub> · β<sub>d</sub> · q"] -.-> strength
 
-  surface["surface parameter<br/>τₛ"] --> effects["surface effects<br/>uᵢ,s, uⱼ,s"]
-
-  strength --> matchup["matchup mean<br/>ηₘ"]
-  effects --> matchup
-
-  margin["bookmaker margin<br/>Vₘ"] --> noise["observation SD<br/>√rₘ"]
-  observation["observation parameters<br/>√r, γᵥ"] --> noise
+  strength ~~~ match_stage["MATCH"]
+  match_stage ~~~ matchup["matchup mean<br/>ηₘ"]
+  strength --> matchup
+  effects["surface effects<br/>uᵢ,s · uⱼ,s"] --> matchup
+  surface_parameter["τₛ"] -.-> effects
 
   matchup --> price["market log-odds<br/>yₘ"]
+  margin["bookmaker margin<br/>Vₘ"] --> noise["observation SD<br/>√rₘ"]
+  observation_parameters["√r · γᵥ"] -.-> noise
   noise --> price
+
+  class entry_stage,evolution_stage,match_stage phase
+  class experience,age,margin observed
+  class entry_parameters,drift_parameters,surface_parameter,observation_parameters parameter
 ```
 
 **Player evolution**

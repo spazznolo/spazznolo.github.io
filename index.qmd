@@ -11,6 +11,7 @@ listing:
   contents:
     - "research/goalie-performance/index.qmd"
     - "research/nhl-pick-probability/index.qmd"
+    - "tennis/model/index.qmd"
     - "post-regulation/index.qmd"
     - "posts/**/index.qmd"
   sort: "date desc"

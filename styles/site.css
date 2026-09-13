@@ -544,9 +544,13 @@ body:has(.model-field-sheet) #title-block-header {
 
 .model-contents-links > p {
   display: grid;
-  gap: 0.45rem 1rem;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.55rem 1.5rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   margin: 0;
+}
+
+.model-contents-links a {
+  display: block;
 }
 
 .model-field-sheet > section.level2 {
@@ -744,8 +748,17 @@ body:has(.model-field-sheet) #title-block-header {
 }
 
 .model-field-sheet #model > .cell {
-  grid-column: 1 / -1;
+  grid-column: 2;
   margin-top: 1.25rem !important;
+}
+
+.model-field-sheet .mermaid-js .phase .nodeLabel,
+.model-field-sheet .mermaid-js .phase .nodeLabel p {
+  color: var(--warm-accent) !important;
+  font-family: "IBM Plex Sans", sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.09em !important;
 }
 
 .model-field-sheet .mermaid-js .node rect,
@@ -761,6 +774,18 @@ body:has(.model-field-sheet) #title-block-header {
   font-family: "IBM Plex Mono", monospace !important;
   font-size: 20px !important;
   line-height: 1.35 !important;
+}
+
+.model-field-sheet .mermaid-js .observed .nodeLabel,
+.model-field-sheet .mermaid-js .observed .nodeLabel p,
+.model-field-sheet .mermaid-js .parameter .nodeLabel,
+.model-field-sheet .mermaid-js .parameter .nodeLabel p {
+  color: var(--bs-secondary-color) !important;
+}
+
+.model-field-sheet .mermaid-js .parameter .nodeLabel,
+.model-field-sheet .mermaid-js .parameter .nodeLabel p {
+  font-size: 16px !important;
 }
 
 .model-field-sheet .mermaid-js .flowchart-link {
@@ -785,7 +810,7 @@ body:has(.model-field-sheet) #title-block-header {
   }
 
   .model-contents-links > p {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
   }
 
   .model-field-sheet > section.level2 {
