@@ -1,8 +1,8 @@
 ---
 title: "Post-regulation"
+subtitle: "Note / Hockey"
 description: "What three-on-three overtime adds to NHL standings, and what predicts the next goal."
 date: 2022-04-20
-date-modified: 2026-09-04
 categories:
   - Probability and simulation
   - Regression and calibration
@@ -11,57 +11,67 @@ sports:
   - Overtime
 status: canonical
 reading-time: true
-toc: true
+toc: false
 ---
 
-::: {.archive-notice}
-This article consolidates four posts published in April 2022.
-:::
+::: {.note-post}
+Since 2015, a game tied after 60 minutes gives both teams one standing point and a five-minute, three-on-three period for a second. Most of the rules from regulation carry over, except for a few important ones: the play goes from five players aside to three, and the period lasts only five minutes. The format change is geared towards increasing entertainment in the form of chaos—the ice surface is too large, and the players are too fast and too skilled, to prevent chances.
 
-Since 2015, a game tied after 60 minutes gives both teams one standing point and a five-minute, three-on-three period for a second. The format is deliberately chaotic: fewer skaters, more open ice, and enough speed and skill to make chances difficult to suppress.
+Is the chaos an equalizer? Does a team's regular-season success translate to overtime? Is a given game's regulation play an indicator for its overtime play? And once overtime begins, does the sequence of play tell us who is more likely to win?
 
-The useful questions are not only whether overtime is random, but where the randomness enters. Does regulation strength carry over? Does play before overtime tell us anything? Once overtime begins, does possession of the puck—or simply having taken the latest shot—change the probability of winning?
+## How often does a team reach overtime?
 
-## How often teams reach overtime
-
-Using the first four seasons of three-on-three overtime, there was little relationship between regulation performance and the share of games a team took beyond regulation. An average team reached overtime in roughly 23% of its games.
+There isn't much of a relationship between a team's regulation performance and the number of times it makes it to overtime. You might expect average teams to have more overtime appearances because they are more closely matched with the rest of the league than exceedingly strong or weak teams, but there isn't much there.
 
 ![](/figs/post-regulation-zero-one.png){fig-alt="Pre-overtime standing points per game compared with the percentage of games going to overtime." width="70%"}
 
-There is a slight case for excluding a few historically weak teams as outliers. Doing so produces a small decline in overtime appearances as team strength rises—about two games over a full season between the weakest and strongest teams—but not enough to change the central result. Overtime exposure is approximately independent of team quality.
+Dropping a few historically bad teams as outliers produces a slight decline in overtime appearances as team strength rises. It amounts to roughly two games over a full season between the weakest and strongest teams—not enough to change the spirit of the result. Going forward, the number of overtime appearances can be treated as random and centred around 23% of a team's games.
 
-## The standings uncertainty created by overtime
+## How much uncertainty does that create?
 
-If the post-regulation point is treated as a coin flip, its randomness flows directly into the standings. To estimate its scale, I created a synthetic conference from the average regulation points percentage at each conference rank from 2015–20, assigned each team the average number of overtime games, and sampled overtime winners from a binomial distribution.
+The conventional wisdom is that the outcome of three-on-three overtime is random. Take that at face value for a moment. After regulation, the teams essentially flip a coin to determine who receives the second point. A team which lands a few more heads receives more standing points than one which lands a few more tails.
+
+To measure the effect, create a conference of synthetic teams using the average regulation points percentage at each conference rank from 2015–20:
 
 ![](/figs/post-regulation-one-onee.png){fig-alt="Average regulation points percentage by conference rank used to create synthetic teams." width="60%"}
 
-A team strayed from its expected standing total by about 1.76 points on average. The largest positive and negative swings in a season averaged about 4.4 points. Across simulated seasons, a team that qualified on regulation points alone missed the playoffs after overtime points were added about 44% of the time; approximately 5.5 conference positions changed per season.
+Assign each team the average number of overtime games—about 19—and flip coins by way of the binomial distribution to determine the number of overtime points it wins.
 
-This does not mean overtime is bad. It means the format introduces a measurable layer of uncertainty into standings that are often decided by one or two points.
+A team strays from its expected standing total by about 1.76 points on average. The largest positive and negative swings in a season average about 4.4 points. Across simulated seasons, a team which would have qualified on regulation points alone misses the playoffs after overtime points are added about 44% of the time. Around 5.5 conference positions change per season.
 
-## Does team strength predict overtime?
+This doesn't mean overtime is bad. It means the format adds a measurable layer of uncertainty to standings which are often decided by one or two points.
 
-At the season and game level, almost nothing carried over. Regulation points percentage did not predict overtime points percentage, and neither season-long expected-goal share nor regulation expected-goal share meaningfully predicted individual overtime outcomes.
+## Is overtime completely random?
+
+At the season level, regulation points percentage does not predict overtime points percentage:
 
 ![](/figs/post-regulation-two-one.png){fig-alt="Regulation points percentage compared with overtime points percentage." width="60%"}
 
+There's nothing there. You don't need a regression to see that.
+
+Another way to look at this is to regress season-long expected-goal share and regulation expected-goal share on the outcome of individual games which reach overtime. But it is the same result—there's nothing there.
+
 ![](/figs/post-regulation-two-twoo.png){fig-alt="Regression of regulation point percentage and regulation-time expected-goal share on overtime outcomes." width="30%"}
 
-The absence of a relationship is itself informative: the five-minute format appears to erase much of the advantage visible during regulation.
+The insignificance is useful. What happens before overtime tells us surprisingly little about who will win it.
 
-## What matters once overtime begins
+## What matters once overtime begins?
 
-The final model used every game ending in overtime from the format's introduction through the study period. It included team season strength, regulation play, overtime expected-goal share before the winning goal, and whether the team took the last shot before that goal.
+The next question is whether overtime remains random *during the overtime*. Using every game ending in overtime from the format's introduction through the study period, regress the outcome on a team's season-long expected-goal share, its regulation and overtime expected-goal shares in that game, and whether it took the final shot before the winning goal. Think of the first three predictors as controls. A few examples of what an observation looks like:
 
 ![](/figs/post-regulation-three-one.png){fig-alt="Example observations used in the overtime shot analysis." width="60%"}
 
+The model can be summarized like this:
+
 ![](/figs/post-regulation-three-two.png){fig-alt="Regression results for overtime outcomes using team, game, and last-shot characteristics." width="30%"}
 
-Having taken the previous shot was the dominant signal: it raised the estimated win probability to 63.8%, an increase of 13.8 percentage points. Overtime expected-goal share mattered much less. A ten-point increase in overtime xG share added about 1.9 percentage points; even a team controlling 75% of overtime expected goals reached only about a 54.7% win probability. Season strength and regulation performance again contributed little.
+Having taken the previous shot matters. It adds about 13.8 percentage points to a team's win probability, bringing it to 63.8%.
 
-## Where the analysis points next
+The only other relevant predictor is the team's expected-goal share in overtime before the goal was scored. It is a distant second: a ten-point increase adds about 1.9 percentage points. Even a team controlling 75% of overtime expected goals reaches only a 54.7% win probability. Season strength and regulation play do not factor.
 
-Treating every shot equally is the obvious limitation. The last shot may proxy for possession, territorial control, rebound pressure, or the quality of the transition it creates. A better model would update win probability after every event, using shot quality and game state rather than only asking which team shot most recently.
+## Are all shots equal?
 
-The larger conclusion is a useful split: before overtime, team quality tells us surprisingly little about who will win; within overtime, the sequence of play begins to matter. The format is not pure randomness, but most of its predictive information is local and fleeting rather than a stable property of the teams.
+Not in this model. The final shot may stand in for possession, territorial control, rebound pressure, or the quality of the transition it creates. The next version should update win probability after every event and use shot quality and game state, rather than only asking which team shot most recently.
+
+The useful split is this: before overtime, team quality tells us almost nothing about who will win. Once overtime begins, the sequence of play starts to matter. Its predictive information is local and fleeting rather than a stable property of the teams.
+:::

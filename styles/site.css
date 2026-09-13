@@ -303,6 +303,115 @@ body.quarto-light .home-about p {
   white-space: nowrap;
 }
 
+/* Notes: compact, question-led essays with a narrow reading measure and
+   room for evidence to breathe beyond the prose. */
+body:has(.note-post) #quarto-content {
+  max-width: 940px;
+}
+
+body:has(.note-post) #title-block-header {
+  margin-bottom: 2.5rem;
+  max-width: 680px;
+  text-align: left;
+}
+
+body:has(.note-post) #title-block-header .quarto-title {
+  display: flex;
+  flex-direction: column;
+}
+
+body:has(.note-post) #title-block-header .title {
+  font-size: 2rem;
+  margin-inline: 0;
+  max-width: none;
+  order: 2;
+}
+
+body:has(.note-post) #title-block-header .subtitle {
+  color: var(--warm-accent);
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  margin: 0 0 0.9rem;
+  max-width: none;
+  order: 1;
+  padding: 0;
+  text-transform: uppercase;
+}
+
+body:has(.note-post) #title-block-header .subtitle::after {
+  display: none;
+}
+
+body:has(.note-post) #title-block-header .description {
+  font-size: 0.94rem;
+  margin-inline: 0;
+  max-width: 610px;
+  padding-top: 1.35rem;
+}
+
+body:has(.note-post) #title-block-header .description::after {
+  margin-left: 0;
+  width: 3rem;
+}
+
+body:has(.note-post) #title-block-header .quarto-title-meta {
+  justify-items: start;
+}
+
+body:has(.note-post) #title-block-header .quarto-title-meta-heading {
+  display: none;
+}
+
+.note-post {
+  margin: 0 auto;
+  max-width: var(--reading-width);
+}
+
+.note-post > p:not(:has(> img)),
+.note-post > section > p:not(:has(> img)),
+.note-post > section > ul,
+.note-post > section > ol,
+.note-post > section > blockquote,
+.note-post > section > h2,
+.note-post > section > h3 {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  max-width: 650px !important;
+}
+
+.note-post > p:first-child {
+  font-size: 1.03rem;
+  line-height: 1.72;
+}
+
+.note-post > section.level2 > h2 {
+  color: var(--warm-accent);
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.035em;
+  margin-bottom: 1rem;
+  margin-top: 3.25rem;
+  text-transform: none;
+}
+
+.note-post .quarto-figure,
+.note-post p:has(> img) {
+  margin-block: 2.1rem;
+  max-width: var(--reading-width) !important;
+}
+
+.note-post .figure-caption,
+.note-post figcaption {
+  color: var(--bs-secondary-color);
+  font-size: 0.78rem;
+  margin: 0.65rem auto 0;
+  max-width: 650px;
+  text-align: left;
+}
+
 .plot-title {
   color: var(--warm-accent);
   font-family: "IBM Plex Sans", sans-serif;

@@ -1,0 +1,22 @@
+---
+title: "New note"
+subtitle: "Note / Topic"
+description: "The question in one sentence."
+date: today
+categories: []
+sports: []
+status: draft
+reading-time: true
+draft: true
+toc: false
+---
+
+::: {.note-post}
+Open with the observation or question. Give the reader only the context needed to care about it.
+
+## A natural turn in the argument
+
+Put evidence where it becomes useful. Headings are optional; add one only when the thought changes direction.
+
+End when the question has been answered as far as the evidence allows.
+:::
