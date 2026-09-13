@@ -314,21 +314,21 @@ In this example, moving from pick five to pick four adds an expected 3.7 WAR. A 
 
 These values are still point estimates. Replacing them with distributions allows the same calculation to include prospect uncertainty. Instead of assigning Bedard exactly 24 WAR, suppose his seven-year value is normally distributed with mean 24 and standard deviation 3.
 
-![](/figs/draft-probabilities-4-1.png){fig-alt="Illustrative distribution for Bedard's seven-year prospect value." width="60%"}
+![](/figs/draft-probabilities-4-1.png?v=2){fig-alt="Illustrative distribution for Bedard's seven-year prospect value." width="60%"}
 
 Under this illustrative distribution, Bedard has a 50% chance of providing roughly 22–26 WAR, a 25% chance of exceeding 26 WAR, and a 25% chance of falling below 22 WAR. The numbers are only an example; the point is that prospect value can be represented by a distribution rather than a single estimate.
 
 The other prospects can be represented in the same way. Michkov receives the widest distribution, reflecting greater uncertainty about both his development and whether his value will be realized in the NHL.
 
-![](/figs/draft-probabilities-4-2.png){fig-alt="Illustrative prospect value distributions, with greater uncertainty assigned to Michkov." width="68%"}
+![](/figs/draft-probabilities-4-2.png?v=2){fig-alt="Illustrative prospect value distributions, with greater uncertainty assigned to Michkov." width="68%"}
 
 Sampling a prospect value and a draft order together produces a distribution for the value of every pick.
 
-![](/figs/draft-probabilities-4-3.png){fig-alt="Pick value distributions after accounting for prospect availability and value uncertainty." width="68%"}
+![](/figs/draft-probabilities-4-3.png?v=2){fig-alt="Pick value distributions after accounting for prospect availability and value uncertainty." width="68%"}
 
 The distribution of the difference answers the trade question directly. Under these assumptions, pick four is worth more than pick five in 67.3% of simulations, with a mean difference of 3.7 WAR.
 
-![](/figs/draft-probabilities-4-4.png){fig-alt="Distribution of the value difference between picks four and five." width="60%"}
+![](/figs/draft-probabilities-4-4.png?v=2){fig-alt="Distribution of the value difference between picks four and five." width="60%"}
 
 **Detroit: drafting strategy**
 
