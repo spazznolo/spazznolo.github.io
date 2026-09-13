@@ -105,15 +105,15 @@ There are thousands of draft-eligible prospects. No publication can rank all of 
 ::: pick-probability-map
 ```{mermaid}
 flowchart TB
-  rankings["partial public rankings"] --> complete["completed rankings"]
-  time["time weights"] --> weighted["weighted rankings"]
-  publication["publication weights"] --> weighted
+  rankings["PARTIAL PUBLIC RANKINGS"] --> complete["completed rankings"]
+  time["TIME WEIGHTS"] --> weighted["weighted rankings"]
+  publication["PUBLICATION WEIGHTS"] --> weighted
   complete --> weighted
   weighted --> strengths["Plackett–Luce strengths"]
   strengths --> drafts["simulated draft orders"]
   drafts --> probabilities["pick probabilities"]
   probabilities --> pickvalue["pick value"]
-  team["team prospect values"] --> pickvalue
+  team["TEAM PROSPECT VALUES"] --> pickvalue
   pickvalue --> decision["draft decision"]
 
   class rankings,time,publication,team phase
