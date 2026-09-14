@@ -23,8 +23,6 @@ Is the chaos an equalizer? Does a team's regular-season success translate to ove
 
 There isn't much of a relationship between a team's regulation performance and the number of times it makes it to overtime. You might expect average teams to have more overtime appearances because they are more closely matched with the rest of the league than exceedingly strong or weak teams, but there isn't much there.
 
-<p class="plot-title">OVERTIME FREQUENCY VS. REGULATION PERFORMANCE</p>
-
 ![](/figs/post-regulation-zero-one.png){fig-alt="Pre-overtime standing points per game compared with the percentage of games going to overtime." width="70%"}
 
 Dropping a few historically bad teams as outliers produces a slight decline in overtime appearances as team strength rises. It amounts to roughly two games over a full season between the weakest and strongest teams—not enough to change the spirit of the result. Going forward, the number of overtime appearances can be treated as random and centred around 23% of a team's games.

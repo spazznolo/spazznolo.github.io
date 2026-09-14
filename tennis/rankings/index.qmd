@@ -42,7 +42,7 @@ These ratings are weekly market-implied WTA player states. Global parameters are
 
 <p class="ranking-note" id="ranking-note">Loading the latest completed Sunday…</p>
 
-<div class="trajectory-title" id="trajectory-title">PLAYER_STRENGTH OVER PAST YEAR</div>
+<div class="trajectory-title" id="trajectory-title">PLAYER STRENGTH OVER PAST YEAR</div>
 <svg id="trajectory" viewBox="0 0 900 420" role="img" aria-label="Weekly player rating trajectory since last season"></svg>
 <div class="trajectory-legend" id="trajectory-legend"></div>
 

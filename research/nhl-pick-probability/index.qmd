@@ -1,7 +1,7 @@
 ---
 title: "NHL Pick Probability"
 description: "Building a probability-based drafting strategy from public draft rankings."
-date: 2021-11-28
+date: 2023-06-28
 date-modified: 2026-09-13
 categories:
   - Probability and simulation

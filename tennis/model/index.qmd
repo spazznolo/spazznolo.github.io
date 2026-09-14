@@ -8,7 +8,7 @@ toc: false
 page-layout: full
 ---
 
-:::: model-field-sheet
+::::::: model-field-sheet
 ## Purpose
 
 This model estimates WTA player strength over time and across surfaces, with uncertainty, by treating historical market probabilities as noisy observations of latent player strength. The aim of this model is not to beat the market, but to use public pricing history to create an accurate, holistic ranking of tour players available at any time. Current estimates are published on the [WTA Rankings](/tennis/rankings/) page.
@@ -26,10 +26,11 @@ The model does not separately represent injuries, rest, player-specific matchups
 
 <nav class="model-contents" aria-label="Contents">
 
-<span>Contents</span>
-<div class="model-contents-links">
+Contents
+
+::: model-contents-links
 <a href="#data">Data</a> <a href="#parameters">Parameters</a> <a href="#model">Model</a> <a href="#estimation">Estimation</a> <a href="#results">Results</a> <a href="#validation">Validation</a> <a href="#next-steps">Next steps</a>
-</div>
+:::
 
 </nav>
 
@@ -59,21 +60,21 @@ All matches on a date are predicted before that date's prices update the player 
 
 **Player states**
 
-::: {.model-parameter-table}
-|  |  |  |
-|---:|:---:|:---|
-| $x_{i,t}$ | = | player $i$'s overall strength at time $t$ |
-| $\mathbf u_i$ | = | player $i$'s hard, clay and grass effects |
-| $z$ | = | all player states and surface effects |
+::: model-parameter-table
+|               |     |                                           |
+|--------------:|:---:|:------------------------------------------|
+|     $x_{i,t}$ |  =  | player $i$'s overall strength at time $t$ |
+| $\mathbf u_i$ |  =  | player $i$'s hard, clay and grass effects |
+|           $z$ |  =  | all player states and surface effects     |
 :::
 
 **Global parameters**
 
 Normal distributions are written as $\operatorname{Normal}(\text{mean},\text{SD})$; $\operatorname{Normal}_2$ uses a covariance matrix, and LogNormal priors use median and log-scale SD.
 
-::: {.model-parameter-table}
+::: model-parameter-table
 |  |  |  |
-|---:|:---:|:---|
+|---------------------:|:--------------------------:|:---------------------|
 | $\theta$ | = | all shared system parameters |
 | $\tau_0$ | = | population entry SD, in log-odds; $\tau_0\sim\operatorname{LogNormal}(1.5,0.75)$ |
 | $\sqrt q$ | = | process SD, in log-odds per square-root year; $\sqrt q\sim\operatorname{LogNormal}(0.5,1)$ |
@@ -259,8 +260,7 @@ $$
 </table>
 ```
 
-
-In a day-clustered bootstrap, the model's mean log loss was 0.016 above the market [95% interval: 0.012, 0.021] and 0.031 below Elo [0.025, 0.038].
+In a day-clustered bootstrap, the model's mean log loss was 0.016 above the market \[95% interval: 0.012, 0.021\] and 0.031 below Elo \[0.025, 0.038\].
 
 Surface effects are small next to overall player strength. Among the current top 500, their posterior means vary between players by roughly one-tenth as much as overall strength.
 
@@ -283,7 +283,7 @@ $$
 The intercept $\alpha$ tests whether predictions are systematically high or low. The slope $\lambda$ tests whether their spread is right: one is calibrated, above one means the model is too conservative, and below one means it is too extreme.
 
 | Subset      |   Matches | Intercept \[95% interval\] |  Slope \[95% interval\] |
-|:-----------------|-----------------:|-------------------:|-----------------:|
+|:-----------------|-----------------:|------------------:|-----------------:|
 | **Overall** | **6,381** |  **−0.01 \[−0.07, 0.05\]** | **1.05 \[0.98, 1.12\]** |
 | 2024        |     3,167 |      −0.02 \[−0.10, 0.05\] |     1.08 \[0.99, 1.18\] |
 | 2025        |     3,214 |      +0.01 \[−0.07, 0.08\] |     1.01 \[0.91, 1.11\] |
@@ -336,4 +336,4 @@ All three coverage rates are close to 95%.
 2.  Evaluate the aging curve using multi-year forecasts without intermediate market updates.
 3.  Revisit clay and grass calibration as more seasons accumulate.
 4.  Split player strength into serve and return states using point-level data, then measure what they add to match prediction.
-::::
+:::::::
