@@ -18,7 +18,7 @@ class RenderedSiteSmokeTest(unittest.TestCase):
 
     def test_homepage_keeps_approved_copy(self):
         html = (SITE / "index.html").read_text(encoding="utf-8")
-        self.assertIn("Featured research", html)
+        self.assertIn('data-anchor-id="research">Research</h2>', html)
         self.assertIn("fifty-four.png", html)
         self.assertIn("Post-regulation", html)
         self.assertIn("Goalie Consistency", html)

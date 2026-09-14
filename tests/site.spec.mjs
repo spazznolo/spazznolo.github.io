@@ -86,9 +86,12 @@ test('homepage starts with the approved image', async ({ page }) => {
 
 test('homepage featured reading times match the rendered listings', async ({ page }) => {
   await page.goto('/');
-  for (const title of ['Goalie Performance', 'NHL Pick Probability']) {
-    const featured = await page.locator('#featured-research li').filter({ hasText: title }).innerText();
-    const listingTime = await page.locator('#listing-recent-writing tbody tr').filter({ hasText: title }).locator('.listing-reading-time').innerText();
+  for (const { homepageTitle, listingTitle } of [
+    { homepageTitle: 'Goalie Performance', listingTitle: 'Goalie Performance' },
+    { homepageTitle: 'Pick Probability', listingTitle: 'NHL Pick Probability' },
+  ]) {
+    const featured = await page.locator('#research li').filter({ hasText: homepageTitle }).innerText();
+    const listingTime = await page.locator('#listing-recent-writing tbody tr').filter({ hasText: listingTitle }).locator('.listing-reading-time').innerText();
     expect(featured).toContain(listingTime);
   }
 });
@@ -167,7 +170,7 @@ test('homepage framing is restrained and the decorative image has no caption', a
 
 test('homepage section labels use the compact type scale', async ({ page }) => {
   await page.goto('/');
-  await expect(page.getByRole('heading', { name: 'Featured research' })).toHaveCSS('font-size', '9.75px');
+  await expect(page.getByRole('heading', { name: 'Research', exact: true })).toHaveCSS('font-size', '9.75px');
   await expect(page.getByRole('heading', { name: 'Recent writing' })).toHaveCSS('font-size', '9.75px');
 });
 
