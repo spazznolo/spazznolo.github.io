@@ -1,6 +1,6 @@
 ---
-title: "Tracking Tennis"
-description: "Turning a television broadcast into frame-, event- and point-level data."
+title: "Extracting Structured Data from Tennis Broadcasts"
+description: "From video to frame-, event- and point-level data."
 date: 2026-09-13
 categories:
   - Computer vision

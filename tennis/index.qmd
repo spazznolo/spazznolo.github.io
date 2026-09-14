@@ -6,4 +6,4 @@ toc: false
 
 The [WTA Rankings](/tennis/rankings/) publish weekly market-implied player strength, surface effects, uncertainty, and historical trajectories. The [model notes](/tennis/model/) describe the specification and fitting process.
 
-[Tracking Tennis](/tennis/tracking/) describes the computer-vision pipeline which turns an ordinary broadcast into frame-, event- and point-level data.
+[Extracting Structured Data from Tennis Broadcasts](/tennis/tracking/) describes the computer-vision pipeline which turns an ordinary broadcast into frame-, event- and point-level data.
