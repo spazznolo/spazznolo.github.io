@@ -96,7 +96,7 @@ test('homepage featured reading times match the rendered listings', async ({ pag
 test('top navigation exposes only approved destinations', async ({ page }) => {
   await page.goto('/');
   const nav = page.locator('nav');
-  await expect(nav.getByRole('link', { name: 'Research' })).toBeVisible();
+  await expect(nav.getByRole('link', { name: 'Research' })).toHaveCount(0);
   await expect(nav.getByRole('link', { name: 'Home', exact: true })).toBeVisible();
   await expect(nav.getByRole('link', { name: 'Subjects' })).toHaveCount(0);
   await expect(nav.getByRole('link', { name: 'About' })).toHaveCount(0);
@@ -104,14 +104,14 @@ test('top navigation exposes only approved destinations', async ({ page }) => {
   await expect(nav.getByRole('link', { name: /LinkedIn|Twitter/i })).toHaveCount(0);
 });
 
-test('keyboard focus reaches navigation and activates Research', async ({ page }) => {
+test('keyboard focus reaches navigation and activates GitHub', async ({ page }) => {
   await page.goto('/');
-  const research = page.locator('nav').getByRole('link', { name: 'Research', exact: true });
-  await research.focus();
-  await expect(research).toBeFocused();
-  await expect(research).toHaveCSS('outline-style', /solid|auto/);
+  const github = page.locator('nav').getByRole('link', { name: 'GitHub', exact: true });
+  await github.focus();
+  await expect(github).toBeFocused();
+  await expect(github).toHaveCSS('outline-style', /solid|auto/);
   await page.keyboard.press('Enter');
-  await expect(page).toHaveURL(/\/research\/$/);
+  await expect(page).toHaveURL(/\/about\/$/);
 });
 
 for (const path of ['/research/goalie-performance/', '/goalies/consistency/']) {
@@ -131,7 +131,7 @@ test('recent writing uses readable stacked rows at 320px', async ({ page }) => {
   const row = table.locator('tbody tr').first();
   await expect(row).toHaveCSS('display', 'block');
   await expect(row.locator('td').first()).toHaveCSS('display', 'grid');
-  await expect(row.locator('.listing-title')).toContainText('Goalie Performance');
+  await expect(row.locator('.listing-title')).toContainText('WTA Rankings');
   const titleBox = await row.locator('.listing-title').boundingBox();
   expect(titleBox?.width ?? 0).toBeGreaterThan(140);
   await expect(row.locator('.listing-categories')).toHaveCount(0);
@@ -142,6 +142,15 @@ test('recent writing uses readable stacked rows at 320px', async ({ page }) => {
     ),
   );
   expect(labels).toEqual(['"Date"', '"Title"', '"Reading time"']);
+});
+
+test('recent writing gives the title column most of the desktop width', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/');
+  const widths = await page.locator('#listing-recent-writing thead th').evaluateAll((cells) =>
+    cells.map((cell) => cell.getBoundingClientRect().width),
+  );
+  expect(widths[1]).toBeGreaterThan(widths[0] + widths[2]);
 });
 
 test('homepage framing is restrained and the decorative image has no caption', async ({ page }) => {

@@ -501,6 +501,22 @@ body:has(.note-post) #title-block-header .quarto-title-meta-heading {
   font-size: 0.9rem;
 }
 
+.home-stream .quarto-listing-table th:nth-child(1),
+.home-stream .quarto-listing-table td:nth-child(1) {
+  width: 18%;
+}
+
+.home-stream .quarto-listing-table th:nth-child(2),
+.home-stream .quarto-listing-table td:nth-child(2) {
+  width: 68%;
+}
+
+.home-stream .quarto-listing-table th:nth-child(3),
+.home-stream .quarto-listing-table td:nth-child(3) {
+  text-align: right;
+  width: 14%;
+}
+
 .quarto-listing-table th,
 .quarto-listing-table td {
   border: 0;
@@ -617,6 +633,10 @@ pre.text code {
   .quarto-listing-table tr,
   .quarto-listing-table td {
     display: block;
+    width: 100%;
+  }
+  .home-stream .quarto-listing-table td:nth-child(n) {
+    text-align: left;
     width: 100%;
   }
   .quarto-listing-table tbody tr {

@@ -20,6 +20,10 @@ class RenderedSiteSmokeTest(unittest.TestCase):
         html = (SITE / "index.html").read_text(encoding="utf-8")
         self.assertIn("Featured research", html)
         self.assertIn("fifty-four.png", html)
+        self.assertIn("Post-regulation", html)
+        self.assertIn("Goalie Consistency", html)
+        self.assertIn("Extracting Structured Data from Tennis Broadcasts", html)
+        self.assertNotIn("Browse all research and the historical archive", html)
 
     def test_discovery_outputs_exist(self):
         required = [
