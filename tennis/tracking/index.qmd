@@ -1,7 +1,7 @@
 ---
 title: "Extracting Structured Data from Tennis Broadcasts"
-description: "From video to frame-, event- and point-level data."
-date: 2026-09-13
+description: "Processing broadcast video to generate frame, event, and point-level data."
+date: 2023-07-30
 categories:
   - Computer vision
   - Measurement
@@ -19,9 +19,9 @@ execute:
 ::::::: model-field-sheet
 ## Purpose
 
-This started during the 2022 US Open. I was at a bar and was struck by how clean the camerawork was. During play, the camera barely moved: one lengthwise shot contained the court, both players and the ball. I figured tennis analytics must be booming because of this. A quick search suggested the opposite.
+This started during the 2022 US Open. I was at a bar and was struck by how clean the camerawork was. During play, the camera barely moved: one symmetrical, almost Wes Anderson-like shot contained the court, both players and the ball. I figured tennis analytics must be booming because of this. A quick search suggested the opposite.
 
-I tend to learn best by trying, and failing, to apply something new to a real problem. The goal here is to build a program which takes in the full broadcast of a tennis match and pushes out an account of it in tabular form: where the players and ball were, what happened and which point it belonged to.
+The goal is to build a program which takes in the full broadcast of a tennis match and pushes out an account of it in tabular form—where the players and ball were, what happened and which point it belonged to. That creates enough structure to study movement, shot selection, serve and return without access to a proprietary tracking feed.
 
 ## System
 

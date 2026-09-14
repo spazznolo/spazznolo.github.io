@@ -33,8 +33,6 @@ website:
     right:
       - text: "Home"
         href: /
-      - text: "Research"
-        href: /research/
       - text: "GitHub"
         href: /about/
   page-footer:

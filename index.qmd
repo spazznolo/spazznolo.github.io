@@ -54,6 +54,4 @@ This blog is an outlet for ideas which naturally interest me. I keep the posts i
 
 ::: {#recent-writing}
 :::
-
-[Browse all research and the historical archive.](/research/)
 :::
