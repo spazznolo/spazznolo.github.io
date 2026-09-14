@@ -169,7 +169,7 @@ class RouteValidationTest(unittest.TestCase):
     def test_listing_input_discovery_is_complete(self):
         root = Path(__file__).resolve().parents[1]
         paths = listing_input_paths(root)
-        self.assertEqual(len(paths), 9)
+        self.assertEqual(len(paths), 10)
         self.assertEqual(
             {path.relative_to(root).as_posix() for path in paths[:3]},
             {

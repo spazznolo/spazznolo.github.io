@@ -1,9 +1,9 @@
 ---
-title: "Tennis tracking"
-description: "Computer-vision notes from a tennis-tracking project."
+title: "Tennis"
+description: "Player ratings and computer vision."
 toc: false
 ---
 
-The [WTA model rankings](/tennis/rankings/) publish weekly market-implied player strength, surface effects, uncertainty, and historical trajectories. The [model notes](/tennis/model/) describe the specification and fitting process.
+The [WTA Rankings](/tennis/rankings/) publish weekly market-implied player strength, surface effects, uncertainty, and historical trajectories. The [model notes](/tennis/model/) describe the specification and fitting process.
 
-The tennis-tracking project is **paused with intent to return**. Its framework, object-detection, pipeline, data, and liveblog posts remain in the [Archive](/archive/).
+[Tracking Tennis](/tennis/tracking/) describes the computer-vision pipeline which turns an ordinary broadcast into frame-, event- and point-level data.

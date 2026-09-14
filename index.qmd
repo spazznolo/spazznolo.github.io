@@ -12,6 +12,7 @@ listing:
     - "research/goalie-performance/index.qmd"
     - "research/nhl-pick-probability/index.qmd"
     - "tennis/model/index.qmd"
+    - "tennis/tracking/index.qmd"
     - "post-regulation/index.qmd"
     - "goalies/consistency/index.qmd"
     - "posts/**/index.qmd"
@@ -46,6 +47,7 @@ This blog is an outlet for ideas which naturally interest me. I keep the posts i
 ## Projects
 
 - [WTA Rankings](/tennis/rankings/) — WTA player ratings derived from betting markets, updated weekly. · [Notes on the model](/tennis/model/)
+- [Tennis Tracking](/tennis/tracking/) — Turning a television broadcast into frame-, event- and point-level data.
 - [Letterboxd Recs](/projects/letterboxd-recs/) — Film recommendations using taste similarity to a curated user group, updated weekly.
 
 ## Recent writing

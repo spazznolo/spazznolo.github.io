@@ -18,6 +18,7 @@ CANONICAL_LISTING_INPUTS = (
     "research/nhl-pick-probability/index.qmd",
     "post-regulation/index.qmd",
     "goalies/consistency/index.qmd",
+    "tennis/tracking/index.qmd",
 )
 
 

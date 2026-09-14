@@ -9,6 +9,7 @@ listing:
       - "nhl-pick-probability/index.qmd"
       - "../post-regulation/index.qmd"
       - "../goalies/consistency/index.qmd"
+      - "../tennis/tracking/index.qmd"
       - "../posts/**/index.qmd"
     sort: "date desc"
     type: table
