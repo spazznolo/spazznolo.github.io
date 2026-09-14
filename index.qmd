@@ -21,7 +21,7 @@ listing:
   fields: [date, title, reading-time]
   sort-ui: false
   filter-ui: false
-  page-size: 10
+  page-size: 1000
   feed: true
 ---
 
