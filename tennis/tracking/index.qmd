@@ -19,15 +19,15 @@ execute:
 ::::::: model-field-sheet
 ## Purpose
 
-The idea began while watching the US Open at a bar. During play, the camera barely moved: one clean, lengthwise shot contained the court, both players and the ball. It seemed like tennis ought to be the easiest major sport to track from television. It was not.
+This started during the 2022 US Open. I was at a bar and was struck by how clean the camerawork was. During play, the camera barely moved: one lengthwise shot contained the court, both players and the ball. I figured tennis analytics must be booming because of this. A quick search suggested the opposite.
 
-The aim is to turn an ordinary broadcast into an account of the match: where the players and ball were, what happened, and which point it belonged to. That is enough to study movement, shot selection, serve and return skill without access to a proprietary tracking system.
+I tend to learn best by trying, and failing, to apply something new to a real problem. The goal here is to build a program which takes in the full broadcast of a tennis match and pushes out an account of it in tabular form: where the players and ball were, what happened and which point it belonged to.
 
 ## System
 
-One broadcast enters the system. Object, court and scoreboard models read the video separately; their outputs are joined by frame, then reduced into events and points. The result is three linked tables rather than another annotated video.
+The object, court and scoreboard models read the same video separately. Their outputs are joined by frame, then reduced into events and points. The final product is three linked tables rather than another annotated video.
 
-This is decidedly not Hawk-Eye. It does not have to be. The useful question is whether the measurements are stable enough for the analysis being asked of them.
+This is decidedly not Hawk-Eye. Here's the thing: it does not have to be. The standard depends on what the data are being used for, and whether the measurements are stable enough for that use.
 
 ## Contents
 
@@ -41,15 +41,15 @@ This is decidedly not Hawk-Eye. It does not have to be. The useful question is w
 
 ## Data
 
-The original modelling set sampled roughly 3,000 frames from quarter-final highlight videos at 15 tournaments. About 2,000 showed the standard gameplay camera. Front player, back player and ball were labelled only in those frames, which gave the detector examples across courts, players, clothing and lighting without treating every frame in a broadcast as relevant.
+The first modelling set sampled roughly 3,000 frames from quarter-final highlight videos at 15 tournaments. About 2,000 showed the standard gameplay camera. Only those frames were labelled for the front player, back player and ball. This introduced different courts, players, clothing and lighting without spending most of the labelling time on replays and crowd shots.
 
 Event labels were added later. The current high-definition event set contains 1,560 labelled moments from 15 matches: 624 hits, 685 bounces, 110 serves, 14 net contacts and 127 dead-ball frames. Matches, rather than individual frames, are kept together during validation.
 
-The raw input remains modest: a single television feed. No camera calibration, chip or proprietary feed is assumed.
+The input is one television feed. There is no calibrated camera, chipped ball or proprietary tracking feed.
 
 ## Outputs
 
-The tables are linked by match and frame.
+The output is three tables, linked by match and frame.
 
 ::: model-parameter-table
 |  |  |  |
@@ -59,7 +59,7 @@ The tables are linked by match and frame.
 | **Point** | = | server, score state, start and end frames, and the events inside the point |
 :::
 
-The notation used below is small.
+Only six pieces of notation are needed below.
 
 ::: model-parameter-table
 |  |  |  |
@@ -93,13 +93,13 @@ flowchart TB
 
 ### Objects
 
-The current high-definition path uses RF-DETR to locate the front player, back player and tennis ball. Earlier versions used YOLOv5; both write the same frame-level schema. Players are large and usually continuous. The ball can be a dot, a streak or completely hidden, so missing detections are expected rather than silently converted to zero.
+The current high-definition path uses RF-DETR to locate the front player, back player and ball. Earlier versions used YOLOv5; both write the same frame-level table. The front player is usually easy. The back player is smaller and often mixed in with the ball people. The ball is worse: it can look like a dot, a streak or nothing at all.
 
-Short gaps are interpolated within a continuous piece of play. Each repaired value keeps an imputation flag, allowing later models to distinguish an observed trajectory from a convenient one.
+Missing locations remain missing in storage. Short gaps can be interpolated within a continuous piece of play, but each repaired value keeps an imputation flag so it is not confused with an observed detection later.
 
 ### Court
 
-A TrackNet-style keypoint model estimates 14 court landmarks. Valid landmarks define a projective transform $H_f$ which maps image pixels onto a regulation court:
+Once the court is located, its known dimensions make the perspective change almost free. The difficult part is locating it reliably. A TrackNet-style model estimates 14 court landmarks; valid landmarks define a projective transform $H_f$ from image pixels to a regulation court:
 
 $$
 \lambda
@@ -113,40 +113,38 @@ x\\y\\1
 \end{pmatrix}.
 $$
 
-The camera normally holds still during a point, so court estimates are checked for implausible jumps and the last good geometry is retained when a new estimate fails. This makes the coordinate system steadier without pretending that a rejected frame was observed.
+The camera normally holds still during a point. New estimates are checked for implausible jumps and rejected when they fail; in that case, the last good court is carried forward.
 
-![](assets/court-landmark-contact-sheet.png){fig-alt="Court landmark detector accepting gameplay views and rejecting close-ups and crowd shots." width="100%"}
+![](assets/rally-sequence.png){fig-alt="Six frames from a rally with player and ball detections, court projection and the accumulating ball path." width="100%"}
 
 ### Events
 
-Hits and bounces are brief, but their approach and departure are visible in the surrounding trajectory. For every event type $e$, the training target is the distance from frame $f$ to its closest labelled event:
+An event label belongs to one frame, but the surrounding frames contain most of the useful information. Instead of classifying each frame as an event or non-event, the target for event type $e$ is its distance from the closest labelled event:
 
 $$
 d_{f,e}=\min_{g\in E_e}|f-g|.
 $$
 
-Separate gradient-boosted tree models predict this distance from player and ball positions, velocity, acceleration, direction changes, curvature, proximity to each player and missingness. Frames near an event receive more weight:
+Separate XGBoost models predict this distance from player and ball positions, velocity, acceleration, direction changes, curvature, proximity to each player and missingness. Frames near an event receive more weight:
 
 $$
 w_{f,e}=\exp(-\alpha d_{f,e}),
 \qquad \alpha=0.1.
 $$
 
-The predicted distance is smoothed within each continuous sequence. Local minima below an event-specific threshold become the predicted events. No feature, smoother or decoder is allowed to cross a sequence boundary.
+At inference, predicted distance is smoothed within each continuous sequence. Local minima below an event-specific threshold become the predicted events. Features, smoothing and event detection all stop at the sequence boundary.
 
 ## Processing
 
-Object and court predictions are first reduced to one row per frame. Court rows form the spine of the table; object locations are joined onto them and short gaps are interpolated with their provenance retained.
+Object and court predictions are first reduced to one row per frame. The court table provides the full frame index, object locations are joined onto it, and short gaps are interpolated while retaining the imputation flags.
 
-The scorebug is read at regular intervals using EasyOCR. Changes in the recognized score provide anchors for point windows, while serve predictions help locate the beginning of play. Events are then assigned to those windows and written beside the frame- and point-level outputs.
+The scorebug is read every few frames using EasyOCR. A change in score anchors the end of a point, while the serve prediction helps locate its beginning. Events between those anchors are assigned to the point.
 
-The first complete release processed a 132-minute, 720p broadcast in 129 minutes using a Colab T4 and a personal laptop. That figure belongs to the earlier pipeline, not the current detector stack, but it established that full-match processing could operate near broadcast length.
+The first complete release processed a 132-minute, 720p broadcast in 129 minutes using a Colab T4 and a personal laptop. That timing belongs to the earlier pipeline, not the current detector stack, but it showed that a full match could be processed in roughly its broadcast length.
 
 ## Validation
 
-The event models are evaluated with five-fold, match-held-out cross-validation. Predicted peaks are matched one-to-one with labelled events; a prediction counts as correct when it falls within three frames of the label.
-
-On a separate unseen first set, raw object detections covered nearly every frame for the front player, but only about half for the back player and ball. These are coverage rates, not precision estimates, and are measured before short-gap interpolation.
+Object coverage was checked on a separate, unseen first set. The front player was found in nearly every frame, while the back player and ball were found in about half. These are raw coverage rates before interpolation, not precision estimates.
 
 | Object | Frame coverage |
 |:--|--:|
@@ -155,7 +153,7 @@ On a separate unseen first set, raw object detections covered nearly every frame
 | **Ball** | 50.0% |
 | **All three** | 25.6% |
 
-The event table below comes from the corrected grouped cross-validation.
+Event performance was evaluated with five-fold cross-validation, keeping whole matches together. Predicted events were matched one-to-one with labels and counted as correct within three frames.
 
 | Event | Labels | Precision | Recall | F1 |
 |:--|--:|--:|--:|--:|
@@ -164,11 +162,11 @@ The event table below comes from the corrected grouped cross-validation.
 | **Serve** | 110 | 0.873 | 0.809 | 0.840 |
 | **Net** | 14 | 0.000 | 0.000 | 0.000 |
 
-The table is encouraging, but it is not the whole test. On one fully unseen first set, manual labels found 17 of 20 hits and 23 of 27 bounces within three frames. Only 2 of 8 serves and none of 4 net contacts were recovered. Precision was not estimated because unreviewed frames were not labelled as negatives.
+The cross-validation table looks good. The fully unseen set was less tidy: 17 of 20 hits and 23 of 27 bounces were found within three frames, but only 2 of 8 serves and none of 4 net contacts. Precision was not estimated because unreviewed frames were not labelled as negatives.
 
-The distinction matters: hits and bounces appear to travel; serves and net contacts do not yet. Fourteen net examples are not enough to fit or judge a useful model, and the serve decoder requires a new out-of-sample pass before it belongs in downstream analysis.
+Hits and bounces appear to travel to a new broadcast. Serve detection does not yet. The net row mostly says that 14 examples are not enough to fit or judge a useful model.
 
-Court projection has a similar boundary. The landmark detector is useful for stabilizing the frame table, but projected coordinates have not yet passed a dedicated geometry test. Court-derived features therefore remain outside the event models.
+The projected court coordinates also failed their geometry audit. They remain useful for inspection, but they are excluded from the event models until they pass a dedicated test.
 
 ## Next steps
 
@@ -177,7 +175,7 @@ Court projection has a similar boundary. The landmark detector is useful for sta
 3.  Add enough net contacts to decide whether they are learnable from broadcast video at all.
 4.  Join reliable events to point outcomes, then estimate serve, return and shot-level value from the resulting sequences.
 
-The last step is the reason for the rest. A tracker is only useful once it makes a tennis question easier to answer.
+Return probability was the statistic I had in mind when the first match was released: given where and how a ball was struck, how often should it come back? With enough reliable point sequences, the same data can separate serve and return skill, describe shot difficulty and begin to answer that question.
 
 The current implementation lives in the [`track` application](https://github.com/spazznolo/tennis/tree/main/apps/track).
 :::::::
