@@ -84,15 +84,11 @@ test('homepage starts with the approved image', async ({ page }) => {
   await expect(page.locator('.home-about')).toHaveCount(0);
 });
 
-test('homepage featured reading times match the rendered listings', async ({ page }) => {
+test('homepage research descriptions sit below their titles', async ({ page }) => {
   await page.goto('/');
-  for (const { homepageTitle, listingTitle } of [
-    { homepageTitle: 'Goalie Performance', listingTitle: 'Goalie Performance' },
-    { homepageTitle: 'Pick Probability', listingTitle: 'NHL Pick Probability' },
-  ]) {
-    const featured = await page.locator('#research li').filter({ hasText: homepageTitle }).innerText();
-    const listingTime = await page.locator('#listing-recent-writing tbody tr').filter({ hasText: listingTitle }).locator('.listing-reading-time').innerText();
-    expect(featured).toContain(listingTime);
+  for (const title of ['Goalie Performance', 'Pick Probability']) {
+    const link = page.locator('#research').getByRole('link', { name: title, exact: true });
+    await expect(link).toHaveCSS('display', 'block');
   }
 });
 

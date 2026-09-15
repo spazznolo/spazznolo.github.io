@@ -156,6 +156,11 @@ body:has(.home-stream) #title-block-header {
   padding-bottom: 0;
 }
 
+.home-stream > section.level2:not(#recent-writing) > ul > li > a:first-child {
+  display: block;
+  width: fit-content;
+}
+
 main section.level2 > h2 {
   color: var(--warm-accent);
   font-size: 1.12rem;
