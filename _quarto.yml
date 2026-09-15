@@ -36,13 +36,10 @@ website:
 format:
   html:
     canonical-url: true
-    theme:
-      dark: [cosmo, styles/dark.scss]
-      light: [cosmo, styles/light.scss]
+    theme: [cosmo, styles/dark.scss]
     css:
       - styles/site.css
       - styles/figure-centering.css
-    respect-user-color-scheme: false
     toc: true
     toc-location: body
     title-block-categories: false

@@ -14,15 +14,6 @@ for (const path of pages) {
     expect(serious).toEqual([]);
   });
 
-  test(`${path} has no serious accessibility violations in light mode`, async ({ page }) => {
-    const response = await page.goto(path);
-    expect(response?.ok()).toBe(true);
-    await page.locator('.quarto-color-scheme-toggle').click();
-    await expect(page.locator('body')).toHaveClass(/quarto-light/);
-    const results = await new AxeBuilder({ page }).analyze();
-    const serious = results.violations.filter(v => ['serious', 'critical'].includes(v.impact));
-    expect(serious).toEqual([]);
-  });
 }
 
 for (const width of widths) {
@@ -50,24 +41,17 @@ test('homepage presentation is retained without header links', async ({ page }) 
   await page.goto('/');
   await expect(page.locator('nav .navbar-nav .nav-link')).toHaveCount(0);
   await expect(page.locator('.navbar-brand')).toHaveCount(0);
+  await expect(page.locator('.quarto-color-scheme-toggle')).toHaveCount(0);
   await expect(page.locator('body')).toHaveCSS('font-family', /Source Code Pro/);
 });
 
-for (const mode of ['dark', 'light']) {
-  for (const width of [320, 1440]) {
-    test(`body type scale stays at 13px in ${mode} mode at ${width}px`, async ({ page }) => {
-      await page.setViewportSize({ width, height: 900 });
-      await page.goto('/');
-      if (mode === 'light') {
-        await page.locator('.quarto-color-scheme-toggle').click();
-        await expect(page.locator('body')).toHaveClass(/quarto-light/);
-      } else {
-        await expect(page.locator('body')).toHaveClass(/quarto-dark/);
-      }
-      await expect(page.locator('html')).toHaveCSS('font-size', '13px');
-      await expect(page.locator('body')).toHaveCSS('font-size', '13px');
-    });
-  }
+for (const width of [320, 1440]) {
+  test(`body type scale stays at 13px at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto('/');
+    await expect(page.locator('html')).toHaveCSS('font-size', '13px');
+    await expect(page.locator('body')).toHaveCSS('font-size', '13px');
+  });
 }
 
 test('homepage starts with the approved image', async ({ page }) => {

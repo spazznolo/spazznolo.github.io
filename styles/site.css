@@ -44,22 +44,15 @@ body a:focus-visible, body button:focus-visible, body summary:focus-visible {
   gap: 0.55rem;
 }
 
-.nav-link, .quarto-color-scheme-toggle {
+.nav-link {
   color: var(--warm-accent) !important;
 }
 
-body.quarto-light .navbar .nav-link,
-body.quarto-light .quarto-color-scheme-toggle {
-  color: #4f3900 !important;
-}
-
-.navbar .nav-link,
-.quarto-color-scheme-toggle {
+.navbar .nav-link {
   transition: none;
 }
 
-body .navbar a.nav-link:focus-visible,
-body .navbar a.quarto-color-scheme-toggle:focus-visible {
+body .navbar a.nav-link:focus-visible {
   outline: 2px solid var(--warm-accent) !important;
   outline-offset: 3px;
   box-shadow: none !important;
@@ -289,10 +282,6 @@ nav#TOC a:hover {
 .home-about p {
   color: #f2f0eb;
   font-size: 1rem;
-}
-
-body.quarto-light .home-about p {
-  color: #211d17;
 }
 
 .article-reading-time, .archive-notice, .article-context {
