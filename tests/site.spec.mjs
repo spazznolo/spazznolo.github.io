@@ -46,9 +46,9 @@ for (const path of responsivePages) {
   }
 }
 
-test('homepage presentation and navigation are retained', async ({ page }) => {
+test('homepage presentation is retained without header links', async ({ page }) => {
   await page.goto('/');
-  await expect(page.locator('nav').getByRole('link', { name: 'Home', exact: true })).toHaveAttribute('href', '/');
+  await expect(page.locator('nav .navbar-nav .nav-link')).toHaveCount(0);
   await expect(page.locator('.navbar-brand')).toHaveCount(0);
   await expect(page.locator('body')).toHaveCSS('font-family', /Source Code Pro/);
 });
@@ -96,25 +96,24 @@ test('homepage featured reading times match the rendered listings', async ({ pag
   }
 });
 
-test('top navigation exposes only approved destinations', async ({ page }) => {
+test('top navigation exposes no destinations', async ({ page }) => {
   await page.goto('/');
   const nav = page.locator('nav');
   await expect(nav.getByRole('link', { name: 'Research' })).toHaveCount(0);
-  await expect(nav.getByRole('link', { name: 'Home', exact: true })).toBeVisible();
+  await expect(nav.getByRole('link', { name: 'Home', exact: true })).toHaveCount(0);
   await expect(nav.getByRole('link', { name: 'Subjects' })).toHaveCount(0);
   await expect(nav.getByRole('link', { name: 'About' })).toHaveCount(0);
-  await expect(nav.getByRole('link', { name: 'GitHub' })).toBeVisible();
+  await expect(nav.getByRole('link', { name: 'GitHub' })).toHaveCount(0);
   await expect(nav.getByRole('link', { name: /LinkedIn|Twitter/i })).toHaveCount(0);
 });
 
-test('keyboard focus reaches navigation and activates GitHub', async ({ page }) => {
+test('GitHub is linked from the homepage body', async ({ page }) => {
   await page.goto('/');
-  const github = page.locator('nav').getByRole('link', { name: 'GitHub', exact: true });
+  const github = page.locator('main').getByRole('link', { name: 'GitHub', exact: true });
   await github.focus();
   await expect(github).toBeFocused();
   await expect(github).toHaveCSS('outline-style', /solid|auto/);
-  await page.keyboard.press('Enter');
-  await expect(page).toHaveURL(/\/about\/$/);
+  await expect(github).toHaveAttribute('href', 'https://github.com/spazznolo');
 });
 
 for (const path of ['/research/goalie-performance/', '/goalies/consistency/']) {

@@ -30,11 +30,6 @@ website:
   navbar:
     collapse: true
     title: false
-    right:
-      - text: "Home"
-        href: /
-      - text: "GitHub"
-        href: /about/
   page-footer:
     border: false
 

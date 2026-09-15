@@ -23,6 +23,7 @@ class RenderedSiteSmokeTest(unittest.TestCase):
         self.assertIn("Post-regulation", html)
         self.assertIn("Goalie Consistency", html)
         self.assertIn("Extracting Structured Data from Tennis Broadcasts", html)
+        self.assertIn('href="https://github.com/spazznolo"', html)
         self.assertNotIn("Browse all research and the historical archive", html)
 
     def test_discovery_outputs_exist(self):
