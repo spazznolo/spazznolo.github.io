@@ -19,9 +19,9 @@ execute:
 ::::::: model-field-sheet
 ## Purpose
 
-This started during the 2022 US Open. I was at a bar and was struck by how clean the camerawork was. During play, the camera barely moved: one symmetrical, almost Wes Anderson-like shot contained the court, both players and the ball. I figured tennis analytics must be booming because of this. A quick search suggested the opposite.
+This project started during the 2022 US Open. I was at a bar and was struck by how clean it looked on the broadcast. The camera barely moved. One symmetrical, Wes Anderson-like shot of the court, both players and the ball. I figured tennis analytics must be booming because of this. A quick search suggested the opposite.
 
-The goal is to build a program which takes in the full broadcast of a tennis match and pushes out an account of it in tabular form—where the players and ball were, what happened and which point it belonged to. That creates enough structure to study movement, shot selection, serve and return without access to a proprietary tracking feed.
+Back then, I thought I could build a scalable system which processes match broadcasts and pushes out event-level data, covering serves, hits, bounces and player positions during each of these. As the tech has progressed, this is even more true today. There are examples of tracking systems all over the internet, yet strangely no public data has been released on tennis yet. I still dabble now and again, still trying to fill that gap in public data.
 
 ## System
 
@@ -34,7 +34,12 @@ This is decidedly not Hawk-Eye. Here's the thing: it does not have to be. The st
 <nav class="model-contents model-contents-section" aria-label="Contents">
 
 ::: model-contents-links
-<a href="#data">Data</a> <a href="#outputs">Outputs</a> <a href="#model">Model</a> <a href="#processing">Processing</a> <a href="#validation">Validation</a> <a href="#next-steps">Next steps</a>
+<a href="#data">Data</a>
+<a href="#outputs">Outputs</a>
+<a href="#model">Model</a>
+<a href="#processing">Processing</a>
+<a href="#validation">Validation</a>
+<a href="#next-steps">Next steps</a>
 :::
 
 </nav>
@@ -93,7 +98,7 @@ flowchart TB
 
 ### Objects
 
-The current high-definition path uses RF-DETR to locate the front player, back player and ball. Earlier versions used YOLOv5; both write the same frame-level table. The front player is usually easy. The back player is smaller and often mixed in with the ball people. The ball is worse: it can look like a dot, a streak or nothing at all.
+The object detection model uses RF-DETR to locate the front player, back player and ball. The front player is usually easy. The back player is smaller and sometimes mistaken for a ball person, but is still very well covered. The ball is worse: it can look like a dot, a streak or be basically invisible.
 
 Missing locations remain missing in storage. Short gaps can be interpolated within a continuous piece of play, but each repaired value keeps an imputation flag so it is not confused with an observed detection later.
 

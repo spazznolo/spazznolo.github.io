@@ -17,16 +17,16 @@ This model estimates WTA player strength over time and across surfaces, with unc
 
 The system consists of a single generative model, run in two stages.
 
-1.  In the off-season, the model learns the shared parameters while integrating over the player states.
-2.  During the season, the model fixes the learned global parameters and estimates latent player strengths before each day's matches.
+1.  In the off-season, the model learns the tour's global parameters while integrating over the player states.
+2.  During the season, the model fixes parameters learned in the first stage, and then estimates latent player strengths before each day's matches.
 
 The player-state model retains 85.4% of the market's signal, compared with 57.7% for standard Elo, without using the predicted match's de-vigged probability or outcome.
 
-The model does not separately represent injuries, rest, player-specific matchups or variation in court speed within a surface. Because it observes only the resulting price, it cannot distinguish these effects cleanly from strength: some may bleed into the latent player states, while the rest appears as observation noise.
+The model does not currently consider injuries, rest, weather, player-specific matchups or variation in court speed within a surface. Because it observes only the resulting price, it cannot distinguish these effects cleanly from strength, which means some of these effects bleed into the latent player states and observation noise.
 
-<nav class="model-contents" aria-label="Contents">
+<nav class="model-contents model-contents-section" aria-label="Contents">
 
-Contents
+## Contents
 
 ::: model-contents-links
 <a href="#data">Data</a> <a href="#parameters">Parameters</a> <a href="#model">Model</a> <a href="#estimation">Estimation</a> <a href="#results">Results</a> <a href="#validation">Validation</a> <a href="#next-steps">Next steps</a>
@@ -36,7 +36,7 @@ Contents
 
 ## Data
 
-One observation per match: date $t$, surface $s$, players $i$ and $j$, their ages and prior experience, and decimal odds $o_{i,m}$ and $o_{j,m}$. These data were acquired for nearly every WTA match from 2019 to 2026. The database stores the source's first listed bookmaker but not its identity; in practice, this was usually *bet365*.
+One observation per match: date $t$, surface $s$, players $i$ and $j$, their ages and prior experience, and decimal odds $o_{i,m}$ and $o_{j,m}$. These data were acquired for nearly every WTA match from 2019 to 2026 from *tennis24*, taking the first bookmaker's listing, which was usually *bet365*.
 
 The market odds are converted into implied log-odds using proportional de-vigging:
 
@@ -53,8 +53,6 @@ The raw bookmaker margin is $v_m=\pi_{i,m}+\pi_{j,m}-1$. The model standardizes 
 $$
 V_m=\frac{v_m-\bar v_{\mathrm{train}}}{s_{v,\mathrm{train}}}.
 $$
-
-All matches on a date are predicted before that date's prices update the player states. Match outcomes are used only for evaluation.
 
 ## Parameters
 
@@ -116,7 +114,7 @@ $$
 x_{i,1} \sim \operatorname{Normal}(0,\tau_i).
 $$
 
-Because predictions are made one match ahead, [fixed peak ages from 24 through 28](/assets/data/wta-peak-sensitivity.csv) produced functionally identical out-of-sample loss. The live model fixes peak age at 24 and uses the piecewise-linear age path:
+Because predictions are only made one match ahead, including age effects produced little value (basically no difference in performance regardless of the peak age that was fixed). The live model fixes peak age at 24 and uses the piecewise-linear age path:
 
 $$
 a(A;\beta)=
@@ -139,7 +137,7 @@ $$
 
 Here, $\Delta t$ is elapsed calendar time in years.
 
-Each player has zero-sum random effects for hard, clay and grass, represented using two orthonormal Helmert contrasts.
+Each player has zero-sum random effects for hard, clay, and grass surfaces, represented using two orthonormal Helmert contrasts.
 
 $$
 \mathbf c_i\sim\operatorname{Normal}_2(\mathbf 0,\tau_s^2\mathbf I_2),
@@ -197,8 +195,6 @@ p(z\mid\theta)\,dz
 +\log p(\theta)
 \right\}.
 $$
-
-During the global fit, the likelihood averages over the player states; only the shared parameters are optimized.
 
 **In-season online fit**
 
