@@ -1,7 +1,7 @@
 ---
 title: "Sports research digest: September 30, 2026"
 date: 2026-09-30
-description: "Defensive play, draft projections, passing intelligence, and lessons from baseball and sports forecasting."
+description: "Team and draft projections, passing intelligence, and lessons from baseball and sports forecasting."
 toc: false
 format:
   html:
@@ -14,11 +14,11 @@ Six picks for the first issue: three about hockey, three from other sports or me
 
 ## Hockey
 
-### [The challenge of evaluating defensive play (1)](https://jhanhky.substack.com/p/why-nhl-coaches-hate-defensive-analytics)
+### [2026–2027 team point projections](https://evolving-hockey.com/blog/2026-2027-team-point-projections/)
 
-**Jack Han · September 22 · Newsletter · Paid**
+**Evolving Hockey · September 28 · Article**
 
-Han describes defensive spacing choices that are hard to capture with hits, blocks, or an individual player's on-ice results. The piece is a useful companion to any player-impact model: it asks what a defender *did* before deciding what the outcome metric can tell us about their contribution.
+The authors explain how they turn player projections into team ratings, game win probabilities, and a 50,000-season simulation. Their comparison of xSPAR, RAPM, and box-score approaches is especially useful if you care how a projection system is assembled. The roster and injury assumptions remain a source of uncertainty, and this season's extra games make raw point totals harder to compare with past years.
 
 ### [2014 first-round retrospective](https://jfresh.substack.com/p/2014-first-round-retrospective-projections)
 

@@ -18,7 +18,7 @@ listing:
   page-size: 20
 ---
 
-A short reading list of public work worth opening, with roughly equal attention to hockey and ideas from other sports. Each entry links to the original. Some originals require a subscription.
+A short reading list of public work worth opening, with roughly equal attention to hockey and ideas from other sports. I pay particular attention to projection systems, defensive value, WAR frameworks, and computer vision. Each entry links to the original. Some originals require a subscription.
 
 ::: {#digest-issues}
 :::
