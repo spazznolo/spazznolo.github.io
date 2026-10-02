@@ -16,6 +16,7 @@ project:
     - "projects/**/*.qmd"
     - "draft/**/*.qmd"
     - "post-regulation/**/*.qmd"
+    - "digest/**/*.qmd"
     - "20*/**/*.qmd"
     - "posts/**/*.qmd"
     - "!templates/**/*.qmd"

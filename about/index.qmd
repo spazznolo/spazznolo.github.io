@@ -1,5 +1,6 @@
 ---
 title: "GitHub"
+description: "Jeremie Spagnolo's projects and code on GitHub."
 toc: false
 ---
 

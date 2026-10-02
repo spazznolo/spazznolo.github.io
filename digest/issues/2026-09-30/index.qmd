@@ -1,0 +1,53 @@
+---
+title: "Sports research digest: September 30, 2026"
+date: 2026-09-30
+description: "Defensive play, draft projections, passing intelligence, and lessons from baseball and sports forecasting."
+toc: false
+format:
+  html:
+    include-in-header:
+      text: |
+        <meta name="robots" content="noindex, nofollow">
+---
+
+Six picks for the first issue: three about hockey, three from other sports or methods. Follow the links for the original work.
+
+## Hockey
+
+### [The challenge of evaluating defensive play (1)](https://jhanhky.substack.com/p/why-nhl-coaches-hate-defensive-analytics)
+
+**Jack Han · September 22 · Newsletter · Paid**
+
+Han describes defensive spacing choices that are hard to capture with hits, blocks, or an individual player's on-ice results. The piece is a useful companion to any player-impact model: it asks what a defender *did* before deciding what the outcome metric can tell us about their contribution.
+
+### [2014 first-round retrospective](https://jfresh.substack.com/p/2014-first-round-retrospective-projections)
+
+**JFresh · September 1 · Newsletter**
+
+A pick-by-pick comparison of draft-day scouting projections with how each player's career developed. Read it for the recurring forecasting question: which projected skills translated to the NHL, and which weaknesses mattered more than scouts expected? It is a retrospective, so the outcome is known when the projection is assessed.
+
+### [Validating Expected Possession Value against coach assessments of passing intelligence](https://ecp.ep.liu.se/index.php/linhac/article/view/1645)
+
+**Miikka Palvalin · September 25 · LINHAC 2026 research paper**
+
+In a sample of 120 Finnish U20 players, an Expected Possession Value passing measure had a moderate association with structured coach ratings and outperformed pass-completion percentage. The association was stronger for defensemen than forwards. The sample and youth-league setting matter when considering how far the result might travel.
+
+## Other sports and methods
+
+### [Comparing Statcast Fielding Run Value to DRS](https://tangotiger.com/index.php/site/comments/comparing-statcast-fielding-run-value-frv-to-drs)
+
+**Tangotiger · September 28 · Blog**
+
+Tango walks through a reproducible comparison of two baseball fielding metrics, starting with how to align their positional baselines. The hockey connection is methodological: apparent disagreement between player-value models can come from what each metric treats as its reference point.
+
+### [Seiya Suzuki’s defense took a big leap forward](https://blogs.fangraphs.com/seiya-suzukis-defense-took-a-big-leap-forward/)
+
+**Davy Andrews · September 30 · FanGraphs**
+
+Three fielding metrics now rate Suzuki positively after years of disagreement. Andrews looks beyond the headline numbers at components of outfield play and notes that defensive measures take time to stabilize. It is a concrete case for checking the underlying behavior before treating a one-year rating change as a settled change in talent.
+
+### [Forecasting sports outcomes through machine learning](https://www.frontiersin.org/journals/computer-science/articles/10.3389/fcomp.2026.1883327/full)
+
+**Research review · September 2026 · Frontiers in Computer Science**
+
+This review maps 118 studies across game results, player performance, injuries, and in-game events. Its most useful takeaway for model builders is the uneven validation practice: the authors call for time-aware testing, uncertainty estimates, and probability calibration. The review is descriptive and does not score each study's risk of bias, which limits claims about which algorithms work best.

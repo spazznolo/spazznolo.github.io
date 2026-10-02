@@ -25,6 +25,10 @@ npm test
 
 Copy `templates/post.qmd` to `posts/<slug>/index.qmd`, replace its example metadata and instructional prose, and leave `draft: true` until publication. New computational posts may use frozen R, Python, Julia, Observable, or Shinylive output; historical archive posts are intentionally non-executable.
 
+## Sports research digest
+
+The digest at `digest/index.qmd` collects selected hockey and broader sports research. Its eight RSS/Atom sources live in `digest/sources.json`; run `python3 scripts/collect_digest.py --days 14 --output /tmp/digest-candidates.md` to prepare a recent candidate list. See `digest/README.md` for the editorial workflow. New issues are reviewed locally before publication.
+
 ## Plotting
 
 New and regenerated figures use the shared Python theme in `scripts/spazz_plot.py`. Install its isolated dependencies with `python3 -m pip install -r requirements-plotting.txt`, then use `spazz_theme()` and `finish_axes()` around ordinary matplotlib code. Keep titles and interpretation in the article, use gold as the only primary series colour, and avoid grids and tick marks.

@@ -1,0 +1,24 @@
+---
+title: "Sports research digest"
+description: "A reading list of hockey and sports analytics articles, newsletters, and papers."
+toc: false
+format:
+  html:
+    include-in-header:
+      text: |
+        <meta name="robots" content="noindex, nofollow">
+listing:
+  id: digest-issues
+  contents: "issues/**/index.qmd"
+  sort: "date desc"
+  type: table
+  fields: [date, title]
+  sort-ui: false
+  filter-ui: false
+  page-size: 20
+---
+
+A short reading list of public work worth opening, with roughly equal attention to hockey and ideas from other sports. Each entry links to the original. Some originals require a subscription.
+
+::: {#digest-issues}
+:::
