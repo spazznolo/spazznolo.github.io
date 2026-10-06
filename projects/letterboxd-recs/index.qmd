@@ -38,13 +38,13 @@ page-layout: full
   .recs-movement { font-size: .78rem; }
   .recs-movement.up { color: #7bd88f; }
   .recs-movement.down { color: #ff7b72; }
-  #recs-surprise { background: transparent; border: 1px solid var(--warm-divider); color: inherit; cursor: pointer; font: inherit; padding: .25rem .6rem; margin-left: .5rem; }
-  #recs-surprise:hover, #recs-surprise.active { color: var(--warm-accent); border-color: var(--warm-accent); }
+  #recs-shuffle { background: transparent; border: 1px solid var(--warm-divider); color: inherit; cursor: pointer; font: inherit; padding: .25rem .6rem; }
+  #recs-shuffle:hover, #recs-shuffle.active { color: var(--warm-accent); border-color: var(--warm-accent); }
 </style>
 
 <div id="letterboxd-recs">
 <p class="recs-note" id="recs-updated">Loading the latest recommendations…</p>
-<p class="recs-note"><button id="recs-surprise" type="button">Surprise me: 20 picks</button> Browse a fresh mix from the ranked 5,000.</p>
+<p class="recs-note"><button id="recs-shuffle" type="button">Shuffle</button></p>
 <div class="recs-grid">
 <div class="recs-controls">
 <div class="recs-head-cell"><button class="recs-sort" data-sort="rank" data-direction="asc" type="button">Rank</button><input id="recs-max-rank" type="number" min="1" placeholder="Max" aria-label="Maximum rank"></div>
@@ -70,10 +70,10 @@ page-layout: full
   const maxRankInput = document.getElementById('recs-max-rank');
   const minYearInput = document.getElementById('recs-min-year');
   const availabilitySelect = document.getElementById('recs-availability');
-  const surpriseButton = document.getElementById('recs-surprise');
+  const shuffleButton = document.getElementById('recs-shuffle');
   const sortButtons = [...document.querySelectorAll('.recs-sort')];
   const rows = document.getElementById('recs-rows');
-  let sortKey = 'rank', sortDirection = 'asc', surpriseMode = false, data;
+  let sortKey = 'rank', sortDirection = 'asc', shuffleMode = false, data;
 
   const streamingProviderKeys = new Set([
     'apple_tv_plus', 'crave', 'criterion_channel', 'disney_plus', 'hulu',
@@ -130,6 +130,26 @@ page-layout: full
     if (key === 'availability') return availabilityType(film);
     return Number(film.current_rank);
   };
+  const weightedSample = (films, count) => {
+    const pool = films.map(film => {
+      const score = Number(film.score_scaled ?? film.score);
+      return {film, weight: Number.isFinite(score) ? Math.max(0, score) : 0};
+    });
+    const picks = [];
+    while (pool.length && picks.length < count) {
+      const total = pool.reduce((sum, entry) => sum + entry.weight, 0);
+      let index;
+      if (total > 0) {
+        let target = Math.random() * total;
+        index = pool.findIndex(entry => (target -= entry.weight) < 0);
+        if (index < 0) index = pool.length - 1;
+      } else {
+        index = Math.floor(Math.random() * pool.length);
+      }
+      picks.push(pool.splice(index, 1)[0].film);
+    }
+    return picks;
+  };
   const render = () => {
     if (!data) return;
     const provider = providerSelect.value, genre = genreSelect.value;
@@ -162,14 +182,7 @@ page-layout: full
       return;
     }
     let displayed = filtered;
-    if (surpriseMode) {
-      displayed = [...filtered];
-      for (let i = displayed.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [displayed[i], displayed[j]] = [displayed[j], displayed[i]];
-      }
-      displayed = displayed.slice(0, 20);
-    }
+    if (shuffleMode) displayed = weightedSample(filtered, 50);
     rows.innerHTML = displayed.map(film => {
       const title = escapeHTML(film.title), url = /^https:\/\//.test(film.letterboxd_url || '') ? escapeHTML(film.letterboxd_url) : '';
       const titleHTML = url ? `<a class="recs-title" href="${url}" target="_blank" rel="noopener noreferrer">${title}</a>` : `<span class="recs-title">${title}</span>`;
@@ -203,14 +216,14 @@ page-layout: full
   genreSelect.addEventListener('change', render);
   minYearInput.addEventListener('input', render);
   availabilitySelect.addEventListener('change', render);
-  surpriseButton.addEventListener('click', () => {
-    surpriseMode = true;
-    surpriseButton.classList.add('active');
+  shuffleButton.addEventListener('click', () => {
+    shuffleMode = true;
+    shuffleButton.classList.add('active');
     render();
   });
   sortButtons.forEach(button => button.addEventListener('click', () => {
-    surpriseMode = false;
-    surpriseButton.classList.remove('active');
+    shuffleMode = false;
+    shuffleButton.classList.remove('active');
     const nextSort = button.dataset.sort;
     sortDirection = sortKey === nextSort ? (sortDirection === 'asc' ? 'desc' : 'asc') : button.dataset.direction;
     sortKey = nextSort;
