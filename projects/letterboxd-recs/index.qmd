@@ -182,7 +182,11 @@ page-layout: full
       return;
     }
     let displayed = filtered;
-    if (shuffleMode) displayed = weightedSample(filtered, 50);
+    if (shuffleMode) {
+      displayed = weightedSample(filtered, 50).sort((left, right) =>
+        sortValue(right, 'score') - sortValue(left, 'score') || Number(left.current_rank) - Number(right.current_rank)
+      );
+    }
     rows.innerHTML = displayed.map(film => {
       const title = escapeHTML(film.title), url = /^https:\/\//.test(film.letterboxd_url || '') ? escapeHTML(film.letterboxd_url) : '';
       const titleHTML = url ? `<a class="recs-title" href="${url}" target="_blank" rel="noopener noreferrer">${title}</a>` : `<span class="recs-title">${title}</span>`;
@@ -218,6 +222,8 @@ page-layout: full
   availabilitySelect.addEventListener('change', render);
   shuffleButton.addEventListener('click', () => {
     shuffleMode = true;
+    sortKey = 'score';
+    sortDirection = 'desc';
     shuffleButton.classList.add('active');
     render();
   });
