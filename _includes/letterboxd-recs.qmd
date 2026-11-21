@@ -27,6 +27,10 @@
   .recs-title:hover { text-decoration: underline; }
   .recs-genres, .recs-provider-list, .recs-availability, .recs-empty { color: var(--bs-secondary-color); }
   .recs-provider-list { font-size: .82rem; }
+  .recs-more-providers { display: inline; }
+  .recs-more-providers summary { display: inline; cursor: pointer; color: inherit; text-decoration: underline; text-underline-offset: .15em; }
+  .recs-more-providers summary::-webkit-details-marker { display: none; }
+  .recs-provider-overflow { display: block; margin-top: .2rem; }
   .recs-availability { font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; }
   .recs-movement { font-size: .78rem; }
   .recs-movement.up { color: #7bd88f; }
@@ -78,6 +82,8 @@
     disney_plus: 'Disney+', hulu: 'Hulu', max: 'Max', mubi: 'MUBI',
     netflix: 'Netflix', paramount_plus: 'Paramount+', peacock: 'Peacock',
     'Disney Plus': 'Disney+', 'Paramount Plus': 'Paramount+', 'Tubi TV': 'Tubi',
+    'Amazon Prime Video': 'Prime Video', 'Amazon Prime Video with Ads': 'Prime Video',
+    'Paramount Plus Basic with Ads': 'Paramount+', 'Paramount Plus Premium': 'Paramount+',
     plex: 'Plex', prime_video: 'Prime Video', tubi: 'Tubi', youtube: 'YouTube'
   };
 
@@ -91,22 +97,26 @@
     .replace(/\b\p{L}/gu, letter => letter.toLocaleUpperCase());
   const christmas = () => Boolean(data?.region);
   const streamingProviders = film => {
-    if (christmas()) return film.streaming || [];
+    if (christmas()) return uniqueProviderLabels(film.streaming);
     if (!film.stream) return [];
     return Object.entries(film.providers || {})
       .filter(([provider, available]) => available && streamingProviderKeys.has(provider))
       .map(([provider]) => provider);
   };
-  const rentalProviders = film => christmas() ? (film.rentals || []) : [];
-  const allProviders = film => [...new Set([...streamingProviders(film), ...rentalProviders(film)])];
+  const uniqueProviderLabels = providers => [...new Set((providers || []).map(providerLabel))];
+  const rentalProviders = film => uniqueProviderLabels(film.rentals);
+  const christmasProviders = (film, method) => {
+    if (method === 'stream') return streamingProviders(film);
+    if (method === 'rent') return rentalProviders(film);
+    return [...new Set([...streamingProviders(film), ...rentalProviders(film)])];
+  };
+  const christmasMethod = (film, method, provider) => {
+    if (method) return method;
+    if (streamingProviders(film).some(name => !provider || name === provider)) return 'stream';
+    if (rentalProviders(film).some(name => !provider || name === provider)) return 'rent';
+    return '';
+  };
   const availabilityType = film => {
-    if (christmas()) {
-      if (!Array.isArray(film.streaming) || !Array.isArray(film.rentals)) return 'Unverified';
-      if (film.streaming.length && film.rentals.length) return 'Stream + rent';
-      if (film.streaming.length) return 'Stream';
-      if (film.rentals.length) return 'Rent';
-      return 'None listed';
-    }
     if (streamingProviders(film).length) return 'stream';
     if (Object.entries(film.providers || {}).some(([provider, available]) => available && rentalProviderKeys.has(provider))) return 'rent';
     return '';
@@ -136,8 +146,12 @@
     if (key === 'title') return String(film.title || '').toLowerCase();
     if (key === 'year') return Number(film.year);
     if (key === 'genre') return (film.genres || []).join(', ').toLowerCase();
-    if (key === 'provider') return allProviders(film).map(providerLabel).join(', ').toLowerCase();
-    if (key === 'availability') return availabilityType(film);
+    if (key === 'provider' || key === 'availability') {
+      const method = christmas() ? christmasMethod(film, availabilitySelect.value, providerSelect.value) : availabilityType(film);
+      if (key === 'availability') return method;
+      const names = christmas() ? (method ? christmasProviders(film, method) : []) : streamingProviders(film).map(providerLabel);
+      return names.join(', ').toLowerCase();
+    }
     return Number(film.current_rank);
   };
   const weightedSample = (films, count) => {
@@ -170,8 +184,7 @@
       if (titleQuery && !String(film.title || '').toLowerCase().includes(titleQuery)) return false;
       if (Number.isFinite(maxRank) && Number(film.current_rank) > maxRank) return false;
       if (christmas()) {
-        const matches = availability === 'stream' ? streamingProviders(film)
-          : availability === 'rent' ? rentalProviders(film) : allProviders(film);
+        const matches = christmasProviders(film, availability);
         if (availability && !matches.length) return false;
         if (provider && !matches.includes(provider)) return false;
       } else {
@@ -209,14 +222,34 @@
       const titleHTML = url ? `<a class="recs-title" href="${url}" target="_blank" rel="noopener noreferrer">${title}</a>` : `<span class="recs-title">${title}</span>`;
       const score = sortValue(film, 'score');
       const mainGenre = (film.genres || [])[0] || '';
-      const streams = escapeHTML(streamingProviders(film).map(providerLabel).join(', '));
-      const rentals = escapeHTML(rentalProviders(film).map(providerLabel).join(', '));
+      const method = christmas() ? christmasMethod(film, availability, provider) : availabilityType(film);
       const providers = christmas()
-        ? [streams && `Stream: ${streams}`, rentals && `Rent: ${rentals}`].filter(Boolean).join('<br>')
-        : streams;
-      const availability = availabilityType(film);
-      return `<div class="recs-row"><span data-label="Rank">${Number(film.current_rank)}</span><span data-label="Movement">${movement(film)}</span><span data-label="Score">${Number.isFinite(score) ? score.toFixed(2) + (christmas() ? (film.own_rating ? '/5†' : '/5') : '') : '—'}</span><span data-label="Title">${titleHTML}</span><span data-label="Year">${film.year || '—'}</span><span class="recs-genres" data-label="Genre" data-genres="${escapeHTML((film.genres || []).join(', '))}">${escapeHTML(mainGenre)}</span><span class="recs-provider-list" data-label="Provider">${providers}</span><span class="recs-availability" data-label="Availability">${availability}</span></div>`;
+        ? compactProviders(method ? christmasProviders(film, method) : [], provider)
+        : escapeHTML(streamingProviders(film).map(providerLabel).join(', '));
+      const providerCell = christmas()
+        ? `<div class="recs-provider-list" data-label="Provider">${providers}</div>`
+        : `<span class="recs-provider-list" data-label="Provider">${providers}</span>`;
+      const status = method || (christmas() ? (film.streaming == null ? 'Unverified' : 'None listed') : '');
+      return `<div class="recs-row"><span data-label="Rank">${Number(film.current_rank)}</span><span data-label="Movement">${movement(film)}</span><span data-label="Score">${Number.isFinite(score) ? score.toFixed(2) + (christmas() ? (film.own_rating ? '/5†' : '/5') : '') : '—'}</span><span data-label="Title">${titleHTML}</span><span data-label="Year">${film.year || '—'}</span><span class="recs-genres" data-label="Genre" data-genres="${escapeHTML((film.genres || []).join(', '))}">${escapeHTML(mainGenre)}</span>${providerCell}<span class="recs-availability" data-label="Availability">${status}</span></div>`;
     }).join('');
+  };
+
+  const compactProviders = (names, selected) => {
+    const ordered = selected && names.includes(selected)
+      ? [selected, ...names.filter(name => name !== selected)]
+      : names;
+    const visible = escapeHTML(ordered.slice(0, 2).join(', '));
+    const more = ordered.slice(2);
+    if (!more.length) return visible;
+    return `${visible} <details class="recs-more-providers"><summary aria-label="Show ${more.length} more providers">+${more.length}</summary><span class="recs-provider-overflow">${escapeHTML(more.join(', '))}</span></details>`;
+  };
+  const refreshChristmasProviders = () => {
+    const selected = providerSelect.value;
+    const choices = [...new Set(data.films.flatMap(film => christmasProviders(film, availabilitySelect.value)))].sort((a, b) => a.localeCompare(b));
+    providerSelect.replaceChildren();
+    addOption(providerSelect, '', 'All providers');
+    choices.forEach(name => addOption(providerSelect, name, name));
+    providerSelect.value = choices.includes(selected) ? selected : '';
   };
 
   fetch(sourceUrl)
@@ -231,10 +264,14 @@
       }
       const date = new Date(data.generated_at);
       updated.textContent = `Last updated: ${date.toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric'})}`;
-      if (christmas()) updated.textContent += ' · Where to watch in Canada · † Your rating';
-      (data.providers || [])
-        .filter(provider => christmas() || (streamingProviderKeys.has(provider) && (provider === 'tubi' || data.films.some(film => streamingProviders(film).includes(provider)))))
-        .forEach(provider => addOption(providerSelect, provider, providerLabel(provider)));
+      if (christmas()) {
+        updated.textContent += ' · Canada · † Your rating';
+        refreshChristmasProviders();
+      } else {
+        (data.providers || [])
+          .filter(provider => streamingProviderKeys.has(provider) && (provider === 'tubi' || data.films.some(film => streamingProviders(film).includes(provider))))
+          .forEach(provider => addOption(providerSelect, provider, providerLabel(provider)));
+      }
       [...new Set(data.films.flatMap(film => film.genres || []))].sort().forEach(genre => addOption(genreSelect, genre, genre));
       render();
     })
@@ -245,7 +282,10 @@
   maxRankInput.addEventListener('input', render);
   genreSelect.addEventListener('change', render);
   minYearInput.addEventListener('input', render);
-  availabilitySelect.addEventListener('change', render);
+  availabilitySelect.addEventListener('change', () => {
+    if (christmas()) refreshChristmasProviders();
+    render();
+  });
   shuffleButton.addEventListener('click', () => {
     shuffleMode = true;
     sortKey = 'score';
