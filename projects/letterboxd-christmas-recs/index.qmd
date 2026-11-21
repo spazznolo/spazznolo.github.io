@@ -1,0 +1,11 @@
+---
+title: "Letterboxd Christmas Recs"
+description: "Personalized Christmas movie rankings and where to stream or rent them in Canada."
+toc: false
+page-layout: full
+include-in-header:
+  text: |
+    <meta name="letterboxd-recs-feed" content="/assets/data/letterboxd-christmas-recs.json">
+---
+
+{{< include ../../_includes/letterboxd-recs.qmd >}}
